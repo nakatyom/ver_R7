@@ -1,9 +1,8 @@
 #include <stdio.h>
-int main() {
-    // ファイルポインタの宣言とファイルのオープン
-    FILE *fp;
-    fp = fopen("sample.txt", "w"); //ファイルが存在しない場合は自動で作成される
-    // ファイルのクローズ
-    fclose(fp);
+#include "file_io.h"
+int write_log() {
+    // first test for building in Raspi
+    printf("TEST_TEST_HELLO_HCM_ET_ROBOT_TEAM!!!\n");
+
     return 0;
 }
