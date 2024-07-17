@@ -1,5 +1,5 @@
 #include "app.h"
-#include "file_io.c"
+#include "motor_test.c"
 #include <stdio.h>
 
 /* メインタスク(起動時にのみ関数コールされる) */
@@ -18,9 +18,8 @@ void main_task(intptr_t unused) {
     
     printf("Start MainTask!!\n");
     
-    /* ライントレースタスクの起動 */
-    write_log();
-    sta_cyc(NAKA_TASK_CYC);
+    /* motor_test.c のタスクを呼ぶ */
+    motorLog();
 
     /* タスク終了 */
     ext_tsk();
