@@ -27,4 +27,27 @@ void printTimeStamp(FILE* fp){  // Assuming that the file is opened correctly.
 
 /* external functions */
 
+extern void printBtnLog(LogTgt SenType, bool TgtState){
+    // open Target file.
+    struct FILE* fp = fopen("Target_file_Path");
 
+
+    // close Target file.
+    fclose(fp);
+}
+
+extern void printSenLog(LogTgt SenType, int TgtVal){
+    // open Target file.
+    struct FILE* fp = fopen("Target_file_Path");
+
+    // close Target file.
+    fclose(fp);
+}
+
+extern void printEncLog(LogTgt SenType, int32_t EncVal){
+    // open Target file.
+    struct FILE* fp = fopen("Target_file_Path");
+
+    // close Target file.
+    fclose(fp);
+}
