@@ -7,9 +7,11 @@ extern "C" {
 /* タスク優先度 */
 #define MAIN_PRIORITY    (TMIN_APP_TPRI + 1) /* メインタスク */
 #define TRACER_PRIORITY  (TMIN_APP_TPRI + 2) /* ライントレースタスク */
+#define MOTORLOG_PRIORITY  (TMIN_APP_TPRI + 3) //モーターAPIのログ出力タスク 
 
 /* タスク周期の定義 */
 #define LINE_TRACER_PERIOD  (100 * 1000) /* ライントレースタスク:100msec周期 */
+#define MOTORLOG_PERIOD  (1000 * 1000) //モーターAPIのログタスク:1000msec周期
 
 /* センサーポートの定義 */
 static const sensor_port_t
@@ -31,6 +33,7 @@ static const motor_port_t
 #ifndef TOPPERS_MACRO_ONLY
 
 extern void main_task(intptr_t exinf);
+extern void motorlog_task(intptr_t exinf);
 
 #endif /* TOPPERS_MACRO_ONLY */
 
