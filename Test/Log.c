@@ -11,9 +11,28 @@ bool is_head_btn = true;
 bool is_head_sen = true;
 bool is_head_enc = true;
 
+char TgtFilePath_bat[] = "";
+char TgtFilePath_btn[] = "";
+char TgtFilePath_color[] = "";
+char TgtFilePath_gyro[] = "";
+char TgtFilePath_sonic[] = "";
+char TgtFilePath_encLR[] = "";
+char TgtFilePath_encArm[] = ""; 
+
 /* private functions */
 
-void printTimeStamp(FILE* fp){  // Assuming that the file is opened correctly.
+void printDateStamp(struct FILE* fp){  // Assuming that the file is opened correctly.
+    /* get current time */
+    time_t now = time(NULL);
+    struct tm* gm_time = gmtime(&now);
+
+    /* add Time Stamp */
+    fprintf(fp, "Logging Date is...\n");
+    fprintf(fp, "%d/%d/%d\n",gm_time->tm_year,gm_time->tm_mon,gm_time->tm_mday);
+
+}
+
+void printTimeStamp(struct FILE* fp){  // Assuming that the file is opened correctly.
     /* get current time */
     time_t now = time(NULL);
     struct tm* gm_time = gmtime(&now);
@@ -26,28 +45,72 @@ void printTimeStamp(FILE* fp){  // Assuming that the file is opened correctly.
 }
 
 /* external functions */
-
-extern void printBtnLog(LogTgt SenType, bool TgtState){
+extern void printBatLog(int TgtVlt, int TgtCur){
     // open Target file.
-    struct FILE* fp = fopen("Target_file_Path");
+    struct FILE* fp = fopen(TgtFilePath_bat, "a");
 
 
     // close Target file.
+    fprintf(fp,"\n");
     fclose(fp);
 }
 
-extern void printSenLog(LogTgt SenType, int TgtVal){
+extern void printBtnLog(char* TgtName, bool TgtState){
     // open Target file.
-    struct FILE* fp = fopen("Target_file_Path");
+    struct FILE* fp = fopen(TgtFilePath_btn, "a");
+
 
     // close Target file.
+    fprintf(fp,"\n");
     fclose(fp);
 }
 
-extern void printEncLog(LogTgt SenType, int32_t EncVal){
+extern void printColorLog(uint8_t TgtColorVal){
     // open Target file.
-    struct FILE* fp = fopen("Target_file_Path");
+    struct FILE* fp = fopen(TgtFilePath_color, "a");
+
 
     // close Target file.
+    fprintf(fp,"\n");
+    fclose(fp);
+}
+
+extern void printGyroLog(uint16_t TgtGyroVal){
+    // open Target file.
+    struct FILE* fp = fopen(TgtFilePath_gyro, "a");
+
+
+    // close Target file.
+    fprintf(fp,"\n");
+    fclose(fp);
+}
+
+extern void printSonicLog(uint16_t TgtSonicVal){
+    // open Target file.
+    struct FILE* fp = fopen(TgtFilePath_sonic, "a");
+
+
+    // close Target file.
+    fprintf(fp,"\n");
+    fclose(fp);
+}
+
+extern void printEncLRLog(int32_t EncLVal, int32_t EncRVal){
+    // open Target file.
+    struct FILE* fp = fopen(TgtFilePath_encLR, "a");
+
+
+    // close Target file.
+    fprintf(fp,"\n");
+    fclose(fp);
+}
+
+extern void printEncArmLog(int32_t EncArmVal){
+    // open Target file.
+    struct FILE* fp = fopen(TgtFilePath_encArm, "a");
+
+
+    // close Target file.
+    fprintf(fp,"\n");
     fclose(fp);
 }
