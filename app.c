@@ -19,13 +19,12 @@ void main_task(intptr_t unused) {
     printf("Start MainTask!!\n");
     
     /* motor_test.c のタスクを呼ぶ */
-    motorLog();
-
+    sta_cyc(MOTORLOG_TASK_CYC);
+    
     /* タスク終了 */
     ext_tsk();
 }
 
-void naka_task(intptr_t unused){
-    printf("Start Naka Task!!\n");
-    
-}
+void motorlog_task(intptr_t exinf){
+    motorLog();
+    }
