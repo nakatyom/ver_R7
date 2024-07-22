@@ -25,7 +25,7 @@ void main_task(intptr_t unused) {
     ext_tsk();
 }
 
-void naka_task(intptr_t unused){
-    printf("Start Naka Task!!\n");
-    
-}
+//void naka_task(intptr_t unused){
+//    printf("Start Naka Task!!\n");
+//    
+//}
