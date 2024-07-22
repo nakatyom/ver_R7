@@ -81,7 +81,7 @@ extern void printBtnLog(char* TgtName, bool TgtState){
     fclose(fp);
 }
 
-extern void printColorLog(uint8_t TgtColorVal){
+extern void printColorLog(u_int8_t TgtColorVal){
     // open Target file.
     struct FILE* fp = fopen(FILE_PATH_COLOR, "a");
     if(fp == NULL){
@@ -99,7 +99,7 @@ extern void printColorLog(uint8_t TgtColorVal){
     fclose(fp);
 }
 
-extern void printGyroLog(uint16_t TgtGyroVal){
+extern void printGyroLog(int16_t TgtGyroVal){
     // open Target file.
     struct FILE* fp = fopen(FILE_PATH_GYRO, "a");
     if(fp == NULL){
@@ -117,7 +117,7 @@ extern void printGyroLog(uint16_t TgtGyroVal){
     fclose(fp);
 }
 
-extern void printSonicLog(uint16_t TgtSonicVal){
+extern void printSonicLog(int16_t TgtSonicVal){
     // open Target file.
     struct FILE* fp = fopen(FILE_PATH_SONIC, "a");
     if(fp == NULL){
