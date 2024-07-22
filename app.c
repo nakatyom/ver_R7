@@ -1,5 +1,5 @@
 #include "app.h"
-#include "motor_test.c"
+#include "zoudatest/motor_test.c"
 #include <stdio.h>
 
 /* メインタスク(起動時にのみ関数コールされる) */
