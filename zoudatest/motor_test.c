@@ -3,10 +3,13 @@
 
 #include "ev3api.h"
 #include "etroboc_ext.h"
+
 #include <stdio.h>
 
 //関数プロトタイプ宣言
 static void motorLog();
+
+
 
 /* ステアリング操舵量の計算 */
 static void motorTypeLog(){
