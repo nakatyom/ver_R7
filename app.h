@@ -4,7 +4,7 @@ extern "C" {
 
 #include "ev3api.h"
 
-/* タスク優先度 */
+// タスク優先度 
 #define MAIN_PRIORITY    (TMIN_APP_TPRI + 1) /* メインタスク */
 #define TRACER_PRIORITY  (TMIN_APP_TPRI + 2) /* ライントレースタスク */
 #define MOTORLOG_PRIORITY  (TMIN_APP_TPRI + 4) //モーターAPIのログ出力タスク 
