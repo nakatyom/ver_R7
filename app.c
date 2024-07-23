@@ -20,9 +20,14 @@ void main_task(intptr_t unused) {
     
     /* motor_test.c のタスクを呼ぶ */
     sta_cyc(MOTORLOG_TASK_CYC);
+    sta_cyc(GOETROBO_TASK_CYC);
     
     /* タスク終了 */
     ext_tsk();
+}
+
+void goetrobo_task(intptr_t exinf){
+    goetrobo();
 }
 
 void motorlog_task(intptr_t exinf){
