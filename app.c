@@ -33,3 +33,4 @@ void goetrobo_task(intptr_t exinf){
 void motorlog_task(intptr_t exinf){
     motorLog();
     }
+//なんでプッシュできない？
