@@ -6,5 +6,5 @@ APPL_LIBS += -lm
 # APPL_DIRS += zoudatest
 # INCLUDES += zoudatest
 
-APPL_DIRS += $(mkfile_path)/zoudatest
-INCLUDES += $(mkfile_path)/zoudatest
+APPL_DIRS += $(mkfile_path)zoudatest
+INCLUDES += $(mkfile_path)zoudatest
