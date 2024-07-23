@@ -13,7 +13,7 @@ extern void goetrobo();
 extern int i;
 
 /* モーター情報表示 */
-void motorLog(){
+void motorLog(motor_port_t){
     
     int left_power, right_power;
     
@@ -25,17 +25,17 @@ void motorLog(){
 }
 
 //スピード・向きを変えながら進む
-void goetrobo(){
+void goetrobo(motor_port_t){
     //モーターの出力設定
     int set_lpower, set_rpower;
     switch(i){
-        case 1 : set_lpower = 10; set_rpower = 10; i=1; break;
+        case 1 : set_lpower = 10; set_rpower = 10; i++; break;
         case 2 : set_lpower = 5; set_rpower = 10; i++; break;
         case 3 : set_lpower = 0; i++; set_rpower = 10; break;
         case 4 : set_lpower = -10; set_rpower = 10; i++; break;
         case 5 : set_lpower = 0; set_rpower = 0; i++; break;
         case 6 : set_lpower = 10; set_rpower = 5; i++; break;
-        case 7 : set_lpower = 20; set_rpower = 10; i++; break;
+        case 7 : set_lpower = 20; set_rpower = 10; i=1; break;
     }
 
     //モーター出力
