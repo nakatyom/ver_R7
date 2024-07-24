@@ -10,6 +10,5 @@ APPL_LIBS += -lm
 APPL_DIRS += $Drv\
     $Mid
 INCLUDES += \
-    -I$
     -I$Drv\
     -I$Mid
