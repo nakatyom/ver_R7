@@ -5,16 +5,6 @@
 
 #include "Log.h"
 
-
-/* define */
-#define FILE_PATH_BAT  "log_bat.txt"
-#define FILE_PATH_BTN "log_btn.txt"
-#define FILE_PATH_COLOR "log_color.txt"
-#define FILE_PATH_GYRO "log_gyro.txt"
-#define FILE_PATH_SONIC "log_sonic.txt"
-#define FILE_PATH_ENC_LR "log_encLR.txt"
-#define FILE_PATH_ENC_ARM "log_encArm.txt" 
-
 /* private valiables */
 bool is_head_bat = true;
 bool is_head_btn = true;
@@ -24,8 +14,8 @@ bool is_head_sonic = true;
 bool is_head_encLR = true;
 bool is_head_encArm = true;
 
-/* private functions */
 
+/* private functions */
 void printTimeStamp(struct FILE* fp, bool is_head){  // Assuming that the file is opened correctly.
     /* get current time */
     time_t now = time(NULL);
@@ -43,7 +33,7 @@ void printTimeStamp(struct FILE* fp, bool is_head){  // Assuming that the file i
 }
 
 /* external functions */
-extern void printBatLog(int TgtVlt, int TgtCur){
+void printBatLog(int TgtVlt, int TgtCur){
     // open Target file.
     struct FILE* fp = fopen(FILE_PATH_BAT, "a");
     if(fp == NULL){
@@ -62,7 +52,7 @@ extern void printBatLog(int TgtVlt, int TgtCur){
     fclose(fp);
 }
 
-extern void printBtnLog(char* TgtName, bool TgtState){
+void printBtnLog(char* TgtName, bool TgtState){
     // open Target file.
     struct FILE* fp = fopen(FILE_PATH_BTN, "a");
     if(fp == NULL){
@@ -81,7 +71,7 @@ extern void printBtnLog(char* TgtName, bool TgtState){
     fclose(fp);
 }
 
-extern void printColorLog(u_int8_t TgtColorVal){
+void printColorLog(u_int8_t TgtColorVal){
     // open Target file.
     struct FILE* fp = fopen(FILE_PATH_COLOR, "a");
     if(fp == NULL){
@@ -99,7 +89,7 @@ extern void printColorLog(u_int8_t TgtColorVal){
     fclose(fp);
 }
 
-extern void printGyroLog(int16_t TgtGyroVal){
+void printGyroLog(int16_t TgtGyroVal){
     // open Target file.
     struct FILE* fp = fopen(FILE_PATH_GYRO, "a");
     if(fp == NULL){
@@ -117,7 +107,7 @@ extern void printGyroLog(int16_t TgtGyroVal){
     fclose(fp);
 }
 
-extern void printSonicLog(int16_t TgtSonicVal){
+void printSonicLog(int16_t TgtSonicVal){
     // open Target file.
     struct FILE* fp = fopen(FILE_PATH_SONIC, "a");
     if(fp == NULL){
@@ -135,7 +125,7 @@ extern void printSonicLog(int16_t TgtSonicVal){
     fclose(fp);
 }
 
-extern void printEncLRLog(int32_t EncLVal, int32_t EncRVal){
+void printEncLRLog(int32_t EncLVal, int32_t EncRVal){
     // open Target file.
     struct FILE* fp = fopen(FILE_PATH_ENC_LR, "a");
     if(fp == NULL){
@@ -154,7 +144,7 @@ extern void printEncLRLog(int32_t EncLVal, int32_t EncRVal){
     fclose(fp);
 }
 
-extern void printEncArmLog(int32_t EncArmVal){
+void printEncArmLog(int32_t EncArmVal){
     // open Target file.
     struct FILE* fp = fopen(FILE_PATH_ENC_ARM, "a");
     if(fp == NULL){
