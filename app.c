@@ -19,6 +19,7 @@ void main_task(intptr_t unused) {
     
     printf("Start Naka Task!!\n");
     sta_cyc(NAKA_TASK_CYC);
+    printf("Naka Task Called \n");
 
     /* タスク終了 */
     ext_tsk();
