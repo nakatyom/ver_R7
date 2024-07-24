@@ -5,16 +5,6 @@
 
 #include "log.h"
 
-
-/* define */
-#define FILE_PATH_BAT  ""
-#define FILE_PATH_BTN ""
-#define FILE_PATH_COLOR ""
-#define FILE_PATH_GYRO ""
-#define FILE_PATH_SONIC ""
-#define FILE_PATH_ENC_LR ""
-#define FILE_PATH_ENC_ARM "" 
-
 /* private valiables */
 bool is_head_bat = true;
 bool is_head_btn = true;
@@ -24,8 +14,8 @@ bool is_head_sonic = true;
 bool is_head_encLR = true;
 bool is_head_encArm = true;
 
-/* private functions */
 
+/* private functions */
 void printTimeStamp(FILE *fp, bool is_head){  // Assuming that the file is opened correctly.
     
     struct timeval tvToday;
@@ -90,7 +80,7 @@ void printBtnLog(char* TgtName, bool TgtState){
     fclose(fp);
 }
 
-void printColorLog(uint8_t TgtColorVal){
+void printColorLog(u_int8_t TgtColorVal){
     // open Target file.
     FILE* fp = fopen(FILE_PATH_COLOR, "a");
     if(fp == NULL){
