@@ -9,4 +9,4 @@
 extern int get_batV(void);
 extern int get_batC(void);
 
-#endif "_BATTERY_H"
+#endif /* _BATTERY_H */

@@ -1,17 +1,20 @@
 mkfile_path := $(dir $(lastword $(MAKEFILE_LIST)))
 
+
+APPL_COBJS += list_api.o
 APPL_COBJS += battery.o button.o
-APPL_COBJS += Log.o
+# APPL_COBJS += log.o
 
 APPL_LIBS += -lm
 
-APPL_DIRS += $(mkfile_path)Apl
-APPL_DIRS += $(mkfile_path)Mid
-APPL_DIRS += $(mkfile_path)Drv
-APPL_DIRS += $(mkfile_path)Test
+APPL_DIRS += $(mkfile_path)
+APPL_DIRS += $(mkfile_path)/Apl
+APPL_DIRS += $(mkfile_path)/Mid
+APPL_DIRS += $(mkfile_path)/Drv
+APPL_DIRS += $(mkfile_path)/Test
 
-INCLUDES += -I$(mkfile_path)Apl
-INCLUDES += -I$(mkfile_path)Mid
-INCLUDES += -I$(mkfile_path)Drv
-INCLUDES += -I$(mkfile_path)Test
-
+INCLUDES += -I$(mkfile_path)
+INCLUDES += -I$(mkfile_path)/Apl
+INCLUDES += -I$(mkfile_path)/Mid
+INCLUDES += -I$(mkfile_path)/Drv
+INCLUDES += -I$(mkfile_path)/Test

@@ -3,7 +3,7 @@
 #include <stdbool.h>
 #include <time.h>
 
-#include "Log.h"
+#include "log.h"
 
 
 /* define */
@@ -26,26 +26,34 @@ bool is_head_encArm = true;
 
 /* private functions */
 
-void printTimeStamp(struct FILE* fp, bool is_head){  // Assuming that the file is opened correctly.
+void printTimeStamp(FILE *fp, bool is_head){  // Assuming that the file is opened correctly.
+    
+    struct timeval tvToday;
+    struct tm *gm_time;
+
     /* get current time */
-    time_t now = time(NULL);
-    struct tm* gm_time = gmtime(&now);
+    gettimeofday(&tvToday, NULL); // Today
+    gm_time = localtime(&tvToday.tv_sec);
 
     /* add Date Stamp */
     if(is_head == true){
         fprintf(fp, "Logging Date is...\n");
-        fprintf(fp, "%d/%d/%d\n",gm_time->tm_year,gm_time->tm_mon,gm_time->tm_mday);
+        fprintf(fp, "%d/%d/%d\n",gm_time->tm_year+1900,gm_time->tm_mon+1,gm_time->tm_mday);
+        fprintf(fp, "%d:%d:%d | ",gm_time->tm_hour,gm_time->tm_min,gm_time->tm_sec);
         is_head = false;
     }
 
     /* add Time Stamp */
-    else if(is_head == false) fprintf(fp, "%d:%d:%d | ",gm_time->tm_hour,gm_time->tm_min,gm_time->tm_sec);
+    else if(is_head == false){
+        fprintf(fp, "Logging time is...\n");
+        fprintf(fp, "%d:%d:%d | ",gm_time->tm_hour,gm_time->tm_min,gm_time->tm_sec);
+    }
 }
 
 /* external functions */
-extern void printBatLog(int TgtVlt, int TgtCur){
+void printBatLog(int TgtVlt, int TgtCur){
     // open Target file.
-    struct FILE* fp = fopen(FILE_PATH_BAT, "a");
+    FILE *fp = fopen(FILE_PATH_BAT, "a");
     if(fp == NULL){
         printf("fail open file on Log.c");
         return;
@@ -62,9 +70,10 @@ extern void printBatLog(int TgtVlt, int TgtCur){
     fclose(fp);
 }
 
-extern void printBtnLog(char* TgtName, bool TgtState){
+
+void printBtnLog(char* TgtName, bool TgtState){
     // open Target file.
-    struct FILE* fp = fopen(FILE_PATH_BTN, "a");
+    FILE* fp = fopen(FILE_PATH_BTN, "a");
     if(fp == NULL){
         printf("fail open file on Log.c");
         return;
@@ -81,9 +90,9 @@ extern void printBtnLog(char* TgtName, bool TgtState){
     fclose(fp);
 }
 
-extern void printColorLog(uint8_t TgtColorVal){
+void printColorLog(uint8_t TgtColorVal){
     // open Target file.
-    struct FILE* fp = fopen(FILE_PATH_COLOR, "a");
+    FILE* fp = fopen(FILE_PATH_COLOR, "a");
     if(fp == NULL){
         printf("fail open file on Log.c");
         return;
@@ -99,9 +108,9 @@ extern void printColorLog(uint8_t TgtColorVal){
     fclose(fp);
 }
 
-extern void printGyroLog(uint16_t TgtGyroVal){
+void printGyroLog(int16_t TgtGyroVal){
     // open Target file.
-    struct FILE* fp = fopen(FILE_PATH_GYRO, "a");
+    FILE* fp = fopen(FILE_PATH_GYRO, "a");
     if(fp == NULL){
         printf("fail open file on Log.c");
         return;
@@ -117,9 +126,9 @@ extern void printGyroLog(uint16_t TgtGyroVal){
     fclose(fp);
 }
 
-extern void printSonicLog(uint16_t TgtSonicVal){
+void printSonicLog(int16_t TgtSonicVal){
     // open Target file.
-    struct FILE* fp = fopen(FILE_PATH_SONIC, "a");
+    FILE* fp = fopen(FILE_PATH_SONIC, "a");
     if(fp == NULL){
         printf("fail open file on Log.c");
         return;
@@ -135,9 +144,9 @@ extern void printSonicLog(uint16_t TgtSonicVal){
     fclose(fp);
 }
 
-extern void printEncLRLog(int32_t EncLVal, int32_t EncRVal){
+void printEncLRLog(int32_t EncLVal, int32_t EncRVal){
     // open Target file.
-    struct FILE* fp = fopen(FILE_PATH_ENC_LR, "a");
+    FILE* fp = fopen(FILE_PATH_ENC_LR, "a");
     if(fp == NULL){
         printf("fail open file on Log.c");
         return;
@@ -146,17 +155,17 @@ extern void printEncLRLog(int32_t EncLVal, int32_t EncRVal){
     //write Log : Date
     //            Time | Encoder_L val | Encoder_R val
     printTimeStamp(fp, is_head_encLR);
-    fprintf(fp, "%d | ", EncLVal);
-    fprintf(fp, "%d\n", EncRVal);
+    fprintf(fp, "%ld | ", EncLVal);
+    fprintf(fp, "%ld\n", EncRVal);
 
     // close Target file.
     fprintf(fp,"\n");
     fclose(fp);
 }
 
-extern void printEncArmLog(int32_t EncArmVal){
+void printEncArmLog(int32_t EncArmVal){
     // open Target file.
-    struct FILE* fp = fopen(FILE_PATH_ENC_ARM, "a");
+    FILE* fp = fopen(FILE_PATH_ENC_ARM, "a");
     if(fp == NULL){
         printf("fail open file on Log.c");
         return;
@@ -165,7 +174,7 @@ extern void printEncArmLog(int32_t EncArmVal){
     //write Log : Date
     //            Time | Encoder_Arm Val
     printTimeStamp(fp, is_head_encArm);
-    fprintf(fp, "%d\n", EncArmVal);
+    fprintf(fp, "%ld\n", EncArmVal);
 
     // close Target file.
     fprintf(fp,"\n");

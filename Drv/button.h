@@ -7,6 +7,6 @@
 #include <stdio.h>
 
 /* external functions */
-bool get_buttonState(button_t button);
+extern bool get_buttonState(button_t button);
 
-#endif "_BUTTON_H"
+#endif /* _BUTTON_H */

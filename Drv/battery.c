@@ -21,8 +21,8 @@ int get_batV(void){
 
     volt = ev3_battery_voltage_mV();
 
-    if(volt > V_MAX || volt =< V_MIN){
-        printf("voltage value is out of range.");
+    if(volt > V_MAX || volt <= V_MIN){
+        printf("voltage value is out of range.\n");
         return -1;
     }
 
@@ -32,10 +32,10 @@ int get_batV(void){
 int get_batC(void){
     int current = 0;
 
-    current = ev3_battery_current_mV();
+    current = ev3_battery_current_mA();
 
-    if(current > C_MAX || current =< C_MIN){
-        printf("current value is out of range.");
+    if(current > C_MAX || current <= C_MIN){
+        printf("current value is out of range.\n");
         return -1;
     }
 

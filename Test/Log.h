@@ -7,7 +7,6 @@
 
 
 /* private functions */
-void printTimeStamp(struct FILE* fp, bool is_head);
 
 /* external functions*/
 extern void printBatLog(int TgtVlt, int TgtCur);
