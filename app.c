@@ -10,7 +10,7 @@
 /* メインタスク(起動時にのみ関数コールされる) */
 void main_task(intptr_t unused) {
 
-    
+    printf("GYRO CHECK PROJECT\n");
     printf("Start MainTask!!\n");
     
     /* ライントレースタスクの起動 */
