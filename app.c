@@ -34,8 +34,8 @@ void naka_task(intptr_t unused){
     printf("Main counter:%d\n",cnt);*/
 
     /* 左右モータ駆動パワーの設定 */
-    ev3_motor_set_power(left_motor, -25);
-    ev3_motor_set_power(right_motor, 25);
+    ev3_motor_set_power(left_motor, -33);
+    ev3_motor_set_power(right_motor, 33);
 
     // カラーセンサのテスト関数
     //drv_color_sensor();
