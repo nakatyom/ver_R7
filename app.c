@@ -9,8 +9,6 @@
 
 /* メインタスク(起動時にのみ関数コールされる) */
 void main_task(intptr_t unused) {
-
-    printf("GYRO CHECK PROJECT\n");
     printf("Start MainTask!!\n");
     
     /* ライントレースタスクの起動 */
@@ -19,8 +17,7 @@ void main_task(intptr_t unused) {
     
     printf("Start Naka Task!!\n");
     sta_cyc(NAKA_TASK_CYC);
-    printf("Naka Task Called \n");
-
+    printf("Naka Task called \n");
     /* タスク終了 */
     ext_tsk();
 }
@@ -37,8 +34,8 @@ void naka_task(intptr_t unused){
     printf("Main counter:%d\n",cnt);*/
 
     /* 左右モータ駆動パワーの設定 */
-    //ev3_motor_set_power(left_motor, -90);
-    //ev3_motor_set_power(right_motor, 90);
+    ev3_motor_set_power(left_motor, -10);
+    ev3_motor_set_power(right_motor, 10);
 
     // カラーセンサのテスト関数
     //drv_color_sensor();
