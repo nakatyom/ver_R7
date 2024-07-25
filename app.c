@@ -1,6 +1,9 @@
 #include "app.h"
-#include "file_io.c"
+#include "ev3api.h"
 #include <stdio.h>
+
+#include "port.h"
+#include "Log.h"
 
 /* メインタスク(起動時にのみ関数コールされる) */
 void main_task(intptr_t unused) {
@@ -16,17 +19,24 @@ void main_task(intptr_t unused) {
     ev3_motor_config(left_motor    ,MEDIUM_MOTOR);
     ev3_motor_config(right_motor   ,MEDIUM_MOTOR);
     
-    printf("Start MainTask!!\n");
-    
-    /* ライントレースタスクの起動 */
-    write_log();
-    sta_cyc(NAKA_TASK_CYC);
+    printf("Start LogTask!!\n");
+    sta_cyc(LOG_CYC);
+
 
     /* タスク終了 */
     ext_tsk();
 }
 
-void naka_task(intptr_t unused){
-    printf("Start Naka Task!!\n");
+void log_task(intptr_t unused){
+    u_int8_t amb = 0;
+    u_int8_t ref = 0;
+    rgb_raw_t color = {0,0,0};
+
+    amb = ev3_color_sensor_get_ambient(color_sensor);
+    ref = ev3_color_sensor_get_reflect(color_sensor);
+    ev3_color_sensor_get_rgb_raw(color_sensor, &color);
+
+    /* Get Log */
+    printColorLog(amb, ref, &color);
     
 }

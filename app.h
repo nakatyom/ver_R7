@@ -5,25 +5,11 @@ extern "C" {
 #include "ev3api.h"
 
 /* タスク優先度 */
-#define MAIN_PRIORITY    (TMIN_APP_TPRI + 1) /* メインタスク */
-#define TRACER_PRIORITY  (TMIN_APP_TPRI + 2) /* ライントレースタスク */
-#define NAKANO_PRIORITY   (TMIN_APP_TPRI + 3)
+#define MAIN_PRIORITY   (TMIN_APP_TPRI + 1) /* メインタスク */
+#define LOG_PRIORITY    (TMIN_APP_TPRI + 2) /* ログ タスク */
 
 /* タスク周期の定義 */
-#define LINE_TRACER_PERIOD  (100 * 1000) /* ライントレースタスク:100msec周期 */
 
-/* センサーポートの定義 */
-static const sensor_port_t
-    touch_sensor    = EV3_PORT_1,
-    color_sensor    = EV3_PORT_2,
-    sonar_sensor    = EV3_PORT_3,
-    gyro_sensor     = EV3_PORT_4;
-
-/* モーターポートの定義 */
-static const motor_port_t
-    arm_motor       = EV3_PORT_A,
-    left_motor      = EV3_PORT_C,
-    right_motor     = EV3_PORT_B;
 
 #ifndef STACK_SIZE
 #define STACK_SIZE      (4096)
@@ -32,7 +18,7 @@ static const motor_port_t
 #ifndef TOPPERS_MACRO_ONLY
 
 extern void main_task(intptr_t exinf);
-extern void naka_task(intptr_t exinf);
+extern void log_task(intptr_t exinf);
 
 #endif /* TOPPERS_MACRO_ONLY */
 
