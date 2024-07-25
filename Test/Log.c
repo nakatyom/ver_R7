@@ -3,7 +3,16 @@
 #include <stdbool.h>
 #include <time.h>
 
-#include "log.h"
+#include "Log.h"
+
+/* define */
+#define FILE_PATH_BAT  "log_bat.txt"
+#define FILE_PATH_BTN "log_btn.txt"
+#define FILE_PATH_COLOR "log_color.txt"
+#define FILE_PATH_GYRO "log_gyro.txt"
+#define FILE_PATH_SONIC "log_sonic.txt"
+#define FILE_PATH_ENC_LR "log_encLR.txt"
+#define FILE_PATH_ENC_ARM "log_encArm.txt" 
 
 /* private valiables */
 bool is_head_bat = true;
@@ -39,6 +48,7 @@ void printTimeStamp(FILE *fp, bool is_head){  // Assuming that the file is opene
         fprintf(fp, "%d:%d:%d | ",gm_time->tm_hour,gm_time->tm_min,gm_time->tm_sec);
     }
 }
+
 
 /* external functions */
 void printBatLog(int TgtVlt, int TgtCur){

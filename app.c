@@ -1,5 +1,4 @@
 #include "app.h"
-#include "list_api.h"
 #include <stdio.h>
 #include "ev3api.h"
 #include <float.h>
@@ -10,9 +9,6 @@
 void main_task(intptr_t unused) {
     
     printf("Start MainTask!!\n");
-    /* write_log(); */
-    commn_settings();    
-    
 
     printf("Start Ichi Task!!\n");
     sta_cyc(ICHI_CYC);

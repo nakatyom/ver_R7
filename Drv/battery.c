@@ -2,7 +2,6 @@
 // These APIs update battery infomations 1[time/second].
 
 #include "ev3api.h"
-#include "app.h"
 #include <stdio.h>
 
 #include "battery.h"
@@ -21,9 +20,9 @@ int get_batV(void){
 
     volt = ev3_battery_voltage_mV();
 
-    if(volt > V_MAX || volt <= V_MIN){
+    if(volt > V_MAX && volt < V_MIN){
         printf("voltage value is out of range.\n");
-        return -1;
+        // return -1;
     }
 
     return volt;
@@ -34,9 +33,9 @@ int get_batC(void){
 
     current = ev3_battery_current_mA();
 
-    if(current > C_MAX || current <= C_MIN){
+    if(current > C_MAX && current < C_MIN){
         printf("current value is out of range.\n");
-        return -1;
+        // return -1;
     }
 
     return current;

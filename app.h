@@ -2,7 +2,6 @@
 extern "C" {
 #endif
 #include "ev3api.h"
-#include "list_api.h"
 #include <stdio.h>
 
 /* タスク優先度 */
