@@ -36,13 +36,13 @@ void mid_linetrace_pid(intptr_t unused){
     reflection = ev3_color_sensor_get_reflect(color_sensor);
     ev3_color_sensor_get_rgb_raw(color_sensor,&rgb_val);
 
-    /*
-    if (rgb_val.r >= XXX and rgb_val.g >= YYY && rgb_val.b >= ZZZ){
+    
+    if (rgb_val.r <= 20 and rgb_val.g<= 48 && rgb_val.b <= 85){
         target = BLACK_REF;
     }else{
         target = BLUE_REF;
     }
-    */
+    
     
     // デバックコード
     if (ev3_touch_sensor_is_pressed(touch_sensor) && (cnt % 1000000 == 0)) {
