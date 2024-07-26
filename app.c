@@ -37,6 +37,6 @@ void log_task(intptr_t unused){
     ev3_color_sensor_get_rgb_raw(color_sensor, &color);
 
     /* Get Log */
-    printColorLog(amb, ref, &color);
-    
+    printf("Write Log...\n");
+    printColorLog(amb, ref, &color); 
 }

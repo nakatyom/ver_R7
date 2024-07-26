@@ -94,6 +94,8 @@ void printColorLog(u_int8_t Ambient, u_int8_t Reflect, rgb_raw_t* TgtColorVal){
         printf("fail open file on Log.c");
         return;
     }
+ 
+    printf("file open.\n");
 
     //write Log : Date
     //            Time | Color Val
