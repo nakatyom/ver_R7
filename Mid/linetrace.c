@@ -5,7 +5,7 @@
 
 
 #define BASE_SPEED 40  // 基本速度
-#define KP 1.5         // 比例ゲイン
+#define KP 1.2         // 比例ゲイン
 #define KI 0.1         // 積分ゲイン
 #define KD 0.02        // 微分ゲイン
 
