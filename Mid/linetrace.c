@@ -4,6 +4,8 @@
 #include "port_settings.h"
 
 #define BASE_SPEED 50  // 基本速度
+#define BLUE_REF 39
+#define BLACK_REF 15
 #define KP 1.1         // 比例ゲイン
 #define KI 0.1         // 積分ゲイン
 #define KD 0.02        // 微分ゲイン
@@ -12,7 +14,7 @@ int reflection;
 int power_left, power_right;
 int error, last_error = 0, integral = 0;
 int correction;
-int target = 15;  // 目標値
+int target ;  // 目標値
 
 // 値をクリップする関数
 int clip(int value, int min, int max) {
@@ -24,29 +26,38 @@ int clip(int value, int min, int max) {
         return value;
     }
 }
+
 uint32_t cnt=0;
+rgb_raw_t rgb_val;
+
 void mid_linetrace_pid(intptr_t unused){
 
     // 反射光の強さを取得
     reflection = ev3_color_sensor_get_reflect(color_sensor);
-    
+    ev3_color_sensor_get_rgb_raw(color_sensor,&rgb_val);
 
+    /*
+    if (rgb_val.r >= XXX and rgb_val.g >= YYY && rgb_val.b >= ZZZ){
+        target = BLACK_REF;
+    }else{
+        target = BLUE_REF;
+    }
+    */
+    
     // デバックコード
     if (ev3_touch_sensor_is_pressed(touch_sensor) && (cnt % 1000000 == 0)) {
-        target += 1;  // 目標値を増加
+        //target += 1;  // 目標値を増加
         if (target > 100) {
             target = 0;  // 目標値をリセット
         }
     }else{
         if (cnt%100000000==0){
-            printf("colorval:%d | Target %d\n",reflection,target);
+            printf("colorval:%d | Target %d | Color(R,G,B)=(%d,%d,%d)\n",reflection,target,rgb_val.r,rgb_val.g,rgb_val.b);
         }
     }
-
     if (cnt>=6500000000){
         cnt=0;
     }
-
 
     // エラー計算
     error = target - reflection;
