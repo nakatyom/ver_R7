@@ -37,9 +37,9 @@ void log_task(intptr_t unused){
     amb = ev3_color_sensor_get_ambient(color_sensor);
     ref = ev3_color_sensor_get_reflect(color_sensor);
     ev3_color_sensor_get_rgb_raw(color_sensor, &color);
-    printColorLog(amb, ref, &color); 
+    printColorLog(amb, ref, &color);
 
     /* Sonic Log */
     dist = ev3_ultrasonic_sensor_get_distance(sonar_sensor);
-    printSonicLog(dist); 
+    printSonicLog(dist);
 }
