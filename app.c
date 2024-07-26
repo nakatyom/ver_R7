@@ -31,12 +31,15 @@ void log_task(intptr_t unused){
     u_int8_t amb = 0;
     u_int8_t ref = 0;
     rgb_raw_t color = {0,0,0};
+    int16_t dist = 0;
 
+    /* Color Log */
     amb = ev3_color_sensor_get_ambient(color_sensor);
     ref = ev3_color_sensor_get_reflect(color_sensor);
     ev3_color_sensor_get_rgb_raw(color_sensor, &color);
-
-    /* Get Log */
-    printf("Write Log...\n");
     printColorLog(amb, ref, &color); 
+
+    /* Sonic Log */
+    dist = ev3_ultrasonic_sensor_get_distance(sonar_sensor);
+    printSonicLog(dist); 
 }

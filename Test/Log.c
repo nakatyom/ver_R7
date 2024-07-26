@@ -6,13 +6,13 @@
 #include "Log.h"
 
 /* define */
-#define FILE_PATH_BAT  "log_bat.txt"
-#define FILE_PATH_BTN "log_btn.txt"
-#define FILE_PATH_COLOR "log_color.txt"
-#define FILE_PATH_GYRO "log_gyro.txt"
-#define FILE_PATH_SONIC "log_sonic.txt"
-#define FILE_PATH_ENC_LR "log_encLR.txt"
-#define FILE_PATH_ENC_ARM "log_encArm.txt" 
+#define FILE_PATH_BAT  "/ver_R7/Test/log_bat.txt"
+#define FILE_PATH_BTN "/ver_R7/Test/log_btn.txt"
+#define FILE_PATH_COLOR "/ver_R7/Test/log_color.txt"
+#define FILE_PATH_GYRO "/ver_R7/Test/log_gyro.txt"
+#define FILE_PATH_SONIC "/ver_R7/Test/log_sonic.txt"
+#define FILE_PATH_ENC_LR "/ver_R7/Test/log_encLR.txt"
+#define FILE_PATH_ENC_ARM "/ver_R7/Test/log_encArm.txt" 
 
 /* private valiables */
 static bool is_head_bat = true;
@@ -138,7 +138,7 @@ void printSonicLog(int16_t TgtSonicVal){
     //write Log : Date
     //            Time | Sonic Val
     printTimeStamp(fp, is_head_sonic);
-    fprintf(fp, "%d\n", TgtSonicVal);
+    fprintf(fp, "Distance = %d[cm]\n", TgtSonicVal);
 
     // close Target file.
     fprintf(fp,"\n");
