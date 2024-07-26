@@ -3,11 +3,10 @@
 #include "app.h"
 #include "port_settings.h"
 
-
-#define BASE_SPEED 40  // 基本速度
-#define KP 1.2         // 比例ゲイン
+#define BASE_SPEED 50  // 基本速度
+#define KP 1.1         // 比例ゲイン
 #define KI 0.1         // 積分ゲイン
-#define KD 0.01        // 微分ゲイン
+#define KD 0.02        // 微分ゲイン
 
 int reflection;
 int power_left, power_right;
