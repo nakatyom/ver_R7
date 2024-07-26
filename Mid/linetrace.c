@@ -5,15 +5,15 @@
 
 
 #define BASE_SPEED 40  // 基本速度
-#define KP 1.2         // 比例ゲイン
+#define KP 0.8         // 比例ゲイン
 #define KI 0.1         // 積分ゲイン
-#define KD 0.02        // 微分ゲイン
+#define KD 0.03        // 微分ゲイン
 
 int reflection;
 int power_left, power_right;
 int error, last_error = 0, integral = 0;
 int correction;
-int target = 18;  // 目標値
+int target = 15;  // 目標値
 
 // 値をクリップする関数
 int clip(int value, int min, int max) {
