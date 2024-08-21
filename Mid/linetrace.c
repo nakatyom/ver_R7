@@ -37,7 +37,7 @@ void mid_linetrace_pid(intptr_t unused){
     ev3_color_sensor_get_rgb_raw(color_sensor,&rgb_val);
 
     
-    if (rgb_val.r <= 20 and rgb_val.g<= 48 && rgb_val.b <= 85){
+    if (rgb_val.r <= 20 && rgb_val.g<= 48 && rgb_val.b <= 85){
         target = BLACK_REF;
     }else{
         target = BLUE_REF;

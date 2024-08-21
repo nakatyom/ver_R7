@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include "ev3api.h"
 #include "port_settings.h"
-#include "linetrace.h"
+
 
 /* メインタスク(起動時にのみ関数コールされる) */
 void main_task(intptr_t unused) {
@@ -22,8 +22,8 @@ void main_task(intptr_t unused) {
 }
 
 
-uint8_t ma_val;
-uint8_t mv_val;
+int ma_val;
+int mv_val;
 int power_left, power_right;
 int32_t ang_left,ang_right;
 void naka_task(intptr_t unused){
