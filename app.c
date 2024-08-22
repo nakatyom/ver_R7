@@ -1,9 +1,8 @@
 #include "app.h"
-#include <stdio.h>
 #include "ev3api.h"
-#include <float.h>
+#include <stdio.h>
 
-#include "battery.h"
+#include "port.h"
 
 /* メインタスク(起動時にのみ関数コールされる) */
 void main_task(intptr_t unused) {
