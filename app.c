@@ -30,5 +30,15 @@ void ichi_task(intptr_t exinf){
 
     ev3_motor_set_power(left_motor, LP);
     ev3_motor_set_power(right_motor, RP);
+    
+    ev3_motor_reset_count(left_motor);
+    ev3_motor_reset_count(right_motor);
+    int32_t LC = ev3_motor_get_count(left_motor);
+    int32_t RC = ev3_motor_get_count(right_motor);
+    int lp = ev3_get_motor_power(left_motor);
+    int rp = ev3_get_motor_power(right_motor);
+
+    printf("%d : %d, %d : %d\n", lp, rp, LC, RC);
+
 
 }
