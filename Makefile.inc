@@ -1,7 +1,7 @@
 mkfile_path := $(dir $(lastword $(MAKEFILE_LIST)))
 
 APPL_COBJS += 
-APPL_COBJS += 
+APPL_COBJS +=
 
 APPL_LIBS += -lm
 
@@ -15,4 +15,4 @@ INCLUDES += -I$(mkfile_path)Apl
 INCLUDES += -I$(mkfile_path)Mid
 INCLUDES += -I$(mkfile_path)Drv
 INCLUDES += -I$(mkfile_path)Cfg
-INCLUDES += -I$(mkfile_path)Test
+# INCLUDES += -I$(mkfile_path)Test
