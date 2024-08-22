@@ -34,13 +34,14 @@ void naka_task(intptr_t unused){
     ang_left = ev3_motor_get_counts(left_motor);
     ang_right = ev3_motor_get_counts(right_motor);
 
-    ev3_motor_reset_counts(left_motor);
-    ev3_motor_reset_counts(right_motor);
+
 
     ma_val = ev3_battery_current_mA();
     mv_val = ev3_battery_voltage_mV();
     
     if (cycle_cnt>=500){
+        ev3_motor_reset_counts(left_motor);
+        ev3_motor_reset_counts(right_motor);
         power_left = power_left+5;
         power_right = power_left;
         ev3_motor_set_power(left_motor, power_left);
