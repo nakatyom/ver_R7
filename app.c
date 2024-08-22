@@ -39,7 +39,7 @@ void naka_task(intptr_t unused){
     ma_val = ev3_battery_current_mA();
     mv_val = ev3_battery_voltage_mV();
     
-    if (cycle_cnt>=500){
+    if (cycle_cnt>=80){
         ev3_motor_reset_counts(left_motor);
         ev3_motor_reset_counts(right_motor);
         power_left = power_left+5;

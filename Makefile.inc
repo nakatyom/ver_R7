@@ -2,6 +2,7 @@ mkfile_path := $(dir $(lastword $(MAKEFILE_LIST)))
 
 APPL_COBJS +=\
 port_settings.o\
+linetrace.o
 
 
 
