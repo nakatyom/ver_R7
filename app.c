@@ -24,8 +24,10 @@ void main_task(intptr_t unused) {
 
 int ma_val;
 int mv_val;
-int power_left, power_right;
+int power_left=0;
+int power_right=0;
 int32_t ang_left,ang_right;
+int cycle_cnt=0;
 void naka_task(intptr_t unused){
     //printf("10ms Task");
     //mid_linetrace_pid();
@@ -37,13 +39,17 @@ void naka_task(intptr_t unused){
 
     ma_val = ev3_battery_current_mA();
     mv_val = ev3_battery_voltage_mV();
-
-    power_left=100;
-    power_right=100;
     
-    ev3_motor_set_power(left_motor, power_left);
-    ev3_motor_set_power(right_motor, power_right);
-
+    if (cycle_cnt>=500){
+        power_left = power_left+5;
+        power_right = power_left;
+        ev3_motor_set_power(left_motor, power_left);
+        ev3_motor_set_power(right_motor, power_right);
+        cycle_cnt=0;
+    }
+    printf("cnt:%d_______", cycle_cnt);
     printf("Battery(A,V):(%d,%d) | Power(L,R):(%d,%d) | Angle(L,R)=(%d,%d)\n",ma_val,mv_val,power_left,power_right,ang_left,ang_right);
+
+    cycle_cnt=cycle_cnt+1;
 
 }
