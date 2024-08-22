@@ -1,7 +1,7 @@
 mkfile_path := $(dir $(lastword $(MAKEFILE_LIST)))
 
-APPL_COBJS += battery.o button.o
-APPL_COBJS += Log.o
+APPL_COBJS += 
+APPL_COBJS += 
 
 APPL_LIBS += -lm
 
