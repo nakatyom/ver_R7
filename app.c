@@ -38,12 +38,12 @@ void ichi_task(intptr_t exinf){
 
     ev3_motor_set_power(left_motor, LP);
     LC = ev3_motor_get_counts(left_motor);
-    LV = (LC*1000)/cyc;
+    //LV = (LC*1000)/cyc;
     ev3_motor_reset_counts(left_motor);
 
     ev3_motor_set_power(right_motor, RP);
     RC = ev3_motor_get_counts(right_motor);
-    RV = (RC*1000)/cyc;
+    //RV = (RC*1000)/cyc;
     ev3_motor_reset_counts(right_motor);
 
     if(count == 100){
@@ -57,7 +57,8 @@ void ichi_task(intptr_t exinf){
         count = 0;
     }
     else{
-        LVSUM += LV;
+        RSUM += RC;
+        LSUM += LC;
         count += 1;
     }
 
