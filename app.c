@@ -24,23 +24,27 @@ void main_task(intptr_t unused) {
 }
 
 int count = 0;
+int LVSUM = 0;
 
 void ichi_task(intptr_t exinf){
-    int cys = 20;
+    int cyc = 10;
     int LP = 50;
     int32_t LC;
     int LV;
 
     ev3_motor_set_power(left_motor, LP);
     LC = ev3_motor_get_counts(left_motor);
-    LV = (LC*1000)/20;
+    LV = (LC*1000)/cyc;
     ev3_motor_reset_counts(left_motor);
 
-    if(count == 10){
-        printf("%d, %d, %d\n", LP, LC, LV);
+    if(count == 100){
+        LVSUM /=100;
+        printf("%d, %d\n", LP, LV);
+        LVSUM = 0;
         count = 0;
     }
     else{
+        LVSUM += LV;
         count += 1;
     }
 
