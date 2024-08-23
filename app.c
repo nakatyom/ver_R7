@@ -24,20 +24,25 @@ void main_task(intptr_t unused) {
 }
 
 void ichi_task(intptr_t exinf){
+    int cys = 20;
     int LP = 50;
     int RP = 50;
     int32_t LC;
     int32_t RC;
+    float LV;
+    float RV;
 
     ev3_motor_set_power(left_motor, LP);
-    ev3_motor_set_power(right_motor, RP);
+    //ev3_motor_set_power(right_motor, RP);
     
     ev3_motor_reset_counts(left_motor);
-    ev3_motor_reset_counts(right_motor);
     LC = ev3_motor_get_counts(left_motor);
-    RC = ev3_motor_get_counts(right_motor);
+    //ev3_motor_reset_counts(right_motor);
+    //RC = ev3_motor_get_counts(right_motor);
 
-    printf("%d : %d, %d : %d\n", LP, RP, LC, RC);
+    LV = (LC/20)*1000;
+
+    printf("%d : %d, %d : %d\n", LP, LV);
 
 
 }
