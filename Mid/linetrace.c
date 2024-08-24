@@ -3,11 +3,11 @@
 #include "port.h"
 
 const int lr_sw = 1; // L_COURSE:1, R_COURSE:-1
-const float KP = 1.0;
+const float KP = 0.5;
 const float KD = 1.0;
-const u_int8_t target = 100;
+const u_int8_t target = 60;
 u_int8_t pre_err = 0;
-int BASE = 35;
+int BASE = 40;
 float motor_compensater = 0.92;
 
 void linetrace(){
@@ -17,7 +17,8 @@ void linetrace(){
 
     /* PID計算 */
     u_int8_t err = target - crnt;
-    u_int8_t out = (u_int8_t)( KP * err + KD * (err-pre_err) );
+    u_int8_t out = (u_int8_t)( KP * err );
+    //u_int8_t out = (u_int8_t)( KP * err + KD * (err-pre_err) );
     pre_err = err;
 
     /* パワー計算 */
