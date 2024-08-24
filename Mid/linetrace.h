@@ -3,6 +3,7 @@
 
 #include "ev3api.h"
 #include "port.h"
+#include "app.h"
 
 /* external functions*/
 extern void linetrace();

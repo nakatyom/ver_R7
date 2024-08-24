@@ -3,6 +3,7 @@
 #include "app.h"
 #include "ev3api.h"
 #include "port.h"
+#include "linetrace.h"
 
 /* メインタスク(起動時にのみ関数コールされる) */
 void main_task(intptr_t unused) {
