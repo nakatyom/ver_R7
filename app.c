@@ -16,7 +16,6 @@ void main_task(intptr_t unused) {
     ev3_motor_config(arm_motor     ,LARGE_MOTOR);
     ev3_motor_config(left_motor    ,MEDIUM_MOTOR);
     ev3_motor_config(right_motor   ,MEDIUM_MOTOR);
-
     
     /* タスク呼び出し */
     sta_cyc(LT_CYC);
