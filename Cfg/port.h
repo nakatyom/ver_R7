@@ -16,7 +16,4 @@ extern const motor_port_t
     left_motor      = EV3_PORT_C,
     right_motor     = EV3_PORT_B;
 
-/*extern functions*/
-extern void set_ports();
-
 #endif /* _PORT_H */
