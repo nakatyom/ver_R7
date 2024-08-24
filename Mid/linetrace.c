@@ -3,7 +3,7 @@
 #include "port.h"
 
 const int lr_sw = -1; // L_COURSE:1, R_COURSE:-1
-const float KP = 0.3;
+const float KP = 0.5;
 const float KD = 1.0;
 const u_int8_t target = 60;
 int pre_err = 0;
@@ -17,8 +17,8 @@ void linetrace(){
 
     /* PID計算 */
     int err = target - crnt;
-    int out = (int)( KP * err );
-    //u_int8_t out = (u_int8_t)( KP * err + KD * (err-pre_err) );
+    //int out = (int)( KP * err );
+    int out = (int)( KP * err + KD * (err-pre_err) );
     pre_err = err;
 
     /* パワー計算 */
