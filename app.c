@@ -49,5 +49,5 @@ void motor_task(intptr_t exinf){
 
     ev3_motor_set_power(left_motor, left_power);
     ev3_motor_set_power(right_motor, right_power);
-    printf("%d, %d\n",);
+    printf("%d, %d\n",left_counts, right_counts);
 }
