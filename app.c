@@ -19,7 +19,7 @@ void main_task(intptr_t unused) {
 
     /* タスク呼び出し */
     sta_cyc(ICHI_CYC1);
-    sta_cyc(ICHI_CYC2);
+    //sta_cyc(ICHI_CYC2);
 
     /* タスク終了 */
     ext_tsk();
@@ -28,9 +28,11 @@ void main_task(intptr_t unused) {
 
 
 void ichi_task1(intptr_t exinf){
-    printf("aaa\n");
+    int a=0;
+    print("%d\n",a);
+    a += 1;
 }
 
 void ichi_task2(intptr_t exinf){
-    printf("bbb\n");
+    
 }
