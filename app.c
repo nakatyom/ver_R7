@@ -19,32 +19,35 @@ void main_task(intptr_t unused) {
 
     
     /* タスク呼び出し */
-    sta_cyc(BOSS_CYC);
+    sta_cyc(SENS_CYC);
+    sta_cyc(MOTOR_CYC);
 
     /* タスク終了 */
     ext_tsk();
 }
 
-int a = 0;
+int32_t left_counts = 0;
+int32_t right_counts = 0;
+int left_power = 0;
+int right_power = 0;
 
-void boss_task(intptr_t exinf){
-    if(a <= 50){
-        sta_cyc(ICHI_CYC1);
-    }
-    else if(a > 50 && a <= 100){
-        sta_cyc(ICHI_CYC2);
-    }
-    else {
-        ext_tsk();
-    }
+void sens_task(intptr_t exinf){
+    left_counts = ev3_motor_get_counts(left_motor);
+    right_counts = ev3_motor_get_counts(right_motor);
 }
 
-void ichi_task1(intptr_t exinf){
-    printf("aaa, %d\n", a);
-    a += 1;
-}
+void motor_task(intptr_t exinf){
+    left_power = 50;
+    right_power = 50;
 
-void ichi_task2(intptr_t exinf){
-    printf("bbb, %d\n",a);
-    a += 1;
+    if(left_count > 180 || left_count < 0){
+        left_power *= -1;
+    }
+
+    if(right_count > 180 || right_count < 0){
+        right_power *= -1;
+    }
+
+    ev3_motor_set_power(left_motor, left_power);
+    ev3_motor_set_power(right_motor, right_power);
 }
