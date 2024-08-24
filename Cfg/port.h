@@ -2,7 +2,6 @@
 #define _PORT_H
 
 #include "ev3api.h"
-#include "app.h"
 
 /* センサーポートの定義 */
 extern const sensor_port_t
