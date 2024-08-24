@@ -2,11 +2,11 @@
 #include "app.h"
 #include "port.h"
 
-const int lr_sw = 1; // L_COURSE:1, R_COURSE:-1
-const float KP = 0.5;
+const int lr_sw = -1; // L_COURSE:1, R_COURSE:-1
+const float KP = 0.3;
 const float KD = 1.0;
 const u_int8_t target = 60;
-u_int8_t pre_err = 0;
+int pre_err = 0;
 int BASE = 40;
 float motor_compensater = 0.92;
 
@@ -16,8 +16,8 @@ void linetrace(){
     u_int8_t crnt = ev3_color_sensor_get_reflect(color_sensor);
 
     /* PID計算 */
-    u_int8_t err = target - crnt;
-    u_int8_t out = (u_int8_t)( KP * err );
+    int err = target - crnt;
+    int out = (int)( KP * err );
     //u_int8_t out = (u_int8_t)( KP * err + KD * (err-pre_err) );
     pre_err = err;
 
