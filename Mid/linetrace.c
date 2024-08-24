@@ -3,8 +3,8 @@
 #include "port.h"
 
 const int lr_sw = -1; // L_COURSE:1, R_COURSE:-1
-const float KP = 0.5;
-const float KD = 1.0;
+const float KP = 0.7;
+const float KD = 0.3;
 const u_int8_t target = 60;
 int pre_err = 0;
 int BASE = 40;
@@ -15,10 +15,18 @@ void linetrace(){
     /* 反射強度の取得 */
     u_int8_t crnt = ev3_color_sensor_get_reflect(color_sensor);
 
-    /* PID計算 */
+    /* err計算 */
     int err = target - crnt;
-    //int out = (int)( KP * err );
-    int out = (int)( KP * err + KD * (err-pre_err) );
+
+    if(err >= 5 || err <= -5){
+        /* P or PD計算 */
+        //int out = (int)( KP * err );
+        int out = (int)( KP * err + KD * (err-pre_err) );
+    }
+    else{
+        /*補正ゼロ(直進する)*/
+        out = 0;
+    }
     pre_err = err;
 
     /* パワー計算 */

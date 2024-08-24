@@ -1,6 +1,7 @@
 mkfile_path := $(dir $(lastword $(MAKEFILE_LIST)))
 
-APPL_COBJS += linetrace.o port.o
+APPL_COBJS += port.o
+APPL_COBJS += linetrace.o get_line.o
 
 APPL_LIBS += -lm
 
