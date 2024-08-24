@@ -9,7 +9,7 @@ void main_task(intptr_t unused) {
     /* IOポート設定 */
     // sensor: touch_sensor,color_sensor, sonar_sensor, gyro_sensor
     // motor : arm_motor, left_motor, right_motor
-    set_port();
+    set_ports();
 
     /* タスク呼び出し */
     sta_cyc(BOSS_CYC);
@@ -28,13 +28,13 @@ void boss_task1(){
         sta_cyc(ICHI_CYC2);
     }
     else {
-        ext_task();
+        ext_tsk();
     }
 }
 
 void ichi_task1(intptr_t exinf){
     if(a == 50){
-        ext_task();
+        ext_tsk();
     }
 
     printf("aaa, %d\n", a);
