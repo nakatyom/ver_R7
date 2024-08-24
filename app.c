@@ -16,6 +16,8 @@ void main_task(intptr_t unused) {
     ev3_motor_config(arm_motor     ,LARGE_MOTOR);
     ev3_motor_config(left_motor    ,MEDIUM_MOTOR);
     ev3_motor_config(right_motor   ,MEDIUM_MOTOR);
+
+    
     /* タスク呼び出し */
     sta_cyc(BOSS_CYC);
 
@@ -25,7 +27,7 @@ void main_task(intptr_t unused) {
 
 int a = 0;
 
-void boss_task1(){
+void boss_task(intptr_t exinf){
     if(a <= 50){
         sta_cyc(ICHI_CYC1);
     }
@@ -38,10 +40,6 @@ void boss_task1(){
 }
 
 void ichi_task1(intptr_t exinf){
-    if(a == 50){
-        ext_tsk();
-    }
-
     printf("aaa, %d\n", a);
     a += 1;
 }
