@@ -18,19 +18,27 @@ void main_task(intptr_t unused) {
     ev3_motor_config(right_motor   ,MEDIUM_MOTOR);
 
     /* タスク呼び出し */
+    int a = 0
+    if(a <= 50){
     sta_cyc(ICHI_CYC1);
-    //sta_cyc(ICHI_CYC2);
+    }
+    else if(a > 50 && a < 100){
+    sta_cyc(ICHI_CYC2);
+    a += 1;
+    }
+    else{}
 
     /* タスク終了 */
     ext_tsk();
 }
 
-int a = 0
+
 
 void ichi_task1(intptr_t exinf){
+    printf("aaa\n")
     a += 1;
 }
 
 void ichi_task2(intptr_t exinf){
-    printf("%d",a);
+    printf("bbb\n");
 }
