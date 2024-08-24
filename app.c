@@ -26,6 +26,5 @@ void main_task(intptr_t unused) {
 }
 
 void linetrace_task(intptr_t exinf){
-    int ref = ev3_color_sensor_get_reflect(color_sensor);
-    printf("%d\n",ref);
+    linetrace();
 }
