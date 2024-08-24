@@ -25,14 +25,12 @@ void main_task(intptr_t unused) {
     ext_tsk();
 }
 
-
+int a = 0
 
 void ichi_task1(intptr_t exinf){
-    int a=0;
-    print("%d\n",a);
     a += 1;
 }
 
 void ichi_task2(intptr_t exinf){
-    
+    printf("%d",a);
 }
