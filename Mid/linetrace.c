@@ -26,8 +26,10 @@ void linetrace(){
     int right_power = BASE - lr_sw * out;
 
     /* モータ出力 */
-    left_power *= (int)(motor_compensater * left_power);
+    left_power = (int)(motor_compensater * left_power);
     ev3_motor_set_power(left_motor, left_power);
     ev3_motor_set_power(right_motor, right_power);
 
+    printf("%d, %d : ", crnt, err);
+    printf("%d, %d\n", left_power, right_power);
 }
