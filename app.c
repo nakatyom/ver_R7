@@ -18,20 +18,19 @@ void main_task(intptr_t unused) {
     ev3_motor_config(right_motor   ,MEDIUM_MOTOR);
 
     /* タスク呼び出し */
-    sta_cyc(ICHI_CYC);
+    sta_cyc(ICHI_CYC1);
+    sta_cyc(ICHI_CYC2);
+
     /* タスク終了 */
     ext_tsk();
 }
 
 
 
-void ichi_task(intptr_t exinf){
-int l_power = 50;
-int r_power = 50;
+void ichi_task1(intptr_t exinf){
+    printf("aaa\n");
+}
 
-float lp = 0.96*50;
-l_power = (int)lp
-
-ev3_motor_set_power(left_motor,l_power);
-ev3_motor_set_power(right_motor,r_power);
+void ichi_task2(intptr_t exinf){
+    printf("bbb\n");
 }
