@@ -17,7 +17,7 @@ void linetrace(){
 
     /* PID計算 */
     u_int8_t err = target - crnt;
-    u_int8_t out = (u_int8_t)( kp * err + kd * (err-pre_error) );
+    u_int8_t out = (u_int8_t)( KP * err + KD * (err-pre_err) );
     pre_err = err;
 
     /* パワー計算 */
