@@ -6,7 +6,7 @@
 #include "port.h"
 
 /* log.txt pass */
-#define FILE_PATH_BAT  "log.txt"
+#define FILE_PATH_LOG  "log.txt"
 
 bool is_head_line = true;
 
@@ -15,7 +15,7 @@ const int wheel_r = 47; //mm
 
 int left_power = 0;
 int right_power = 0;
-float motor_compensater = 0.92;
+float motor_comp = 0.92;
 
 /* private functions */
 void printTimeStamp(FILE *fp, bool is_head){  // Assuming that the file is opened correctly. 
@@ -52,7 +52,7 @@ void printLog(int dist, uint8_t ref, rgb_raw_t* rgb_val){
     printTimeStamp(fp, is_head_line);
     fprintf(fp, "%d,", dist);
     fprintf(fp, "%d,", ref);
-    fprintf(fp, "%d,%d,%d\n", rgb_val.r, rgb_val.g, rgb_val.b);
+    fprintf(fp, "%d,%d,%d\n", rgb_val->r, rgb_val->g, rgb_val->b);
 
     // close Target file.
     fclose(fp);
@@ -81,13 +81,13 @@ extern void get_line(){
     /* モータ駆動 */
     int left_power;
     int right_power;
-    if((int)crnt_dist <= taget_dist/2){
+    if((int)crnt_dist <= target_dist/2){
         if(left_power <= 40){
             left_power  += 5;
             right_power += 5;
         }
     }
-    else if((int)crnt_dist > taget_dist/2 && (int)crnt_dist <= taget_dist){
+    else if((int)crnt_dist > target_dist/2 && (int)crnt_dist <= target_dist){
         if(left_power >= 0){
             left_power  -= 5;
             right_power -= 5;
@@ -96,12 +96,10 @@ extern void get_line(){
     else {
     ev3_motor_stop(left_motor, TRUE);
     ev3_motor_stop(right_motor, TRUE);
-    fprintf(fp,"\n");
-    fclose(fp);// close Target file.
     ext_tsk(); //task終了
     }
 
-    left_power = (int)(motor_compensater * left_power);
+    left_power = (int)(motor_comp * left_power);
     ev3_motor_set_power(left_motor, left_power);
     ev3_motor_set_power(right_motor, right_power);
 }

@@ -19,10 +19,11 @@ void linetrace(){
     /* err計算 */
     int err = target - crnt;
 
+    int out;
     if(err >= 5 || err <= -5){
         /* P or PD計算 */
         //int out = (int)( KP * err );
-        int out = (int)( KP * err + KD * (err-pre_err) );
+        out = (int)( KP * err + KD * (err-pre_err) );
     }
     else{
         /*補正ゼロ(直進する)*/
