@@ -5,9 +5,10 @@
 const int lr_sw = -1; // L_COURSE:1, R_COURSE:-1
 const float KP = 0.7;
 const float KD = 0.3;
+int BASE = 40;        // base speed
 const u_int8_t target = 60;
+
 int pre_err = 0;
-int BASE = 40;
 float motor_compensater = 0.92;
 
 void linetrace(){
