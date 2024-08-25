@@ -27,5 +27,6 @@ void main_task(intptr_t unused) {
 }
 
 void linetrace_task(intptr_t exinf){
-    linetrace();
+    get_line();
+    //linetrace();
 }

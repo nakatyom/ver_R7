@@ -102,4 +102,5 @@ extern void get_line(){
     left_power = (int)(motor_comp * left_power);
     ev3_motor_set_power(left_motor, left_power);
     ev3_motor_set_power(right_motor, right_power);
+    printf("%.1f,%d,%d\n", crnt_dist, left_power, right_power);
 }
