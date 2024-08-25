@@ -13,6 +13,7 @@ bool is_head_line = true;
 const int target_dist = 100; //mm
 const int wheel_r = 47; //mm
 
+float crnt_dist = 0.0;
 int left_power = 0;
 int right_power = 0;
 float motor_comp = 0.92;
@@ -65,7 +66,6 @@ extern void get_line(){
     }
 
     /* 現在距離計算 */
-    float crnt_dist = 0.0;
     int32_t r_digree = ev3_motor_get_counts(right_motor);
     crnt_dist = wheel_r * (r_digree * 3.1415 / 180);
 
@@ -79,8 +79,6 @@ extern void get_line(){
     printLog((int)crnt_dist, ref, &rgb_val);
 
     /* モータ駆動 */
-    int left_power;
-    int right_power;
     if((int)crnt_dist <= target_dist/2){
         if(left_power <= 40){
             left_power  += 5;
