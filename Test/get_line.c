@@ -94,8 +94,8 @@ extern void get_line(){
         }
     }
     else {
-    ev3_motor_stop(left_motor, TRUE);
-    ev3_motor_stop(right_motor, TRUE);
+    ev3_motor_stop(left_motor, (bool_t)1);
+    ev3_motor_stop(right_motor, (bool_t)1);
     ext_tsk(); //task終了
     }
 
