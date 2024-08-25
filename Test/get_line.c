@@ -81,14 +81,18 @@ extern void get_line(){
     /* モータ駆動 */
     if((int)crnt_dist <= target_dist/2){
         if(left_power <= 40){
-            left_power  += 5;
-            right_power += 5;
+            left_power  += 2;
+        }
+        if(right_power <= 40){
+            right_power += 2;
         }
     }
     else if((int)crnt_dist > target_dist/2 && (int)crnt_dist <= target_dist){
         if(left_power >= 0){
-            left_power  -= 5;
-            right_power -= 5;
+            left_power  += 2;
+        }
+        if(right_power >= 0){
+            right_power += 2;
         }
     }
     else {
@@ -97,8 +101,8 @@ extern void get_line(){
     ext_tsk(); //task終了
     }
 
-    left_power = (int)(motor_comp * left_power);
-    ev3_motor_set_power(left_motor, left_power);
+    int left_power_t = (int)(motor_comp * left_power);
+    ev3_motor_set_power(left_motor, left_power_t);
     ev3_motor_set_power(right_motor, right_power);
-    printf("%.1f,%d,%d\n", crnt_dist, left_power, right_power);
+    printf("%.1f,%d,%d\n", crnt_dist, left_power_t, right_power);
 }
