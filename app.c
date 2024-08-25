@@ -26,8 +26,14 @@ void main_task(intptr_t unused) {
     ext_tsk();
 }
 
+int is_touch = 0;
+
 void linetrace_task(intptr_t exinf){
     if(ev3_touch_sensor_is_pressed(touch_sensor)){
+       is_touch  = 1;
+    }
+
+    if(is_touch == 1){
         // get_line();
         linetrace();
     }
