@@ -1,81 +1,34 @@
-#include "ev3api.h"
-#include <stdio.h>
-#include "app.h"
-#include "port_settings.h"
+#include "linetrace.h"
+#include "velocity_control.h"
 
-#define BASE_SPEED 50  // 基本速度
-#define BLUE_REF 39
-#define BLACK_REF 15
-#define KP 1.1         // 比例ゲイン
-#define KI 0.1         // 積分ゲイン
-#define KD 0.02        // 微分ゲイン
 
-int reflection;
-int power_left, power_right;
-int error, last_error = 0, integral = 0;
-int correction;
-int target ;  // 目標値
+float mid_PID_line_pos(float tag, float maj){ 
 
-// 値をクリップする関数
-int clip(int value, int min, int max) {
-    if (value < min) {
-        return min;
-    } else if (value > max) {
-        return max;
-    } else {
-        return value;
-    }
+    const float kp = 0.5f;
+    const float ki = 0.0f;
+    const float kd = 0.0;
+
+    static float intg;
+    static float err_pre;
+    static float err;
+     
+    err_pre = err;
+    err = tag - maj;
+    intg += err;
+
+    if (intg > 1000.0f)    intg = 1000.0f;
+    if (intg < -1000.0f)   intg = -1000.0f;
+
+    return ((err * kp) + (intg * ki) + ((err - err_pre) * kd));
 }
 
-uint32_t cnt=0;
-rgb_raw_t rgb_val;
 
-void mid_linetrace_pid(intptr_t unused){
+void linetrace(void){
 
-    // 反射光の強さを取得
-    reflection = ev3_color_sensor_get_reflect(color_sensor);
-    ev3_color_sensor_get_rgb_raw(color_sensor,&rgb_val);
+    int reflection = ev3_color_sensor_get_reflect(EV3_PORT_1);
 
-    
-    if (rgb_val.r <= 20 and rgb_val.g<= 48 && rgb_val.b <= 85){
-        target = BLACK_REF;
-    }else{
-        target = BLUE_REF;
-    }
-    
-    
-    // デバックコード
-    if (ev3_touch_sensor_is_pressed(touch_sensor) && (cnt % 1000000 == 0)) {
-        //target += 1;  // 目標値を増加
-        if (target > 100) {
-            target = 0;  // 目標値をリセット
-        }
-    }else{
-        if (cnt%100000000==0){
-            printf("colorval:%d | Target %d | Color(R,G,B)=(%d,%d,%d)\n",reflection,target,rgb_val.r,rgb_val.g,rgb_val.b);
-        }
-    }
-    if (cnt>=6500000000){
-        cnt=0;
-    }
+    float velo_rot_target = mid_PID_line_pos(25.0f, (float)reflection);
 
-    // エラー計算
-    error = target - reflection;
-    integral += error;
-    correction = KP * error + KD * (error - last_error); //+ KI * integral ;
-
-    // 左右のモーターのパワーを設定
-    power_left = BASE_SPEED - correction;
-    power_right = BASE_SPEED + correction;
-
-    // パワーを-100～100の範囲にクリップ
-    power_left = clip(power_left, -100, 100);
-    power_right = clip(power_right, -100, 100);
-
-    ev3_motor_set_power(left_motor, power_left);
-    ev3_motor_set_power(right_motor, power_right);
-
-    // 前回のエラーを更新
-    last_error = error;
+//    mid_velocity_control(50.0f, velo_rot_target);
+    mid_velocity_control(50.0f, 0.0f);  // debug
 }
-

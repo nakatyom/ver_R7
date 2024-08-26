@@ -5,6 +5,7 @@ extern "C" {
 #include "ev3api.h"
 #include "port_settings.h"
 #include "linetrace.h"
+#include "velocity_control.h"
 
 /* タスク優先度 */
 #define MAIN_PRIORITY    (TMIN_APP_TPRI + 1) /* メインタスク */
