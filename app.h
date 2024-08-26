@@ -9,8 +9,7 @@ extern "C" {
 
 /* タスク優先度 */
 #define MAIN_PRIORITY    (TMIN_APP_TPRI + 1) /* メインタスク */
-#define TRACER_PRIORITY  (TMIN_APP_TPRI + 2) /* ライントレースタスク */
-#define NAKANO_PRIORITY   (TMIN_APP_TPRI + 3)
+#define NAKANO_PRIORITY   (TMIN_APP_TPRI + 2)
 
 /* タスク周期の定義 */
 #define LINE_TRACER_PERIOD  (100 * 1000) /* ライントレースタスク:100msec周期 */

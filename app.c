@@ -14,8 +14,6 @@ void main_task(intptr_t unused) {
     /* ライントレースタスクの起動 */
     /* write_log(); */
     commn_settings();
-    ev3_sensor_config(EV3_PORT_1, COLOR_SENSOR);
-    ev3_sensor_config(EV3_PORT_2, GYRO_SENSOR);
     
     printf("Start Naka Task!!\n");
     sta_cyc(NAKA_TASK_CYC);
@@ -27,6 +25,6 @@ void main_task(intptr_t unused) {
 
 //uint8_t cnt;
 void naka_task(intptr_t unused){
-    //printf("10ms Task");
+    printf("10ms Task");
     linetrace();
 }
