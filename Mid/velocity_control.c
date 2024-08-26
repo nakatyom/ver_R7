@@ -103,9 +103,9 @@ void mid_velocity_control(float velo_str_tgt, float velo_rot_tgt){
     ev3_motor_set_power(right_motor, mot_r_u);
     ev3_motor_set_power(left_motor, mot_l_u);
 
-//    printf("velo_str %f | velo_rot %f | velo_str_u %f | velo_rot_u %f | mot_r_u_tmp %f | mot_l_u_tmp %f\n", velo_str, velo_rot, velo_str_u, velo_rot_u, mot_r_u_tmp, mot_l_u_tmp);
+    printf("velo_str %f | velo_rot %f | velo_str_u %f | velo_rot_u %f | mot_r_u_tmp %f | mot_l_u_tmp %f\n", velo_str, velo_rot, velo_str_u, velo_rot_u, mot_r_u_tmp, mot_l_u_tmp);
 //    printf("velo_str %f | velo_rot %f | velo_str_u %f | velo_rot_u %f\n", velo_str, velo_rot, velo_str_u, velo_rot_u);
-    printf("velo_str %f | velo_rot %f\n", velo_str, velo_rot);
+//    printf("velo_str %f | velo_rot %f\n", velo_str, velo_rot);
 //    printf("cnt_r %d | cnt_l %d\n", velo_r_tmp, velo_l_tmp);
 //    printf("mot_r_u_str %f | mot_r_u_rot %f\n", mot_r_u_str, mot_r_u_rot);
 }
