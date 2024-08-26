@@ -25,7 +25,7 @@ float mid_PID_line_pos(float tag, float maj){
 
 void linetrace(void){
 
-    int reflection = ev3_color_sensor_get_reflect(EV3_PORT_1);
+    int reflection = ev3_color_sensor_get_reflect(color_sensor);
 
     float velo_rot_target = mid_PID_line_pos(25.0f, (float)reflection);
 
