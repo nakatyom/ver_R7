@@ -29,6 +29,6 @@ void linetrace(void){
 
     float velo_rot_target = mid_PID_line_pos(50.0f, (float)reflection);
 
-    mid_velocity_control(50.0f, velo_rot_target);
+    mid_velocity_control(0.0f, 0.0f);
 //    mid_velocity_control(50.0f, 0.0f);  // debug
 }
