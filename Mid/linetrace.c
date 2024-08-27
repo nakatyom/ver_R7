@@ -6,7 +6,7 @@ float mid_PID_line_pos(float tag, float maj){
 
     const float kp = 0.2f;
     const float ki = 0.0f;
-    const float kd = 0.01f;
+    const float kd = 0.1f;
 
     static float intg;
     static float err_pre;
