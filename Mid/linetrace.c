@@ -4,8 +4,8 @@
 
 float mid_PID_line_pos(float tag, float maj){ 
 
-    const float kp = 0.25f;
-    const float ki = 0.00f;
+    const float kp = 0.5f;
+    const float ki = 0.01f;
     const float kd = 0.10f;
 
     static float intg;

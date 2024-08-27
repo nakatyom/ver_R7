@@ -14,7 +14,7 @@
 
 float mid_PID_str_velo(float tag, float maj){ 
 
-    const float kp = 0.01f;
+    const float kp = 0.1f;
     const float ki = 0.01f;
     const float kd = 0.0f;
 
@@ -26,8 +26,8 @@ float mid_PID_str_velo(float tag, float maj){
     err = tag - maj;
     intg += err;
 
-    if (intg > 10000.0f)    intg = 10000.0f;
-    if (intg < -10000.0f)   intg = -10000.0f;
+    if (intg > 1000.0f)    intg = 1000.0f;
+    if (intg < -1000.0f)   intg = -1000.0f;
 
     return ((err * kp) + (intg * ki) + ((err - err_pre) * kd));
 }
@@ -56,7 +56,7 @@ float mid_PID_rot_velo(float tag, float maj){
 
 float mid_LPF_str_velo(float maj){ 
 
-    const float k = 0.7f;
+    const float k = 0.85f;
 
     static float out;
 
