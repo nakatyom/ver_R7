@@ -25,6 +25,6 @@ void main_task(intptr_t unused) {
 
 //uint8_t cnt;
 void naka_task(intptr_t unused){
-    printf("10ms Task");
+    printf("10ms Task ");
     linetrace();
 }
