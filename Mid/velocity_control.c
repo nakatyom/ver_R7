@@ -15,7 +15,7 @@
 float mid_PID_str_velo(float tag, float maj){ 
 
     const float kp = 1.0f;
-    const float ki = 0.1f;
+    const float ki = 0.5f;
     const float kd = 0.0f;
 
     static float intg;
