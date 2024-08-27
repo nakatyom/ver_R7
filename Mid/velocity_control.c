@@ -98,8 +98,8 @@ void mid_velocity_control(float velo_str_tgt, float velo_rot_tgt){
     float mot_l_u_tmp = mot_l_u_str - mot_l_u_rot;  // deg/sec(motor)
     
     /* 操作量計算 */
-    int mot_r_u = (int)(mot_r_u_tmp * 0.2f);
-    int mot_l_u = (int)(mot_l_u_tmp * 0.2f);
+    int mot_r_u = (int)(mot_r_u_tmp * 1.0f);
+    int mot_l_u = (int)(mot_l_u_tmp * 1.0f);
 
     if (mot_r_u >  100)  mot_r_u = 100;
     if (mot_r_u < -100)  mot_r_u = -100;
