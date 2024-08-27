@@ -54,6 +54,18 @@ float mid_PID_rot_velo(float tag, float maj){
 }
 
 
+float mid_LPF_str_velo(float maj){ 
+
+    const float k = 0.5f;
+
+    static float out;
+
+    out = (out * k) + (maj * (1.0f - k)); 
+
+    return out;
+}
+
+
 void mid_velocity_control(float velo_str_tgt, float velo_rot_tgt){
 
     static int cnt_r;
@@ -73,7 +85,7 @@ void mid_velocity_control(float velo_str_tgt, float velo_rot_tgt){
     float velo_r    = ((float)velo_r_tmp / 360.0f) * (PI_FLOAT * TIRE_SIZE_R);   // deg/sec(motor) ⇒ mm/sec(motor) 
     float velo_l    = ((float)velo_l_tmp / 360.0f) * (PI_FLOAT * TIRE_SIZE_L);   // deg/sec(motor) ⇒ mm/sec(motor)
    
-    float velo_str  = (velo_r + velo_l) * 0.5f; // mm/sec(robot)
+    float velo_str  = mid_LPF_str_velo( ((velo_r + velo_l) * 0.5f)); // mm/sec(robot)
 
     /* 旋回速度計算 */ 
     float velo_rot = (float)ev3_gyro_sensor_get_rate(gyro_sensor);   // deg/sec (yaw rate)
