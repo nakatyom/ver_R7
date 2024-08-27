@@ -56,7 +56,7 @@ float mid_PID_rot_velo(float tag, float maj){
 
 float mid_LPF_str_velo(float maj){ 
 
-    const float k = 0.5f;
+    const float k = 0.7f;
 
     static float out;
 
