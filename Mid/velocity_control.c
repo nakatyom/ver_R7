@@ -36,8 +36,8 @@ float mid_PID_str_velo(float tag, float maj){
 float mid_PID_rot_velo(float tag, float maj){ 
 
     const float kp = 0.5f;
-    const float ki = 0.001f;
-    const float kd = 0.005f;
+    const float ki = 0.01f;
+    const float kd = 0.05f;
 
     static float intg;
     static float err_pre;
