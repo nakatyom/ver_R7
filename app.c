@@ -27,19 +27,16 @@ void main_task(intptr_t unused) {
     ext_tsk();
 }
 
+int motor_power = 50;
+int32_t encL = 0;
+int32_t encR = 0;
+
 void log_task(intptr_t unused){
-    u_int8_t amb = 0;
-    u_int8_t ref = 0;
-    rgb_raw_t color = {0,0,0};
-    int16_t dist = 0;
+    ev3_motor_set_power(left_motor,motor_power);
+    ev3_motor_set_power(right_motor,motor_power);
 
-    /* Color Log */
-    amb = ev3_color_sensor_get_ambient(color_sensor);
-    ref = ev3_color_sensor_get_reflect(color_sensor);
-    ev3_color_sensor_get_rgb_raw(color_sensor, &color);
-    printColorLog(amb, ref, &color);
+    encL = ev3_motor_get_counts(left_motor);
+    encR = ev3_motor_get_counts(right_motor);
 
-    /* Sonic Log */
-    dist = ev3_ultrasonic_sensor_get_distance(sonar_sensor);
-    printSonicLog(dist);
+    log_EncLR(motor_power,motor_power,encL,encR);
 }

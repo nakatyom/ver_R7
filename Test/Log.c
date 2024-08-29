@@ -6,23 +6,10 @@
 #include "Log.h"
 
 /* define */
-#define FILE_PATH_BAT  "log_bat.txt"
-#define FILE_PATH_BTN "log_btn.txt"
-#define FILE_PATH_COLOR "log_color.txt"
-#define FILE_PATH_GYRO "log_gyro.txt"
-#define FILE_PATH_SONIC "log_sonic.txt"
-#define FILE_PATH_ENC_LR "log_encLR.txt"
-#define FILE_PATH_ENC_ARM "log_encArm.txt" 
+#define FILE_PATH_MOTOR "/ver_R7/log_motor.txt"
 
 /* private valiables */
-static bool is_head_bat = true;
-static bool is_head_btn = true;
-static bool is_head_color = true;
-static bool is_head_gyro = true;
-static bool is_head_sonic = true;
-static bool is_head_encLR = true;
-static bool is_head_encArm = true;
-
+static bool is_head_motor = true;
 
 /* private functions */
 void printTimeStamp(FILE *fp, bool is_head){  // Assuming that the file is opened correctly.
@@ -48,106 +35,9 @@ void printTimeStamp(FILE *fp, bool is_head){  // Assuming that the file is opene
 
 
 /* external functions */
-void printBatLog(int TgtVlt, int TgtCur){
+void log_EncLR(int pwrL, int pwrR, int32_t encL, int32_t encR){
     // open Target file.
-    FILE *fp = fopen(FILE_PATH_BAT, "a");
-    if(fp == NULL){
-        printf("fail open file on Log.c");
-        return;
-    }
-
-    //write Log : Date
-    //            Time | Vlotage Val | Current Val
-    printTimeStamp(fp, is_head_bat);
-    fprintf(fp, "Battery_volt = %d[mV], ", TgtVlt);
-    fprintf(fp, "Battery_current = %d[mA]\n", TgtCur);
-
-    // close Target file.
-    fprintf(fp,"\n");
-    fclose(fp);
-}
-
-
-void printBtnLog(char* TgtName, bool TgtState){
-    // open Target file.
-    FILE* fp = fopen(FILE_PATH_BTN, "a");
-    if(fp == NULL){
-        printf("fail open file on Log.c");
-        return;
-    }
-
-    //write Log : Date
-    //            Time | Button Name | State
-    printTimeStamp(fp, is_head_btn);
-    fprintf(fp, "%s = ", TgtName);
-    fprintf(fp, "%d\n", TgtState);
-
-    // close Target file.
-    fprintf(fp,"\n");
-    fclose(fp);
-}
-
-void printColorLog(u_int8_t Ambient, u_int8_t Reflect, rgb_raw_t* TgtColorVal){
-    // open Target file.
-    FILE* fp = fopen(FILE_PATH_COLOR, "a");
-    if(fp == NULL){
-        printf("fail open file on Log.c");
-        return;
-    }
- 
-    printf("file open.\n");
-
-    //write Log : Date
-    //            Time | Color Val
-    printTimeStamp(fp, is_head_color);
-    fprintf(fp, "Ambient = %d, ", Ambient);
-    fprintf(fp, "Reflect = %d, ", Reflect);
-    fprintf(fp, "R:%d, G:%d, B:%d\n", TgtColorVal->r, TgtColorVal->g, TgtColorVal->b);
-
-    // close Target file.
-    fprintf(fp,"\n");
-    fclose(fp);
-}
-
-void printGyroLog(int16_t TgtGyroVal){
-    // open Target file.
-    FILE* fp = fopen(FILE_PATH_GYRO, "a");
-    if(fp == NULL){
-        printf("fail open file on Log.c");
-        return;
-    }
-
-    //write Log : Date
-    //            Time | Gyro Val
-    printTimeStamp(fp, is_head_gyro);
-    fprintf(fp, "%d\n", TgtGyroVal);
-
-    // close Target file.
-    fprintf(fp,"\n");
-    fclose(fp);
-}
-
-void printSonicLog(int16_t TgtSonicVal){
-    // open Target file.
-    FILE* fp = fopen(FILE_PATH_SONIC, "a");
-    if(fp == NULL){
-        printf("fail open file on Log.c");
-        return;
-    }
-
-    //write Log : Date
-    //            Time | Sonic Val
-    printTimeStamp(fp, is_head_sonic);
-    fprintf(fp, "Distance = %d[cm]\n", TgtSonicVal);
-
-    // close Target file.
-    fprintf(fp,"\n");
-    fclose(fp);
-}
-
-void printEncLRLog(int32_t EncLVal, int32_t EncRVal){
-    // open Target file.
-    FILE* fp = fopen(FILE_PATH_ENC_LR, "a");
+    FILE* fp = fopen(FILE_PATH_MOTOR, "a");
     if(fp == NULL){
         printf("fail open file on Log.c");
         return;
@@ -155,27 +45,11 @@ void printEncLRLog(int32_t EncLVal, int32_t EncRVal){
 
     //write Log : Date
     //            Time | Encoder_L val | Encoder_R val
-    printTimeStamp(fp, is_head_encLR);
-    fprintf(fp, "%ld | ", EncLVal);
-    fprintf(fp, "%ld\n", EncRVal);
-
-    // close Target file.
-    fprintf(fp,"\n");
-    fclose(fp);
-}
-
-void printEncArmLog(int32_t EncArmVal){
-    // open Target file.
-    FILE* fp = fopen(FILE_PATH_ENC_ARM, "a");
-    if(fp == NULL){
-        printf("fail open file on Log.c");
-        return;
-    }
-
-    //write Log : Date
-    //            Time | Encoder_Arm Val
-    printTimeStamp(fp, is_head_encArm);
-    fprintf(fp, "%ld\n", EncArmVal);
+    // printTimeStamp(fp, is_head_encLR);
+    fprintf(fp, "%ld,", pwrL);
+    fprintf(fp, "%ld,", encL);
+    fprintf(fp, "%ld,", pwrR);
+    fprintf(fp, "%ld\n", encR);
 
     // close Target file.
     fprintf(fp,"\n");
