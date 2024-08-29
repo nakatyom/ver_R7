@@ -27,7 +27,7 @@ void main_task(intptr_t unused) {
     ext_tsk();
 }
 
-int motor_power = 50;
+int motor_p = 50;
 int32_t encL = 0;
 int32_t encR = 0;
 
