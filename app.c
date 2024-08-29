@@ -6,25 +6,20 @@
 #include "linetrace.h"
 #include "get_line.h"
 
-/* メインタスク(起動時にのみ関数コールされ�?) */
+/* メインタスク(起動時にのみ関数コールされ�?) */
 void main_task(intptr_t unused) {
+    /* ポート設定 */
+    // sensor   : touch_sensor, color_sensor, sonar_sensor, gyro_sensor
+    // actuator : arm_motor, left_motor, right_motor
+    set_portCfg();
     
-    /* タスク呼び出�? */
-    sta_cyc(LT_CYC);
+    /* タスク呼び出し */
+    sta_cyc(BOSS_CYC);
 
-    /* タスク終�? */
+    /* タスク終了 */
     ext_tsk();
 }
 
-int is_touch = 0;
+void boss_task(intptr_t exinf){
 
-void linetrace_task(intptr_t exinf){
-    if(ev3_touch_sensor_is_pressed(touch_sensor)){
-       is_touch  = 1;
-    }
-
-    if(is_touch == 1){
-        // get_line();
-        linetrace();
-    }
 }

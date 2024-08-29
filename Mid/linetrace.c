@@ -1,5 +1,4 @@
 #include "ev3api.h"
-#include "app.h"
 #include "port.h"
 
 const int lr_sw = -1; // L_COURSE:1, R_COURSE:-1
