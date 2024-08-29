@@ -14,4 +14,7 @@ extern const motor_port_t arm_motor;
 extern const motor_port_t left_motor;
 extern const motor_port_t right_motor;
 
+/* extern functions */
+extern void set_portCfg(void);
+
 #endif /* _PORT_H */
