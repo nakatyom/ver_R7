@@ -39,7 +39,7 @@ void log_EncLR(int pwrL, int pwrR, int32_t encL, int32_t encR){
     // open Target file.
     FILE* fp = fopen(FILE_PATH_MOTOR, "a");
     if(fp == NULL){
-        printf("fail open file on Log.c");
+        printf("failed open file on Log.c\n");
         return;
     }
 

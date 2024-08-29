@@ -30,13 +30,22 @@ void main_task(intptr_t unused) {
 int motor_p = 50;
 int32_t encL = 0;
 int32_t encR = 0;
+int is_head = 0;
+
 
 void log_task(intptr_t unused){
-    ev3_motor_set_power(left_motor,motor_power);
-    ev3_motor_set_power(right_motor,motor_power);
+
+    if(is_head == 0){
+        ev3_motor_reset_counts(left_motor);
+        ev3_motor_reset_counts(right_motor);
+        is_head = 1;
+    }
+
+    ev3_motor_set_power(left_motor,motor_p);
+    ev3_motor_set_power(right_motor,motor_p);
 
     encL = ev3_motor_get_counts(left_motor);
     encR = ev3_motor_get_counts(right_motor);
 
-    log_EncLR(motor_power,motor_power,encL,encR);
+    log_EncLR(motor_p,motor_p,encL,encR);
 }
