@@ -8,16 +8,10 @@
 /* メインタスク(起動時にのみ関数コールされる) */
 void main_task(intptr_t unused) {
 
-    /* センサー入力ポートの設定 */
-    ev3_sensor_config(touch_sensor ,TOUCH_SENSOR);
-    ev3_sensor_config(color_sensor ,COLOR_SENSOR);
-    ev3_sensor_config(sonar_sensor ,ULTRASONIC_SENSOR);
-    ev3_sensor_config(gyro_sensor  ,GYRO_SENSOR);
-    
-    /* モーター出力ポートの設定 */
-    ev3_motor_config(arm_motor     ,LARGE_MOTOR);
-    ev3_motor_config(left_motor    ,MEDIUM_MOTOR);
-    ev3_motor_config(right_motor   ,MEDIUM_MOTOR);
+    /* ポート設定 */
+    // sensor   : touch_sensor, color_sensor, sonar_sensor, gyro_sensor 
+    // actuator : arm_motor, left_motr, right_motor
+    set_portCfg();
     
     printf("Start LogTask!!\n");
     sta_cyc(LOG_CYC);
@@ -41,11 +35,12 @@ void log_task(intptr_t unused){
         is_head = 1;
     }
 
-    ev3_motor_set_power(left_motor,motor_p);
-    ev3_motor_set_power(right_motor,motor_p);
+    // ev3_motor_set_power(left_motor,motor_p);
+    // ev3_motor_set_power(right_motor,motor_p);
 
     encL = ev3_motor_get_counts(left_motor);
     encR = ev3_motor_get_counts(right_motor);
 
-    log_EncLR(motor_p,motor_p,encL,encR);
+    printf("%ld,%ld\n",encL,encR);
+    //log_EncLR(motor_p,motor_p,encL,encR);
 }

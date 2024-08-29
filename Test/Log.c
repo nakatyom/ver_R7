@@ -6,7 +6,7 @@
 #include "Log.h"
 
 /* define */
-#define FILE_PATH_MOTOR "/ver_R7/log_motor.txt"
+#define FILE_PATH_MOTOR "log_motor.txt"
 
 /* private valiables */
 static bool is_head_motor = true;
@@ -52,6 +52,8 @@ void log_EncLR(int pwrL, int pwrR, int32_t encL, int32_t encR){
     fprintf(fp, "%ld\n", encR);
 
     // close Target file.
-    fprintf(fp,"\n");
+    // fprintf(fp,"\n");
     fclose(fp);
 }
+
+
