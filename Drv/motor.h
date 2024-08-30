@@ -17,5 +17,6 @@ extern void motor_set_power(motor_port_t tgt_port, int power);
 extern int  motor_get_power(motor_port_t tgt_port);
 extern void motor_reset_counts(motor_port_t tgt_port);
 extern int32_t motor_get_counts(motor_port_t tgt_port);
+extern int32_t motor_get_pre_counts(motor_port_t tgt_port);
 
 #endif /* _PORT_H */

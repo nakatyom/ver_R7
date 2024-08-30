@@ -23,5 +23,5 @@ void boss_task(intptr_t exinf){
     struct coordinate crnt;
     get_crntCoordinate(&crnt);
 
-    print("x=%d, y=%d, theta=%d\n",crnt.x, crnt.y,crnt.theta);
+    printf("x=%d, y=%d, theta=%d\n",crnt.x, crnt.y,crnt.theta);
 }
