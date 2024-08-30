@@ -47,9 +47,9 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
         }
         else { //曲進している
             //ロボットの旋回量
-            rad = (delta_LL - delta_LR)/(float)whell_dist;
+            delta_rad = (delta_LL - delta_LR)/(float)whell_dist;
 
-            if(rad > delta_theta_thresshold){ //delta_thetaが大きい
+            if(delta_rad > delta_theta_thresshold){ //delta_thetaが大きい
                 delta_L = 2*(delta_L/delta_rad)*sin(delta_rad/2);
             }
 
