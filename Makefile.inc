@@ -2,7 +2,7 @@ mkfile_path := $(dir $(lastword $(MAKEFILE_LIST)))
 
 APPL_COBJS += 
 APPL_COBJS += odometry.o
-APPL_COBJS += 
+APPL_COBJS += motor.o
 APPL_COBJS += body.o port.o
 APPL_COBJS += 
 
