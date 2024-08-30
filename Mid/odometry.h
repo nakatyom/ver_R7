@@ -7,13 +7,8 @@ extern struct coordinate{
     int theta;
 };
 
-extern struct coordinate crnt_coordinate;
-extern struct coordinate  pre_coordinate;
-
-/* static function */
-
-
 /* external functions*/
-extern coordinate get_crntCoordinate(void);
+extern void get_crntCoordinate(struct coordinate* crnt_coordinate);
+extern void get_preCoordinate(struct coordinate* pre_coordinate);
 
 #endif /* _ODOMETRY_H */

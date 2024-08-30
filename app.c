@@ -3,8 +3,7 @@
 #include "app.h"
 #include "ev3api.h"
 #include "port.h"
-#include "linetrace.h"
-#include "get_line.h"
+#include "odometry.h"
 
 /* メインタスク(起動時にのみ関数コールされ�?) */
 void main_task(intptr_t unused) {
@@ -21,5 +20,8 @@ void main_task(intptr_t unused) {
 }
 
 void boss_task(intptr_t exinf){
+    struct coordinate crnt;
+    get_crntCoordinate(&crnt);
 
+    print("x=%d, y=%d, theta=%d\n",crnt.x, crnt.y,crnt.theta);
 }
