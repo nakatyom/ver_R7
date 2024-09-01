@@ -2,9 +2,9 @@
 #define _ODOMETRY_H
 
 extern struct coordinate{
-    int x;
-    int y;
-    int theta;
+    float x;
+    float y;
+    float theta;
 };
 
 /* external functions*/
