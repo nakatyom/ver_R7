@@ -3,7 +3,9 @@
 #include "port.h"
 #include "motor.h"
 
-int32_t crnt_enc = 0;
+int32_t crnt_encL = 0;
+int32_t crnt_encR = 0;
+int32_t crnt_encA = 0;
 int32_t pre_encL = 0;
 int32_t pre_encR = 0;
 int32_t pre_encA = 0;
@@ -14,7 +16,14 @@ extern void motor_set_power(motor_port_t tgt_port, int power){
     if(tgt_port == EV3_PORT_C){
         power = (int)(motor_balancer * power);
     }
-
+    else if(tgt_port == EV3_PORT_B || tgt_port == EV3_PORT_A){
+        // 何もしない
+    }
+    else {
+        printf("An invalid value entered in motor_get_pre_counts.\n");
+        return;
+    }
+    
     ev3_motor_set_power(tgt_port, power);
 }
 
@@ -28,21 +37,27 @@ extern void motor_reset_counts(motor_port_t tgt_port){
 
 extern int32_t motor_get_counts(motor_port_t tgt_port){
     if(tgt_port == EV3_PORT_C){
-        pre_encL = crnt_enc;
+        pre_encL  = crnt_encL;
+        crnt_encL = ev3_motor_get_counts(tgt_port);
+        
+        return crnt_encL;
     }
     else if(tgt_port == EV3_PORT_B){
-        pre_encR = crnt_enc;
+        pre_encR  = crnt_encR;
+        crnt_encR = ev3_motor_get_counts(tgt_port);
+        
+        return crnt_encR;
     }
     else if(tgt_port == EV3_PORT_A){
-        pre_encA = crnt_enc;
+        pre_encA  = crnt_encA;
+        crnt_encA = ev3_motor_get_counts(tgt_port);
+        
+        return crnt_encA;
     }
     else{
         printf("An invalid value entered in motor_get_pre_counts.\n");
         return 0;
     }
-    
-    crnt_enc = ev3_motor_get_counts(tgt_port);
-    return crnt_enc;
     
 }
 
