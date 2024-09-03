@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <time.h>
+
 #include "motor.h"
 #include "ev3api.h"
 #include "port.h"
@@ -23,75 +24,93 @@ void delay(int milliseconds){
 }
 
 /* extern functions */
-extern int32_t motor_get_counts(motor_port_t tgt_port){
-    if(tgt_port != EV3_PORT_A && tgt_port != EV3_PORT_B && tgt_port != EV3_PORT_C){
+extern int32_t motor_get_counts(motor_port_t port){
+    if(port != arm_motor && port != right_motor && port != left_motor){
         printf("An invalid value entered in motor_get_counts().\n");
         return 0;
     }
 
     // 現在値の取得
-    int32_t temp_enc = ev3_motor_get_counts(tgt_port);
+    crnt_enc[port] = ev3_motor_get_counts(port);
 
     // 通信遅れ判定の場合、1ms待って再取得
-    if(temp_enc == pre_enc[tgt_port] && (pre_power[tgt_port] != 0 || crnt_powor[tgt_port] != 0)){ // 前回値と一致かつモーターパワーが0でない
+    if(crnt_enc[port] == pre_enc[port] && (pre_power[port] != 0 || crnt_powor[port] != 0)){ // 前回値と一致かつモーターパワーが0でない
             delay(1); // 1ms待つ
-            crnt_enc = ev3_motor_get_counts(tgt_port);
+            crnt_enc[port] = ev3_motor_get_counts(port);
     }
 
     // 前回値の更新
-    pre_enc[tgt_port]  = crnt_enc[tgt_port];
-    crnt_enc[tgt_port] = temp_enc;
+    pre_enc[port]  = crnt_enc[port];
 
-    return crnt_enc[tgt_port];
+    return crnt_enc[port];
 }
 
-extern int32_t motor_get_pre_counts(motor_port_t tgt_port){
-    if(tgt_port != EV3_PORT_A && tgt_port != EV3_PORT_B && tgt_port != EV3_PORT_C){
+extern int32_t motor_get_pre_counts(motor_port_t port){
+    if(port != arm_motor && port != right_motor && port != left_motor){
         printf("An invalid value entered in motor_get_pre_counts().\n");
         return 0;
     }
 
-    return pre_enc[tgt_port];
+    return pre_enc[port];
 }
 
-extern void motor_reset_counts(motor_port_t tgt_port){
-    ev3_motor_reset_counts(tgt_port);
+extern void motor_reset_counts(motor_port_t port){
+    ev3_motor_reset_counts(port);
     return;
 }
 
-extern void motor_set_power(motor_port_t tgt_port, int power){
-    if(tgt_port != EV3_PORT_A && tgt_port != EV3_PORT_B && tgt_port != EV3_PORT_C){
+extern void motor_set_power(motor_port_t port, int power){
+    if(port != arm_motor && port != right_motor && port != left_motor){
         printf("An invalid value entered in motor_set_power().\n");
         return;
     }
-
-    // 前回値の更新
-    pre_power = ev3_motor_get_power(tgt_port);
-
     // 左モータの場合、パワーに補正をかける
-    if(tgt_port == EV3_PORT_C){
-        power = (int)(motor_sync * power);
+    if(port == left_motor){
+         power = (int)(motor_sync * power);
     }
     
     // パワーを設定
-    ev3_motor_set_power(tgt_port, power);
+    ev3_motor_set_power(port, power);
+
+    // 前回値,現在値の更新
+    pre_power[port]  = crnt_power[port];
+    crnt_power[port] = ev3_motor_get_power(port);
+
     return;
 }
 
-extern int  motor_get_power(motor_port_t tgt_port){
-    if(tgt_port != EV3_PORT_A && tgt_port != EV3_PORT_B && tgt_port != EV3_PORT_C){
+extern void motor_stop(motor_port_t port){
+    if(port != arm_motor && port != right_motor && port != left_motor){
+        printf("An invalid value entered in motor_stop().\n");
+        return;
+    }
+
+    // モータを停止
+    ev3_motor_stop(port);
+
+    // 前回値,現在値の更新
+    pre_power[port]  = crnt_power[port];
+    crnt_power[port] = ev3_motor_get_power(port);
+}
+
+extern int  motor_get_power(motor_port_t port){
+    if(port != arm_motor && port != right_motor && port != left_motor){
         printf("An invalid value entered in motor_get_power().\n");
         return;
     }
+    
+    /* 前回値, 現在値の更新 */
+    pre_power[port]  = crnt_power[port];
+    crnt_power[port] = ev3_motor_get_power(port);
 
-    return crnt_powor[tgt_port];
+    return crnt_powor[port];
 }
 
-extern int  motor_get_pre_power(motor_port_t tgt_port){
-    if(tgt_port != EV3_PORT_A && tgt_port != EV3_PORT_B && tgt_port != EV3_PORT_C){
-        printf("An invalid value entered in motor_get__pre_power().\n");
+extern int  motor_get_pre_power(motor_port_t port){
+    if(port != arm_motor && port != right_motor && port != left_motor){
+        printf("An invalid value entered in motor_get_pre_power().\n");
         return;
     }
     
-    return pre_powor[tgt_port];
+    return pre_powor[port];
 }

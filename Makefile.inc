@@ -1,10 +1,10 @@
 mkfile_path := $(dir $(lastword $(MAKEFILE_LIST)))
 
-APPL_COBJS += 
-APPL_COBJS += odometry.o
-APPL_COBJS += motor.o
+APPL_COBJS += state.o linetrace.o
+APPL_COBJS += odometry.o v_ctrl.o
+APPL_COBJS += motor.o gyro.o color.c
 APPL_COBJS += body.o port.o
-APPL_COBJS += 
+# APPL_COBJS += get_line.o
 
 APPL_LIBS += -lm
 
