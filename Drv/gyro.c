@@ -14,7 +14,7 @@ int16_t pre_rate   = 0;
 
 
 /* static functions */
-void delay(int milliseconds){
+void delay_connect(int milliseconds){
     clock_t start_time = clock();
     while(clock() < start_time + milliseconds);
 }
@@ -38,7 +38,7 @@ extern int16_t gyro_sensor_get_angle(sensor_port_t port){
         int mp_r_pre = motor_get_pre_power(right_motor);
 
         if( (mp_l * mp_l_pre * mp_r * mp_r_pre) != 0){ //左右モータのパワーが0でない
-            delay(1); // 1ms待つ
+            delay_connect(1); // 1ms待つ
             crnt_angle = ev3_gyro_sensor_get_angle(port);
         }     
     }
@@ -75,7 +75,7 @@ extern int16_t gyro_sensor_get_rate(sensor_port_t port){
         int mp_r_pre = motor_get_pre_power(right_motor);
 
         if( (mp_l * mp_l_pre * mp_r * mp_r_pre) != 0){ //左右モータのパワーが0でない
-            delay(1); // 1ms待つ
+            delay_connect(1); // 1ms待つ
             crnt_rate = ev3_gyro_sensor_get_rate(port);
         }     
     }
