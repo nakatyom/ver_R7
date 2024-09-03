@@ -39,9 +39,12 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
         delta_L = 0.0;
 
         // 旋回量の計算(左右移動量の平均をwheel_dis/2で割る)
-        delta_rad = (abs(delta_LL)+abs(delta_LR))/(float)whell_dist;
+        // 旋回中心を求める
+        float a = (wheel_dist)/(delta_LL+delta_LR);
+        float b = (wheel_dist)/(delta_LL+delta_LR);
+        delta_rad = ((delta_LL/a)+(delta_LR/b))/2.0;
         
-        if(delta_LL < delta_LR){
+        if(delta_LL > delta_LR){
             delta_rad *= -1;
         }
         printf("AAA, ");
@@ -57,7 +60,7 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
         }
         else { //曲進している
             //ロボットの旋回量
-            delta_rad = (delta_LL - delta_LR) / (float)whell_dist;
+            delta_rad = (delta_LL - delta_LR) / (float)wheel_dist;
 
             if(abs(delta_rad) > delta_theta_thresshold){ //delta_thetaが大きい
                 delta_L = 2 * (delta_L / delta_rad) * sin(delta_rad / 2);
