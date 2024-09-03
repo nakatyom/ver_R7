@@ -5,7 +5,7 @@
 #include "body.h"
 #include "port.h"
 #include "motor.h"
-#include "velocity_control.h"
+#include "v_ctrl.h"
 
 #define ENC_CORR_R      1.0f        // 右ENC個体差補正係数
 #define ENC_CORR_L      1.0f        // 左ENC個体差補正係数
@@ -26,7 +26,7 @@ static struct pid_params{
 };
 
 struct pid_params pid_params_str = {0.1, 0.01, 0.0 , 0.0, 0.0};
-struct pid_params pid_params_str = {0.4, 0.1 , 0.05, 0.0, 0.0};
+struct pid_params pid_params_lot = {0.4, 0.1 , 0.05, 0.0, 0.0};
 
 /* static functions */
 float mid_PID_velo(float tgt, float crnt, struct pid_params* pid_params){
@@ -38,7 +38,7 @@ float mid_PID_velo(float tgt, float crnt, struct pid_params* pid_params){
     if (pid_params->intg >  1000.0f) pid_params->intg = 1000.0f;
     if (pid_params->intg < -1000.0f) pid_params->intg = -1000.0f;
 
-    float out = (pid_params->kp)*err + (pid_params->ki)*intg + (pid_params->kd)*(err - (pid_params->pre_err));
+    float out = (pid_params->kp)*err + (pid_params->ki)*(pid_params->intg) + (pid_params->kd)*(err - (pid_params->pre_err));
 
     return out;
 }

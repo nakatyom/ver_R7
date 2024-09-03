@@ -10,7 +10,7 @@
 int32_t crnt_enc[3] = {0, 0, 0};
 int32_t pre_enc[3]  = {0, 0, 0};
 
-int crnt_powor[3] = {0, 0, 0};
+int crnt_power[3] = {0, 0, 0};
 int pre_power[3]  = {0, 0, 0};
 
 // Multiply left motor 0.0~1.0
@@ -34,7 +34,7 @@ extern int32_t motor_get_counts(motor_port_t port){
     crnt_enc[port] = ev3_motor_get_counts(port);
 
     // 通信遅れ判定の場合、1ms待って再取得
-    if(crnt_enc[port] == pre_enc[port] && (pre_power[port] != 0 || crnt_powor[port] != 0)){ // 前回値と一致かつモーターパワーが0でない
+    if(crnt_enc[port] == pre_enc[port] && (pre_power[port] != 0 || crnt_power[port] != 0)){ // 前回値と一致かつモーターパワーが0でない
             delay(1); // 1ms待つ
             crnt_enc[port] = ev3_motor_get_counts(port);
     }
@@ -86,7 +86,7 @@ extern void motor_stop(motor_port_t port){
     }
 
     // モータを停止
-    ev3_motor_stop(port);
+    ev3_motor_stop(port, true);
 
     // 前回値,現在値の更新
     pre_power[port]  = crnt_power[port];
@@ -103,7 +103,7 @@ extern int  motor_get_power(motor_port_t port){
     pre_power[port]  = crnt_power[port];
     crnt_power[port] = ev3_motor_get_power(port);
 
-    return crnt_powor[port];
+    return crnt_power[port];
 }
 
 extern int  motor_get_pre_power(motor_port_t port){
@@ -112,5 +112,5 @@ extern int  motor_get_pre_power(motor_port_t port){
         return;
     }
     
-    return pre_powor[port];
+    return pre_power[port];
 }
