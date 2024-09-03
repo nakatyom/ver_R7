@@ -28,6 +28,7 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
     //左右モータの回転量を計算する[rad]
     delta_PhL = 3.141592 * (motor_get_counts(left_motor)  - motor_get_pre_counts(left_motor))  / 180.0;
     delta_PhR = 3.141592 * (motor_get_counts(right_motor) - motor_get_pre_counts(right_motor)) / 180.0;
+    printf("%f, %f\n", delta_PhL, delta_PhR);
     
     /* 左右モータの移動量を計算する */
     delta_LL = (float)(wheel_size / 2) * delta_PhL;

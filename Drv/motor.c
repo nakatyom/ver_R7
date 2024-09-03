@@ -40,7 +40,7 @@ extern int32_t motor_get_counts(motor_port_t port){
     }
 
     // 前回値の更新
-    pre_enc[port]  = crnt_enc[port];
+    pre_enc[port] = crnt_enc[port];
 
     return crnt_enc[port];
 }
