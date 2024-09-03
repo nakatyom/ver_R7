@@ -43,6 +43,17 @@ float mid_PID_velo(float tgt, float crnt, struct pid_params* pid_params){
     return out;
 }
 
+float mid_LPF_str_velo(float maj){ 
+
+    const float k = 0.85f;
+
+    static float out;
+
+    out = (out * k) + (maj * (1.0f - k)); 
+
+    return out;
+}
+
 
 /* extern functions */
 extern void mid_velocity_control(float velo_str_tgt, float velo_rot_tgt){
