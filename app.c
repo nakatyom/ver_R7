@@ -20,8 +20,12 @@ void main_task(intptr_t unused) {
 }
 
 void boss_task(intptr_t exinf){
-    struct coordinate crnt;
-    get_crntCoordinate(&crnt);
+    // struct coordinate crnt = {0.0, 0.0, 0.0};
+    // get_crntCoordinate(&crnt);
 
-    printf("x=%d, y=%d, theta=%d\n",crnt.x, crnt.y,crnt.theta);
+    // printf("x=%d, y=%d, theta=%d\n",crnt.x, crnt.y,crnt.theta);
+
+    int32_t lm = motor_get_counts(left_motor);
+    int32_t rm = motor_get_counts(right_motor);
+    printf("%d, %d\n", lm, rm);
 }
