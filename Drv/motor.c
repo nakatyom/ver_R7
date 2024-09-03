@@ -29,6 +29,9 @@ extern int32_t motor_get_counts(motor_port_t port){
         printf("An invalid value entered in motor_get_counts().\n");
         return 0;
     }
+    
+    // 前回値の更新
+    pre_enc[port] = crnt_enc[port];
 
     // 現在値の取得
     crnt_enc[port] = ev3_motor_get_counts(port);
@@ -38,9 +41,6 @@ extern int32_t motor_get_counts(motor_port_t port){
             delay_connect_m(1); // 1ms待つ
             crnt_enc[port] = ev3_motor_get_counts(port);
     }
-
-    // 前回値の更新
-    pre_enc[port] = crnt_enc[port];
 
     return crnt_enc[port];
 }

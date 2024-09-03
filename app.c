@@ -23,7 +23,7 @@ void boss_task(intptr_t exinf){
     struct coordinate crnt = {0.0, 0.0, 0.0};
     get_crntCoordinate(&crnt);
 
-    // printf("x=%d, y=%d, theta=%d\n",crnt.x, crnt.y,crnt.theta);
+    printf("x=%d, y=%d, theta=%d\n",crnt.x, crnt.y,crnt.theta);
 
     // int32_t lm = motor_get_pre_counts(left_motor);
     // int32_t rm = motor_get_pre_counts(right_motor);
