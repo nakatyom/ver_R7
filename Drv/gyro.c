@@ -27,6 +27,9 @@ extern int16_t gyro_sensor_get_angle(sensor_port_t port){
         return 0;
     }
 
+    /* 前回値の更新 */
+    pre_angle = crnt_angle;
+
     // 現在値の取得
     crnt_angle = ev3_gyro_sensor_get_angle(port);
 
@@ -43,9 +46,6 @@ extern int16_t gyro_sensor_get_angle(sensor_port_t port){
         }     
     }
     
-    /* 前回値の更新 */
-    pre_angle = crnt_angle;
-
     return crnt_angle;
 }
 
@@ -64,6 +64,9 @@ extern int16_t gyro_sensor_get_rate(sensor_port_t port){
         return 0;
     }
 
+    /* 前回値の更新 */
+    pre_rate = crnt_rate;
+
     // 現在値の取得
     crnt_rate = ev3_gyro_sensor_get_rate(port);
 
@@ -80,11 +83,7 @@ extern int16_t gyro_sensor_get_rate(sensor_port_t port){
         }     
     }
     
-    /* 前回値の更新 */
-    pre_rate = crnt_rate;
-
     return crnt_rate;
-
 }
 
 extern int16_t gyro_sensor_get_pre_rate(sensor_port_t port){
