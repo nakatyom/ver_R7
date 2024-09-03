@@ -138,7 +138,7 @@ extern void mid_velocity_control_rot(float velo_rot_tgt){
     float velo_rot = (float)ev3_gyro_sensor_get_rate(gyro_sensor);   // deg/sec (yaw rate)
     
     /* 速度操作量計算（FB項算出）*/
-    float velo_str_u = mid_PID_velo(velo_rot_tgt, velo_rot, &pid_params_rot);    // deg/sec(yaw rate)
+    float velo_rot_u = mid_PID_velo(velo_rot_tgt, velo_rot, &pid_params_rot);    // deg/sec(yaw rate)
 
     /* 速度操作量計算（FF項とFB項の合成）*/
     float mot_r_u_rot = (TRED_SIZE / TIRE_SIZE_R) * (velo_rot_tgt + velo_rot_u);    // deg/sec(yaw rate) ⇒ deg/sec(motor)
