@@ -26,7 +26,7 @@ static struct pid_params{
 };
 
 struct pid_params pid_params_str = {0.1, 0.01, 0.0 , 0.0, 0.0};
-struct pid_params pid_params_lot = {0.4, 0.1 , 0.05, 0.0, 0.0};
+struct pid_params pid_params_rot = {0.4, 0.1 , 0.05, 0.0, 0.0};
 
 /* static functions */
 float mid_PID_velo(float tgt, float crnt, struct pid_params* pid_params){
@@ -44,9 +44,7 @@ float mid_PID_velo(float tgt, float crnt, struct pid_params* pid_params){
 }
 
 float mid_LPF_str_velo(float maj){ 
-
     const float k = 0.85f;
-
     static float out;
 
     out = (out * k) + (maj * (1.0f - k)); 
@@ -75,8 +73,8 @@ extern void mid_velocity_control(float velo_str_tgt, float velo_rot_tgt){
     float velo_rot = (float)ev3_gyro_sensor_get_rate(gyro_sensor);   // deg/sec (yaw rate)
     
     /* 速度操作量計算（FB項算出）*/
-    float velo_str_u = mid_PID_str_velo(velo_str_tgt, velo_str);    // mm/sec(robot)  
-    float velo_rot_u = mid_PID_rot_velo(velo_rot_tgt, velo_rot);    // deg/sec(yaw rate)
+    float velo_str_u = mid_PID_velo(velo_str_tgt, velo_str, &pid_params_str);    // mm/sec(robot)  
+    float velo_rot_u = mid_PID_velo(velo_rot_tgt, velo_rot, &pid_params_rot);    // deg/sec(yaw rate)
 
     /* 速度操作量計算（FF項とFB項の合成）*/
     float mot_r_u_str = ((velo_str_tgt + velo_str_u) / (PI_FLOAT * TIRE_SIZE_R)) * 360.0f;  // mm/sec(robot) ⇒ deg/sec(motor)
