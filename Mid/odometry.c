@@ -38,16 +38,12 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
         //ロボットの移動距離
         delta_L = 0.0;
 
-        // 旋回量の計算(左右移動量の平均をwheel_dis/2で割る)
-        // 旋回中心を求める
-        float a = (wheel_dist)/(delta_LL+delta_LR);
-        float b = (wheel_dist)/(delta_LL+delta_LR);
-        delta_rad = ((delta_LL/a)+(delta_LR/b))/2.0;
+        // 旋回量の計算
+        delta_rad = abs(delta_LL - delta_LR) / wheel_dist;
         
         if(delta_LL > delta_LR){
             delta_rad *= -1;
         }
-        printf("AAA, ");
     }
     else { //直進・曲進している
         //ロボットの移動距離
