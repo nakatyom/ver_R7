@@ -56,6 +56,8 @@ extern int32_t motor_get_pre_counts(motor_port_t port){
 
 extern void motor_reset_counts(motor_port_t port){
     ev3_motor_reset_counts(port);
+    crnt_enc[port] = 0;
+    pre_enc[port]  = 0;
     return;
 }
 

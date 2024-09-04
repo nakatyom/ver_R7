@@ -39,7 +39,7 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
         delta_L = 0.0;
 
         // 旋回量の計算
-        delta_rad = abs(delta_LL - delta_LR) / wheel_dist;
+        delta_rad = abs(delta_LL - delta_LR) / (float)wheel_dist;
         
         if(delta_LL > delta_LR){
             delta_rad *= -1;
