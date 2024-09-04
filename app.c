@@ -20,14 +20,12 @@ void main_task(intptr_t unused) {
 }
 
 void boss_task(intptr_t exinf){
-    struct coordinate crnt = {0.0, 0.0, 0.0};
-    get_crntCoordinate(&crnt);
+    // struct coordinate crnt = {0.0, 0.0, 0.0};
+    // get_crntCoordinate(&crnt);
 
-    printf("x=%f, y=%f, theta=%f\n",crnt.x, crnt.y,crnt.theta);
+    // printf("x=%f, y=%f, theta=%f\n",crnt.x, crnt.y,crnt.theta);
 
-
-
-    // int16_t angle = gyro_sensor_get_angle(gyro_sensor);
-
+    int16_t angle = gyro_sensor_get_angle(gyro_sensor);
+    printf("theta = %d\n", angle);
 
 }
