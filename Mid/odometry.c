@@ -6,6 +6,7 @@
 #include "body.h"
 #include "port.h"
 #include "motor.h"
+#include "gyro.h"
 #include "odometry.h"
 
 static struct coordinate pre_coordinate  = {0.0, 0.0, 0.0}; //前回座標
@@ -57,6 +58,7 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
         }
     }
 
+    delta_rad = gyro_sensor_get_angle(gyro_sensor) - gyro_sensor_get_pre_angle(gyro_sensor);
 
     // 現在座標を計算する
     float pre_rad = 3.141592 * pre_coordinate.theta / 180.0;
