@@ -13,11 +13,13 @@ static struct coordinate pre_coordinate  = {0.0, 0.0, 0.0}; //前回座標
 const int   straight_threshold = 2; //直進時のモータ角度誤差許容範囲
 const float delta_theta_thresshold = 10.0;
 
+float delta_L       = 0.0; // ロボットの移動量(mm)
+double delta_rad    = 0.0; // ロボットの旋回量(radian)
+float delota_pre_rad = 0.0;
+
 
 /* external functions */
 void get_crntCoordinate(struct coordinate* crnt_coordinate){
-    float delta_L       = 0.0; // ロボットの移動量(mm)
-    double delta_rad    = 0.0; // ロボットの旋回量(radian)
 
     //左右モータの回転量を計算する[rad]
     float delta_PhL = 3.141592 * (motor_get_counts(left_motor)  - motor_get_pre_counts(left_motor))  / 180.0;
@@ -79,6 +81,7 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
     pre_coordinate.y     = crnt_coordinate->y;
     pre_coordinate.theta = crnt_coordinate->theta;
 
+    delota_pre_rad = delta_rad;
     return;
 }
 
