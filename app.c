@@ -39,7 +39,7 @@ void boss_task(intptr_t exinf){
     float delta_PhR = 3.141592 * (motor_get_counts(right_motor) - motor_get_pre_counts(right_motor)) / 180.0;
     
     /* 左右モータの移動量を計算する */
-    float delta_LL = (float)(wheel_size / 2) * delta_PhL;
+    float delta_LL = 0; //(float)(wheel_size / 2) * delta_PhL;
     float delta_LR = (float)(wheel_size / 2) * delta_PhR;
 
     //ロボットの移動距離
