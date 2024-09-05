@@ -31,8 +31,8 @@ void boss_task(intptr_t exinf){
     // int16_t rate  = gyrosensor_get_rate(gyro_sensor);
     // printf("theta = %d\n", angle);
 
-    float delta_L       = 0.0; // ロボットの移動量(mm)
-    double delta_rad    = 0.0; // ロボットの旋回量(radian)
+    static float delta_L; // ロボットの移動量(mm)
+    static double delta_rad; // ロボットの旋回量(radian)
 
     //左右モータの回転量を計算する[rad]
     float delta_PhL = 3.141592 * (motor_get_counts(left_motor)  - motor_get_pre_counts(left_motor))  / 180.0;
@@ -44,5 +44,6 @@ void boss_task(intptr_t exinf){
 
     //ロボットの移動距離
     delta_L = (delta_LL + delta_LR)/(float)2.0;
-    print("%f\n", delta_L);
+    delta_rad = (delta_LL - delta_LR)/(float)wheel_dist;
+    print("%f\n", delta_rad);
 }
