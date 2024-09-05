@@ -15,7 +15,7 @@ const float delta_theta_thresshold = 10.0;
 
 float delta_L       = 0.0; // ロボットの移動量(mm)
 double delta_rad    = 0.0; // ロボットの旋回量(radian)
-float delota_pre_rad = 0.0;
+float delta_pre_rad = 0.0;
 
 
 /* external functions */
@@ -64,7 +64,7 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
     delta_rad = 3.141592 * delta_rad /180.0;
 
     // 現在座標を計算する
-    float pre_rad = 3.141592 * pre_coordinate.theta / 180.0;
+    float pre_rad = 3.141592 * delta_pre_rad / 180.0;
     float delta_theta = 180.0 * delta_rad / 3.141592;   
     
     crnt_coordinate->x      = pre_coordinate.x + (float)((double)delta_L * cos(pre_rad + (delta_rad / 2.0)));
@@ -81,7 +81,7 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
     pre_coordinate.y     = crnt_coordinate->y;
     pre_coordinate.theta = crnt_coordinate->theta;
 
-    delota_pre_rad = delta_rad;
+    delta_pre_rad = delta_rad;
     return;
 }
 
