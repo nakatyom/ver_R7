@@ -40,25 +40,7 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
             delta_rad *= -1;
         }
     }
-    else { //直進・曲進している
-        //ロボットの移動距離
-        delta_L = (delta_LL + delta_LR)/(float)2.0;
 
-        if( abs(delta_LL-delta_LR) < ((wheel_size/2)*3.141592*straight_threshold/180.0) ){ //直進している
-            //ロボットの旋回量
-            delta_rad = 0.0;
-
-        }
-        else { //曲進している
-            //ロボットの旋回量
-            delta_rad = (delta_LL - delta_LR) / (float)wheel_dist;
-
-            if(abs(delta_rad) > delta_theta_thresshold){ //delta_thetaが大きい
-                delta_L = 2 * (delta_L / delta_rad) * sin(delta_rad / 2);
-                printf("BBB, ");
-            }
-        }
-    }
 
     delta_rad = gyro_sensor_get_angle(gyro_sensor) - gyro_sensor_get_pre_angle(gyro_sensor);
     delta_rad = 3.141592 * delta_rad /180.0;
