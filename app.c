@@ -19,6 +19,8 @@ void main_task(intptr_t unused) {
     ext_tsk();
 }
 
+#include "body.h"
+
 void boss_task(intptr_t exinf){
     // struct coordinate crnt = {0.0, 0.0, 0.0};
     // get_crntCoordinate(&crnt);
