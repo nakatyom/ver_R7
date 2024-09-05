@@ -44,4 +44,5 @@ void boss_task(intptr_t exinf){
 
     //ロボットの移動距離
     delta_L = (delta_LL + delta_LR)/(float)2.0;
+    print("%f\n", delta_L);
 }
