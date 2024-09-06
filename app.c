@@ -53,7 +53,7 @@ void naka_task(intptr_t unused){
         start_flag=true;
     }
 
-    if (start_flag == true &&  toch_cnt >= 1000 ){
+    if (start_flag == true && toch_cnt >= 400 ){
         linetrace(val_val);
     }else if(start_flag == true && toch_cnt <= 1000) {
         toch_cnt += 1;
