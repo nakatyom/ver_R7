@@ -34,7 +34,7 @@ void boss_task(intptr_t exinf){
     
     else if(test == 1){
         get_crntCoordinate(&crnt);
-        printf("x=%f, y=%f, theta=%f\n",crnt.x, crnt.y,crnt.theta);
+        //printf("x=%f, y=%f, theta=%f\n",crnt.x, crnt.y,crnt.theta);
     }
 
 
