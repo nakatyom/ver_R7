@@ -1,10 +1,17 @@
 mkfile_path := $(dir $(lastword $(MAKEFILE_LIST)))
-
-APPL_COBJS += motor_test.o
+ 
+APPL_COBJS += port_settings.o
+APPL_COBJS += linetrace.o
+APPL_COBJS += velocity_control.o
 
 APPL_LIBS += -lm
-# APPL_DIRS += zoudatest
-# INCLUDES += zoudatest
 
-APPL_DIRS += $(mkfile_path)zoudatest
-INCLUDES += -I$(mkfile_path)zoudatest
+APPL_DIRS += $(mkfile_path)Apl
+APPL_DIRS += $(mkfile_path)Mid
+APPL_DIRS += $(mkfile_path)Drv
+APPL_DIRS += $(mkfile_path)Cfg
+
+INCLUDES += -I$(mkfile_path)Apl
+INCLUDES += -I$(mkfile_path)Mid
+INCLUDES += -I$(mkfile_path)Drv
+INCLUDES += -I$(mkfile_path)Cfg

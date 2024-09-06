@@ -1,35 +1,54 @@
 #include "app.h"
-#include "zoudatest/motor_test.c"
 #include <stdio.h>
+#include "ev3api.h"
+#include "port_settings.h"
+#include "linetrace.h"
+#include "velocity_control.h"
 
 /* メインタスク(起動時にのみ関数コールされる) */
+bool_t toch_flg = false;
 void main_task(intptr_t unused) {
 
-    /* センサー入力ポートの設定 */
-    ev3_sensor_config(touch_sensor ,TOUCH_SENSOR);
-    ev3_sensor_config(color_sensor ,COLOR_SENSOR);
-    ev3_sensor_config(sonar_sensor ,ULTRASONIC_SENSOR);
-    ev3_sensor_config(gyro_sensor  ,GYRO_SENSOR);
-    
-    /* モーター出力ポートの設定 */
-    ev3_motor_config(arm_motor     ,LARGE_MOTOR);
-    ev3_motor_config(left_motor    ,MEDIUM_MOTOR);
-    ev3_motor_config(right_motor   ,MEDIUM_MOTOR);
-    
     printf("Start MainTask!!\n");
     
-    /* motor_test.c のタスクを呼ぶ */
-    sta_cyc(MOTORLOG_TASK_CYC);
-    sta_cyc(GOETROBO_TASK_CYC);
-    
+    /* ライントレースタスクの起動 */
+    /* write_log(); */
+    commn_settings();
+    printf("Start Naka Task!!\n");
+    sta_cyc(NAKA_TASK_CYC);
+
     /* タスク終了 */
     ext_tsk();
 }
 
-void goetrobo_task(intptr_t exinf){
-    goetrobo();
-}
-
-void motorlog_task(intptr_t exinf){
-    motorLog();
+int toch_cnt = 0; 
+bool_t pre_toch=false;
+bool_t start_flag = false;
+float val_val=0.0;
+//uint8_t cnt;
+void naka_task(intptr_t unused){
+    // printf("10ms Task ");
+    pre_toch = toch_flg;
+    toch_flg = ev3_touch_sensor_is_pressed(touch_sensor);
+    
+    if (pre_toch == false && toch_flg==true){
+        val_val = val_val + 0.01;
+        printf("変数値：%f\n",val_val);
+    }else{
+        printf(".");
     }
+
+    if (start_flag == false && toch_flg == true){
+        toch_cnt += 1;
+    }
+    else{
+        toch_cnt =0;
+    }
+
+    if (start_flag == false && toch_cnt >= 200){
+        start_flag=true;
+    }
+    if (start_flag == true){
+        linetrace(val_val);
+    }
+}
