@@ -43,7 +43,7 @@ int checkMissingData(motor_port_t port){
 
 
 /* extern functions */
-extern int32_t motor_get_counts(motor_port_t port){
+int32_t motor_get_counts(motor_port_t port){
     const char func_name[] = "motor_get_counts";
     if(1 == is_ValidInput(port, func_name)) return 0;
     
@@ -58,14 +58,14 @@ extern int32_t motor_get_counts(motor_port_t port){
     return crnt_enc[port];
 }
 
-extern int32_t motor_get_pre_counts(motor_port_t port){
+int32_t motor_get_pre_counts(motor_port_t port){
     const char func_name[] = "motor_get_pre_counts";
     if(1 == is_ValidInput(port, func_name)) return 0;
 
     return pre_enc[port];
 }
 
-extern void motor_reset_counts(motor_port_t port){
+void motor_reset_counts(motor_port_t port){
     const char func_name[] = "motor_reset_counts";
     if(1 == is_ValidInput(port, func_name)) return;
 
@@ -78,7 +78,7 @@ extern void motor_reset_counts(motor_port_t port){
 
 
 /* パワー設定 */
-extern void motor_set_power(motor_port_t port, int power){
+void motor_set_power(motor_port_t port, int power){
     const char func_name[] = "motor_set_power";
     if(1 == is_ValidInput(port, func_name)) return;
     
@@ -92,7 +92,7 @@ extern void motor_set_power(motor_port_t port, int power){
     return;
 }
 
-extern void motor_stop(motor_port_t port){
+void motor_stop(motor_port_t port){
     const char func_name[] = "motor_stop";
     if(1 == is_ValidInput(port, func_name)) return;
 
@@ -104,7 +104,7 @@ extern void motor_stop(motor_port_t port){
     crnt_power[port] = 0;
 }
 
-extern int  motor_get_power(motor_port_t port){
+int  motor_get_power(motor_port_t port){
     const char func_name[] = "motor_get_power";
     if(1 == is_ValidInput(port, func_name)) return 0;
     
@@ -120,7 +120,7 @@ extern int  motor_get_power(motor_port_t port){
     return crnt_power[port];
 }
 
-extern int  motor_get_pre_power(motor_port_t port){
+int  motor_get_pre_power(motor_port_t port){
     const char func_name[] = "motor_get_pre_power";
     if(1 == is_ValidInput(port, func_name)) return 0;
     
