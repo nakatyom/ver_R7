@@ -110,6 +110,7 @@ void mid_velocity_control(float velo_str_tgt, float velo_rot_tgt){
     float mot_l_u_tmp = mot_l_u_str - mot_l_u_rot;  // deg/sec(motor)
     
     /* 操作量計算 */
+    float batt_v = (float)ev3_battery_voltage_mV();  // Todo:電圧取れない
     int mot_r_u = (int)(mot_r_u_tmp * 0.14149)/(batt_v*0.0001);
     int mot_l_u = (int)(mot_l_u_tmp * 0.13955)/(batt_v*0.0001);
 
@@ -118,7 +119,7 @@ void mid_velocity_control(float velo_str_tgt, float velo_rot_tgt){
     if (mot_l_u >  100)  mot_l_u = 100;
     if (mot_l_u < -100)  mot_l_u = -100;
 
-    float batt_v = (float)ev3_battery_voltage_mV();  // Todo:電圧取れない
+   
 
     ev3_motor_set_power(right_motor,mot_r_u);
     ev3_motor_set_power(left_motor, mot_l_u);
