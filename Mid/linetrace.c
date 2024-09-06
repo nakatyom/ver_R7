@@ -27,7 +27,7 @@ void linetrace(float val_val){
 
     int reflection = ev3_color_sensor_get_reflect(color_sensor);
     cnt = cnt + 1;
-    printf("Reflect:%d\n",reflection);
+    //printf("Reflect:%d\n",reflection);
 
     float velo_rot_target = mid_PID_line_pos(55.0f, (float)reflection,val_val);
 
