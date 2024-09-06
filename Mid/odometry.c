@@ -37,10 +37,9 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
         // 旋回量の計算
         delta_rad = (abs(delta_LL) - abs(delta_LR)) / (float)wheel_dist;
         
-        if(delta_LL > delta_LR){
-            delta_rad *= -1;
-            printf("旋回計算時のdelta_rad(方向)：%d\n",delta_rad);
-        }
+//        if(delta_LL > delta_LR){
+//            delta_rad *= -1;
+//        }
     }
 
     else { //直進・曲進している
@@ -70,6 +69,12 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
     crnt_coordinate->x      = pre_coordinate.x + (float)((double)delta_L * cos(pre_rad + (delta_rad / 2.0)));
     crnt_coordinate->y      = pre_coordinate.y + (float)((double)delta_L * sin(pre_rad + (delta_rad / 2.0)));
     crnt_coordinate->theta  = pre_coordinate.theta + (float)delta_theta;
+
+    printf("現在(X,Y):(%f,%f) | ",crnt_coordinate.x,crnt_coordinate.y);
+    printf("過去(X,Y):(%f,%f) | ",pre_coordinate.x,pre_coordinate.y);
+    printf("移動距離:%f | ",delta_L);
+    printf("過去角度:%f | ",pre_rad);
+    printf("Δラジアン:%d \n",delta_rad);
     
             //前回座標を更新する
     pre_coordinate.x     = crnt_coordinate->x;
