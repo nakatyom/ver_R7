@@ -50,13 +50,13 @@ void naka_task(intptr_t unused){
     else if(start_flag == false){
         toch_cnt =0;
     }
-    if (start_flag == false && toch_cnt >= 200){
+    if (start_flag == false && toch_cnt >= 100){
         start_flag=true;
     }
 
-    if (start_flag == true && toch_cnt >= 400 ){
+    if (start_flag == true && toch_cnt >= 350 ){
         linetrace(val_val);
-    }else if(start_flag == true && toch_cnt <= 1000) {
+    }else if(start_flag == true && toch_cnt <= 350) {
         toch_cnt += 1;
         if (wrn_flag == false){
             printf("警告：手を放してください。\n"); 
