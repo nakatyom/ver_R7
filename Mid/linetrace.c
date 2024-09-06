@@ -1,70 +1,34 @@
-#include "ev3api.h"
-#include <stdio.h>
-#include "app.h"
-#include "port_settings.h"
-
-#define BASE_SPEED 50  // 基本速度
-#define KP 1.1         // 比例ゲイン
-#define KI 0.1         // 積分ゲイン
-#define KD 0.02        // 微分ゲイン
-
-int reflection;
-int power_left, power_right;
-int error, last_error = 0, integral = 0;
-int correction;
-int target = 15;  // 目標値
-
-// 値をクリップする関数
-int clip(int value, int min, int max) {
-    if (value < min) {
-        return min;
-    } else if (value > max) {
-        return max;
-    } else {
-        return value;
-    }
-}
-uint32_t cnt=0;
-void mid_linetrace_pid(intptr_t unused){
-
-    // 反射光の強さを取得
-    reflection = ev3_color_sensor_get_reflect(color_sensor);
-    
-
-    // デバックコード
-    if (ev3_touch_sensor_is_pressed(touch_sensor) && (cnt % 1000000 == 0)) {
-        target += 1;  // 目標値を増加
-        if (target > 100) {
-            target = 0;  // 目標値をリセット
-        }
-    }else{
-        if (cnt%100000000==0){
-            printf("colorval:%d | Target %d\n",reflection,target);
-        }
-    }
-
-    if (cnt>=6500000000){
-        cnt=0;
-    }
+#include "linetrace.h"
+#include "velocity_control.h"
 
 
-    // エラー計算
-    error = target - reflection;
-    integral += error;
-    correction = KP * error + KD * (error - last_error); //+ KI * integral ;
+float mid_PID_line_pos(float tag, float maj){ 
 
-    // 左右のモーターのパワーを設定
-    power_left = BASE_SPEED - correction;
-    power_right = BASE_SPEED + correction;
+    const float kp = 0.20f;
+    const float ki = 0.02f;
+    const float kd = 0.0f;
 
-    // パワーを-100～100の範囲にクリップ
-    power_left = clip(power_left, -100, 100);
-    power_right = clip(power_right, -100, 100);
+    static float intg;
+    static float err_pre;
+    static float err;
+     
+    err_pre = err;
+    err = tag - maj;
+    intg += err;
 
-    ev3_motor_set_power(left_motor, power_left);
-    ev3_motor_set_power(right_motor, power_right);
+    if (intg > 1000.0f)    intg = 1000.0f;
+    if (intg < -1000.0f)   intg = -1000.0f;
 
-    // 前回のエラーを更新
-    last_error = error;
+    return ((err * kp) + (intg * ki) + ((err - err_pre) * kd));
 }
 
+
+void linetrace(void){
+
+    int reflection = ev3_color_sensor_get_reflect(color_sensor);
+
+    float velo_rot_target = mid_PID_line_pos(55.0f, (float)reflection);
+
+    mid_velocity_control(80.0f, -velo_rot_target);
+//    mid_velocity_control(50.0f, 0.0f);  // debug
+}
