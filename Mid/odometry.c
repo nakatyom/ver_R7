@@ -72,9 +72,9 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
     float pre_rad = 3.141592 * delta_pre_rad / 180.0;
     float delta_theta = 180.0 * delta_rad / 3.141592;   
     
-    crnt_coordinate->x      = crnt_coordinate.x + (float)((double)delta_L * cos(pre_rad + (delta_rad / 2.0)));
-    crnt_coordinate->y      = crnt_coordinate.y + (float)((double)delta_L * sin(pre_rad + (delta_rad / 2.0)));
-    crnt_coordinate->theta  = crnt_coordinate.theta + (float)delta_theta;
+    crnt_coordinate->x      = crnt_coordinate->x + (float)((double)delta_L * cos(pre_rad + (delta_rad / 2.0)));
+    crnt_coordinate->y      = crnt_coordinate->y + (float)((double)delta_L * sin(pre_rad + (delta_rad / 2.0)));
+    crnt_coordinate->theta  = crnt_coordinate->theta + (float)delta_theta;
     
     return;
 }
