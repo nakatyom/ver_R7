@@ -4,7 +4,7 @@
 
 float mid_PID_line_pos(float tag, float maj,float val){ 
 
-    const float kp = val;
+    const float kp = (float)val;
     const float ki = 0.00f;
     const float kd = 0.00f;
 
