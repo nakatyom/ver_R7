@@ -70,6 +70,13 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
     crnt_coordinate->y      = pre_coordinate.y + (float)((double)delta_L * sin(pre_rad + (delta_rad / 2.0)));
     crnt_coordinate->theta  = pre_coordinate.theta + (float)delta_theta;
     
+            //前回座標を更新する
+    pre_coordinate.x     = crnt_coordinate->x;
+    pre_coordinate.y     = crnt_coordinate->y;
+    pre_coordinate.theta = crnt_coordinate->theta;
+
+    delta_pre_rad = delta_rad;
+    
     return;
 }
 
@@ -77,13 +84,6 @@ extern void get_preCoordinate(struct coordinate* coordinate_p){
     coordinate_p->x     = pre_coordinate.x;
     coordinate_p->y     = pre_coordinate.y;
     coordinate_p->theta = pre_coordinate.theta;
-
-        //前回座標を更新する
-    pre_coordinate.x     = crnt_coordinate->x;
-    pre_coordinate.y     = crnt_coordinate->y;
-    pre_coordinate.theta = crnt_coordinate->theta;
-
-    delta_pre_rad = delta_rad;
 
     return;
 }
