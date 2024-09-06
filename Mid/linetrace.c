@@ -10,8 +10,8 @@ float mid_PID_line_pos(float tag, float maj,float val){
     const float kd = 0.10f;
     */
     /* power 50 の時。 */
-    const float kp = (float)val;
-    const float ki = 0.00f;
+    const float kp = 0.72f;
+    const float ki = (float)val;
     const float kd = 0.00f;
 
     static float intg;
