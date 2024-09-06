@@ -9,6 +9,7 @@
 #include "gyro.h"
 #include "odometry.h"
 
+
 static struct coordinate pre_coordinate  = {0.0, 0.0, 0.0}; //前回座標
 const int   straight_threshold = 2; //直進時のモータ角度誤差許容範囲
 const float delta_theta_thresshold = 10.0;
@@ -61,20 +62,13 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
     delta_rad = gyro_sensor_get_angle(gyro_sensor) - gyro_sensor_get_pre_angle(gyro_sensor);
     delta_rad = 3.141592 * delta_rad /180.0;
 
-    //前回座標を更新する
-    pre_coordinate.x     = crnt_coordinate->x;
-    pre_coordinate.y     = crnt_coordinate->y;
-    pre_coordinate.theta = crnt_coordinate->theta;
-
-    delta_pre_rad = delta_rad;
-
     // 現在座標を計算する
     float pre_rad = 3.141592 * delta_pre_rad / 180.0;
     float delta_theta = 180.0 * delta_rad / 3.141592;   
     
-    crnt_coordinate->x      = crnt_coordinate->x + (float)((double)delta_L * cos(pre_rad + (delta_rad / 2.0)));
-    crnt_coordinate->y      = crnt_coordinate->y + (float)((double)delta_L * sin(pre_rad + (delta_rad / 2.0)));
-    crnt_coordinate->theta  = crnt_coordinate->theta + (float)delta_theta;
+    crnt_coordinate->x      = pre_coordinate.x + (float)((double)delta_L * cos(pre_rad + (delta_rad / 2.0)));
+    crnt_coordinate->y      = pre_coordinate.y + (float)((double)delta_L * sin(pre_rad + (delta_rad / 2.0)));
+    crnt_coordinate->theta  = pre_coordinate.theta + (float)delta_theta;
     
     return;
 }
@@ -83,6 +77,13 @@ extern void get_preCoordinate(struct coordinate* coordinate_p){
     coordinate_p->x     = pre_coordinate.x;
     coordinate_p->y     = pre_coordinate.y;
     coordinate_p->theta = pre_coordinate.theta;
+
+        //前回座標を更新する
+    pre_coordinate.x     = crnt_coordinate->x;
+    pre_coordinate.y     = crnt_coordinate->y;
+    pre_coordinate.theta = crnt_coordinate->theta;
+
+    delta_pre_rad = delta_rad;
 
     return;
 }
