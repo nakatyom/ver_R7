@@ -39,7 +39,7 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
         
         if(delta_LL > delta_LR){
             delta_rad *= -1;
-            printf("旋回計算時のdelta_rad(方向)：%d",delta_rad);
+            printf("旋回計算時のdelta_rad(方向)：%d\n",delta_rad);
         }
     }
 
