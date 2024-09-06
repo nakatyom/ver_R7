@@ -5,6 +5,7 @@
 #include "linetrace.h"
 #include "velocity_control.h"
 
+
 /* メインタスク(起動時にのみ関数コールされる) */
 bool_t toch_flg = false;
 void main_task(intptr_t unused) {
@@ -25,9 +26,17 @@ int toch_cnt = 0;
 bool_t pre_toch=false;
 bool_t start_flag = false;
 float val_val=0.0;
+
 //uint8_t cnt;
 void naka_task(intptr_t unused){
-    // printf("10ms Task ");
+    int16_t angle_val;
+    int16_t rate_val;
+    angle_val = ev3_gyro_sensor_get_angle(gyro_sensor);
+    rate_val = ev3_gyro_sensor_get_rate(gyro_sensor);
+
+    printf("Angle：%d , Rate:%d\n",angle_val,rate_val);
+    
+    /*
     pre_toch = toch_flg;
     toch_flg = ev3_touch_sensor_is_pressed(touch_sensor);
     
@@ -52,4 +61,5 @@ void naka_task(intptr_t unused){
     if (start_flag == true){
         linetrace(val_val);
     }
+    */
 }
