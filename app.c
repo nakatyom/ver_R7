@@ -25,6 +25,7 @@ void main_task(intptr_t unused) {
 int toch_cnt = 0; 
 bool_t pre_toch=false;
 bool_t start_flag = false;
+bool_t wrn_flag = false;
 float val_val=0.0;
 
 //uint8_t cnt;
@@ -57,7 +58,11 @@ void naka_task(intptr_t unused){
         linetrace(val_val);
     }else if(start_flag == true && toch_cnt <= 1000) {
         toch_cnt += 1;
-        printf("警告：手を放してください。\n");
+        if (wrn_flag == false){
+            printf("警告：手を放してください。\n"); 
+            wrn_flag=true;
+        }
+        
     }
     
 }
