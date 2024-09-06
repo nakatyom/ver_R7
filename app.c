@@ -21,7 +21,7 @@ void main_task(intptr_t unused) {
 
 #include "motor.h"
 
-int test = 0;
+int test = 1;
 struct coordinate crnt = {0.0, 0.0, 0.0};
 
 void boss_task(intptr_t exinf){
@@ -31,6 +31,7 @@ void boss_task(intptr_t exinf){
     re = motor_get_counts(right_motor);
     printf("left_enc:%d, right_enc:%d\n", (int)le, (int)re);
     }
+    
     else if(test == 1){
         get_crntCoordinate(&crnt);
         printf("x=%f, y=%f, theta=%f\n",crnt.x, crnt.y,crnt.theta);
