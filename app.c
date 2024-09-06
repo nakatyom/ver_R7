@@ -19,6 +19,8 @@ void main_task(intptr_t unused) {
     ext_tsk();
 }
 
+#include "motor.h"
+
 int test = 0;
 struct coordinate crnt = {0.0, 0.0, 0.0};
 
