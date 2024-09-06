@@ -1,7 +1,7 @@
 #include "velocity_control.h"
 
 #define ENC_CORR_R      1.0f        // 右ENC個体差補正係数
-#define ENC_CORR_L      1.0f        // 左ENC個体差補正係数
+#define ENC_CORR_L      0.9f        // 左ENC個体差補正係数
 
 #define TIRE_SIZE_R     94.0f       // 右タイヤ直径[mm]
 #define TIRE_SIZE_L     94.0f       // 左タイヤ直径[mm]
@@ -110,16 +110,16 @@ void mid_velocity_control(float velo_str_tgt, float velo_rot_tgt){
     float mot_l_u_tmp = mot_l_u_str - mot_l_u_rot;  // deg/sec(motor)
     
     /* 操作量計算 */
-    float batt_v = (float)ev3_battery_voltage_mV();  // Todo:電圧取れない
-    int mot_r_u = (int)(mot_r_u_tmp * 0.14149)/(batt_v*0.0001);
-    int mot_l_u = (int)(mot_l_u_tmp * 0.13955)/(batt_v*0.0001);
+
+    int mot_r_u = (int)(mot_r_u_tmp * 1.0f);
+    int mot_l_u = (int)(mot_l_u_tmp * 1.0f);
 
     if (mot_r_u >  100)  mot_r_u = 100;
     if (mot_r_u < -100)  mot_r_u = -100;
     if (mot_l_u >  100)  mot_l_u = 100;
     if (mot_l_u < -100)  mot_l_u = -100;
 
-   
+    float batt_v = (float)ev3_battery_voltage_mV();  // Todo:電圧取れない   
 
     ev3_motor_set_power(right_motor,mot_r_u);
     ev3_motor_set_power(left_motor, mot_l_u);
