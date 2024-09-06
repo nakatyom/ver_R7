@@ -61,25 +61,21 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
     delta_rad = gyro_sensor_get_angle(gyro_sensor) - gyro_sensor_get_pre_angle(gyro_sensor);
     delta_rad = 3.141592 * delta_rad /180.0;
 
-    // 現在座標を計算する
-    float pre_rad = 3.141592 * delta_pre_rad / 180.0;
-    float delta_theta = 180.0 * delta_rad / 3.141592;   
-    
-    crnt_coordinate->x      = pre_coordinate.x + (float)((double)delta_L * cos(pre_rad + (delta_rad / 2.0)));
-    crnt_coordinate->y      = pre_coordinate.y + (float)((double)delta_L * sin(pre_rad + (delta_rad / 2.0)));
-    crnt_coordinate->theta  = pre_coordinate.theta + (float)delta_theta;
-    
-    // 小数点下第１位で切り捨て
-    crnt_coordinate->x      = floor((crnt_coordinate->x * 10.0) / 10.0);
-    crnt_coordinate->y      = floor((crnt_coordinate->y * 10.0) / 10.0);
-    crnt_coordinate->theta  = floor((crnt_coordinate->theta * 10.0) / 10.0);
-    
     //前回座標を更新する
     pre_coordinate.x     = crnt_coordinate->x;
     pre_coordinate.y     = crnt_coordinate->y;
     pre_coordinate.theta = crnt_coordinate->theta;
 
     delta_pre_rad = delta_rad;
+
+    // 現在座標を計算する
+    float pre_rad = 3.141592 * delta_pre_rad / 180.0;
+    float delta_theta = 180.0 * delta_rad / 3.141592;   
+    
+    crnt_coordinate->x      = crnt_coordinate.x + (float)((double)delta_L * cos(pre_rad + (delta_rad / 2.0)));
+    crnt_coordinate->y      = crnt_coordinate.y + (float)((double)delta_L * sin(pre_rad + (delta_rad / 2.0)));
+    crnt_coordinate->theta  = crnt_coordinate.theta + (float)delta_theta;
+    
     return;
 }
 
