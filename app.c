@@ -26,7 +26,7 @@ int toch_cnt = 0;
 bool_t pre_toch=false;
 bool_t start_flag = false;
 bool_t wrn_flag = false;
-float val_val=0.0;
+float val_val=-0.01;
 
 //uint8_t cnt;
 void naka_task(intptr_t unused){
