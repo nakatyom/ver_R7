@@ -40,8 +40,6 @@ void naka_task(intptr_t unused){
     if (pre_toch == false && toch_flg==true){
         val_val = val_val + 0.01;
         printf("変数値：%f\n",val_val);
-    }else{
-        printf(".");
     }
 
     if (start_flag == false && toch_flg == true){
@@ -53,13 +51,13 @@ void naka_task(intptr_t unused){
     }
     if (start_flag == false && toch_cnt >= 200){
         start_flag=true;
-        toch_cnt += 1;
     }
-    else{
-        printf("警告：手を放してください。\n");
-    }
+
     if (start_flag == true &&  toch_cnt >= 1000 ){
         linetrace(val_val);
+    }else if(start_flag == true && toch_cnt <= 1000) {
+        toch_cnt += 1;
+        printf("警告：手を放してください。\n");
     }
     
 }
