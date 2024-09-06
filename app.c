@@ -40,6 +40,7 @@ void naka_task(intptr_t unused){
 
     if (start_flag == false && toch_flg == true){
         toch_cnt += 1;
+        printf("counter:%d\n",toch_cnt);
     }
     else{
         toch_cnt =0;
