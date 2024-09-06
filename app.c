@@ -19,16 +19,20 @@ void main_task(intptr_t unused) {
     ext_tsk();
 }
 
-#include "body.h"
+int test = 0;
+struct coordinate crnt = {0.0, 0.0, 0.0};
 
 void boss_task(intptr_t exinf){
-    struct coordinate crnt = {0.0, 0.0, 0.0};
-    get_crntCoordinate(&crnt);
+    if(test == 0){
+    static int32_t le, re;
+    printf("left_enc:%d, right_enc:%d\n", le, re);
+    }
+    else if(test == 1){
+        get_crntCoordinate(&crnt);
+        printf("x=%f, y=%f, theta=%f\n",crnt.x, crnt.y,crnt.theta);
+    }
 
-    printf("x=%f, y=%f, theta=%f\n",crnt.x, crnt.y,crnt.theta);
 
-    // int16_t angle = gyro_sensor_get_angle(gyro_sensor);
-    // int16_t rate  = gyrosensor_get_rate(gyro_sensor);
-    // printf("theta = %d\n", angle);
+
 
 }
