@@ -25,7 +25,9 @@ struct coordinate crnt = {0.0, 0.0, 0.0};
 void boss_task(intptr_t exinf){
     if(test == 0){
     static int32_t le, re;
-    printf("left_enc:%d, right_enc:%d\n", le, re);
+    le = motor_get_counts(left_motor);
+    re = motor_get_counts(right_motor);
+    printf("left_enc:%d, right_enc:%d\n", (int)le, (int)re);
     }
     else if(test == 1){
         get_crntCoordinate(&crnt);
