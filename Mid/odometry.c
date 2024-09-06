@@ -70,7 +70,7 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
     crnt_coordinate->y      = pre_coordinate.y + (float)((double)delta_L * sin(pre_rad + (delta_rad / 2.0)));
     crnt_coordinate->theta  = pre_coordinate.theta + (float)delta_theta;
 
-    printf("現在(X,Y):(%f,%f) | ",crnt_coordinate.x,crnt_coordinate.y);
+    printf("現在(X,Y):(%f,%f) | ",crnt_coordinate->x,crnt_coordinate->y);
     printf("過去(X,Y):(%f,%f) | ",pre_coordinate.x,pre_coordinate.y);
     printf("移動距離:%f | ",delta_L);
     printf("過去角度:%f | ",pre_rad);
