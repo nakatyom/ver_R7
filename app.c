@@ -33,9 +33,6 @@ void naka_task(intptr_t unused){
     int16_t rate_val;
     angle_val = ev3_gyro_sensor_get_angle(gyro_sensor);
     rate_val = ev3_gyro_sensor_get_rate(gyro_sensor);
-
-    printf("Angle：%d , Rate:%d\n",angle_val,rate_val);
-    
     
     pre_toch = toch_flg;
     toch_flg = ev3_touch_sensor_is_pressed(touch_sensor);
