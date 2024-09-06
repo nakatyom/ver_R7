@@ -4,16 +4,17 @@
 
 float mid_PID_line_pos(float tag, float maj,float val){ 
     /* power 90 の時。 */
-    /*
+    
     const float kp = 0.2f;
     const float ki = 0.02f;
     const float kd = 0.10f;
-    */
+    
     /* power 50 の時。0.72 */
+    /*
     const float kp = 0.30f;
-    const float ki = (float)val;
+    const float ki = 0.04f;
     const float kd = 0.13f;
-
+    */
     static float intg;
     static float err_pre;
     static float err;
@@ -36,7 +37,7 @@ void linetrace(float val_val){
 
     float velo_rot_target = mid_PID_line_pos(55.0f, (float)reflection,val_val);
 
-    mid_velocity_control(50.0f, -velo_rot_target);
+    mid_velocity_control(90.0f, -velo_rot_target);
     //printf("%d,%d\n",cnt,reflection);
     //mid_velocity_control(90.0f, 0.0f);  // debug
 }
