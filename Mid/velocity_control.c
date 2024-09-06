@@ -7,7 +7,7 @@
 #define TIRE_SIZE_L     94.0f       // 左タイヤ直径[mm]
 #define TRED_SIZE       125.0f      // トレッド直径[mm]
 
-#define SAMPLE_RATE     100.0f      // 計測周波数[sec]
+#define SAMPLE_RATE     10.0f      // 計測周波数[sec]
 #define PI_FLOAT        3.141592f   // 円周率
 
 
