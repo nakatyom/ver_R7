@@ -4,12 +4,6 @@
 #include "ev3api.h"
 
 
-extern enum state{
-    PRE_START       = 0,
-    LAP_RUN         = 1,
-    DUBBLE_LOOP     = 2,
-    DEBRI_REMOVE    = 3,
-    SMART_CARRY     = 4
-};
+extern enum state;
 
 #endif /* _PORT_H */

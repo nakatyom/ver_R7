@@ -1,11 +1,7 @@
 #ifndef _ODOMETRY_H
 #define _ODOMETRY_H
 
-extern struct coordinate{
-    float x;
-    float y;
-    float theta;
-};
+extern struct coordinate;
 
 /* external functions*/
 extern void get_crntCoordinate(struct coordinate* crnt_coordinate);
