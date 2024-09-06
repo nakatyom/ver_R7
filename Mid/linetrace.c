@@ -4,9 +4,9 @@
 
 float mid_PID_line_pos(float tag, float maj,float val){ 
 
-    const float kp = val;
-    const float ki = 0.0f;
-    const float kd = 0.0f;
+    const float kp = 0.2f;
+    const float ki = 0.02f;
+    const float kd = val;
 
     static float intg;
     static float err_pre;
@@ -22,16 +22,15 @@ float mid_PID_line_pos(float tag, float maj,float val){
     return ((err * kp) + (intg * ki) + ((err - err_pre) * kd));
 }
 
-int cnt =0;
+
 void linetrace(float val_val){
 
     int reflection = ev3_color_sensor_get_reflect(color_sensor);
-    cnt = cnt + 1;
     //printf("Reflect:%d\n",reflection);
 
     float velo_rot_target = mid_PID_line_pos(55.0f, (float)reflection,val_val);
 
     mid_velocity_control(80.0f, velo_rot_target);
-    printf("%d,%d\n",cnt,reflection);
+    //printf("%d,%d\n",cnt,reflection);
     //mid_velocity_control(90.0f, 0.0f);  // debug
 }

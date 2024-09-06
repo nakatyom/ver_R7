@@ -36,7 +36,7 @@ void naka_task(intptr_t unused){
 
     printf("Angle：%d , Rate:%d\n",angle_val,rate_val);
     
-    /*
+    
     pre_toch = toch_flg;
     toch_flg = ev3_touch_sensor_is_pressed(touch_sensor);
     
@@ -61,5 +61,5 @@ void naka_task(intptr_t unused){
     if (start_flag == true){
         linetrace(val_val);
     }
-    */
+    
 }
