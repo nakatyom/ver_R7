@@ -22,13 +22,16 @@ float mid_PID_line_pos(float tag, float maj,float val){
     return ((err * kp) + (intg * ki) + ((err - err_pre) * kd));
 }
 
+int cnt =0;
 void linetrace(float val_val){
 
     int reflection = ev3_color_sensor_get_reflect(color_sensor);
+    cnt = cnt + 1;
     printf("Reflect:%d\n",reflection);
 
     float velo_rot_target = mid_PID_line_pos(35.0f, (float)reflection,val_val);
 
     mid_velocity_control(80.0f, velo_rot_target);
+    printf("cnt,Reflect):(%d,%d\n",cnt,reflection);
     //mid_velocity_control(90.0f, 0.0f);  // debug
 }
