@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include <math.h>
-#include <time.h>
+
 
 #include "motor.h"
 #include "ev3api.h"
 #include "port.h"
+#include "_timer_.h"
 
 // 0:Arm, 1:Right, 2:Left
 int32_t crnt_enc[3] = {0, 0, 0};
@@ -18,10 +19,7 @@ const float motor_sync = 1.0;
 
 
 /* static functions */
-void delay_connect_m(int milliseconds){
-    clock_t start_time = clock();
-    while(clock() < start_time + milliseconds);
-}
+
 
 /* extern functions */
 extern int32_t motor_get_counts(motor_port_t port){
@@ -38,7 +36,7 @@ extern int32_t motor_get_counts(motor_port_t port){
 
     // 通信遅れ判定の場合、1ms待って再取得
     if(crnt_enc[port] == pre_enc[port] && (pre_power[port] != 0 || crnt_power[port] != 0)){ // 前回値と一致かつモーターパワーが0でない
-            delay_connect_m(1); // 1ms待つ
+            // delay_connect(1); // 1ms待つ
             crnt_enc[port] = ev3_motor_get_counts(port);
     }
 
