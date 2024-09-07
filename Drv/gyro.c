@@ -16,7 +16,7 @@ int16_t pre_rate   = 0;
 /* static functions */
 
 /* extern functions */
-extern int16_t gyro_sensor_get_angle(sensor_port_t port){
+int16_t gyro_sensor_get_angle(sensor_port_t port){
     if(port != gyro_sensor){
         printf("An invalid value entered in gyro_sensor_get_angle().\n");
         return 0;
@@ -44,7 +44,7 @@ extern int16_t gyro_sensor_get_angle(sensor_port_t port){
     return crnt_angle;
 }
 
-extern int16_t gyro_sensor_get_pre_angle(sensor_port_t port){
+int16_t gyro_sensor_get_pre_angle(sensor_port_t port){
     if(port != gyro_sensor){
         printf("An invalid value entered in gyro_sensor_get_pre_angle().\n");
         return 0;
@@ -53,7 +53,7 @@ extern int16_t gyro_sensor_get_pre_angle(sensor_port_t port){
     return pre_angle;
 }
 
-extern int16_t gyro_sensor_get_rate(sensor_port_t port){
+int16_t gyro_sensor_get_rate(sensor_port_t port){
     if(port != gyro_sensor){
         printf("An invalid value entered in gyro_sensor_get_rate().\n");
         return 0;
@@ -81,7 +81,7 @@ extern int16_t gyro_sensor_get_rate(sensor_port_t port){
     return crnt_rate;
 }
 
-extern int16_t gyro_sensor_get_pre_rate(sensor_port_t port){
+int16_t gyro_sensor_get_pre_rate(sensor_port_t port){
     if(port != gyro_sensor){
         printf("An invalid value entered in gyro_sensor_get_pre_rate().\n");
         return 0;
