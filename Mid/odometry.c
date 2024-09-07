@@ -63,7 +63,7 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
     delta_rad = 3.141592 * delta_rad /180.0;
 
     // 現在座標を計算する
-    float pre_rad = delta_pre_rad;
+    float pre_rad =+ delta_pre_rad;
     float delta_theta = 180.0 * delta_rad / 3.141592;   
     
     crnt_coordinate->x      = pre_coordinate.x + (float)((double)delta_L * cos(pre_rad + (delta_rad / 2.0)));
