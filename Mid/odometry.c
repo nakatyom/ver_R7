@@ -36,10 +36,7 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
 
         // 旋回量の計算
         delta_rad = (abs(delta_LL) - abs(delta_LR)) / (float)wheel_dist;
-        
-        if(delta_LL > delta_LR){
-            delta_rad *= -1;
-        }
+
     }
 
     else { //直進・曲進している
@@ -49,14 +46,13 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
             //ロボットの旋回量
             delta_rad = 0.0;
         }
-        // else { //曲進している
-        //     //ロボットの旋回量
-        //     delta_rad = (delta_LL - delta_LR) / (float)wheel_dist;
-        //     if(abs(delta_rad) > delta_theta_thresshold){ //delta_thetaが大きい
-        //         delta_L = 2 * (delta_L / delta_rad) * sin(delta_rad / 2);
-        //         printf("BBB, ");
-        //     }
-        // }
+        else { //曲進している
+            //ロボットの旋回量
+            delta_rad = (delta_LL - delta_LR) / (float)wheel_dist;
+            if(abs(delta_rad) > delta_theta_thresshold){ //delta_thetaが大きい
+                delta_L = 2 * (delta_L / delta_rad) * sin(delta_rad / 2);
+            }
+        }
     }
 
     delta_rad = gyro_sensor_get_angle(gyro_sensor) - gyro_sensor_get_pre_angle(gyro_sensor);
