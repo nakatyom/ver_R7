@@ -35,12 +35,15 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
         delta_L = 0.0;
 
         // 旋回量の計算
+        // 分子が0にならない
         if(abs(delta_LL) != abs(delta_LR) && abs(delta_LL) > abs(delta_LR)){
             // printf("脳筋ブレイクポイント,左:%f,右:%f\n",delta_LL,delta_LR);
             delta_rad = (abs(delta_LL) - abs(delta_LR)) / (float)wheel_dist;
         }else if(abs(delta_LL) != abs(delta_LR) && abs(delta_LL) < abs(delta_LR)){
             delta_rad = (abs(delta_LR) - abs(delta_LL)) / (float)wheel_dist;
         }
+
+        // 分子が0になる
         else{
             if(delta_LL > 0){
                 delta_rad = delta_LL / (float)wheel_dist;
@@ -50,6 +53,12 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
                 delta_rad = delta_LR / (float)wheel_dist;
             }
         }
+
+        // 逆回転を検知
+        if(delta_LL > 0){
+            delta_rad = delta_rad * -1;
+        }
+
         delta_theta = (delta_rad * 360) / 3.141592;
 
         //printf("delta_LL:%f | ",delta_LL);
