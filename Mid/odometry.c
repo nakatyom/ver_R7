@@ -29,11 +29,15 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
     float delta_LL = (float)(wheel_size / 2) * delta_PhL;
     float delta_LR = (float)(wheel_size / 2) * delta_PhR;
 
-    /* 走行体の旋回角度を計算する */
+    /* 走行体の旋回角度を計算する(ジャイロ) */
     delta_theta_g = gyro_sensor_get_angle(gyro_sensor) - gyro_sensor_get_pre_angle(gyro_sensor);
     delta_rad_g = 3.141592 * delta_theta_g /180.0;
 
     if( (delta_LL > 0.0 && delta_LR < 0.0) || (delta_LL < 0.0 && delta_LR > 0.0) ){ //旋回している
+        //旋回量を計算する   
+        delta_rad_e = ( abs(delta_LL) - abs(delta_LR) ) / (float)wheel_dist;       
+        if(delta_LL < 0.0) delta_rad_e *= -1;
+        
         //ロボットの移動距離
         delta_L = 0.0;
 
