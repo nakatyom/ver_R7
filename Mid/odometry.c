@@ -39,11 +39,17 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
         if(abs(delta_LL) != abs(delta_LR) && abs(delta_LL) > abs(delta_LR)){
             // printf("脳筋ブレイクポイント,左:%f,右:%f\n",delta_LL,delta_LR);
             delta_rad = (abs(delta_LL) - abs(delta_LR)) / (float)wheel_dist;
+            if(delta_LL < 0){
+                delta_rad = -delta_rad;
+            }
         }else if(abs(delta_LL) != abs(delta_LR) && abs(delta_LL) < abs(delta_LR)){
             delta_rad = (abs(delta_LR) - abs(delta_LL)) / (float)wheel_dist;
+            if(delta_LL < 0){
+                delta_rad = -delta_rad;
+            }
         }
         
-        // 分子が0になる
+        // 分子が0になる（シミュレータ上の措置）
         else{
             if(delta_LL > 0){
                 delta_rad = delta_LL / (float)wheel_dist;
