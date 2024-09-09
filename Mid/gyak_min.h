@@ -5,7 +5,7 @@
 #include "coordinate.h"
 
 /* external functions*/
-extern void  get_tgtV(struct coordinate* tgt_coordinate, struct coordinate* crnt_coordinate);
-
+extern float  get_tgtV(struct coordinate* tgt_coordinate, struct coordinate* crnt_coordinate);
+extern void   reset_tgtV();
 
 #endif /* _GYAK_MIN_H */
