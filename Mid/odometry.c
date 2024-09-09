@@ -28,7 +28,7 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
 
     /* 走行体の旋回角度を計算する */
     float delta_theta = gyro_sensor_get_angle(gyro_sensor) - gyro_sensor_get_pre_angle(gyro_sensor);
-    float delta_rad   = 3.141592 * delta_rad /180.0;
+    float delta_rad   = 3.141592 * delta_theta /180.0;
 
     if( (delta_LL > 0.0 && delta_LR < 0.0) || (delta_LL < 0.0 && delta_LR > 0.0) ){ //旋回している
         //ロボットの移動距離
