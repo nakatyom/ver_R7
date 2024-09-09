@@ -3,6 +3,6 @@
 
 #include "ev3api.h"
 
-extern void 
+extern void straight();
 
 #endif /* _PORT_H */
