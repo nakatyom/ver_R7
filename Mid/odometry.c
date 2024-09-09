@@ -5,6 +5,7 @@
 #include "ev3api.h"
 #include "body.h"
 #include "port.h"
+#include "coordinate.h"
 #include "motor.h"
 #include "gyro.h"
 #include "odometry.h"
@@ -15,6 +16,8 @@ static struct coordinate pre_coordinate  = {0.0, 0.0, 0.0}; //前回座標
 /* external functions */
 void get_crntCoordinate(struct coordinate* crnt_coordinate){
     float delta_L = 0.0; // 移動量
+    float delta_rad_g = 0.0;
+    float delta_rad_e = 0.0;
 
     /* 左右モータの回転量を計算する[rad] */
     float delta_PhL = 3.141592 * (motor_get_counts(left_motor)  - motor_get_pre_counts(left_motor))  / 180.0;
@@ -33,27 +36,21 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
         delta_L = 0.0;
 
         // 旋回量の計算
-        // delta_rad = (abs(delta_LL) - abs(delta_LR)) / (float)wheel_dist;
+        delta_rad_e = (abs(delta_LL) - abs(delta_LR)) / (float)wheel_dist;
 
     }
-
     else { //直進・曲進している
-        //ロボットの移動距離
-        delta_L = (delta_LL + delta_LR)/(float)2.0;
+        // 移動距離を計算
+        if(abs(delta_rad) > 0.174){ //delta_radが十分大きい     
+            delta_L = 2 * (delta_L / delta_rad) * sin(delta_rad / 2);
+        }
+        else {
+            delta_L = (delta_LL + delta_LR)/(float)2.0;
+        }
 
-        if( abs(delta_LL-delta_LR) < ((wheel_size/2)*3.141592*straight_threshold/180.0) ){ //直進している
-            //ロボットの旋回量
-            // delta_rad = 0.0;
-        }
-        else { //曲進している
-            //ロボットの旋回量
-            // delta_rad = (delta_LL - delta_LR) / (float)wheel_dist;
-            if(abs(delta_rad) > 0.174){ //delta_radが十分大きい
-                delta_L = 2 * (delta_L / delta_rad) * sin(delta_rad / 2);
-            }
-        }
+        //旋回量を計算する   
+        delta_rad_e = (delta_LL - delta_LR) / (float)wheel_dist;
     }
-
 
 
     // 現在座標を計算する
@@ -63,7 +60,7 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
     crnt_coordinate->y      = pre_coordinate.y + (float)((double)delta_L * sin(pre_rad + (delta_rad / 2.0)));
     crnt_coordinate->theta  = pre_coordinate.theta + (float)delta_theta;
     
-            //前回座標を更新する
+    //前回座標を更新する
     pre_coordinate.x     = crnt_coordinate->x;
     pre_coordinate.y     = crnt_coordinate->y;
     pre_coordinate.theta = crnt_coordinate->theta;

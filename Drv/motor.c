@@ -19,7 +19,6 @@ const float motor_sync = 1.0;
 
 
 /* static functions */
-<<<<<<< HEAD
 
 
 /* extern functions */
@@ -39,43 +38,6 @@ extern int32_t motor_get_counts(motor_port_t port){
     if(crnt_enc[port] == pre_enc[port] && (pre_power[port] != 0 || crnt_power[port] != 0)){ // 前回値と一致かつモーターパワーが0でない
             // delay_connect(1); // 1ms待つ
             crnt_enc[port] = ev3_motor_get_counts(port);
-=======
-int is_ValidInput(motor_port_t port, const char* func_name){
-    if(port != arm_motor && port != right_motor && port != left_motor){
-        printf("An invalid value entered in %s.\n", func_name);
-        return 1;
-    }
-    return 0;
-}
-
-void delay_connect_m(int milliseconds){
-    clock_t start_time = clock();
-    while(clock() < start_time + milliseconds);
-}
-
-int checkMissingData(motor_port_t port){
-    if(crnt_enc[port] == pre_enc[port]){// 前回値と一致
-        if(pre_power[port] != 0 || crnt_power[port] != 0){ // モーターパワーが0でない
-            delay_connect_m(1); // 1ms待つ
-            return 0;
-        }
-    }
-    return 1;
-}
-
-
-/* extern functions */
-int32_t motor_get_counts(motor_port_t port){
-    const char func_name[] = "motor_get_counts";
-    if(1 == is_ValidInput(port, func_name)) return 0;
-    
-    pre_enc[port] = crnt_enc[port]; // 前回値の更新
-
-    // 現在値の取得(通信遅れ判定の場合、1ms待って再取得)
-    for(int i=0; i<=1; i++){
-        crnt_enc[port] = ev3_motor_get_counts(port);
-        i = checkMissingData(port);
->>>>>>> 879c4fc4b0dcf856a8901df8563171b09485b9f2
     }
 
     return crnt_enc[port];
