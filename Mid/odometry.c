@@ -3,9 +3,9 @@
 #include <stdlib.h>
 
 #include "ev3api.h"
+#include "common.h"
 #include "body.h"
 #include "port.h"
-#include "coordinate.h"
 #include "motor.h"
 #include "gyro.h"
 #include "odometry.h"
@@ -22,8 +22,8 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
     float delta_theta_e = 0.0;
 
     /* 左右モータの回転量を計算する[rad] */
-    float delta_PhL = 3.141592 * (motor_get_counts(left_motor)  - motor_get_pre_counts(left_motor))  / 180.0;
-    float delta_PhR = 3.141592 * (motor_get_counts(right_motor) - motor_get_pre_counts(right_motor)) / 180.0;
+    float delta_PhL = PI_FLOAT * (motor_get_counts(left_motor)  - motor_get_pre_counts(left_motor))  / 180.0;
+    float delta_PhR = PI_FLOAT * (motor_get_counts(right_motor) - motor_get_pre_counts(right_motor)) / 180.0;
     
     /* 左右モータの移動量を計算する */
     float delta_LL = (float)(wheel_size / 2) * delta_PhL;
@@ -31,7 +31,7 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
 
     /* 走行体の旋回角度を計算する(ジャイロ) */
     delta_theta_g = gyro_sensor_get_angle(gyro_sensor) - gyro_sensor_get_pre_angle(gyro_sensor);
-    delta_rad_g = 3.141592 * delta_theta_g /180.0;
+    delta_rad_g = PI_FLOAT * delta_theta_g /180.0;
 
     if( (delta_LL > 0.0 && delta_LR < 0.0) || (delta_LL < 0.0 && delta_LR > 0.0) ){ //旋回している
         //旋回量を計算する   
@@ -58,8 +58,8 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
     
 
     // 現在座標を計算する
-    float pre_rad += 3.141592 * pre_coordinate.theta / 180.0;
-    delta_theta_e = 180.0 * delta_rad_e / 3.141592;
+    float pre_rad += PI_FLOAT * pre_coordinate.theta / 180.0;
+    delta_theta_e = 180.0 * delta_rad_e / PI_FLOAT;
     
     crnt_coordinate->x      = pre_coordinate.x + (float)((double)delta_L * cos(pre_rad + (delta_rad_e / 2.0)));
     crnt_coordinate->y      = pre_coordinate.y + (float)((double)delta_L * sin(pre_rad + (delta_rad_e / 2.0)));

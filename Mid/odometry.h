@@ -1,7 +1,7 @@
 #ifndef _ODOMETRY_H
 #define _ODOMETRY_H
 
-#include "coordinate.h"
+#include "common.h"
 
 
 /* external functions*/

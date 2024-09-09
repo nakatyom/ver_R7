@@ -1,5 +1,6 @@
 #include<stdio.h>
 
+#include "common.h"
 #include "port.h"
 #include "body.h"
 #include "motor.h"
@@ -9,8 +10,7 @@
 #define ENC_CORR_R      1.0f        // 右ENC個体差補正係数
 #define ENC_CORR_L      1.0f        // 左ENC個体差補正係数
 
-#define SAMPLE_RATE     20f      // 計測周波数[ms]
-#define PI_FLOAT        3.141592f   // 円周率
+#define SAMPLE_RATE     20.0f      // 計測周波数[ms]
 
 
 

@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 #include "ev3api.h"
-#include "coordinate.h"
+#include "common.h"
 #include "gyak_min.h"
 
 float goal_time = 10.0; //到達時間[s]
