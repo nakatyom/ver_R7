@@ -62,7 +62,7 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
 
 
 
-        delta_theta = (delta_rad * 360) / 3.141592;
+        delta_theta = (float)((delta_rad * 360) / 3.141592);
 
         //printf("delta_LL:%f | ",delta_LL);
         //printf("delta_LR:%f | ",delta_LR);
