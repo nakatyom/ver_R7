@@ -56,7 +56,7 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
 
         // 逆回転を検知
         if(delta_LL > 0 && delta_LR < 0){
-            delta_rad = delta_rad * -1;
+            delta_rad = -delta_rad;
         }
 
         delta_theta = (delta_rad * 360) / 3.141592;
