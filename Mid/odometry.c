@@ -41,30 +41,30 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
         // 旋回量の計算
         // 分子が0にならない
         if(abs(delta_LL) > abs(delta_LR)){
-            //printf("左:%f | 右:%f | ",delta_LL,delta_LR); //for debug
+            printf("左:%f | 右:%f | ",delta_LL,delta_LR); //for debug
             delta_rad_e = (abs(delta_LL) + abs(delta_LR)) / (float)wheel_dist;
             if(delta_LL < 0.0f){
                 //printf("分岐1 | delta_rad_e:%f | ", delta_rad_e); //for debug
                 delta_rad_e = -delta_rad_e;
                 //printf("delta_rad_e:%f\n",delta_rad_e); //for debug
             }
-            //printf("\\\\delta_rad_e:%f | ",delta_rad_e); //for debug
+            printf("\\\\delta_rad_e:%f | ",delta_rad_e); //for debug
         }else if(abs(delta_LL) < abs(delta_LR)){
             delta_rad_e = (abs(delta_LR) + abs(delta_LL)) / (float)wheel_dist;
-            //printf("左:%f | 右:%f | ",delta_LL,delta_LR); //for debug
+            printf("左:%f | 右:%f | ",delta_LL,delta_LR); //for debug
             if(delta_LL < 0.0f){
                 //printf("分岐2 | delta_rad_e:%f | ", delta_rad_e); //for debug
                 delta_rad_e = -delta_rad_e;
                 //printf("delta_rad_e:%f\n",delta_rad_e); //for debug
             }
-            //printf("\\\\delta_rad_e:%f | ",delta_rad_e); //for debug
+            printf("\\\\delta_rad_e:%f | ",delta_rad_e); //for debug
 
         }
         
         // 分子が0になる（シミュレータ上の措置）
         else{
             delta_rad_e = delta_LL / (float)wheel_dist;
-            //printf("//delta_rad_e:%f | ",delta_rad_e); //for debug
+            printf("//delta_rad_e:%f | ",delta_rad_e); //for debug
                         
         }
 
@@ -77,7 +77,7 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
     else { //直進・曲進している
         //ロボットの移動距離
         delta_L = (delta_LL + delta_LR)/(float)2.0;
-
+        printf("左:%f | 右:%f | ",delta_LL,delta_LR); //for debug
             //ロボットの旋回量
             delta_rad_e = (delta_LL - delta_LR) / (float)wheel_dist;
             if(abs(delta_rad_e) > 0.174){ //delta_rad_eが十分大きい
@@ -97,7 +97,7 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
     pre_coordinate.x     = crnt_coordinate->x;
     pre_coordinate.y     = crnt_coordinate->y;
     pre_coordinate.theta = crnt_coordinate->theta;
-
+    
     return;
 }
 
