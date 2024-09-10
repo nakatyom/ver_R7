@@ -34,6 +34,7 @@ void boss_task(intptr_t exinf){
     
     else if(test == 1){
         get_crntCoordinate(&crnt);
+        printf("motor_powL:%d | motor_powR:%d | ",motor_get_power(left_motor),motor_get_power(right_motor))
         printf("x=%f, y=%f, theta=%f\n",crnt.x, crnt.y,crnt.theta);
     }
 
