@@ -80,17 +80,17 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
     else { //直進・曲進している
         //ロボットの移動距離
         delta_L = (delta_LL + delta_LR)/(float)2.0;
-
-        if( abs(delta_LL-delta_LR) < ((wheel_size/2)*3.141592*straight_threshold/180.0) ){ //直進している
-            //ロボットの旋回量
-            // delta_rad = 0.0;
-        }
-        else { //曲進している
-            //ロボットの旋回量
+        
+        // if( abs(delta_LL-delta_LR) < ((wheel_size/2)*3.141592*straight_threshold/180.0) ){ //直進している
+        //     //ロボットの旋回量
+        //     // delta_rad = 0.0;
+        // }
+        // else { //曲進している
+        //     //ロボットの旋回量
             delta_rad = (delta_LL - delta_LR) / (float)wheel_dist;
             if(abs(delta_rad) > 0.174){ //delta_radが十分大きい
                 delta_L = 2 * (delta_L / delta_rad) * sin(delta_rad / 2);
-            }
+        //    }
         }
     }
 
