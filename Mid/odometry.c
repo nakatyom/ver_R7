@@ -40,7 +40,7 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
         // 分子が0にならない
         if(abs(delta_LL) > abs(delta_LR)){
             //printf("左:%f | 右:%f | ",delta_LL,delta_LR); //for debug
-            delta_rad = (abs(delta_LL) - abs(delta_LR)) / (float)wheel_dist;
+            delta_rad = (abs(delta_LL) + abs(delta_LR)) / (float)wheel_dist;
             if(delta_LL < 0.0f){
                 //printf("分岐1 | delta_rad:%f | ", delta_rad); //for debug
                 delta_rad = -delta_rad;
@@ -48,7 +48,7 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
             }
             printf("\\\\delta_rad:%f | ",delta_rad); //for debug
         }else if(abs(delta_LL) < abs(delta_LR)){
-            delta_rad = (abs(delta_LR) - abs(delta_LL)) / (float)wheel_dist;
+            delta_rad = (abs(delta_LR) + abs(delta_LL)) / (float)wheel_dist;
             //printf("左:%f | 右:%f | ",delta_LL,delta_LR); //for debug
             if(delta_LL < 0.0f){
                 //printf("分岐2 | delta_rad:%f | ", delta_rad); //for debug
