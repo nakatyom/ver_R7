@@ -52,7 +52,6 @@ extern int32_t motor_get_counts(motor_port_t port){
     for(int i=0; i<1; i++){
         crnt_enc[port] = ev3_motor_get_counts(port);
         // i += checkMissingData(port);
-        printf("a");
     }
 
 
