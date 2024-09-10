@@ -43,7 +43,7 @@ int is_ValidInput(motor_port_t port, char* func_name){
 /* extern functions */
 extern int32_t motor_get_counts(motor_port_t port){
     const char func_name[] = "motor_get_counts";
-    if(1 == is_ValidInput(port, func_name)) return;
+    // if(1 == is_ValidInput(port, func_name)) return;
     
     // 前回値の更新
     pre_enc[port] = crnt_enc[port];
@@ -62,7 +62,7 @@ extern int32_t motor_get_counts(motor_port_t port){
 
 int32_t motor_get_pre_counts(motor_port_t port){
     const char func_name[] = "motor_get_pre_counts";
-    if(1 == is_ValidInput(port, func_name)) return 0;
+    // if(1 == is_ValidInput(port, func_name)) return 0;
 
     return pre_enc[port];
 }
