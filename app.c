@@ -22,6 +22,7 @@ void main_task(intptr_t unused) {
 #include "motor.h"
 
 int test = 1;
+int i = 1;
 struct coordinate crnt = {0.0, 0.0, 0.0};
 
 void boss_task(intptr_t exinf){
@@ -37,6 +38,11 @@ void boss_task(intptr_t exinf){
         //printf("x=%f , y=%f , θ=%f \n", crnt.x , crnt.y , crnt.theta);
         printf("角度:%f end of line\n",crnt.theta);
         //printf("x=%f, y=%f, theta=%f\n",crnt.x, crnt.y,crnt.theta);
+        while (i < 200){
+            motor_set_power(left_motor,30);
+            motor_set_power(right_motor,-30);
+            i++;
+        }
     }
 
 
