@@ -37,20 +37,24 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
         // 旋回量の計算
         // 分子が0にならない
         if(abs(delta_LL) > abs(delta_LR)){
-            // printf("脳筋ブレイクポイント,左:%f,右:%f\n",delta_LL,delta_LR);
+            printf("左:%f | 右:%f | ",delta_LL,delta_LR);
             delta_rad = (abs(delta_LL) - abs(delta_LR)) / (float)wheel_dist;
             if(delta_LL < 0.0f){
-                printf("分岐1 | delta_rad:%f | ", delta_rad);
+                //printf("分岐1 | delta_rad:%f | ", delta_rad); //for debug
                 delta_rad = -delta_rad;
-                printf("delta_rad:%f\n",delta_rad);
+                //printf("delta_rad:%f\n",delta_rad); //for debug
             }
+            printf("delta_rad:%f | ",delta_rad);
         }else if(abs(delta_LL) < abs(delta_LR)){
             delta_rad = (abs(delta_LR) - abs(delta_LL)) / (float)wheel_dist;
+            printf("左:%f | 右:%f | ",delta_LL,delta_LR);
             if(delta_LL < 0.0f){
-                printf("分岐2 | delta_rad:%f | ", delta_rad);
+                //printf("分岐2 | delta_rad:%f | ", delta_rad); //for debug
                 delta_rad = -delta_rad;
-                printf("delta_rad:%f\n",delta_rad);
+                //printf("delta_rad:%f\n",delta_rad); //for debug
             }
+            printf("delta_rad:%f | ",delta_rad);
+
         }
         
         // 分子が0になる（シミュレータ上の措置）
