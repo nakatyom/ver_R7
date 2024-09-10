@@ -24,11 +24,11 @@ int checkMissingData(motor_port_t port){
     if(crnt_enc[port] == pre_enc[port]){ // 前回値と一致
         if((pre_power[port] != 0 || crnt_power[port] != 0)){ // モーターパワーが0でない 
             // delay_connect(1); // 1ms待つ
-            return 1;
+            return 0;
         }
     }
 
-    return 2;
+    return 1;
 }
 
 int is_ValidInput(motor_port_t port, char* func_name){
@@ -48,14 +48,10 @@ extern int32_t motor_get_counts(motor_port_t port){
     // 前回値の更新
     pre_enc[port] = crnt_enc[port];
 
-    // 現在値の取得
-    crnt_enc[port] = ev3_motor_get_counts(port);
-
-
     // 現在値の取得(通信遅れ判定の場合、1ms待って再取得)
     for(int i=0; i<=1; i++){
         crnt_power[port] = ev3_motor_get_power(port);
-        i = checkMissingData(port);
+        i += checkMissingData(port);
     }
 
 
@@ -118,7 +114,7 @@ int  motor_get_power(motor_port_t port){
     // 現在値の取得(通信遅れ判定の場合、1ms待って再取得)
     for(int i=0; i<=1; i++){
         crnt_power[port] = ev3_motor_get_power(port);
-        i = checkMissingData(port);
+        i += checkMissingData(port);
     }
 
     return crnt_power[port];
