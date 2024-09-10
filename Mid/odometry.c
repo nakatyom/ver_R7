@@ -11,8 +11,6 @@
 
 
 static struct coordinate pre_coordinate  = {0.0, 0.0, 0.0}; //前回座標
-const int   straight_threshold = 2; //直進時のモータ角度誤差許容範囲
-const float delta_theta_thresshold = 10.0;
 
 /* external functions */
 void get_crntCoordinate(struct coordinate* crnt_coordinate){
@@ -26,11 +24,15 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
     float delta_LL = (float)(wheel_size / 2) * delta_PhL;
     float delta_LR = (float)(wheel_size / 2) * delta_PhR;
 
-    printf("左:%f | 右:%f | ",delta_LL,delta_LR); //for debug
+    //printf("左:%f | 右:%f | ",delta_LL,delta_LR); //for debug
 
-    /* 走行体の旋回角度を計算する */
-    float delta_theta = gyro_sensor_get_angle(gyro_sensor) - gyro_sensor_get_pre_angle(gyro_sensor);
-    float delta_rad   = 3.141592 * delta_theta /180.0;
+    /* 走行体の旋回角度を計算する (ジャイロ)*/
+    float delta_theta_g = gyro_sensor_get_angle(gyro_sensor) - gyro_sensor_get_pre_angle(gyro_sensor);
+    float delta_rad_g   = 3.141592 * delta_theta_g /180.0;
+
+    // 走行体の旋回角度を計算する(エンコーダー)
+    float delta_rad_e = 0.0;
+    float delta_theta_e;
 
     if( (delta_LL > 0.0 && delta_LR < 0.0) || (delta_LL < 0.0 && delta_LR > 0.0) ){ //旋回している
         //ロボットの移動距離
@@ -40,77 +42,62 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
         // 分子が0にならない
         if(abs(delta_LL) > abs(delta_LR)){
             //printf("左:%f | 右:%f | ",delta_LL,delta_LR); //for debug
-            delta_rad = (abs(delta_LL) + abs(delta_LR)) / (float)wheel_dist;
+            delta_rad_e = (abs(delta_LL) + abs(delta_LR)) / (float)wheel_dist;
             if(delta_LL < 0.0f){
-                //printf("分岐1 | delta_rad:%f | ", delta_rad); //for debug
-                delta_rad = -delta_rad;
-                //printf("delta_rad:%f\n",delta_rad); //for debug
+                //printf("分岐1 | delta_rad_e:%f | ", delta_rad_e); //for debug
+                delta_rad_e = -delta_rad_e;
+                //printf("delta_rad_e:%f\n",delta_rad_e); //for debug
             }
-            printf("\\\\delta_rad:%f | ",delta_rad); //for debug
+            //printf("\\\\delta_rad_e:%f | ",delta_rad_e); //for debug
         }else if(abs(delta_LL) < abs(delta_LR)){
-            delta_rad = (abs(delta_LR) + abs(delta_LL)) / (float)wheel_dist;
+            delta_rad_e = (abs(delta_LR) + abs(delta_LL)) / (float)wheel_dist;
             //printf("左:%f | 右:%f | ",delta_LL,delta_LR); //for debug
             if(delta_LL < 0.0f){
-                //printf("分岐2 | delta_rad:%f | ", delta_rad); //for debug
-                delta_rad = -delta_rad;
-                //printf("delta_rad:%f\n",delta_rad); //for debug
+                //printf("分岐2 | delta_rad_e:%f | ", delta_rad_e); //for debug
+                delta_rad_e = -delta_rad_e;
+                //printf("delta_rad_e:%f\n",delta_rad_e); //for debug
             }
-            printf("\\\\delta_rad:%f | ",delta_rad); //for debug
+            //printf("\\\\delta_rad_e:%f | ",delta_rad_e); //for debug
 
         }
         
         // 分子が0になる（シミュレータ上の措置）
         else{
-            delta_rad = delta_LL / (float)wheel_dist;
-            printf("//delta_rad:%f | ",delta_rad); //for debug
+            delta_rad_e = delta_LL / (float)wheel_dist;
+            //printf("//delta_rad_e:%f | ",delta_rad_e); //for debug
                         
         }
 
 
 
-        delta_theta = (float)((delta_rad * 180.0) / 3.141592);
-
-        //printf("delta_LL:%f | ",delta_LL);
-        //printf("delta_LR:%f | ",delta_LR);
-        //printf("delta_rad:%f | ",delta_rad);
+        delta_theta_e = (float)((delta_rad_e * 180.0) / 3.141592);
 
     }
 
     else { //直進・曲進している
         //ロボットの移動距離
         delta_L = (delta_LL + delta_LR)/(float)2.0;
-        
-        // if( abs(delta_LL-delta_LR) < ((wheel_size/2)*3.141592*straight_threshold/180.0) ){ //直進している
-        //     //ロボットの旋回量
-        //     // delta_rad = 0.0;
-        // }
-        // else { //曲進している
-        //     //ロボットの旋回量
-            delta_rad = (delta_LL - delta_LR) / (float)wheel_dist;
-            if(abs(delta_rad) > 0.174){ //delta_radが十分大きい
-                delta_L = 2 * (delta_L / delta_rad) * sin(delta_rad / 2);
-        //    }
+
+            //ロボットの旋回量
+            delta_rad_e = (delta_LL - delta_LR) / (float)wheel_dist;
+            if(abs(delta_rad_e) > 0.174){ //delta_rad_eが十分大きい
+                delta_L = 2 * (delta_L / delta_rad_e) * sin(delta_rad_e / 2);
         }
     }
 
 
     // 現在座標を計算する
     float pre_rad = 3.141592 * pre_coordinate.theta / 180.0;
-
-    //printf("pre_rad:%f | ",pre_rad);
     
-    crnt_coordinate->x      = pre_coordinate.x + (float)((double)delta_L * cos(pre_rad + (delta_rad / 2.0)));
-    crnt_coordinate->y      = pre_coordinate.y + (float)((double)delta_L * sin(pre_rad + (delta_rad / 2.0)));
-    crnt_coordinate->theta  = pre_coordinate.theta + (float)delta_theta;
+    crnt_coordinate->x      = pre_coordinate.x + (float)((double)delta_L * cos(pre_rad + (delta_rad_e / 2.0)));
+    crnt_coordinate->y      = pre_coordinate.y + (float)((double)delta_L * sin(pre_rad + (delta_rad_e / 2.0)));
+    crnt_coordinate->theta  = pre_coordinate.theta + (float)delta_theta_e;
     
             //前回座標を更新する
     pre_coordinate.x     = crnt_coordinate->x;
     pre_coordinate.y     = crnt_coordinate->y;
     pre_coordinate.theta = crnt_coordinate->theta;
 
-    //printf("前回角度:%f | ",pre_coordinate.theta);
-
-    //printf("\n");
     return;
 }
 
