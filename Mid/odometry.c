@@ -26,6 +26,8 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
     float delta_LL = (float)(wheel_size / 2) * delta_PhL;
     float delta_LR = (float)(wheel_size / 2) * delta_PhR;
 
+    printf("左:%f | 右:%f | ",delta_LL,delta_LR); //for debug
+
     /* 走行体の旋回角度を計算する */
     float delta_theta = gyro_sensor_get_angle(gyro_sensor) - gyro_sensor_get_pre_angle(gyro_sensor);
     float delta_rad   = 3.141592 * delta_theta /180.0;
