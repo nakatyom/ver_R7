@@ -1,11 +1,14 @@
 #include <stdio.h>
 
-#include "app.h"
 #include "ev3api.h"
+#include "common.h"
 #include "port.h"
+#include "motor.h"
+#include "gyro.h"
+#include "app.h"
 #include "odometry.h"
 
-/* メインタスク(起動時にのみ関数コールされ�?) */
+/* メインタスク */
 void main_task(intptr_t unused) {
     /* ポート設定 */
     // sensor   : touch_sensor, color_sensor, sonar_sensor, gyro_sensor
@@ -13,26 +16,17 @@ void main_task(intptr_t unused) {
     set_portCfg();
     
     /* タスク呼び出し */
+    sta_cyc(SENS_CYC);
     sta_cyc(BOSS_CYC);
 
     /* タスク終了 */
     ext_tsk();
 }
 
-#include "motor.h"
-
-int test = 1;
-struct coordinate crnt = {0.0, 0.0, 0.0};
 
 void boss_task(intptr_t exinf){
-    if(test == 0){
-    static int32_t le, re;
-    le = motor_get_counts(left_motor);
-    re = motor_get_counts(right_motor);
-    printf("left_enc:%d, right_enc:%d\n", (int)le, (int)re);
-    }
-    
-    else if(test == 1){
+    static struct coordinate crnt;
+
         get_crntCoordinate(&crnt);
         printf("x=%f, y=%f, theta=%f\n",crnt.x, crnt.y,crnt.theta);
 
@@ -45,9 +39,19 @@ void boss_task(intptr_t exinf){
             //motor_set_power(right_motor,0);
         }
 
-    }
+}
 
 
+void sens_task(intptr_t exinf){
+    /* モータ読み取り */
+    // motor_update(arm_motor);
+    // motor_update(left_motor);
+    // motor_update(right_motor);
 
+    /* ジャイロ読み取り */
+    // gyro_sensor_update(gyro_sensor);
+
+    /* カラーセンサ読み取り */
+    // color_sensor_update(color_sensor);
 
 }
