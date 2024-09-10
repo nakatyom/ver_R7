@@ -38,8 +38,8 @@ void boss_task(intptr_t exinf){
         printf("角度:%f end of line\n",crnt.theta);
         //printf("x=%f, y=%f, theta=%f\n",crnt.x, crnt.y,crnt.theta);
         if(crnt.theta < 180){
-            motor_set_power(left_motor,60);
-            motor_set_power(right_motor,-60);
+            motor_set_power(left_motor,80);
+            motor_set_power(right_motor,-80);
         }
         else if(crnt.theta > 180){
             motor_set_power(left_motor, 0);
