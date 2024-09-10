@@ -35,6 +35,15 @@ void boss_task(intptr_t exinf){
     else if(test == 1){
         get_crntCoordinate(&crnt);
         printf("x=%f, y=%f, theta=%f\n",crnt.x, crnt.y,crnt.theta);
+
+        if(crnt.theta < 180){
+            motor_set_power(left_motor,70);
+            motor_set_power(right_motor,-70);
+        }
+        else if(crnt.theta > 190){
+            motor_set_power(left_motor,0);
+            motor_set_power(right_motor,0);
+        }
     }
 
 
