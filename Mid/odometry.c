@@ -36,17 +36,17 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
 
         // 旋回量の計算
         // 分子が0にならない
-        if(abs(delta_LL) != abs(delta_LR) && abs(delta_LL) > abs(delta_LR)){
+        if(abs(delta_LL) > abs(delta_LR)){
             // printf("脳筋ブレイクポイント,左:%f,右:%f\n",delta_LL,delta_LR);
             delta_rad = (abs(delta_LL) - abs(delta_LR)) / (float)wheel_dist;
-            if(delta_LL < 0){
+            if(delta_LL < 0.0f){
                 printf("分岐1 | delta_rad:%f | ", delta_rad);
                 delta_rad = -delta_rad;
                 printf("delta_rad:%f\n",delta_rad);
             }
-        }else if(abs(delta_LL) != abs(delta_LR) && abs(delta_LL) < abs(delta_LR)){
+        }else if(abs(delta_LL) < abs(delta_LR)){
             delta_rad = (abs(delta_LR) - abs(delta_LL)) / (float)wheel_dist;
-            if(delta_LL < 0){
+            if(delta_LL < 0.0f){
                 printf("分岐2 | delta_rad:%f | ", delta_rad);
                 delta_rad = -delta_rad;
                 printf("delta_rad:%f\n",delta_rad);
@@ -54,19 +54,19 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
         }
         
         // 分子が0になる（シミュレータ上の措置）
-        else{
-            if(delta_LL > 0){
-                delta_rad = delta_LL / (float)wheel_dist;
-                // printf("delta_rad:%f\n",delta_rad);
-            }
-            else if(delta_LR > 0){
-                delta_rad = delta_LR / (float)wheel_dist;
-            }
-        }
+        // else{
+        //     if(delta_LL > 0){
+        //         delta_rad = delta_LL / (float)wheel_dist;
+        //         // printf("delta_rad:%f\n",delta_rad);
+        //     }
+        //     else if(delta_LR > 0){
+        //         delta_rad = delta_LR / (float)wheel_dist;
+        //     }
+        // }
 
 
 
-        delta_theta = (float)((delta_rad * 360) / 3.141592);
+        delta_theta = (float)((delta_rad * 180.0) / 3.141592);
 
         //printf("delta_LL:%f | ",delta_LL);
         //printf("delta_LR:%f | ",delta_LR);
@@ -94,7 +94,7 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
 
 
     // 現在座標を計算する
-    float pre_rad =+ 3.141592 * pre_coordinate.theta / 180.0;
+    float pre_rad += 3.141592 * pre_coordinate.theta / 180.0;
 
     //printf("pre_rad:%f | ",pre_rad);
     
