@@ -24,7 +24,7 @@ uint8_t color_sensor_get_reflect(sensor_port_t port){
     return crnt_ref;
 }
 
-void color_sensor_get_rgb_raw(sensor_port_t port, rgb_raw_t rgb_val){
+void color_sensor_get_rgb_raw(sensor_port_t port, rgb_raw_t* rgb_val){
     if(port != color_sensor){
         printf("An invalid value entered in color_sensor_get_rgb_raw().\n");
         return 0;
@@ -44,7 +44,7 @@ void color_sensor_get_rgb_raw(sensor_port_t port, rgb_raw_t rgb_val){
 void color_sensor_update(sensor_port_t port){
     if(port != color_sensor){
         printf("An invalid value entered in color_sensor_update().\n");
-        return 0;
+        return;
     }
 
     /* 現在値の取得 */
