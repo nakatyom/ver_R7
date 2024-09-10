@@ -43,16 +43,15 @@ int is_ValidInput(motor_port_t port, char* func_name){
 /* extern functions */
 extern int32_t motor_get_counts(motor_port_t port){
     const char func_name[] = "motor_get_counts";
-    // if(1 == is_ValidInput(port, func_name)) return;
+    // if(1 != is_ValidInput(port, func_name)) return;
     
     // 前回値の更新
     pre_enc[port] = crnt_enc[port];
 
     // 現在値の取得(通信遅れ判定の場合、1ms待って再取得)
-    printf("b");
     for(int i=0; i<1; i++){
-        crnt_power[port] = ev3_motor_get_counts(port);
-        i += checkMissingData(port);
+        crnt_enc[port] = ev3_motor_get_counts(port);
+        // i += checkMissingData(port);
         printf("a");
     }
 
@@ -69,7 +68,7 @@ int32_t motor_get_pre_counts(motor_port_t port){
 
 void motor_reset_counts(motor_port_t port){
     const char func_name[] = "motor_reset_counts";
-    if(1 == is_ValidInput(port, func_name)) return;
+    // if(1 == is_ValidInput(port, func_name)) return;
 
     ev3_motor_reset_counts(port);
     crnt_enc[port] = 0;
@@ -82,7 +81,7 @@ void motor_reset_counts(motor_port_t port){
 /* パワー設定 */
 void motor_set_power(motor_port_t port, int power){
     const char func_name[] = "motor_set_power";
-    if(1 == is_ValidInput(port, func_name)) return;
+    // if(1 == is_ValidInput(port, func_name)) return;
     
     // パワーを設定
     ev3_motor_set_power(port, power);
@@ -96,7 +95,7 @@ void motor_set_power(motor_port_t port, int power){
 
 void motor_stop(motor_port_t port){
     const char func_name[] = "motor_stop";
-    if(1 == is_ValidInput(port, func_name)) return;
+    // if(1 == is_ValidInput(port, func_name)) return;
 
     // モータを停止
     ev3_motor_stop(port, true);
@@ -108,7 +107,7 @@ void motor_stop(motor_port_t port){
 
 int  motor_get_power(motor_port_t port){
     const char func_name[] = "motor_get_power";
-    if(1 == is_ValidInput(port, func_name)) return 0;
+    // if(1 == is_ValidInput(port, func_name)) return 0;
     
     /* 前回値, 現在値の更新 */
     pre_power[port]  = crnt_power[port];
@@ -124,7 +123,7 @@ int  motor_get_power(motor_port_t port){
 
 int  motor_get_pre_power(motor_port_t port){
     const char func_name[] = "motor_get_pre_power";
-    if(1 == is_ValidInput(port, func_name)) return 0;
+    // if(1 == is_ValidInput(port, func_name)) return 0;
     
     return pre_power[port];
 }
