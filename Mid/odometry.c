@@ -90,9 +90,9 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
     // 現在座標を計算する
     float pre_rad = 3.141592 * pre_coordinate.theta / 180.0;
     
-    crnt_coordinate->x      = pre_coordinate.x + (float)((double)delta_L * cos(pre_rad + (delta_rad_e / 2.0)));
-    crnt_coordinate->y      = pre_coordinate.y + (float)((double)delta_L * sin(pre_rad + (delta_rad_e / 2.0)));
-    crnt_coordinate->theta  = pre_coordinate.theta + (float)delta_theta_e;
+    crnt_coordinate->x      = pre_coordinate.x + (float)((double)delta_L * cos(pre_rad + (delta_rad_g / 2.0)));
+    crnt_coordinate->y      = pre_coordinate.y + (float)((double)delta_L * sin(pre_rad + (delta_rad_g / 2.0)));
+    crnt_coordinate->theta  = pre_coordinate.theta + (float)delta_theta_g;
     
             //前回座標を更新する
     pre_coordinate.x     = crnt_coordinate->x;
