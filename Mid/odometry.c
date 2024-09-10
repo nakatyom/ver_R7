@@ -60,15 +60,14 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
         }
         
         // 分子が0になる（シミュレータ上の措置）
-        // else{
-        //     if(delta_LL > 0){
-        //         delta_rad = delta_LL / (float)wheel_dist;
-        //         // printf("delta_rad:%f\n",delta_rad);
-        //     }
-        //     else if(delta_LR > 0){
-        //         delta_rad = delta_LR / (float)wheel_dist;
-        //     }
-        // }
+        else{
+            delta_rad = delta_LL / (float)wheel_dist;
+            if(delta_LL < 0){
+                delta_rad = -delta_rad;
+                printf("同値delta_rad:%f | ",delta_rad);
+            }
+                        
+        }
 
 
 
