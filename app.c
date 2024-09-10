@@ -37,8 +37,8 @@ void boss_task(intptr_t exinf){
         printf("x=%f, y=%f, theta=%f\n",crnt.x, crnt.y,crnt.theta);
 
         if(crnt.theta < 180){
-            motor_set_power(left_motor,70);
-            motor_set_power(right_motor,-70);
+            motor_set_power(left_motor,80);
+            motor_set_power(right_motor,-80);
         }
         else if(crnt.theta > 180){
             motor_set_power(left_motor,0);
