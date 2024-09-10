@@ -94,7 +94,7 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
 
 
     // 現在座標を計算する
-    float pre_rad += 3.141592 * pre_coordinate.theta / 180.0;
+    float pre_rad = 3.141592 * pre_coordinate.theta / 180.0;
 
     //printf("pre_rad:%f | ",pre_rad);
     
