@@ -49,7 +49,8 @@ extern int32_t motor_get_counts(motor_port_t port){
     pre_enc[port] = crnt_enc[port];
 
     // 現在値の取得(通信遅れ判定の場合、1ms待って再取得)
-    for(int i=0; i<=1; i++){
+    printf("b");
+    for(int i=0; i<1; i++){
         crnt_power[port] = ev3_motor_get_counts(port);
         i += checkMissingData(port);
         printf("a");
@@ -113,7 +114,7 @@ int  motor_get_power(motor_port_t port){
     pre_power[port]  = crnt_power[port];
 
     // 現在値の取得(通信遅れ判定の場合、1ms待って再取得)
-    for(int i=0; i<=1; i++){
+    for(int i=0; i<1; i++){
         crnt_power[port] = ev3_motor_get_power(port);
         i += checkMissingData(port);
     }
