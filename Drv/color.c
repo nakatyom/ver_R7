@@ -4,7 +4,7 @@
 #include "port.h"
 #include "color.h"
 
- u_int8_t crnt_ref = 0;
+ uint8_t crnt_ref = 0;
  /* uint16_t r, g, b */
  rgb_raw_t crnt_rgb = {0, 0, 0};
 
@@ -27,11 +27,11 @@ uint8_t color_sensor_get_reflect(sensor_port_t port){
 void color_sensor_get_rgb_raw(sensor_port_t port, rgb_raw_t* rgb_val){
     if(port != color_sensor){
         printf("An invalid value entered in color_sensor_get_rgb_raw().\n");
-        return 0;
+        return;
     }
 
     /* 現在値の取得 */
-    v3_color_sensor_get_reflect(port, &crnt_rgb);
+    ev3_color_sensor_get_rgb_raw(port, &crnt_rgb);
     rgb_val->r = crnt_rgb.r;
     rgb_val->g = crnt_rgb.g;
     rgb_val->b = crnt_rgb.b;
@@ -49,7 +49,7 @@ void color_sensor_update(sensor_port_t port){
 
     /* 現在値の取得 */
     crnt_ref = ev3_color_sensor_get_reflect(port);
-    v3_color_sensor_get_reflect(port, &crnt_rgb);
+    ev3_color_sensor_get_rgb_raw(port, &crnt_rgb);
 
     return;
 }
