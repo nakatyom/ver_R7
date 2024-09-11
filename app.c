@@ -26,15 +26,16 @@ void main_task(intptr_t unused) {
 
 void boss_task(intptr_t exinf){
     static struct coordinate crnt;
+    const float tgt_dist = 200.0;
 
         get_crntCoordinate(&crnt);
         printf("x=%f, y=%f, theta=%f\n",crnt.x, crnt.y,crnt.theta);
 
-        if(crnt.theta <= 90){
-            motor_set_power(left_motor,80);
-            motor_set_power(right_motor,-80);
+        if(crnt.x <= 200){
+            // float crnt_v = calc_TgtVelocity(tgt_dist);
+            mid_velocity_control(crnt_v, 0.0f);
         }
-        else if(crnt.theta > 90){
+        else{
             motor_stop(left_motor);
             motor_stop(right_motor);
         }

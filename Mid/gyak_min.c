@@ -4,26 +4,73 @@
 #include "common.h"
 #include "gyak_min.h"
 
-float tgtV_ave = 50.0; //　目標平均速度[mm/s]
+const float tgtV_ave = 50.0f; // 目標平均速度[mm/s]
+const float tgtR_ave = 45.0f; // 目標平均速度[theta/s]
+const cyc_time = 100;         // サイクル周期[ms]
+const int array_size = 11;    // 配列長
+
+
 
 
 /* static functions */
 
 
 /* external functions */
-float get_tgtV(struct coordinate* tgt_coordinate, struct coordinate* crnt_coordinate){
+float calc_TgtVelocity(float tgt_dist){
+    static int is_head; // 最初の呼び出しかを判定する
+    static int cnt_V;  // 何回目の呼び出しかをカウントする
 
+    /* 並進速度用のパラメータ */
+    static float div_dist[array_size];
+    static float tgt_velocity[array_size];
+    float tgt_v = 0;
 
+    /* 最初の一回だけ呼び出される処理 */
+    if(0 == is_head){
+        float divTime_v;
+        float normTime_v;
+
+        /* 到達速度計算 */
+        float tgtTime = tgt_dist / tgtV_ave;
+        
+        /* 各時間における目標距離を配列に格納する */
+        for(int i=1; i<=array_size; i++){
+            divTime_v  = (i / array_size) * tgtTime; // 分割時間
+            normTime_v = divTime_v[i] / tgtTime;     // 正規化時間
+            
+            /* ジャーク最小化 */
+            div_dist[i-1] = tgt_dist * (6*(float)pow(normTime_v,5) - 15*(float)pow(normTime_v,4) + 10*(float)pow(normTime_v,3));
+        }
+
+        /* 現在の目標速度を計算 */
+        tgt_v = div_dist[cnt_V];
+
+        cnt_V += 1; //カウントアップ
+
+        return tgt_v;
+    }
+    
+    /* 現在の目標速度を計算 */
+    tgt_v = ( div_dist[cnt_V] - div_dist[cnt_V-1] ) / cyc_time;
+
+    cnt_V += 1; //カウントアップ
+
+    return tgt_v;
 }
 
-void reset_tgtV(){
+float calc_TgtRate(float tgt_theta){
+    static int is_head; // 最初の呼び出しかを判定する
+    static int cnt_W;  // 何回目の呼び出しかをカウントする
 
+    /* 旋回角度用のパラメータ */
+    static float divTime_w[array_size];
+    static float normTime_w[array_size];
 }
 
-// 目標座標、現在座標→距離、角度
+
 // 到達時間計算
-// 到達時間を50分割(static 長さ51の配列)
-// 正規化時間を計算(static 長さ51の配列)
+// 到達時間を11分割(static 長さ11の配列)
+// 正規化時間を計算(static 長さ11の配列)
 // 各時間での目標距離を計算
 // 各時間での目標速度を計算:(Ln^Ln-1)/delta_t
 // return 目標時間

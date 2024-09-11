@@ -7,11 +7,9 @@
 #include "gyro.h"
 #include "velocity_control.h"
 
-#define ENC_CORR_R      1.0f        // 右ENC個体差補正係数
-#define ENC_CORR_L      1.0f        // 左ENC個体差補正係数
-
+#define ENC_CORR_R      1.0f       // 右ENC個体差補正係数
+#define ENC_CORR_L      1.0f       // 左ENC個体差補正係数
 #define SAMPLE_RATE     20.0f      // 計測周波数[ms]
-
 
 
 float mid_PID_str_velo(float tag, float maj){ 
