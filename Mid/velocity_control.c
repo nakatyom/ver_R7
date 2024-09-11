@@ -135,11 +135,12 @@ void mid_velocity_control(float velo_str_tgt, float velo_rot_tgt){
 //    printf("cnt_r %d | cnt_l %d\n", velo_r_tmp, velo_l_tmp);
 //    printf("mot_r_u_str %f | mot_r_u_rot %f\n", mot_r_u_str, mot_r_u_rot);
 //    printf("mot_r_u %d | mot_l_u %d\n", mot_r_u, mot_l_u);
-    printf("velo_str %8.4f | velo_rot %8.4f | mot_r_u %3d | mot_l_u %3d | batt_v %8.4f\n", velo_str, velo_rot, mot_r_u, mot_l_u, batt_v);
+//    printf("velo_str %8.4f | velo_rot %8.4f | mot_r_u %3d | mot_l_u %3d | batt_v %8.4f\n", velo_str, velo_rot, mot_r_u, mot_l_u, batt_v);
+    printf("velo_str_tgt %8.4f | velo_str_u %8.4f | mot_r_u_str %8.4f | mot_l_u_str %8.4f\n", velo_str_tgt, velo_str_u, mot_r_u_str, mot_l_u_str);
     
-    int mot_r_p = ev3_motor_get_power(right_motor);
-    int mot_l_p = ev3_motor_get_power(left_motor);
-    printf("mot_r_p %3d | mot_l_p %3d\n",mot_r_p, mot_l_p);
+//    int mot_r_p = ev3_motor_get_power(right_motor);
+//    int mot_l_p = ev3_motor_get_power(left_motor);
+//    printf("mot_r_p %3d | mot_l_p %3d\n",mot_r_p, mot_l_p);
 }
 
 
