@@ -7,7 +7,7 @@
 #include "gyro.h"
 #include "app.h"
 #include "odometry.h"
-#include "gyak_min"
+#include "gyak_min.h"
 
 /* メインタスク */
 void main_task(intptr_t unused) {
@@ -27,7 +27,7 @@ void main_task(intptr_t unused) {
 
 void boss_task(intptr_t exinf){
     static struct coordinate crnt;
-    const float tgt_dist = 200.0;
+    float tgt_dist = 200.0;
 
         // get_crntCoordinate(&crnt);
         // printf("x=%f, y=%f, theta=%f\n",crnt.x, crnt.y,crnt.theta);
