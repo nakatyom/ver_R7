@@ -33,13 +33,13 @@ void boss_task(intptr_t exinf){
 
         if(crnt.x <= 200){
             // float crnt_v = calc_TgtVelocity(tgt_dist);
-            mid_velocity_control(0.0f, 0.0f);
+            mid_velocity_control(500.0f, 0.0f);
             // motor_set_power(left_motor, 50);
             // motor_set_power(right_motor, -50);
         }
         else{
-            motor_stop(left_motor);
-            motor_stop(right_motor);
+            // motor_stop(left_motor);
+            // motor_stop(right_motor);
         }
 
 }
