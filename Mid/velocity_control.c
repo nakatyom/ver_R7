@@ -12,7 +12,7 @@
 #define SAMPLE_RATE     20.0f      // 計測周波数[ms]
 
 
-float mid_PID_str_velo(float tag, float maj, bool intg_rest, bool intg_stop){ 
+float mid_PID_str_velo(float tag, float maj, int intg_rest, int intg_stop){ 
 
     const float kp = 0.1f;
     const float ki = 0.01f;
@@ -25,8 +25,8 @@ float mid_PID_str_velo(float tag, float maj, bool intg_rest, bool intg_stop){
     err_pre = err;
     err = tag - maj;
 
-    if (intg_stop != true) intg += err;
-    if (intg_rest == true) intg = 0;
+    if (intg_stop != 1) intg += err;
+    if (intg_rest == 1) intg = 0;
 
     if (intg > 1000.0f)    intg = 1000.0f;
     if (intg < -1000.0f)   intg = -1000.0f;
@@ -35,7 +35,7 @@ float mid_PID_str_velo(float tag, float maj, bool intg_rest, bool intg_stop){
 }
 
 
-float mid_PID_rot_velo(float tag, float maj, bool intg_rest, bool intg_stop){ 
+float mid_PID_rot_velo(float tag, float maj, int intg_rest, int intg_stop){ 
 
     const float kp = 0.4f;
     const float ki = 0.1f;
@@ -49,8 +49,8 @@ float mid_PID_rot_velo(float tag, float maj, bool intg_rest, bool intg_stop){
     err = tag - maj;
     intg += err;
 
-    if (intg_stop != true) intg += err;
-    if (intg_rest == true) intg = 0;
+    if (intg_stop != 1) intg += err;
+    if (intg_rest == 1) intg = 0;
 
     if (intg > 1000.0f)    intg = 1000.0f;
     if (intg < -1000.0f)   intg = -1000.0f;
@@ -141,6 +141,6 @@ void mid_velocity_control(float velo_str_tgt, float velo_rot_tgt){
 
 void mid_velocity_control_reset(void){
 
-    float dummy1 = mid_PID_str_velo(0, 0, true, true);
-    float dummy2 = mid_PID_rot_velo(0, 0, true, true);
+    float dummy1 = mid_PID_str_velo(0, 0, 1, 1);
+    float dummy2 = mid_PID_rot_velo(0, 0, 1, 1);
 }
