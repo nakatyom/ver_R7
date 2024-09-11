@@ -141,6 +141,6 @@ void mid_velocity_control(float velo_str_tgt, float velo_rot_tgt){
 
 void mid_velocity_control_reset(void){
 
-    float dummy1 = mid_PID_str_velo(0, 0, false, false);
-    float dummy2 = mid_PID_rot_velo(0, 0, false, false);
+    float dummy1 = mid_PID_str_velo(0, 0, true, true);
+    float dummy2 = mid_PID_rot_velo(0, 0, true, true);
 }
