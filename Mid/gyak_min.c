@@ -36,7 +36,7 @@ float calc_TgtVelocity(float tgt_dist){
         /* 各時間における目標距離を配列に格納する */
         for(int i=1; i<=11; i++){
             divTime_v  = (i / 11) * tgtTime; // 分割時間
-            normTime_v = divTime_v[i] / tgtTime;     // 正規化時間
+            normTime_v = divTime_v / tgtTime;     // 正規化時間
             
             /* ジャーク最小化 */
             div_dist[i-1] = tgt_dist * (6*(float)pow(normTime_v,5) - 15*(float)pow(normTime_v,4) + 10*(float)pow(normTime_v,3));
