@@ -29,7 +29,7 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
     double delta_rad_e = 0.0;
     double delta_theta_e = 0.0;
 
-    if(delta_LL > 0.0f && delta_LR < 0.0f){ //時計回りに旋回している
+    if(delta_LL > 0.0 && delta_LR < 0.0){ //時計回りに旋回している
         //ロボットの移動距離
         delta_L = 0.0;
         // 旋回量の計算
@@ -54,10 +54,10 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
         }
         
     }
-    delta_theta_e = (delta_rad_e * 180.0f / PI_DOUBLE);
+    delta_theta_e = (delta_rad_e * 180.0 / PI_DOUBLE);
 
     /* 走行体の旋回角度を計算する (ジャイロ)*/
-    double delta_theta_g = (float)(gyro_sensor_get_angle(gyro_sensor) - gyro_sensor_get_pre_angle(gyro_sensor));
+    double delta_theta_g = (double)(gyro_sensor_get_angle(gyro_sensor) - gyro_sensor_get_pre_angle(gyro_sensor));
     double delta_rad_g   = PI_DOUBLE * delta_theta_g /180.0;
 
     // 現在座標を計算する
