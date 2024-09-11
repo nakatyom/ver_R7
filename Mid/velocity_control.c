@@ -12,7 +12,7 @@
 #define SAMPLE_RATE     20.0f      // 計測周波数[ms]
 
 
-float mid_PID_str_velo(float tag, float maj){ 
+float mid_PID_str_velo(float tag, float maj, bool intg_rest, bool intg_stop){ 
 
     const float kp = 0.1f;
     const float ki = 0.01f;
@@ -24,7 +24,9 @@ float mid_PID_str_velo(float tag, float maj){
      
     err_pre = err;
     err = tag - maj;
-    intg += err;
+
+    if (intg_stop != true) intg += err;
+    if (intg_rest == true) intg = 0;
 
     if (intg > 1000.0f)    intg = 1000.0f;
     if (intg < -1000.0f)   intg = -1000.0f;
@@ -33,7 +35,7 @@ float mid_PID_str_velo(float tag, float maj){
 }
 
 
-float mid_PID_rot_velo(float tag, float maj){ 
+float mid_PID_rot_velo(float tag, float maj, bool intg_rest, bool intg_stop){ 
 
     const float kp = 0.4f;
     const float ki = 0.1f;
@@ -46,6 +48,9 @@ float mid_PID_rot_velo(float tag, float maj){
     err_pre = err;
     err = tag - maj;
     intg += err;
+
+    if (intg_stop != true) intg += err;
+    if (intg_rest == true) intg = 0;
 
     if (intg > 1000.0f)    intg = 1000.0f;
     if (intg < -1000.0f)   intg = -1000.0f;
@@ -92,8 +97,8 @@ void mid_velocity_control(float velo_str_tgt, float velo_rot_tgt){
 
     /* 速度操作量計算（FB項算出）*/
 #if (1)
-    float velo_str_u = mid_PID_str_velo(velo_str_tgt, velo_str);    // mm/sec(robot)
-    float velo_rot_u = mid_PID_rot_velo(velo_rot_tgt, velo_rot);    // deg/sec(yaw rate)
+    float velo_str_u = mid_PID_str_velo(velo_str_tgt, velo_str, false, false);    // mm/sec(robot)
+    float velo_rot_u = mid_PID_rot_velo(velo_rot_tgt, velo_rot, false, false);    // deg/sec(yaw rate)
 #else
     float velo_str_u = 0;   // debug
     float velo_rot_u = 0;   // debug
@@ -131,4 +136,11 @@ void mid_velocity_control(float velo_str_tgt, float velo_rot_tgt){
 //    printf("mot_r_u_str %f | mot_r_u_rot %f\n", mot_r_u_str, mot_r_u_rot);
 //    printf("mot_r_u %d | mot_l_u %d\n", mot_r_u, mot_l_u);
     printf("velo_str %8.4f | velo_rot %8.4f | mot_r_u %3d | mot_l_u %3d | batt_v %8.4f\n", velo_str, velo_rot, mot_r_u, mot_l_u, batt_v);
+}
+
+
+void mid_velocity_control_reset(void){
+
+    float dummy1 = mid_PID_str_velo(0, 0, false, false);
+    float dummy2 = mid_PID_rot_velo(0, 0, false, false);
 }
