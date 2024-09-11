@@ -96,7 +96,7 @@ void mid_velocity_control(float velo_str_tgt, float velo_rot_tgt){
     float velo_rot = (float)gyro_sensor_get_rate(gyro_sensor);   // deg/sec (yaw rate)
 
     /* 速度操作量計算（FB項算出）*/
-#if (1)
+#if (0)
     float velo_str_u = mid_PID_str_velo(velo_str_tgt, velo_str, false, false);    // mm/sec(robot)
     float velo_rot_u = mid_PID_rot_velo(velo_rot_tgt, velo_rot, false, false);    // deg/sec(yaw rate)
 #else
