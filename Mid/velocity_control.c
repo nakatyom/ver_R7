@@ -136,6 +136,10 @@ void mid_velocity_control(float velo_str_tgt, float velo_rot_tgt){
 //    printf("mot_r_u_str %f | mot_r_u_rot %f\n", mot_r_u_str, mot_r_u_rot);
 //    printf("mot_r_u %d | mot_l_u %d\n", mot_r_u, mot_l_u);
     printf("velo_str %8.4f | velo_rot %8.4f | mot_r_u %3d | mot_l_u %3d | batt_v %8.4f\n", velo_str, velo_rot, mot_r_u, mot_l_u, batt_v);
+    
+    int mot_r_p = ev3_motor_get_power(right_motor);
+    int mot_l_p = ev3_motor_get_power(left_motor);
+    printf("mot_r_p %3d | mot_l_p %3d\n",mot_r_p, mot_l_p);
 }
 
 
