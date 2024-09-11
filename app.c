@@ -29,14 +29,16 @@ void boss_task(intptr_t exinf){
     static struct coordinate crnt;
     float tgt_dist = 200.0;
 
-        // get_crntCoordinate(&crnt);
-        // printf("x=%f, y=%f, theta=%f\n",crnt.x, crnt.y,crnt.theta);
+        get_crntCoordinate(&crnt);
+        printf("x=%f, y=%f, theta=%f\n",crnt.x, crnt.y,crnt.theta);
 
         if(crnt.x <= 200){
-            float crnt_v = calc_TgtVelocity(tgt_dist);
+            float crnt_v = 30 + 1.0f*calc_TgtVelocity(tgt_dist);
             // mid_velocity_control(500.0f, 0.0f);
-            motor_set_power(left_motor,  30+(int)crnt_v);
-            motor_set_power(right_motor, 30+(int)crnt_v);
+            motor_set_power(left_motor,  (int)crnt_v);
+            motor_set_power(right_motor, (int)crnt_v);
+
+            printf("MP:%d\n", (int)crnt_v);
         }
         else{
             // motor_stop(left_motor);
