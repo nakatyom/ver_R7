@@ -33,7 +33,7 @@ void boss_task(intptr_t exinf){
         printf("x=%f, y=%f, theta=%f\n",crnt.x, crnt.y,crnt.theta);
 
         if(crnt.x <= 200){
-            float crnt_v = 30 + 1.0f*calc_TgtVelocity(tgt_dist);
+            float crnt_v = 30.0 + 1.0f * calc_TgtVelocity(tgt_dist);
             // mid_velocity_control(500.0f, 0.0f);
             motor_set_power(left_motor,  (int)crnt_v);
             motor_set_power(right_motor, (int)crnt_v);
