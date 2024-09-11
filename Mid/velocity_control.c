@@ -125,8 +125,8 @@ void mid_velocity_control(float velo_str_tgt, float velo_rot_tgt){
 
     float batt_v = (float)ev3_battery_voltage_mV();  // Todo:電圧取れない
 
-    motor_set_power(right_motor, mot_r_u);
-    motor_set_power(left_motor, mot_l_u);
+    ev3_motor_set_power(right_motor, mot_r_u);
+    ev3_motor_set_power(left_motor, mot_l_u);
 
     /* for Debug */
 //    printf("velo_str %f | velo_rot %f | velo_str_u %f | velo_rot_u %f | mot_r_u_tmp %f | mot_l_u_tmp %f\n", velo_str, velo_rot, velo_str_u, velo_rot_u, mot_r_u_tmp, mot_l_u_tmp);
