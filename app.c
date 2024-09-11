@@ -7,6 +7,7 @@
 #include "gyro.h"
 #include "app.h"
 #include "odometry.h"
+#include "gyak_min"
 
 /* メインタスク */
 void main_task(intptr_t unused) {
