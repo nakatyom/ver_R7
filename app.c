@@ -95,6 +95,4 @@ void sens_task(intptr_t exinf){
     /* カラーセンサ読み取り */
     // color_sensor_update(color_sensor);
     linetrace();
-
-
 }
