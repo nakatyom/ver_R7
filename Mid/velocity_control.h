@@ -4,7 +4,7 @@
 #include "ev3api.h"
 #include <stdio.h>
 #include "app.h"
-#include "port_settings.h"
+#include "port.h"
 
 extern void mid_velocity_control(float, float);
 
