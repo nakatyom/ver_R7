@@ -30,7 +30,7 @@ extern int dist(float x1, float y1, float x2, float y2) {
 extern int calc_angle(float tgt_pos_x, float tgt_pos_y){
     static const float PI = 3.14159265358979323846264338327950288;   
     float tgt_angle=0;
-    struct coordinate crnt = {0.0, 0.0, 0.0};
+    crnt = {0.0, 0.0, 0.0};
     get_crntCoordinate(&crnt);
 
     // 処理1 原点移動    
