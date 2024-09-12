@@ -29,8 +29,6 @@ void main_task(intptr_t unused) {
 struct coordinate crnt   = {  0.0,   0.0, 0.0};
 struct coordinate target = {100.0, 100.0, 0.0}; // 地点座標なので角度な?��?
 
-double trans_gDeg(double encdeg); // 任意センサ角度→ジャイロ角度
-
 void boss_task(intptr_t exinf){
     static int is_head;
 

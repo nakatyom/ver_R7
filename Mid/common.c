@@ -23,7 +23,7 @@ float trans_gDeg(float encdeg){
         deg = -1.0 * (360.0 - deg);
     }
 
-    if((int)deg == -180) deg = 0.0; //floatなのでホントは必要ないけど,念のため
+    if((int)deg == -180) deg = 0.0; //floatなのでホント�?��?要な�?けど,念のため
 
     printf("deg:%f\n",(float)deg);
     return deg;
@@ -31,18 +31,18 @@ float trans_gDeg(float encdeg){
 
 void transPolor(struct coordinate* crnt, struct coordinate* tgt, float* dist, float* theta){
     /* 現在角度をジャイロ角度に変換 */
-    float crnt_gDeg = trans_gDeg(crnt.theta);
+    float crnt_gDeg = trans_gDeg(crnt->theta);
     
-    /* 直進量計算 */
-    float x = target.x - crnt.x;
-    float y = target.y - crnt.y;
+    /* 直進量計�? */
+    float x = target->x - crnt->x;
+    float y = target->y - crnt->y;
     float L = sqrt(pow(x,2.0) + pow(y, 2.0));
 
-    /* 旋回量計算 */
+    /* 旋回量計�? */
     float rot = 180.0 / 3.141592 * atan2(y, x);
     rot = rot - crnt_gDeg;
 
-    printf("直進量:%f, 旋回角度:%f\n",L, rot);
+    printf("直進�?:%f, 旋回角度:%f\n",L, rot);
 
     return;
 }
