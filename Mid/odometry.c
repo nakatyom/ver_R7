@@ -33,14 +33,14 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
         //ロボットの移動距離
         delta_L = 0.0;
         // 旋回量の計算
-        delta_rad_e = (abs(delta_LL) + abs(delta_LR)) / (double)wheel_dist;
+        delta_rad_e = -1.0 * (abs(delta_LL) + abs(delta_LR)) / (double)wheel_dist;
 
     }
     else if((delta_LL < 0.0 && delta_LR > 0.0)){ // 反時計回りに旋回している
         //ロボットの移動距離
         delta_L = 0.0;
         // 旋回量の計算
-        delta_rad_e = -1.0 * (abs(delta_LL) + abs(delta_LR)) / (double)wheel_dist;
+        delta_rad_e = (abs(delta_LL) + abs(delta_LR)) / (double)wheel_dist;
 
     }
     else { //直進・曲進している
