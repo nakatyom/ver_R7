@@ -161,14 +161,7 @@ extern bool_t proc_run(float now_dist,float tgt_dist){
 }
 
 // 攻略
-extern int hello_neo(){
-    if(roop_cnt == 9){
-        return 2;
-    }
-    else{
-        return 1;
-    }
-    
+void hello_neo(){
     // 定数宣言（目標座標の配列
 //    float x_pos_target[6]={420.0,580.0,860.0,-1040.0,-720.0,-1360.0,-1300.0,-1000.0,0};
 //    float y_pos_target[6]={-140.0,-520.0,-240.0,-260.0,-780.0,-1040.0,-560.0,-260.0,-260.0};
