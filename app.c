@@ -36,7 +36,6 @@ void boss_task(intptr_t exinf){
 
     if(0 == is_head){
 
-        linetrace();
 
         /* 現在角度をジャイロ角度に変換 */
         double crnt_gDeg = trans_gDeg(crnt.theta);
@@ -95,5 +94,7 @@ void sens_task(intptr_t exinf){
 
     /* カラーセンサ読み取り */
     // color_sensor_update(color_sensor);
+    linetrace();
+
 
 }
