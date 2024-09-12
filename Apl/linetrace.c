@@ -30,9 +30,9 @@ float mid_PID_line_pos(float tag, float maj){
 
 
 void linetrace(void){
-    get_crntCoordinate(&crnt);
+    get_crntCoordinate(&crnt_line);
 
-    printf("x=%f | y=%f | θ=%f\n",crnt.x,crnt.y,crnt.theta);
+    printf("x=%f | y=%f | θ=%f\n",crnt_line.x,crnt_line.y,crnt_line.theta);
 
     int reflection = ev3_color_sensor_get_reflect(color_sensor);
 
