@@ -118,14 +118,14 @@ extern bool_t proc_turn(int now_angle, int tgt_angle){
     //get_crntCoordinate(&crnt);
     if (now_angle < tgt_angle){
         ev3_motor_set_power(left_motor,  -50);
-        ev3_motor_set_power(right_motor, 50);
+        ev3_motor_set_power(right_motor, 60);
         //printf("処理：分岐１");
         printf("比較角度(現在( %d° ):目標( %d° )\n",now_angle,tgt_angle);
         flag =false;
     }
     else if (now_angle > tgt_angle){
         ev3_motor_set_power(left_motor,  60);
-        ev3_motor_set_power(right_motor, -60);
+        ev3_motor_set_power(right_motor, -70);
         //printf("処理：分岐２");
         printf("比較角度(現在( %d° ):目標( %d° )\n",now_angle,tgt_angle);
         flag =false;
@@ -145,12 +145,12 @@ extern bool_t proc_run(float now_dist,float tgt_dist){
     bool_t flag = false;
     if (now_dist < tgt_dist){
         ev3_motor_set_power(left_motor,  60);
-        ev3_motor_set_power(right_motor, 60);
+        ev3_motor_set_power(right_motor, 70);
         flag = false;
     }
     else if (now_dist > tgt_dist){
         ev3_motor_set_power(left_motor,  -40);
-        ev3_motor_set_power(right_motor, -40);
+        ev3_motor_set_power(right_motor, -50);
         flag = false;
     }else{
         printf("走行完了");
