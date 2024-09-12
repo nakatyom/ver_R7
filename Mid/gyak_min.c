@@ -7,7 +7,7 @@
 const float tgtV_ave = 50.0f; // 目標平均速度[mm/s]
 const float tgtR_ave = 45.0f; // 目標平均速度[theta/s]
 const cyc_time = 100;         // サイクル周期[ms]
-const int array_size = 11;    // 配列長
+const int array = 11;    // 配列長
 
 
 
@@ -21,8 +21,8 @@ float calc_TgtVelocity(float tgt_dist){
     static int cnt_V;  // 何回目の呼び出しかをカウントする
 
     /* 並進速度用のパラメータ */
-    static float div_dist[array_size];
-    static float tgt_velocity[array_size];
+    static float div_dist[11];
+    static float tgt_velocity[11];
     float tgt_v = 0;
 
     /* 最初の一回だけ呼び出される処理 */
@@ -34,9 +34,9 @@ float calc_TgtVelocity(float tgt_dist){
         float tgtTime = tgt_dist / tgtV_ave;
         
         /* 各時間における目標距離を配列に格納する */
-        for(int i=1; i<=array_size; i++){
-            divTime_v  = (i / array_size) * tgtTime; // 分割時間
-            normTime_v = divTime_v[i] / tgtTime;     // 正規化時間
+        for(int i=1; i<=11; i++){
+            divTime_v  = (i / 11) * tgtTime; // 分割時間
+            normTime_v = divTime_v / tgtTime;     // 正規化時間
             
             /* ジャーク最小化 */
             div_dist[i-1] = tgt_dist * (6*(float)pow(normTime_v,5) - 15*(float)pow(normTime_v,4) + 10*(float)pow(normTime_v,3));
@@ -63,8 +63,8 @@ float calc_TgtRate(float tgt_theta){
     static int cnt_W;  // 何回目の呼び出しかをカウントする
 
     /* 旋回角度用のパラメータ */
-    static float divTime_w[array_size];
-    static float normTime_w[array_size];
+    static float divTime_w[11];
+    static float normTime_w[11];
 }
 
 
