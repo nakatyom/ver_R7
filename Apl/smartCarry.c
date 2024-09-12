@@ -30,7 +30,7 @@ extern int dist(float x1, float y1, float x2, float y2) {
 extern int calc_angle(float tgt_pos_x, float tgt_pos_y){
     static const float PI = 3.14159265358979323846264338327950288;   
     float tgt_angle=0;
-    crnt = {0.0, 0.0, 0.0};
+    crnt = [0.0, 0.0, 0.0];
     get_crntCoordinate(&crnt);
 
     // 処理1 原点移動    
@@ -162,7 +162,14 @@ extern bool_t proc_run(float now_dist,float tgt_dist){
 }
 
 // 攻略
-void hello_neo(){
+int hello_neo(){
+    if(roop_cnt == 9){
+        return 2;
+    }
+    else{
+        return 1;
+    }
+    
     // 定数宣言（目標座標の配列
 //    float x_pos_target[6]={420.0,580.0,860.0,-1040.0,-720.0,-1360.0,-1300.0,-1000.0,0};
 //    float y_pos_target[6]={-140.0,-520.0,-240.0,-260.0,-780.0,-1040.0,-560.0,-260.0,-260.0};
@@ -203,6 +210,6 @@ void hello_neo(){
         printf("現在座標（%f,%f）\n",crnt.x,crnt.y);
         printf("目標座標（%f,%f）\n",x_pos_target[roop_cnt],y_pos_target[roop_cnt]);
     }
-
+    
 }
 
