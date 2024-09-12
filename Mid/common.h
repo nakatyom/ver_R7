@@ -11,7 +11,7 @@ extern struct coordinate{
 };
 
 extern float trans_gDeg(float encdeg);
-extern void transPolor(struct coordinate* crnt, struct coordinate* tgt, float* dist, float* theta);
+extern void transPolor(struct coordinate* crnt, struct coordinate* trgt, float* dist, float* theta);
 
 #endif /* _COMMON_H */
 

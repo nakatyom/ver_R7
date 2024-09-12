@@ -29,13 +29,13 @@ float trans_gDeg(float encdeg){
     return deg;
 }
 
-void transPolor(struct coordinate* crnt, struct coordinate* tgt, float* dist, float* theta){
+void transPolor(struct coordinate* crnt, struct coordinate* trgt, float* dist, float* theta){
     /* 現在角度をジャイロ角度に変換 */
     float crnt_gDeg = trans_gDeg(crnt->theta);
     
     /* 直進量計�? */
-    float x = target->x - crnt->x;
-    float y = target->y - crnt->y;
+    float x = trgt->x - crnt->x;
+    float y = trgt->y - crnt->y;
     float L = sqrt(pow(x,2.0) + pow(y, 2.0));
 
     /* 旋回量計�? */
