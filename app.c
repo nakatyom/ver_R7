@@ -96,5 +96,6 @@ void sens_task(intptr_t exinf){
     // color_sensor_update(color_sensor);
     linetrace();
 
+    get_crntCoordinate(&crnt);
     printf("x=%f | y=%f | θ=%f\n",crnt.x,crnt.y,crnt.theta);
 }
