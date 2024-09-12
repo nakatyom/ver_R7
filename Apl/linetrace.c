@@ -4,7 +4,7 @@
 #include "port.h"
 #include "velocity_control.h"
 #include "linetrace.h"
-
+#include "odometry.h"
 
 float mid_PID_line_pos(float tag, float maj){ 
 
@@ -28,7 +28,9 @@ float mid_PID_line_pos(float tag, float maj){
 
 
 void linetrace(void){
+    get_crntCoordinate(&crnt);
 
+    printf("x=%f | y=%f | θ=%f\n",crnt.x,crnt.y,crnt.theta);
     int reflection = ev3_color_sensor_get_reflect(color_sensor);
 
     float velo_rot_target = mid_PID_line_pos(55.0f, (float)reflection);
