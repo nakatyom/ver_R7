@@ -117,8 +117,8 @@ extern bool_t proc_turn(int now_angle, int tgt_angle){
     bool_t flag = false;
     //get_crntCoordinate(&crnt);
     if (now_angle < tgt_angle){
-        ev3_motor_set_power(left_motor,  -40);
-        ev3_motor_set_power(right_motor, 40);
+        ev3_motor_set_power(left_motor,  -50);
+        ev3_motor_set_power(right_motor, 50);
         //printf("処理：分岐１");
         printf("比較角度(現在( %d° ):目標( %d° )\n",now_angle,tgt_angle);
         flag =false;
