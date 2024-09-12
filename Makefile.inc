@@ -1,7 +1,7 @@
 mkfile_path := $(dir $(lastword $(MAKEFILE_LIST)))
 
-APPL_COBJS += linetrace.o smartCarry.o
-APPL_COBJS += odometry.o velocity_control.o gyak_min.o
+APPL_COBJS += linetrace.o
+APPL_COBJS += common.o odometry.o velocity_control.o gyak_min.o
 APPL_COBJS += motor.o gyro.o color.o
 APPL_COBJS += body.o port.o
 # APPL_COBJS += get_line.o

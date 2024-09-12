@@ -4,12 +4,9 @@
 #include "common.h"
 #include "gyak_min.h"
 
-const float tgtV_ave = 50.0f; // 目標平均速度[mm/s]
-const float tgtR_ave = 45.0f; // 目標平均速度[theta/s]
-const cyc_time = 100;         // サイクル周期[ms]
-const int array = 11;    // 配列長
-
-
+float tgtV_ave = 50.0f;   // 目標平均速度[mm/s]
+float tgtR_ave = 20.0f;   // 目標平均速度[theta/s]
+const int cyc_time = 100; // サイクル周期[ms]
 
 
 /* static functions */
@@ -17,7 +14,6 @@ const int array = 11;    // 配列長
 
 /* external functions */
 float calc_TgtVelocity(float tgt_dist){
-    static int is_head; // 最初の呼び出しかを判定する
     static int cnt_V;  // 何回目の呼び出しかをカウントする
 
     /* 並進速度用のパラメータ */
@@ -26,7 +22,7 @@ float calc_TgtVelocity(float tgt_dist){
     float tgt_v = 0;
 
     /* 最初の一回だけ呼び出される処理 */
-    if(0 == is_head){
+    if(0 == tgt_v){
         float divTime_v;
         float normTime_v;
 
@@ -47,6 +43,12 @@ float calc_TgtVelocity(float tgt_dist){
 
         cnt_V += 1; //カウントアップ
 
+        printf("divTime_v:");
+        for(int i=0;i<11;i++){
+            printf("%f, ",divTime_v[i]);
+        }
+        printf("\n");
+        
         return tgt_v;
     }
     

@@ -17,7 +17,7 @@ int now_dist = 0;
 float now_x=0.0f;
 float now_y=0.0f;
 int roop_cnt=0;
-extern struct coordinate crnt = {0.0, 0.0, 0.0};//自己位置座標
+struct coordinate crnt_neo = {0.0, 0.0, 0.0};//自己位置座標
 
 // 走行距離計算処理
 extern int dist(float x1, float y1, float x2, float y2) {
@@ -30,27 +30,27 @@ extern int dist(float x1, float y1, float x2, float y2) {
 extern int calc_angle(float tgt_pos_x, float tgt_pos_y){
     static const float PI = 3.14159265358979323846264338327950288;   
     float tgt_angle=0;
-    get_crntCoordinate(&crnt);
+    get_crntCoordinate(&crnt_neo);
 
     // 処理1 原点移動    
     // (x座標)
-    //tgt_pos_x = tgt_pos_x - crnt.x;
-    //tgt_pos_y = tgt_pos_y - crnt.y;
+    //tgt_pos_x = tgt_pos_x - crnt_neo.x;
+    //tgt_pos_y = tgt_pos_y - crnt_neo.y;
     
     
-    if (crnt.x <= 0.0f){
-        tgt_pos_x = tgt_pos_x + abs(crnt.x);
-    }else if(crnt.x > 0.0f){
-        tgt_pos_x = tgt_pos_x - abs(crnt.x);
+    if (crnt_neo.x <= 0.0f){
+        tgt_pos_x = tgt_pos_x + abs(crnt_neo.x);
+    }else if(crnt_neo.x > 0.0f){
+        tgt_pos_x = tgt_pos_x - abs(crnt_neo.x);
     }
     else{
         printf("旋回角度算出中に異常発生");
     }
     // (y座標)
-    if (crnt.y <= 0.0f){
-        tgt_pos_y = tgt_pos_y + abs(crnt.y);
-    }else if(crnt.y > 0.0f){
-        tgt_pos_y = tgt_pos_y - abs(crnt.y);
+    if (crnt_neo.y <= 0.0f){
+        tgt_pos_y = tgt_pos_y + abs(crnt_neo.y);
+    }else if(crnt_neo.y > 0.0f){
+        tgt_pos_y = tgt_pos_y - abs(crnt_neo.y);
     }else{
         printf("旋回角度算出中に異常発生");
     }
@@ -65,14 +65,14 @@ extern int calc_angle(float tgt_pos_x, float tgt_pos_y){
         }else{
             tgt_angle=atan2(tgt_pos_x,tgt_pos_y);
             tgt_angle = tgt_angle * (180 / PI);
-            tgt_angle = tgt_angle - 270; 
+            tgt_angle = tgt_angle; 
         }
 
     }else if (tgt_pos_x <= 0 && tgt_pos_y > 0){
     // ロボからみた目的地が第2象限の時。(x,y) (-,+)
         printf("| 第2象限\n");
         if (tgt_pos_x == 0){
-            tgt_angle=-270;
+            tgt_angle=90;
         }else{
             tgt_angle=atan2(tgt_pos_y,tgt_pos_x);
             tgt_angle = tgt_angle * (180 / PI);
@@ -101,11 +101,11 @@ extern int calc_angle(float tgt_pos_x, float tgt_pos_y){
     }
 
     
-    //tgt_angle = atan((tgt_pos_y-crnt.y)/(tgt_pos_x-crnt.x));
+    //tgt_angle = atan((tgt_pos_y-crnt_neo.y)/(tgt_pos_x-crnt_neo.x));
     printf("(x,y)=(%f,%f) | ",tgt_pos_x,tgt_pos_y);
     
 
-    //printf("(x,y)=(%f,%f) , theta=%f\n 目標位置(100,100)への角度：%f°\n",crnt.x, crnt.y,crnt.theta,tgt_angle);
+    //printf("(x,y)=(%f,%f) , theta=%f\n 目標位置(100,100)への角度：%f°\n",crnt_neo.x, crnt_neo.y,crnt_neo.theta,tgt_angle);
     //printf("(----------------------------------------------------\n");
 
     return (int)tgt_angle;
@@ -114,17 +114,17 @@ extern int calc_angle(float tgt_pos_x, float tgt_pos_y){
 // 旋回処理[暫定]
 extern bool_t proc_turn(int now_angle, int tgt_angle){
     bool_t flag = false;
-    //get_crntCoordinate(&crnt);
+    //get_crntCoordinate(&crnt_neo);
     if (now_angle < tgt_angle){
-        ev3_motor_set_power(left_motor,  -50);
-        ev3_motor_set_power(right_motor, 60);
+        ev3_motor_set_power(left_motor,  -5);
+        ev3_motor_set_power(right_motor, 5);
         //printf("処理：分岐１");
         printf("比較角度(現在( %d° ):目標( %d° )\n",now_angle,tgt_angle);
         flag =false;
     }
     else if (now_angle > tgt_angle){
-        ev3_motor_set_power(left_motor,  60);
-        ev3_motor_set_power(right_motor, -70);
+        ev3_motor_set_power(left_motor,  10);
+        ev3_motor_set_power(right_motor, -10);
         //printf("処理：分岐２");
         printf("比較角度(現在( %d° ):目標( %d° )\n",now_angle,tgt_angle);
         flag =false;
@@ -143,13 +143,13 @@ extern bool_t proc_run(float now_dist,float tgt_dist){
     printf("距離情報(現在( %d mm):目標( %d mm )\n",(int)now_dist,(int)tgt_dist);
     bool_t flag = false;
     if (now_dist < tgt_dist){
-        ev3_motor_set_power(left_motor,  60);
-        ev3_motor_set_power(right_motor, 70);
+        ev3_motor_set_power(left_motor,  20);
+        ev3_motor_set_power(right_motor, 20);
         flag = false;
     }
     else if (now_dist > tgt_dist){
-        ev3_motor_set_power(left_motor,  -40);
-        ev3_motor_set_power(right_motor, -50);
+        ev3_motor_set_power(left_motor,  -2);
+        ev3_motor_set_power(right_motor, -2);
         flag = false;
     }else{
         printf("走行完了");
@@ -161,19 +161,17 @@ extern bool_t proc_run(float now_dist,float tgt_dist){
 }
 
 // 攻略
-void hello_neo(){
+extern int hello_neo(){
     // 定数宣言（目標座標の配列
-//    float x_pos_target[6]={420.0,580.0,860.0,-1040.0,-720.0,-1360.0,-1300.0,-1000.0,0};
-//    float y_pos_target[6]={-140.0,-520.0,-240.0,-260.0,-780.0,-1040.0,-560.0,-260.0,-260.0};
-//    float x_pos_target[6]={420.0,580.0,240.0,-484.0,-720.0,-1360.0,-560.0,-260.0,0};
-//    float y_pos_target[6]={-140.0,-520.0,-860.0,-836.0,-780.0,-1040.0,-1300.0,-1000.0,-260.0};
+    /* SIM上の座標を修正。*/
     float x_pos_target[6]={420.0,520.0,240.0,-220.0,-780.0,-1040.0,-560.0,-260.0,-260.0};
     float y_pos_target[6]={-140.0,-580.0,-860.0,-760.0,-720.0,-1360.0,-1300.0,-720.0,0.0};
-    get_crntCoordinate(&crnt);
+
+    get_crntCoordinate(&crnt_neo);
 
     // 変数宣言
-    now_angle = (int)crnt.theta;    
-    printf("x=%f, y=%f, theta=%f | ",crnt.x, crnt.y, crnt.theta);
+    now_angle = (int)crnt_neo.theta;    
+    printf("x=%f, y=%f, theta=%f | ",crnt_neo.x, crnt_neo.y, crnt_neo.theta);
     // 旋回処理
     if (init_flag == false){ 
         tgt_angl = calc_angle(x_pos_target[roop_cnt],y_pos_target[roop_cnt]);
@@ -181,15 +179,16 @@ void hello_neo(){
     }else if (init_flag == true && turn_flag==false && drive_flag==false){
         turn_flag=proc_turn(now_angle,tgt_angl);
         if(turn_flag==true){
-            tgt_dist = dist(crnt.x,crnt.y,x_pos_target[roop_cnt],y_pos_target[roop_cnt]);
-            now_x = crnt.x;
-            now_y = crnt.y;
+            
+            tgt_dist = dist(crnt_neo.x,crnt_neo.y,x_pos_target[roop_cnt],y_pos_target[roop_cnt]);
+            now_x = crnt_neo.x;
+            now_y = crnt_neo.y;
         }
     }
     // 走行処理
     if (turn_flag==true && drive_flag==false){
-        now_dist = dist(crnt.x,crnt.y,now_x,now_y);
-        //tgt_dist = (int)dist(crnt.x,crnt.y,x_pos_target[roop_cnt],y_pos_target[roop_cnt]);
+        now_dist = dist(crnt_neo.x,crnt_neo.y,now_x,now_y);
+        //tgt_dist = (int)dist(crnt_neo.x,crnt_neo.y,x_pos_target[roop_cnt],y_pos_target[roop_cnt]);
         drive_flag = proc_run(now_dist,tgt_dist);
 
     }
@@ -199,9 +198,9 @@ void hello_neo(){
         drive_flag = false;
         init_flag = false;
         printf("移動完了(ループ%d回)\n",roop_cnt);
-        printf("現在座標（%f,%f）\n",crnt.x,crnt.y);
+        printf("現在座標（%f,%f）\n",crnt_neo.x,crnt_neo.y);
         printf("目標座標（%f,%f）\n",x_pos_target[roop_cnt],y_pos_target[roop_cnt]);
     }
-    
+
 }
 
