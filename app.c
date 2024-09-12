@@ -41,6 +41,7 @@ void boss_task(intptr_t exinf){
     }
 }
 
+
 void sens_task(intptr_t exinf){
     /* モータ読み取り */
     // motor_update(arm_motor);
