@@ -8,9 +8,9 @@
 
 float mid_PID_line_pos(float tag, float maj){ 
 
-    const float kp = 0.20f;
-    const float ki = 0.02f;
-    const float kd = 0.1f;
+    const float kp = 0.3f;
+    const float ki = 0.04f;
+    const float kd = 0.13f;
 
     static float intg;
     static float err_pre;
@@ -33,6 +33,6 @@ void linetrace(void){
 
     float velo_rot_target = mid_PID_line_pos(55.0f, (float)reflection);
 
-    mid_velocity_control(90.0f, -velo_rot_target);
+    mid_velocity_control(50.0f, -velo_rot_target);
 //    mid_velocity_control(50.0f, 0.0f);  // debug
 }
