@@ -6,6 +6,8 @@
 #include "linetrace.h"
 #include "odometry.h"
 
+struct coordinate crnt_line = {0.0, 0.0, 0.0} ;
+
 float mid_PID_line_pos(float tag, float maj){ 
 
     const float kp = 0.3f;
@@ -28,6 +30,9 @@ float mid_PID_line_pos(float tag, float maj){
 
 
 void linetrace(void){
+    get_crntCoordinate(&crnt);
+
+    printf("x=%f | y=%f | θ=%f\n",crnt.x,crnt.y,crnt.theta);
 
     int reflection = ev3_color_sensor_get_reflect(color_sensor);
 

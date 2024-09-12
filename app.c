@@ -97,7 +97,4 @@ void sens_task(intptr_t exinf){
     
     linetrace();
 
-    get_crntCoordinate(&crnt);
-
-    printf("x=%f | y=%f | θ=%f\n",crnt.x,crnt.y,crnt.theta);
 }
