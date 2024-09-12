@@ -9,15 +9,16 @@
 #include "odometry.h"
 #include "gyak_min.h"
 #include "linetrace.h"
+#include "doubleLoop.h"
 
 /* メインタスク */
 void main_task(intptr_t unused) {
-    /* ポ�??��ト設?��? */
+    /* ポ�??��ト設?��? */
     // sensor   : touch_sensor, color_sensor, sonar_sensor, gyro_sensor
     // actuator : arm_motor, left_motor, right_motor
     set_portCfg();
     
-    /* タスク呼び出?��? */
+    /* タスク呼び出?��? */
     sta_cyc(SENS_CYC);
     sta_cyc(BOSS_CYC);
 
@@ -25,18 +26,9 @@ void main_task(intptr_t unused) {
     ext_tsk();
 }
 
-#include <math.h>
-struct coordinate crnt   = {  0.0,   0.0, 0.0};
-struct coordinate target = {100.0, 100.0, 0.0}; // 地点座標なので角度な?��?
-
 void boss_task(intptr_t exinf){
-    static int is_head;
 
-    if(0 == is_head){
-        float test = calc_TgtVelocity(200.0);
-
-        is_head = 1;
-    }
+    doubleloop();
 }
 
 
