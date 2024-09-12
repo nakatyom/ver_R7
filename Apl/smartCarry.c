@@ -30,7 +30,6 @@ extern int dist(float x1, float y1, float x2, float y2) {
 extern int calc_angle(float tgt_pos_x, float tgt_pos_y){
     static const float PI = 3.14159265358979323846264338327950288;   
     float tgt_angle=0;
-    crnt = [0.0, 0.0, 0.0];
     get_crntCoordinate(&crnt);
 
     // 処理1 原点移動    
@@ -162,7 +161,7 @@ extern bool_t proc_run(float now_dist,float tgt_dist){
 }
 
 // 攻略
-int hello_neo(){
+extern int hello_neo(){
     if(roop_cnt == 9){
         return 2;
     }
