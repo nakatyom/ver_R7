@@ -116,15 +116,15 @@ extern bool_t proc_turn(int now_angle, int tgt_angle){
     bool_t flag = false;
     //get_crntCoordinate(&crnt_neo);
     if (now_angle < tgt_angle){
-        ev3_motor_set_power(left_motor,  -5);
-        ev3_motor_set_power(right_motor, 5);
+        ev3_motor_set_power(left_motor,  -50);
+        ev3_motor_set_power(right_motor, 60);
         //printf("処理：分岐１");
         printf("比較角度(現在( %d° ):目標( %d° )\n",now_angle,tgt_angle);
         flag =false;
     }
     else if (now_angle > tgt_angle){
-        ev3_motor_set_power(left_motor,  10);
-        ev3_motor_set_power(right_motor, -10);
+        ev3_motor_set_power(left_motor,  60);
+        ev3_motor_set_power(right_motor, -70);
         //printf("処理：分岐２");
         printf("比較角度(現在( %d° ):目標( %d° )\n",now_angle,tgt_angle);
         flag =false;
@@ -143,13 +143,13 @@ extern bool_t proc_run(float now_dist,float tgt_dist){
     printf("距離情報(現在( %d mm):目標( %d mm )\n",(int)now_dist,(int)tgt_dist);
     bool_t flag = false;
     if (now_dist < tgt_dist){
-        ev3_motor_set_power(left_motor,  20);
-        ev3_motor_set_power(right_motor, 20);
+        ev3_motor_set_power(left_motor,  60);
+        ev3_motor_set_power(right_motor, 70);
         flag = false;
     }
     else if (now_dist > tgt_dist){
-        ev3_motor_set_power(left_motor,  -2);
-        ev3_motor_set_power(right_motor, -2);
+        ev3_motor_set_power(left_motor,  -40);
+        ev3_motor_set_power(right_motor, -50);
         flag = false;
     }else{
         printf("走行完了");
@@ -201,6 +201,6 @@ extern int hello_neo(){
         printf("現在座標（%f,%f）\n",crnt_neo.x,crnt_neo.y);
         printf("目標座標（%f,%f）\n",x_pos_target[roop_cnt],y_pos_target[roop_cnt]);
     }
-
+    
 }
 
