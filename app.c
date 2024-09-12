@@ -97,7 +97,7 @@ void sens_task(intptr_t exinf){
     
     //linetrace();
     rgb_raw_t rgb;
-    uint8_t ref = ev3_color_senser_get_reflect(color_sensor);
-    ev3_color_senser_get_rgb_raw(color_sensor,&rgb);
+    uint8_t ref = ev3_color_sensor_get_reflect(color_sensor);
+    ev3_color_sensor_get_rgb_raw(color_sensor,&rgb);
     printf("ref = %d | r = %d | g = %d | b = %d\n",ref, rgb.r, rgb.g, rgb.b);
 }
