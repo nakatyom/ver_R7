@@ -17,7 +17,7 @@ int now_dist = 0;
 float now_x=0.0f;
 float now_y=0.0f;
 int roop_cnt=0;
-struct coordinate crnt = {0.0, 0.0, 0.0};//自己位置座標
+extern struct coordinate crnt = {0.0, 0.0, 0.0};//自己位置座標
 
 // 走行距離計算処理
 extern int dist(float x1, float y1, float x2, float y2) {
