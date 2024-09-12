@@ -35,7 +35,7 @@ float calc_TgtVelocity(float tgt_dist){
             normTime_v = divTime_v / tgtTime;     // 正規化時間
             
             /* ジャーク最小化 */
-            div_dist[i-1] = tgt_dist * (6*(float)pow(normTime_v,5) - 15*(float)pow(normTime_v,4) + 10*(float)pow(normTime_v,3));
+            div_dist[i-1] = tgt_dist * (6.0*(float)pow(normTime_v,5) - 15.0*(float)pow(normTime_v,4) + 10.0*(float)pow(normTime_v,3));
         }
 
         /* 現在の目標速度を計算 */
