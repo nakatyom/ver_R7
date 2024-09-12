@@ -6,7 +6,7 @@
 
 float tgtV_ave = 50.0f;   // 目標平均速度[mm/s]
 float tgtR_ave = 20.0f;   // 目標平均速度[theta/s]
-const int cyc_time = 100; // サイクル周期[ms]
+const float cyc_time = 0.1; // サイクル周期[s]
 
 
 /* static functions */
@@ -39,21 +39,23 @@ float calc_TgtVelocity(float tgt_dist){
         }
 
         /* 現在の目標速度を計算 */
-        tgt_v = div_dist[cnt_V];
+        tgt_v = div_dist[cnt_V]/cyc_time;
 
         cnt_V += 1; //カウントアップ
 
-        printf("divTime_v:");
+        printf("divTime_v:%f, div_dist:",divTime_v);
         for(int i=0;i<11;i++){
-            printf("%f, ",divTime_v[i]);
+            printf("%f, ",div_dist[i]);
         }
         printf("\n");
+        printf("tgt_v:%f",tgt_v);
         
         return tgt_v;
     }
     
     /* 現在の目標速度を計算 */
     tgt_v = ( div_dist[cnt_V] - div_dist[cnt_V-1] ) / cyc_time;
+    printf("%f, ",tgt_v);
 
     cnt_V += 1; //カウントアップ
 
