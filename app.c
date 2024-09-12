@@ -26,7 +26,7 @@ void main_task(intptr_t unused) {
 }
 
 #include <math.h>
-extern struct coordinate crnt   = {  0.0,   0.0, 0.0};
+struct coordinate crnt   = {  0.0,   0.0, 0.0};
 struct coordinate target = {100.0, 100.0, 0.0}; // 地点座標なので角度な�?
 
 double trans_gDeg(double encdeg); // 任意センサ角度→ジャイロ角度
@@ -97,5 +97,7 @@ void sens_task(intptr_t exinf){
     
     linetrace();
 
-    
+    get_crntCoordinate(&crnt);
+
+    printf("x=%f | y=%f | θ=%f\n",crnt.x,crnt.y,crnt.theta);
 }
