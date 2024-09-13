@@ -35,7 +35,7 @@ void calc_tgt(float tgt, float tgt_time, int div_num, float* div_time, float* tg
 }
 
 void normalize_tgt(int div_num, float* tgt){
-    float off_set = 30.0;
+    float off_set = 50.0;
     float maxVal = tgt[div_num/2];
     float raito = off_set / maxVal;
 
