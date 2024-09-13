@@ -26,7 +26,7 @@ void main_task(intptr_t unused) {
 
 
 
-void boss_task(intptr_t exinf){
+void _task(intptr_t exinf){
     mid_velocity_control(0.0f, 0.0f); 
 
     //static int cunt;
