@@ -29,6 +29,8 @@ void boss_task(intptr_t exinf){
     float time[11] = {0.0};
     float velo[11] = {0.0};
 
+    get_TgtVelocity(500.0, 10.0, time, velo);
+
     printf("time, velo:\n");
     for(int i=0;i<11;i++){
         printf("%f, ", time[i]);
