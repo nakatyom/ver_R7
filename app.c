@@ -61,7 +61,7 @@ void sens_task(intptr_t exinf){
 
         printf("dist:\n");
         for(int i=0;i<ARRAY;i++){
-            printf("%f, ", time[i]);
+            printf("%f, ", dist[i]);
         }
         printf("\nvelocity:\n");
         for(int i=0;i<ARRAY;i++){
