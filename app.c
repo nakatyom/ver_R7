@@ -45,7 +45,7 @@ void sens_task(intptr_t exinf){
     static struct coordinate test_c = {0.0f, 0.0f, 0.0f};
     static int cunt;
     static int is_head = 0;
-    static float time[ARRAY] = {0.0};
+    static float dist[ARRAY] = {0.0};
     static float velo[ARRAY] = {0.0};
 
     float tgt_distance = 500.0;
@@ -57,13 +57,13 @@ void sens_task(intptr_t exinf){
     // mid_velocity_control(30.0f, 0.0f);
     
     if(0 == is_head){
-        calc_TgtVelocity(tgt_distance, tgt_time, ARRAY, time, velo);
+        calc_TgtVelocity(tgt_distance, tgt_time, ARRAY, dist, velo);
 
-        printf("time:\n");
+        printf("dist:\n");
         for(int i=0;i<ARRAY;i++){
             printf("%f, ", time[i]);
         }
-        printf("\ntime:\n");
+        printf("\nvelocity:\n");
         for(int i=0;i<ARRAY;i++){
             printf("%f : ",velo[i]);
         }
@@ -71,11 +71,11 @@ void sens_task(intptr_t exinf){
         is_head = 1;
     }
     
-    if((float)cunt*0.02 < tgt_time){
-        float tgtV = get_TgtVelcity((float)cunt*0.02, ARRAY, time, velo);
-        printf("crnt_time: %f ", (float)cunt*0.02);
+    if(test_c.x < tgt_distance){
+        float tgtV = get_TgtVelcity(test_c.x, ARRAY, dist, velo);
+        printf("crnt_dist: %f ", test_c.x);
         printf("TgtV: %f\n", tgtV); 
-        mid_velocity_control(tgtV+30.0f, 0.0f);
+        mid_velocity_control(tgtV, 0.0f);
     }
     else{
         motor_stop(left_motor);
