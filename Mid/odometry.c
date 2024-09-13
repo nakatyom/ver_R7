@@ -30,12 +30,14 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
  
     if(delta_LL > 0.0 && delta_LR < 0.0){ //時計回りに旋回している
         //ロボットの移動距離
+        printf("オドメトリ分岐１");
         delta_L = 0.0;
         // 旋回量の計算
         delta_rad_e = -1.0 * (abs(delta_LL) + abs(delta_LR)) / (double)wheel_dist;
  
     }
     else if((delta_LL < 0.0 && delta_LR > 0.0)){ // 反時計回りに旋回している
+        printf("オドメトリ分岐２");
         //ロボットの移動距離
         delta_L = 0.0;
         // 旋回量の計算
@@ -44,6 +46,7 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
     }
     else { //直進・曲進している
         //ロボットの移動距離
+        printf("オドメトリ分岐３");
         delta_L = (delta_LL + delta_LR)/(double)2.0;
         //ロボットの旋回量
         delta_rad_e = (delta_LL - delta_LR) / (double)wheel_dist;

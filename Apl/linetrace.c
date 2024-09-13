@@ -81,12 +81,11 @@ int linetrace(void){
     float velo_rot_target;
     color_sensor_get_rgb_raw(color_sensor,&crnt_rgb_line);
     reflection = color_sensor_get_reflect(color_sensor);
+    
     get_crntCoordinate(&crnt_line);
     printf("x=%f, y=%f, theta=%f | ",crnt_line.x, crnt_line.y, crnt_line.theta);
     // BLUE検知まで走行する処理。
-
-
-    
+   
     if (divion == 0){
         if(judge_blue() == true){divion = 1;}// RGB==BLUE
         if((crnt_line.x >=2750 && crnt_line.y >= -300) || (crnt_line.x >=2750 && crnt_line.y <= -1800)){ //コーナーエリア
