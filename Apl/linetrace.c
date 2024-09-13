@@ -8,7 +8,9 @@
 
 
 float mid_PID_line_pos(float tag, float maj,int pwr){ 
-
+    
+    printf("ref = %f\n",maj);
+    
     float kp = 0.2f;
     float ki = 0.02f;
     float kd = 0.10f;
