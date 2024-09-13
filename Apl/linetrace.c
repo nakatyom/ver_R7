@@ -79,25 +79,25 @@ extern bool_t judge_black(){
 
 int linetrace(void){
     float velo_rot_target;
-    //color_sensor_get_rgb_raw(color_sensor,&crnt_rgb_line);
-
+    get_crntCoordinate(&crnt_line);
+    color_sensor_get_rgb_raw(color_sensor,&crnt_rgb_line);
     reflection = color_sensor_get_reflect(color_sensor);
 
     if (divion == 0){
-        get_crntCoordinate(&crnt_line);
+
         printf("x=%f, y=%f, theta=%f | ",crnt_line.x, crnt_line.y, crnt_line.theta);
-        if((crnt_line.x >=2750 && crnt_line.y >= -300) || (crnt_line.x >=2750 && crnt_line.y <= -1800)){ //コーナーエリア
+//        if((crnt_line.x >=2750 && crnt_line.y >= -300) || (crnt_line.x >=2750 && crnt_line.y <= -1800)){ //コーナーエリア
             printf("判定1 \n");
             velo_rot_target = mid_PID_line_pos(55.0f, (float)reflection,50);
             mid_velocity_control(50.0f, -velo_rot_target);
-        }else{ //ストレートエリア
-            printf("判定2 \n");
-            velo_rot_target = mid_PID_line_pos(55.0f, (float)reflection,90);
-            mid_velocity_control(90.0f, -velo_rot_target);
-            if(judge_blue() == true){
-                divion = 1;
-            }
-        }
+//        }else{ //ストレートエリア
+//            printf("判定2 \n");
+//            velo_rot_target = mid_PID_line_pos(55.0f, (float)reflection,90);
+//            mid_velocity_control(90.0f, -velo_rot_target);
+//            if(judge_blue() == true){
+//                divion = 1;
+//            }
+//        }
 
 
         return 0;
