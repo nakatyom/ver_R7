@@ -9,8 +9,8 @@
 
 float mid_PID_line_pos(float tag, float maj,int pwr){ 
     
-    printf("ref = %f\n",maj);
-    
+    printf("ref = %f | ",maj);
+
     float kp = 0.2f;
     float ki = 0.02f;
     float kd = 0.10f;
@@ -81,6 +81,7 @@ int linetrace(void){
         }else{ //ストレートエリア
             velo_rot_target = mid_PID_line_pos(55.0f, (float)reflection,90);
             mid_velocity_control(90.0f, -velo_rot_target);
+            printf("脳筋ブレイクポイント\n");
         }
         return 0;
     }else if(divion = 1){//RGB==BLACK
