@@ -72,9 +72,9 @@ void sens_task(intptr_t exinf){
         is_head = 1;
     }
     
-    if(crnt_time < tgt_distance){
-        float tgtV = get_TgtVelcity(crnt_time, ARRAY, dist, velo);
-        printf("crnt_dist: %f ", crnt_time);
+    if(crnt_time < tgt_time){
+        float tgtV = get_TgtVelcity(crnt_time, ARRAY, time, velo);
+        printf("crnt_time: %f ", crnt_time);
         printf("TgtV: %f\n", tgtV); 
         mid_velocity_control(tgtV, 0.0f);
     }
