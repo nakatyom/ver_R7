@@ -45,12 +45,12 @@ float mid_PID_line_pos(float tag, float maj,int pwr){
 
 int divion = 0;
 int finish = 0;
-rgb_raw_t crnt_rgb_line;
+struct rgb_raw_t crnt_rgb_line;
 struct coordinate crnt_line = {0.0, 0.0, 0.0};//自己位置座標
 
 
 extern bool_t judge_blue(){
-    int reflection = color_sensor_get_reflect(color_sensor);
+    u_int8_t reflection = color_sensor_get_reflect(color_sensor);
     color_sensor_get_rgb_raw(color_sensor,&crnt_rgb_line);
     printf("ref = %d | r = %d | g = %d | b = %d\n",reflection, crnt_rgb_line.r, crnt_rgb_line.g, crnt_rgb_line.b);
     if(( crnt_rgb_line.r >=80 && crnt_rgb_line.r <=90 ) && ( crnt_rgb_line.g >=110 && crnt_rgb_line.g <=225 ) && ( crnt_rgb_line.b >=140 && crnt_rgb_line.b <=150 )&& ( reflection >=85 && reflection <=150 )  ){
@@ -64,7 +64,7 @@ extern bool_t judge_blue(){
 }
 
 extern bool_t judge_black(){
-    int reflection = color_sensor_get_reflect(color_sensor);
+    u_int8_t reflection = color_sensor_get_reflect(color_sensor);
     color_sensor_get_rgb_raw(color_sensor,&crnt_rgb_line);
     printf("ref = %d | r = %d | g = %d | b = %d\n",reflection, crnt_rgb_line.r, crnt_rgb_line.g, crnt_rgb_line.b);
     if(( crnt_rgb_line.r >=70 && crnt_rgb_line.r <=80 ) && ( crnt_rgb_line.g >=80 && crnt_rgb_line.g <=90 ) && ( crnt_rgb_line.b >=95 && crnt_rgb_line.b <=100 )&& ( reflection >=68 && reflection <=77 )  ){
@@ -80,7 +80,7 @@ int linetrace(void){
     get_crntCoordinate(&crnt_line);
     printf("x=%f, y=%f, theta=%f | ",crnt_line.x, crnt_line.y, crnt_line.theta);
     // BLUE検知まで走行する処理。
-    int reflection = color_sensor_get_reflect(color_sensor);
+    u_int8_t reflection = color_sensor_get_reflect(color_sensor);
     float velo_rot_target;
     
     if (divion == 0){
