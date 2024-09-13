@@ -26,6 +26,8 @@ void main_task(intptr_t unused) {
     ext_tsk();
 }
 
+
+
 void boss_task(intptr_t exinf){
     static int cunt;
     static int is_head = 0;
@@ -33,7 +35,7 @@ void boss_task(intptr_t exinf){
     static float velo[11] = {0.0};
 
     if(0 == is_head){
-        calc_TgtVelocity(500.0, 100.0, 11, time, velo);
+        calc_TgtVelocity(500.0, 30.0, 11, time, velo);
 
         printf("time:\n");
         for(int i=0;i<11;i++){
@@ -46,9 +48,10 @@ void boss_task(intptr_t exinf){
         printf("\n");
         is_head = 1;
     }
-    else if((float)(cunt*0.02) < 10.0){
-        float tgtV = get_TgtVelcity((float)(cunt*0.02), 11, time, velo);
-        printf("crnt_time: %f ", (float)(cunt*0.1));
+    
+    if((float)cunt*0.02 < 10.0){
+        float tgtV = get_TgtVelcity((float)cunt*0.02, 11, time, velo);
+        printf("crnt_time: %f ", (float)cunt*0.02);
         printf("TgtV: %f\n", tgtV);
         mid_velocity_control(tgtV, 0.0);    
     }
