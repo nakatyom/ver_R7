@@ -4,27 +4,30 @@
 #include "common.h"
 #include "gyak_min.h"
 
-#define GYAK_ARRAY_SIZE 11 //ジャーク最小化??��?��?割数
+#define GYAK_ARRAY_SIZE 11 //ジャーク最小化??��?��?割数
 
 
 /* static functions */
 
 
 /* external functions */
-/* 最初�???��?��一回だけ呼び出される�???��?��??��?��? */
+/* 最初�???��?��一回だけ呼び出される�???��?��??��?��? */
 void calc_tgt(float tgt, float tgt_time, float* div_time, float* tgtV){
     int div_num = sizeof(div_time)/sizeof(div_time[0]);
+    printf("div_num:%d",div_num);
     float pre_tgt_dist = 0.0;
 
-    /* ??��?��?時間における目標距離を�???��?��??��?��???��?��に格納す??��?��? */
+    printf("nT:");
+    /* 分割時間における */
     for(int i=1; i<=div_num; i++){
-        double normTime = (i / div_num);      // 正規化時間
-        div_time[i-1]  = normTime * tgt_time; // ??��?��?割時間
+        double normTime = ((double)i / (double)div_num);             // 正規化時間
+        printf("%f, ",normTime);
+        div_time[i-1]  = (float)normTime * tgt_time; // 分割時間
             
-        /* ??��?��???��?��?割時間における目標距離の計�? */
+        /*  */
         float tgt_dist = tgt * (float)(6.0*pow(normTime,5.0) - 15.0*pow(normTime,4.0) + 10.0*pow(normTime,3.0));
 
-        /* 目標速度を計�? */
+        /*  */
         if(i == 1){
             tgtV[i-1] = tgt_dist / div_time[0];
             pre_tgt_dist = tgt_dist;
