@@ -7,9 +7,6 @@
 #include "odometry.h"
 
 float mid_PID_line_pos(float tag, float maj,int pwr){ 
-    
-    printf("ref = %f | ",maj);
-
     float kp = 0.2f;
     float ki = 0.02f;
     float kd = 0.10f;
@@ -93,14 +90,14 @@ extern int linetrace(){
             }
         }
         else{ 
-            printf("判定2 \n");
+            printf("判定2");
             velo_rot_target = mid_PID_line_pos(55.0f, (float)reflection,90);
             mid_velocity_control(90.0f, -velo_rot_target);
             if (kotesaki == true){   
-                printf("小手先のカラーセンサ");
+                printf(" | 小手先のカラーセンサ");
                 color_sensor_get_rgb_raw(color_sensor,&crnt_rgb_line);
                 if(judge_blue()== true){
-                    printf("黒検知平行：%d\n",cnt);
+                    printf("黒検知へ移行。");
                     divion = 1;
                 }
             }
@@ -114,7 +111,7 @@ extern int linetrace(){
             printf("STOPカウント：%d\n",cnt);
         }
         else{
-            printf("判定3 \n");
+            printf("判定3");
             velo_rot_target = mid_PID_line_pos(55.0f, (float)reflection,50);
             mid_velocity_control(50.0f, -velo_rot_target);
             color_sensor_get_rgb_raw(color_sensor,&crnt_rgb_line);
