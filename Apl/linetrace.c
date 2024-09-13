@@ -139,6 +139,7 @@ extern int linetrace(){
         motor_stop(left_motor);
         motor_stop(right_motor);
         printf("FINISH LINETRACE\n");
+        reset_Coordinate();
         return 1;
     }
     
