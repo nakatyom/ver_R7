@@ -3,6 +3,7 @@
 #include <stdlib.h>
 
 #include "ev3api.h"
+#include "common.h"
 #include "body.h"
 #include "port.h"
 #include "motor.h"
