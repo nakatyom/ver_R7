@@ -40,7 +40,7 @@ void normalize_tgt(int div_num, float* tgt){
     float raito = off_set / maxVal;
 
     for(int i=0; i<div_num; i++){
-        tgt[i] = (1.0 - raito)*tgt[i];
+        //tgt[i] = (1.0 - raito)*tgt[i];
         tgt[i] += off_set;
     }
 
