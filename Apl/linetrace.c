@@ -87,17 +87,17 @@ int linetrace(void){
 
         printf("x=%f, y=%f, theta=%f | ",crnt_line.x, crnt_line.y, crnt_line.theta);
 //        if((crnt_line.x >=2750 && crnt_line.y >= -300) || (crnt_line.x >=2750 && crnt_line.y <= -1800)){ //コーナーエリア
-            printf("判定1 \n");
-            velo_rot_target = mid_PID_line_pos(55.0f, (float)reflection,50);
-            mid_velocity_control(50.0f, -velo_rot_target);
+//            printf("判定1 \n");
+//            velo_rot_target = mid_PID_line_pos(55.0f, (float)reflection,50);
+//            mid_velocity_control(50.0f, -velo_rot_target);
 //        }else{ //ストレートエリア
-//            printf("判定2 \n");
-//            velo_rot_target = mid_PID_line_pos(55.0f, (float)reflection,90);
-//            mid_velocity_control(90.0f, -velo_rot_target);
-//            if(judge_blue() == true){
-//                divion = 1;
-//            }
-//        }
+            printf("判定2 \n");
+            velo_rot_target = mid_PID_line_pos(55.0f, (float)reflection,90);
+            mid_velocity_control(90.0f, -velo_rot_target);
+            if(judge_blue() == true){
+                divion = 1;
+            }
+        }
 
 
         return 0;
