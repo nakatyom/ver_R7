@@ -12,7 +12,7 @@
 
 /* メインタスク */
 void main_task(intptr_t unused) {
-    /* ポート設定 */
+    /* ポ�?�ト設�? */
     // sensor   : touch_sensor, color_sensor, sonar_sensor, gyro_sensor
     // actuator : arm_motor, left_motor, right_motor
     set_portCfg();
@@ -20,17 +20,17 @@ void main_task(intptr_t unused) {
     
 
     
-    /* タスク呼び出し */
+    /* タスク呼び出�? */
     sta_cyc(SENS_CYC);
     //sta_cyc(BOSS_CYC);
 
-    /* タスク終了 */
+    /* タスク終�? */
     ext_tsk();
 }
 int robo_mode=0;
 
 void boss_task(intptr_t exinf){
-    printf("僕は邪魔者。");
+    printf("僕�?�邪魔�?�?");
     /*
     static struct coordinate crnt;
     get_crntCoordinate(&crnt);
@@ -63,25 +63,27 @@ void sens_task(intptr_t exinf){
     printf("ref = %d | r = %d | g = %d | b = %d\n",ref, rgb.r, rgb.g, rgb.b);
     */
 
-   rgb_raw_t crnt_rgb_app = {0.0, 0.0, 0.0};
+   mid_velocity_control(50.0f, 0.0f);
 
-   int calc_luminance(rgb_raw_t color) {
-    // 加重平均で明度を計算し、int型に変換
+   //gb_raw_t crnt_rgb_app = {0.0, 0.0, 0.0};
 
-        int luminance = 0;
-    
-        printf("r = %d, g = %d, b = %d, ",color.r,color.g,color.b);
+   //nt calc_luminance(rgb_raw_t color) {
+   //// �?重平�?で明度を計算し、int型に変換
 
-        luminance = (int)(0.299 * color.r + 0.587 * color.g + 0.114 * color.b);
-        //luminance = (luminance * 100) / 255;
+   //    int luminance = 0;
+   //
+   //    printf("r = %d, g = %d, b = %d, ",color.r,color.g,color.b);
 
-        printf("ref = %d\n",luminance);
+   //    luminance = (int)(0.299 * color.r + 0.587 * color.g + 0.114 * color.b);
+   //    //luminance = (luminance * 100) / 255;
 
-        return luminance;
-    }
+   //    printf("ref = %d\n",luminance);
 
-    color_sensor_get_rgb_raw(color_sensor,&crnt_rgb_app);
-    int ref_app = calc_luminance(crnt_rgb_app);
+   //    return luminance;
+   //}
+
+   //color_sensor_get_rgb_raw(color_sensor,&crnt_rgb_app);
+   //int ref_app = calc_luminance(crnt_rgb_app);
     
     /*else if(robo_mode == 2){
         // robo_mode = demrm
