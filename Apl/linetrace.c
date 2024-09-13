@@ -106,7 +106,7 @@ extern int linetrace(){
             }
         }
         else{ 
-            printf("判定2");
+            printf("判定2 \n");
             velo_rot_target = mid_PID_line_pos(80.0f, (float)reflection,90);
             mid_velocity_control(90.0f, -velo_rot_target);
             if (kotesaki == true){   
@@ -123,10 +123,10 @@ extern int linetrace(){
         if (cnt < 25){
             motor_stop(left_motor);
             motor_stop(right_motor);
-            printf("STOPカウント：%d\n",cnt);
+            printf("STOPカウント：%d\n",cnt);ｓ
         }
         else{
-            printf("判定3");
+            printf("設定 \n");
             velo_rot_target = mid_PID_line_pos(80.0f, (float)reflection,50);
             mid_velocity_control(50.0f, -velo_rot_target);
             color_sensor_get_rgb_raw(color_sensor,&crnt_rgb_line);
