@@ -27,7 +27,7 @@ void main_task(intptr_t unused) {
     /* タスク終了 */
     ext_tsk();
 }
-int robo_mode=0;
+
 
 void boss_task(intptr_t exinf){
     printf("僕は邪魔者。");
@@ -50,7 +50,7 @@ void boss_task(intptr_t exinf){
 }
 int32_t left=0;
 int32_t right=0;
-
+int robo_mode=0;
 
 void sens_task(intptr_t exinf){
     /*
@@ -62,7 +62,7 @@ void sens_task(intptr_t exinf){
     ev3_color_sensor_get_rgb_raw(color_sensor,&rgb);
     printf("ref = %d | r = %d | g = %d | b = %d\n",ref, rgb.r, rgb.g, rgb.b);
     */
-    printf("\n(mA,mV):(%d,%d)  |  ",ev3_battery_current_mA(),ev3_battery_voltage_mV());
+    //printf("\n(mA,mV):(%d,%d)  |  ",ev3_battery_current_mA(),ev3_battery_voltage_mV());
     if (robo_mode == 0 ){
         robo_mode = linetrace();
     }else if(robo_mode == 1){
