@@ -50,7 +50,8 @@ struct coordinate crnt_line = {0.0, 0.0, 0.0};//自己位置座標
 
 extern bool_t judge_blue(){
     int reflection = ev3_color_sensor_get_reflect(color_sensor);
-    if(( crnt_rgb_line.r >=10 && crnt_rgb_line.r <=20 ) && ( crnt_rgb_line.g >=42 && crnt_rgb_line.g <=52 ) && ( crnt_rgb_line.b >=80 && crnt_rgb_line.b <=90 )&& ( reflection >=30 && reflection <=40 )  ){
+    printf("ref = %d | r = %d | g = %d | b = %d\n",reflection, crnt_rgb_line.r, crnt_rgb_line.g, crnt_rgb_line.b);
+    if(( crnt_rgb_line.r >=80 && crnt_rgb_line.r <=90 ) && ( crnt_rgb_line.g >=110 && crnt_rgb_line.g <=225 ) && ( crnt_rgb_line.b >=140 && crnt_rgb_line.b <=150 )&& ( reflection >=85 && reflection <=150 )  ){
         return true;
     }
     else{
@@ -60,7 +61,8 @@ extern bool_t judge_blue(){
 
 extern bool_t judge_black(){
     int reflection = ev3_color_sensor_get_reflect(color_sensor);
-    if(( crnt_rgb_line.r >=4 && crnt_rgb_line.r <=13 ) && ( crnt_rgb_line.g >=5 && crnt_rgb_line.g <=15 ) && ( crnt_rgb_line.b >=7 && crnt_rgb_line.b <=17 )&& ( reflection >=3 && reflection <=14 )  ){
+    printf("ref = %d | r = %d | g = %d | b = %d\n",reflection, crnt_rgb_line.r, crnt_rgb_line.g, crnt_rgb_line.b);
+    if(( crnt_rgb_line.r >=70 && crnt_rgb_line.r <=80 ) && ( crnt_rgb_line.g >=80 && crnt_rgb_line.g <=90 ) && ( crnt_rgb_line.b >=95 && crnt_rgb_line.b <=100 )&& ( reflection >=68 && reflection <=77 )  ){
         return true;
     }
     else{
