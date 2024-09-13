@@ -20,7 +20,8 @@ float now_x=0.0f;
 float now_y=0.0f;
 int roop_cnt=0;
 struct coordinate crnt_neo = {0.0, 0.0, 0.0};//自己位置座標
-
+float x_pos_target[6]={ 420.0, 520.0, 240.0,-220.0,-780.0,-1040.0, -580.0,-260.0,-260.0};
+float y_pos_target[6]={-140.0,-580.0,-860.0,-760.0,-670.0,-1100.0,-1200.0,-720.0,   0.0};
 // 走行距離計算処理
 int dist(float x1, float y1, float x2, float y2) {
     float dx = x2 - x1;
@@ -40,23 +41,24 @@ int calc_angle(float tgt_pos_x, float tgt_pos_y){
     //tgt_pos_y = tgt_pos_y - crnt_neo.y;
     
     
-    if (crnt_neo.x <= 0.0f){
-        tgt_pos_x = tgt_pos_x + abs(crnt_neo.x);
-    }else if(crnt_neo.x > 0.0f){
-        tgt_pos_x = tgt_pos_x - abs(crnt_neo.x);
-    }
-    else{
-        printf("旋回角度算出中に異常発生");
-    }
-    // (y座標)
-    if (crnt_neo.y <= 0.0f){
-        tgt_pos_y = tgt_pos_y + abs(crnt_neo.y);
-    }else if(crnt_neo.y > 0.0f){
-        tgt_pos_y = tgt_pos_y - abs(crnt_neo.y);
-    }else{
-        printf("旋回角度算出中に異常発生");
-    }
-
+    //if (crnt_neo.x <= 0.0f){
+    //    tgt_pos_x = tgt_pos_x + abs(crnt_neo.x);
+    //}else if(crnt_neo.x > 0.0f){
+    //    tgt_pos_x = tgt_pos_x - abs(crnt_neo.x);
+    //}
+    //else{
+    //    printf("旋回角度算出中に異常発生");
+    //}
+    //// (y座標)
+    //if (crnt_neo.y <= 0.0f){
+    //    tgt_pos_y = tgt_pos_y + abs(crnt_neo.y);
+    //}else if(crnt_neo.y > 0.0f){
+    //    tgt_pos_y = tgt_pos_y - abs(crnt_neo.y);
+    //}else{
+    //    printf("旋回角度算出中に異常発生");
+    //}
+    tgt_pos_x = tgt_pos_x - crnt_neo.x;
+    tgt_pos_y = tgt_pos_y - crnt_neo.y;
     // 処理2角度計算
     tgt_angle=atan2(tgt_pos_y,tgt_pos_x);
     tgt_angle = tgt_angle * (180 / PI);
@@ -165,13 +167,11 @@ bool_t proc_run(float now_dist,float tgt_dist){
 int hello_neo(){
     // 定数宣言（目標座標の配列
     /* SIM上の座標を修正。*/
-    float x_pos_target[6]={420.0,520.0,240.0,-220.0,-780.0,-1040.0,-580.0,-260.0,-260.0};
-    float y_pos_target[6]={-140.0,-580.0,-860.0,-760.0,-670.0,-1100.0,-1200.0,-720.0,0.0};
     get_crntCoordinate(&crnt_neo);
     if(roop_cnt <= 8){
         // 変数宣言
         now_angle = (int)trans_gDeg((crnt_neo.theta));
-        printf("x=%f, y=%f, theta(変換後)=%f° | ",crnt_neo.x, crnt_neo.y, trans_gDeg(crnt_neo.theta));
+        printf("x=%f, y=%f, theta=%f° | ",crnt_neo.x, crnt_neo.y, trans_gDeg(crnt_neo.theta));
         // 旋回処理
         if (init_flag == false){ 
             tgt_angl = calc_angle(x_pos_target[roop_cnt],y_pos_target[roop_cnt]);
