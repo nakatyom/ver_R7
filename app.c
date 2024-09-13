@@ -32,7 +32,7 @@ void boss_task(intptr_t exinf){
     float velo[11] = {0.0};
 
     if(0 == is_head){
-        get_TgtVelocity(500.0, 10.0, 11, time, velo);
+        calc_TgtVelocity(500.0, 10.0, 11, time, velo);
 
         printf("time, velo:\n");
         for(int i=0;i<11;i++){
