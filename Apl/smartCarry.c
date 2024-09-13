@@ -121,7 +121,7 @@ extern bool_t proc_turn(int now_angle, int tgt_angle){
     bool_t flag = false;
     //get_crntCoordinate(&crnt_neo);
     if (now_angle < tgt_angle){
-        mdl_velocity_control(0.0f, 45.0f);
+        mid_velocity_control(0.0f, 45.0f);
         //ev3_motor_set_power(left_motor,  5);
         //ev3_motor_set_power(right_motor, -5);
         //printf("処理：分岐１");
@@ -129,7 +129,7 @@ extern bool_t proc_turn(int now_angle, int tgt_angle){
         flag =false;
     }
     else if (now_angle > tgt_angle){
-        mdl_velocity_control(0.0f, -45.0f);
+        mid_velocity_control(0.0f, -45.0f);
         //ev3_motor_set_power(left_motor,  -10);
         //ev3_motor_set_power(right_motor, 10);
         //printf("処理：分岐２");
@@ -149,13 +149,13 @@ extern bool_t proc_run(float now_dist,float tgt_dist){
     printf("距離情報(現在( %d mm):目標( %d mm )\n",(int)now_dist,(int)tgt_dist);
     bool_t flag = false;
     if (now_dist < tgt_dist){
-        mdl_velocity_control(60.0f, 0.0f);
+        mid_velocity_control(60.0f, 0.0f);
         //ev3_motor_set_power(left_motor,  20);
         //ev3_motor_set_power(right_motor, 20);
         flag = false;
     }
     else if (now_dist > tgt_dist){
-        mdl_velocity_control(60.0f, 0.0f);
+        mid_velocity_control(60.0f, 0.0f);
         //ev3_motor_set_power(left_motor,  -2);
         //ev3_motor_set_power(right_motor, -2);
         flag = false;
