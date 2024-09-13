@@ -42,7 +42,9 @@ int robo_mode=0;
 #define ARRAY 50
 
 void sens_task(intptr_t exinf){
-    static struct coordinate test_c = {0.0f, 0.0f, 0.0f};
+    int a = 0;
+    a = hello_neo();
+    // static struct coordinate test_c = {0.0f, 0.0f, 0.0f};
     //static int cunt;
     //static int is_head = 0;
     //static float time[ARRAY] = {0.0};
@@ -53,13 +55,8 @@ void sens_task(intptr_t exinf){
     //float tgt_time = 20.0;
     //float crnt_time = (float)cunt*0.02;
 
-    get_crntCoordinate(&test_c);
-    printf("x: %f,y: %f,theta: %f\n",test_c.x, test_c.y, test_c.theta);
-
-    if(true ==  ev3_touch_sensor_is_pressed(touch_sensor)){
-        test_c.x = 0.0;
-        test_c.y = 0.0;
-    }
+    //get_crntCoordinate(&test_c);
+    //printf("x: %f,y: %f,theta: %f\n",test_c.x, test_c.y, test_c.theta);
 
 /*  
     mid_velocity_control(0.0f, -40.0f);
