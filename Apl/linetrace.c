@@ -45,7 +45,7 @@ float mid_PID_line_pos(float tag, float maj,int pwr){
 
 int divion = 0;
 int finish = 0;
-struct rgb_raw_t crnt_rgb_line;
+rgb_raw_t crnt_rgb_line;
 struct coordinate crnt_line = {0.0, 0.0, 0.0};//自己位置座標
 
 extern bool_t judge_blue(){
