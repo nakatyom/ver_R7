@@ -12,7 +12,7 @@
 
 /* メインタスク */
 void main_task(intptr_t unused) {
-    /* ポ�?�ト設�? */
+    /* ポ�?�ト設�? */
     // sensor   : touch_sensor, color_sensor, sonar_sensor, gyro_sensor
     // actuator : arm_motor, left_motor, right_motor
     set_portCfg();
@@ -20,17 +20,17 @@ void main_task(intptr_t unused) {
     
 
     
-    /* タスク呼び出�? */
+    /* タスク呼び出�? */
     sta_cyc(SENS_CYC);
     //sta_cyc(BOSS_CYC);
 
-    /* タスク終�? */
+    /* タスク終�? */
     ext_tsk();
 }
 int robo_mode=0;
 
 void boss_task(intptr_t exinf){
-    printf("僕�?�邪魔�?�?");
+    printf("僕�?�邪魔�?�?");
     /*
     static struct coordinate crnt;
     get_crntCoordinate(&crnt);
@@ -63,12 +63,12 @@ void sens_task(intptr_t exinf){
     printf("ref = %d | r = %d | g = %d | b = %d\n",ref, rgb.r, rgb.g, rgb.b);
     */
 
-   mid_velocity_control(50.0f, 0.0f);
+   mid_velocity_control(50.0f, 1.0f);
 
    //gb_raw_t crnt_rgb_app = {0.0, 0.0, 0.0};
 
    //nt calc_luminance(rgb_raw_t color) {
-   //// �?重平�?で明度を計算し、int型に変換
+   //// �?重平�?で明度を計算し、int型に変換
 
    //    int luminance = 0;
    //
