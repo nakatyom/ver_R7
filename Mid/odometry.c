@@ -57,7 +57,7 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
     double delta_theta_g = (double)(gyro_sensor_get_angle(gyro_sensor) - gyro_sensor_get_pre_angle(gyro_sensor));
     double delta_rad_g   = PI_DOUBLE * delta_theta_g /180.0;
     
-    printf("theta_g = %f | rad_g = %f",delta_theta_g,delta_rad_g);
+    printf("theta_g = %f | rad_g = %f | ",delta_theta_g,delta_rad_g);
     
     // 現在座標を計算する
     double pre_rad = PI_DOUBLE * pre_coordinate.theta / 180.0;
