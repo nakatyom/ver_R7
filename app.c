@@ -42,7 +42,7 @@ int robo_mode=0;
 #define ARRAY 50
 
 void sens_task(intptr_t exinf){
-    //static struct coordinate test_c = {0.0f, 0.0f, 0.0f};
+    static struct coordinate test_c = {0.0f, 0.0f, 0.0f};
     //static int cunt;
     //static int is_head = 0;
     //static float time[ARRAY] = {0.0};
