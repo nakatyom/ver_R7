@@ -26,5 +26,6 @@ void main_task(intptr_t unused) {
 //uint8_t cnt;
 void naka_task(intptr_t unused){
     printf("10ms Task ");
-    linetrace();
+    // linetrace();
+    mid_velocity_control(50.0f, 0.0f);
 }
