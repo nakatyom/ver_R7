@@ -49,14 +49,16 @@ void sens_task(intptr_t exinf){
     static float velo[ARRAY] = {0.0};
 
     float tgt_distance = 1000.0;
+    float tgt_theta = 90.0;
     float tgt_time = 20.0;
     float crnt_time = (float)cunt*0.02;
 
     get_crntCoordinate(&test_c);
     printf("x: %f,y: %f,theta: %f\n",test_c.x, test_c.y, test_c.theta);
+
     
-    mid_velocity_control(60.0f, 0.0f);
-    if(test_c.x > 0.99 * tgt_distance){
+    mid_velocity_control(0.0f, 60.0f);
+    if(test_c.theta > 0.99 * tgt_theta){
         motor_stop(left_motor);
         motor_stop(right_motor);      
     }
