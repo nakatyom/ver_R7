@@ -100,6 +100,8 @@ extern int linetrace(){
                 color_sensor_get_rgb_raw(color_sensor,&crnt_rgb_line);
                 if(judge_blue() == true){
                     divion = 1;
+                    motor_stop(left_motor);
+                    motor_stop(right_motor);
                 }
             }
 
