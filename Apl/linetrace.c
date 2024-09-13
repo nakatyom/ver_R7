@@ -84,11 +84,11 @@ extern int linetrace(){
 
     if (divion == 0){
         printf("x=%f, y=%f, theta=%f | ",crnt_line.x, crnt_line.y, crnt_line.theta);
-        if((crnt_line.x >=2750 && crnt_line.y >= -300) || (crnt_line.x >=2750 && crnt_line.y <= -1800)){
+        if((crnt_line.x >=2750 && crnt_line.y >= -300) || (crnt_line.x >=3000 && crnt_line.y <= -1800)){
             printf("判定1 \n");
             velo_rot_target = mid_PID_line_pos(55.0f, (float)reflection,50);
             mid_velocity_control(50.0f, -velo_rot_target);
-            if (crnt_line.x >=2750 && crnt_line.y <= -1800 && kotesaki==false){
+            if (crnt_line.x >=3000 && crnt_line.y <= -1800 && kotesaki==false){
                 kotesaki=true;
             }
         }
@@ -107,11 +107,11 @@ extern int linetrace(){
         }
         return 0;
     }else if(divion == 1){//RGB==BLACK
-        cnt + cnt + 1;
+        cnt = cnt + 1;
         if (cnt < 25){
             motor_stop(left_motor);
             motor_stop(right_motor);
-            printf("STOPカウント：%d",cnt);
+            printf("STOPカウント：%d\n",cnt);
         }
         else{
             printf("判定3 \n");
