@@ -45,9 +45,10 @@ int divion = 0;
 int finish = 0;
 
 u_int8_t reflection =0;
+rgb_raw_t crnt_rgb_line;
 struct coordinate crnt_line = {0.0, 0.0, 0.0};//自己位置座標
 
-bool_t judge_blue(rgb_raw_t crnt_rgb_line){
+bool_t judge_blue(){
     //rgb_raw_t crnt_rgb_line;
     //u_int8_t reflection = color_sensor_get_reflect(color_sensor);
     //color_sensor_get_rgb_raw(color_sensor,&crnt_rgb_line);
@@ -61,7 +62,7 @@ bool_t judge_blue(rgb_raw_t crnt_rgb_line){
     }
 }
 
-bool_t judge_black(rgb_raw_t crnt_rgb_line){
+bool_t judge_black(){
     
     //u_int8_t reflection = color_sensor_get_reflect(color_sensor);
     //ev3_color_sensor_get_rgb_raw(color_sensor,&crnt_rgb_line);
@@ -74,11 +75,10 @@ bool_t judge_black(rgb_raw_t crnt_rgb_line){
         return false;
     }
 }
-
-extern int linetrace(rgb_raw_t rgb){
+bool_t kotesaki = false;
+extern int linetrace(){
     float velo_rot_target;
     get_crntCoordinate(&crnt_line);
-    
     reflection = color_sensor_get_reflect(color_sensor);
 
     if (divion == 0){
@@ -87,13 +87,23 @@ extern int linetrace(rgb_raw_t rgb){
             printf("判定1 \n");
             velo_rot_target = mid_PID_line_pos(55.0f, (float)reflection,50);
             mid_velocity_control(50.0f, -velo_rot_target);
-        }else{ 
+            if (crnt_line.x >=2750 && crnt_line.y <= -1800){
+                kotesaki=true;
+            }
+        }
+        else{ 
             printf("判定2 \n");
             velo_rot_target = mid_PID_line_pos(55.0f, (float)reflection,90);
             mid_velocity_control(90.0f, -velo_rot_target);
-            if(judge_blue(rgb) == true){
-                divion = 1;
+            if (kotesaki == true)
+            {
+                color_sensor_get_rgb_raw(color_sensor,&crnt_rgb_line);
+                if(judge_blue() == true){
+                    divion = 1;
+                }
             }
+
+
         }
         return 0;
     }else if(divion == 1){//RGB==BLACK
@@ -101,7 +111,7 @@ extern int linetrace(rgb_raw_t rgb){
         velo_rot_target = mid_PID_line_pos(55.0f, (float)reflection,50);
         mid_velocity_control(50.0f, -velo_rot_target);
         return 0;
-        if(judge_black(rgb)==true){
+        if(judge_black()==true){
             divion = 2;
         }
     }else{
