@@ -58,7 +58,7 @@ float get_TgtVelcity(float crnt_time, int div_num, float* div_time, float* tgt_v
         return 0.0;
     }
 
-    return tgt_velocity[i];
+    return tgt_velocity[cunt_v];
 }
 
 float get_TgtRate(float crnt_time, int div_num, float* div_time, float* tgt_rate){
@@ -72,5 +72,5 @@ float get_TgtRate(float crnt_time, int div_num, float* div_time, float* tgt_rate
         return 0.0;
     }
 
-    return tgt_rate[i];
+    return tgt_rate[cunt_r];
 }
