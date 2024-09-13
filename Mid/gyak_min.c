@@ -16,10 +16,10 @@ void calc_tgt(float tgt, float tgt_time, int div_num, float* div_dist, float* tg
     for(int i=1; i<=div_num; i++){
         double normTime = ((double)i / (double)div_num);             // 正規化時間
         // div_time[i-1]  = (float)normTime * tgt_time; // ?��?割時間
-        double div_time = normTime * tgt_time;
+        float div_time = (float)normTime * tgt_time;
             
         /*  */
-        div_dist[i-1] = tgt * (float)(6.0*pow(normTime,5.0) - 15.0*pow(normTime,4.0) + 10.0*pow(normTime,3.0));
+        div_dist[i-1] = (float)( tgt * (6.0*pow(normTime,5.0) - 15.0*pow(normTime,4.0) + 10.0*pow(normTime,3.0)) );
 
         /*  */
         if(i == 1){
