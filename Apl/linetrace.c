@@ -61,7 +61,7 @@ bool_t judge_blue(rgb_raw_t crnt_rgb_line){
     }
 }
 
-bool_t judge_black(){
+bool_t judge_black(rgb_raw_t crnt_rgb_line){
     
     //u_int8_t reflection = color_sensor_get_reflect(color_sensor);
     //ev3_color_sensor_get_rgb_raw(color_sensor,&crnt_rgb_line);
@@ -95,15 +95,13 @@ extern int linetrace(rgb_raw_t rgb){
                 divion = 1;
             }
         }
-
-
         return 0;
     }else if(divion == 1){//RGB==BLACK
         printf("判定3 \n");
         velo_rot_target = mid_PID_line_pos(55.0f, (float)reflection,50);
         mid_velocity_control(50.0f, -velo_rot_target);
         return 0;
-        if(judge_black()==true){
+        if(judge_black(rgb)==true){
             divion = 2;
         }
     }else{
