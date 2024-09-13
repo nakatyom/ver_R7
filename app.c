@@ -75,11 +75,11 @@ void sens_task(intptr_t exinf){
         luminance = (int)(0.299 * color.r + 0.587 * color.g + 0.114 * color.b);
         luminance = (luminance * 100) / 255;
 
-        printf("ref = %d | ",luminance);
+        printf("ref = %d\n",luminance);
 
         return luminance;
     }
-    
+
     color_sensor_get_rgb_raw(color_sensor,&crnt_rgb_app);
     int ref_app = calc_luminance(crnt_rgb_app);
     
