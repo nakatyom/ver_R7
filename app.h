@@ -6,7 +6,6 @@ extern "C" {
 /* タスク優先度 */
 #define MAIN_PRIORITY   (TMIN_APP_TPRI + 1) /* メインタスク */
 #define CUNT_PRIORITY   (TMIN_APP_TPRI + 2)
-#define SENS_PRIORITY   (TMIN_APP_TPRI + 3) /* センサ�?動タスク */
 #define BOSS_PRIORITY   (TMIN_APP_TPRI + 4) /* 制御タスク */
 
 /* タスク周期�?�定義 */
@@ -21,7 +20,6 @@ extern "C" {
 
 extern void main_task(intptr_t exinf);
 extern void cunt_task(intptr_t exinf);
-extern void sens_task(intptr_t exinf);
 extern void boss_task(intptr_t exinf);
 
 #endif /* TOPPERS_MACRO_ONLY */

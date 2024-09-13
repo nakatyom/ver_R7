@@ -64,12 +64,6 @@ void boss_task(intptr_t exinf){
     //cunt += 1;
 }
 
-
-void sens_task(intptr_t exinf){
-
-
-}
-
 void cunt_task(intptr_t exinf){
 
 }
