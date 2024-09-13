@@ -19,7 +19,7 @@ void main_task(intptr_t unused) {
     
     /* タスク呼び出し */
     sta_cyc(SENS_CYC);
-    sta_cyc(BOSS_CYC);
+    //sta_cyc(BOSS_CYC);
 
     /* タスク終了 */
     ext_tsk();
