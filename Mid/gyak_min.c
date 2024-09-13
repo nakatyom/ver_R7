@@ -1,79 +1,73 @@
 #include <stdio.h>
+#include <math.h>
 
-#include "ev3api.h"
 #include "common.h"
 #include "gyak_min.h"
-
-const float tgtV_ave = 50.0f; // 目標平均速度[mm/s]
-const float tgtR_ave = 45.0f; // 目標平均速度[theta/s]
-const cyc_time = 100;         // サイクル周期[ms]
-const int array = 11;    // 配列長
-
-
-
 
 /* static functions */
 
 
 /* external functions */
-float calc_TgtVelocity(float tgt_dist){
-    static int is_head; // 最初の呼び出しかを判定する
-    static int cnt_V;  // 何回目の呼び出しかをカウントする
+/* 最初�?????��?��??��?��???��?��??��?��一回だけ呼び出される�?????��?��??��?��???��?��??��?��????��?��??��?��???��?��??��?��? */
+void calc_tgt(float tgt, float tgt_time, int div_num, float* div_time, float* tgtV){
+    float pre_tgt_dist = 0.0;
 
-    /* 並進速度用のパラメータ */
-    static float div_dist[11];
-    static float tgt_velocity[11];
-    float tgt_v = 0;
-
-    /* 最初の一回だけ呼び出される処理 */
-    if(0 == is_head){
-        float divTime_v;
-        float normTime_v;
-
-        /* 到達速度計算 */
-        float tgtTime = tgt_dist / tgtV_ave;
-        
-        /* 各時間における目標距離を配列に格納する */
-        for(int i=1; i<=11; i++){
-            divTime_v  = (i / 11) * tgtTime; // 分割時間
-            normTime_v = divTime_v / tgtTime;     // 正規化時間
+    /* ?��?割時間におけ?��? */
+    for(int i=1; i<=div_num; i++){
+        double normTime = ((double)i / (double)div_num);             // 正規化時間
+        div_time[i-1]  = (float)normTime * tgt_time; // ?��?割時間
             
-            /* ジャーク最小化 */
-            div_dist[i-1] = tgt_dist * (6*(float)pow(normTime_v,5) - 15*(float)pow(normTime_v,4) + 10*(float)pow(normTime_v,3));
+        /*  */
+        float tgt_dist = tgt * (float)(6.0*pow(normTime,5.0) - 15.0*pow(normTime,4.0) + 10.0*pow(normTime,3.0));
+
+        /*  */
+        if(i == 1){
+            tgtV[i-1] = tgt_dist / div_time[0];
+            pre_tgt_dist = tgt_dist;
         }
-
-        /* 現在の目標速度を計算 */
-        tgt_v = div_dist[cnt_V];
-
-        cnt_V += 1; //カウントアップ
-
-        return tgt_v;
+        else{
+            tgtV[i-1] = (tgt_dist - pre_tgt_dist) / div_time[0];
+            pre_tgt_dist = tgt_dist;
+        }
     }
+
+    return;
+}
+
+void calc_TgtVelocity(float tgt_dist, float tgt_time, int div_num, float* div_time, float* tgt_velocity){
+    calc_tgt(tgt_dist, tgt_time, div_num, div_time, tgt_velocity);
+    return;
+}
+
+void calc_TgtRate(float tgt_theta, float tgt_time, int div_num, float* div_time, float* tgt_rate){
+    calc_tgt(tgt_theta, tgt_time, div_num, div_time, tgt_rate);
+    return;
+}
+
+float get_TgtVelcity(float crnt_time, int div_num, float* div_time, float* tgt_velocity){
+    static int cunt_v = 0;
+    /* 現在使�?べき速度配�?��?�要�?番号を更新する */
+    if(div_time[cunt_v] <= crnt_time) cunt_v += 1;
     
-    /* 現在の目標速度を計算 */
-    tgt_v = ( div_dist[cnt_V] - div_dist[cnt_V-1] ) / cyc_time;
+    /* 配�?��?�最後に到�?(目標地点に到�?)したらリセ�?トす�?*/
+    if(cunt_v >= div_num){
+        cunt_v = 0;
+        return 0.0;
+    }
 
-    cnt_V += 1; //カウントアップ
-
-    return tgt_v;
+    return tgt_velocity[cunt_v];
 }
 
-float calc_TgtRate(float tgt_theta){
-    static int is_head; // 最初の呼び出しかを判定する
-    static int cnt_W;  // 何回目の呼び出しかをカウントする
+float get_TgtRate(float crnt_time, int div_num, float* div_time, float* tgt_rate){
+    static int cunt_r;
+    /* 現在使�?べき速度配�?��?�要�?番号を更新する */
+    if(div_time[cunt_r] <= crnt_time) cunt_r += 1;
+    
+    /* 配�?��?�最後に到�?(目標地点に到�?)したらリセ�?トす�?*/
+    if(cunt_r >= div_num){
+        cunt_r = 0;
+        return 0.0;
+    }
 
-    /* 旋回角度用のパラメータ */
-    static float divTime_w[11];
-    static float normTime_w[11];
+    return tgt_rate[cunt_r];
 }
-
-
-// 到達時間計算
-// 到達時間を11分割(static 長さ11の配列)
-// 正規化時間を計算(static 長さ11の配列)
-// 各時間での目標距離を計算
-// 各時間での目標速度を計算:(Ln^Ln-1)/delta_t
-// return 目標時間
-
-// リセット関数
-// 上記のstaticを初期化する

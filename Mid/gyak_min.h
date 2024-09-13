@@ -2,8 +2,9 @@
 #define _GYAK_MIN_H
 
 /* external functions*/
-extern float calc_TgtVelocity(float tgt_dist);
-extern float calc_TgtRate(float tgt_theta);
-extern void reset_tgt(void);
+extern void calc_TgtVelocity(float tgt_dist, float tgt_time, int div_num, float* div_time, float* tgt_velocity);
+extern void calc_TgtRate(float tgt_theta, float tgt_time, int div_num, float* div_time, float* tgt_rate);
+extern float get_TgtVelcity(float crnt_time, int div_num, float* div_time, float* tgt_velocity);
+extern float get_TgtRate(float crnt_time, int div_num, float* div_time, float* tgt_rate);
 
 #endif /* _GYAK_MIN_H */

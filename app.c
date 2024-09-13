@@ -32,53 +32,47 @@ void main_task(intptr_t unused) {
 
 
 void boss_task(intptr_t exinf){
-    printf("僕は邪魔者。");
-    /*
-    static struct coordinate crnt;
-    get_crntCoordinate(&crnt);
-    if (robo_mode == 0 ){
-        robo_mode = linetrace();
-    }else if(robo_mode == 1){
-        robo_mode = hello_neo();
-    }/*else if(robo_mode == 2){
-        // robo_mode = demrm
-    }else if (robo_mode == 3){
-        // robo_mode = smrt()
-    }else{
-        // robo_mode = smrt()
-    }*/
-
-    
+    // printf("僕は邪魔者。");
+  
 }
 int32_t left=0;
 int32_t right=0;
 int robo_mode=0;
 
+#define ARRAY 50
+
 void sens_task(intptr_t exinf){
-    mid_velocity_control(50.0f, 0.0f);
-    /*
-    left=motor_get_counts(left_motor);
-    right=motor_get_counts(right_motor);
-    printf("(left,right):(%d,%d) | GYRO:%d\n",left,right,gyro_sensor_get_angle(gyro_sensor));
-    rgb_raw_t rgb;
-    uint8_t ref = ev3_color_sensor_get_reflect(color_sensor);
-    ev3_color_sensor_get_rgb_raw(color_sensor,&rgb);
-    printf("ref = %d | r = %d | g = %d | b = %d\n",ref, rgb.r, rgb.g, rgb.b);
-    */
-    //printf("\n(mA,mV):(%d,%d)  |  ",ev3_battery_current_mA(),ev3_battery_voltage_mV());
-    //if (robo_mode == 0 ){
-    //    robo_mode = linetrace();
-    //}else if(robo_mode == 1){
-    //    printf("NEO  ");
-    //    robo_mode = hello_neo();
-    //}
+    static int cunt;
+    static int is_head = 0;
+    static float time[ARRAY] = {0.0};
+    static float velo[ARRAY] = {0.0};
+
+    if(0 == is_head){
+        calc_TgtVelocity(100.0, 10.0, 11, time, velo);
+
+        printf("time:\n");
+        for(int i=0;i<ARRAY;i++){
+            printf("%f, ", time[i]);
+        }
+        printf("\ntime:\n");
+        for(int i=0;i<ARRAY;i++){
+            printf("%f : ",velo[i]);
+        }
+        printf("\n");
+        is_head = 1;
+    }
     
-    /*else if(robo_mode == 2){
-        // robo_mode = demrm
-    }else if (robo_mode == 3){
-        // robo_mode = smrt()
-    }else{
-        // robo_mode = smrt()
-    }*/
+    if((float)cunt*0.02 < 10.0){
+        float tgtV = get_TgtVelcity((float)cunt*0.02, ARRAY, time, velo);
+        printf("crnt_time: %f ", (float)cunt*0.02);
+        printf("TgtV: %f\n", tgtV); 
+        mid_velocity_control(tgtV+30.0f, 0.0f);
+    }
+    else{
+        motor_stop(left_motor);
+        motor_stop(right_motor);
+    }
+
+    cunt += 1;
 
 }
