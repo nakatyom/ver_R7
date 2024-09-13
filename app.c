@@ -44,14 +44,22 @@ void boss_task(intptr_t exinf){
 
     
 }
+int32_t left=0;
+int32_t right=0;
+
 
 void sens_task(intptr_t exinf){
+    motor_get_counts(left_motor);
+    motor_get_counts(right_motor);
+    printf("(left,right):(%d,%d)",left,right);
+    /*
     if (robo_mode == 0 ){
         robo_mode = linetrace();
     }else if(robo_mode == 1){
         printf("NEO  ");
         robo_mode = hello_neo();
     }
+    */
     /*else if(robo_mode == 2){
         // robo_mode = demrm
     }else if (robo_mode == 3){
