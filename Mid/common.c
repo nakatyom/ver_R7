@@ -6,13 +6,10 @@
 
 /* extern functions*/
 float trans_gDeg(float encdeg){
-    float nPI = 360.0;
+    float nPI = 0.0;
 
-    if(abs(encdeg) > nPI){
-        while(abs(encdeg) < nPI){
+    while(abs(encdeg) > nPI + 360.0){
             nPI += 360.0;
-        }
-        nPI -= 360.0;
     }
     
     float deg = abs(encdeg) - nPI;
@@ -23,7 +20,7 @@ float trans_gDeg(float encdeg){
         deg = -1.0 * (360.0 - deg);
     }
 
-    if((int)deg == -180) deg = 0.0; //floatなのでホント�?��?要な�?けど,念のため
+    if(deg == -180.0) deg = 0.0;
 
     printf("deg:%f\n",(float)deg);
     return deg;
