@@ -35,7 +35,7 @@ void calc_tgt(float tgt, float tgt_time, int div_num, float* div_time, float* tg
 }
 
 void normalize_tgt(int div_num, float* tgt){
-    float off_set = 30;
+    float off_set = 30.0;
     float maxVal = tgt[div_num/2];
     float raito = off_set / maxVal;
 
@@ -48,7 +48,7 @@ void normalize_tgt(int div_num, float* tgt){
 
 void calc_TgtVelocity(float tgt_dist, float tgt_time, int div_num, float* div_time, float* tgt_velocity){
     calc_tgt(tgt_dist, tgt_time, div_num, div_time, tgt_velocity);
-    //normalize_tgt(div_num, tgt_velocity);
+    normalize_tgt(div_num, tgt_velocity);
     return;
 }
 
