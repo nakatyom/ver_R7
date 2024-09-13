@@ -1,14 +1,14 @@
 #include <stdio.h>
 
 #include "ev3api.h"
-#include "common.h"
+// #include "common.h"
 #include "port.h"
-#include "motor.h"
-#include "gyro.h"
+// #include "motor.h"
+// # include "gyro.h"
 #include "app.h"
-#include "odometry.h"
-#include "gyak_min.h"
-#include "linetrace.h"
+// #include "odometry.h"
+// #include "gyak_min.h"
+// #include "linetrace.h"
 
 /* メインタスク */
 void main_task(intptr_t unused) {
