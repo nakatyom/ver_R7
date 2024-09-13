@@ -12,17 +12,15 @@
 
 /* メインタスク */
 void main_task(intptr_t unused) {
-    /* ポ�?�ト設�? */
+    /* ポ�?�ト設�? */
     // sensor   : touch_sensor, color_sensor, sonar_sensor, gyro_sensor
     // actuator : arm_motor, left_motor, right_motor
     set_portCfg();
     
-    /* タスク呼び出�? */
-    sta_cyc(CUNT_CYC);
-    sta_cyc(SENS_CYC);
+    /* タスク呼び出�? */
     sta_cyc(BOSS_CYC);
 
-    /* タスク終�? */
+    /* タスク終�? */
     ext_tsk();
 }
 
@@ -62,8 +60,4 @@ void boss_task(intptr_t exinf){
     //}
 
     //cunt += 1;
-}
-
-void cunt_task(intptr_t exinf){
-
 }
