@@ -41,9 +41,17 @@ float mid_PID_line_pos(float tag, float maj,int pwr){
 int divion = 0;
 int finish = 0;
 
-u_int8_t reflection =0;
+int reflection =0;
 rgb_raw_t crnt_rgb_line;
 struct coordinate crnt_line = {0.0, 0.0, 0.0};//自己位置座標
+
+// 明度を計算する関数
+int calc_luminance(rgb_raw_t color) {
+    // 加重平均で明度を計算し、int型に変換
+    int luminance = (int)(0.299 * color.r + 0.587 * color.r + 0.114 * color.r);
+    luminance = (luminance * 100) / 255;
+    return luminance;
+}
 
 bool_t judge_blue(){
     //rgb_raw_t crnt_rgb_line;
@@ -77,7 +85,7 @@ int cnt =0;
 extern int linetrace(){
     float velo_rot_target;
     get_crntCoordinate(&crnt_line);
-    reflection = color_sensor_get_reflect(color_sensor);
+    reflection = calc_luminance(crnt_rgb_line);
 
     if (divion == 0){
         printf("x=%f, y=%f, theta=%f | ",crnt_line.x, crnt_line.y, crnt_line.theta);
