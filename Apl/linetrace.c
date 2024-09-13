@@ -48,8 +48,12 @@ struct coordinate crnt_line = {0.0, 0.0, 0.0};//自己位置座標
 // 明度を計算する関数
 int calc_luminance(rgb_raw_t color) {
     // 加重平均で明度を計算し、int型に変換
+    
     int luminance = (int)(0.299 * color.r + 0.587 * color.r + 0.114 * color.r);
     luminance = (luminance * 100) / 255;
+
+    printf("ref = %d | ",reflection);
+
     return luminance;
 }
 
@@ -86,7 +90,7 @@ extern int linetrace(){
     float velo_rot_target;
     get_crntCoordinate(&crnt_line);
     reflection = calc_luminance(crnt_rgb_line);
-    printf("ref = %d | ",reflection);
+    //printf("ref = %d | ",reflection);
 
     if (divion == 0){
         printf("x=%f, y=%f, theta=%f | ",crnt_line.x, crnt_line.y, crnt_line.theta);
