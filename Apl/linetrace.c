@@ -45,14 +45,14 @@ float mid_PID_line_pos(float tag, float maj,int pwr){
 
 int divion = 0;
 int finish = 0;
-//rgb_raw_t crnt_rgb_line;
+rgb_raw_t crnt_rgb_line;
 u_int8_t reflection =0;
 struct coordinate crnt_line = {0.0, 0.0, 0.0};//自己位置座標
 
 extern bool_t judge_blue(){
-    rgb_raw_t crnt_rgb_line;
+    //rgb_raw_t crnt_rgb_line;
     //u_int8_t reflection = color_sensor_get_reflect(color_sensor);
-    color_sensor_get_rgb_raw(color_sensor,&crnt_rgb_line);
+    //color_sensor_get_rgb_raw(color_sensor,&crnt_rgb_line);
     printf("ref = %d | r = %d | g = %d | b = %d\n",reflection, crnt_rgb_line.r, crnt_rgb_line.g, crnt_rgb_line.b);
     if(( crnt_rgb_line.r >=80 && crnt_rgb_line.r <=90 ) && ( crnt_rgb_line.g >=110 && crnt_rgb_line.g <=225 ) && ( crnt_rgb_line.b >=140 && crnt_rgb_line.b <=150 )&& ( reflection >=85 && reflection <=150 )  ){
         printf("_____________________BLUE JUDGE_____________________\n");
@@ -80,6 +80,7 @@ extern bool_t judge_black(){
 int linetrace(void){
     float velo_rot_target;
     //color_sensor_get_rgb_raw(color_sensor,&crnt_rgb_line);
+    color_sensor_get_rgb_raw(color_sensor,&crnt_rgb_line);
     reflection = color_sensor_get_reflect(color_sensor);
 
     if (divion == 0){
