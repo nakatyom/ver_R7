@@ -57,7 +57,7 @@ void sens_task(intptr_t exinf){
     printf("x: %f,y: %f,theta: %f\n",test_c.x, test_c.y, test_c.theta);
 
     
-    mid_velocity_control(0.0f, -60.0f);
+    mid_velocity_control(0.0f, -40.0f);
     if(test_c.theta > 0.95 * tgt_theta){
         motor_stop(left_motor);
         motor_stop(right_motor);      
