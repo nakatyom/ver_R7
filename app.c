@@ -48,8 +48,11 @@ void boss_task(intptr_t exinf){
 int32_t left=0;
 int32_t right=0;
 int robo_mode=1;
-
+struct coordinate postest = {0.0, 0.0, 0.0};//自己位置座標
 void sens_task(intptr_t exinf){
+    get_crntCoordinate(&postest);
+    printf("x=%f, y=%f, theta(変換後)=%f° | ",postest.x, postest.y, trans_gDeg(postest.theta));
+
     /*
     left=motor_get_counts(left_motor);
     right=motor_get_counts(right_motor);
@@ -63,8 +66,8 @@ void sens_task(intptr_t exinf){
     if (robo_mode == 0 ){
         robo_mode = linetrace();
     }else if(robo_mode == 1){
-        printf("NEO  ");
-        robo_mode = hello_neo();
+        //printf("NEO  ");
+        //robo_mode = hello_neo();
     }
     
     /*else if(robo_mode == 2){
