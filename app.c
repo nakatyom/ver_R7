@@ -45,10 +45,17 @@ void boss_task(intptr_t exinf){
         printf("\n");
         is_head = 1;
     }
+    else if((float)(cunt*0.1) < 10.0){
+        float tgtV = get_TgtVelcity((float)(cunt*0.1), 11, time, velo);
+        printf("crnt_time: %f ", (float)(cunt*0.1));
+        printf("TgtV: %f\n", tgtV);
+    }
+    else{
+        motor_stop(left_motor);
+        motor_stop(right_motor);
+    }
 
-    float tgtV = get_TgtVelcity((float)(cunt*0.1), 11, time, velo);
-    printf("crnt_time: %f ", (float)(cunt*0.1));
-    printf("TgtV: %f\n", tgtV);
+
 
     // mid_velocity_control(tgtV, 0.0);    
 
