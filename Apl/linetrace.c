@@ -123,7 +123,7 @@ extern int linetrace(){
         if (cnt < 25){
             motor_stop(left_motor);
             motor_stop(right_motor);
-            printf("STOPカウント：%d\n",cnt);ｓ
+            printf("STOPカウント：%d\n",cnt);
         }
         else{
             printf("設定 \n");
