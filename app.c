@@ -29,38 +29,39 @@ void main_task(intptr_t unused) {
 
 
 void boss_task(intptr_t exinf){
-    static int cunt;
-    static int is_head = 0;
-    static float time[11] = {0.0};
-    static float velo[11] = {0.0};
+    mid_velocity_control(50.0f, 0.0f); 
 
-    if(0 == is_head){
-        calc_TgtVelocity(100.0, 10.0, 11, time, velo);
+    //static int cunt;
+    //static int is_head = 0;
+    //static float time[11] = {0.0};
+    //static float velo[11] = {0.0};
 
-        printf("time:\n");
-        for(int i=0;i<11;i++){
-            printf("%f, ", time[i]);
-        }
-        printf("\ntime:\n");
-        for(int i=0;i<11;i++){
-            printf("%f : ",velo[i]);
-        }
-        printf("\n");
-        is_head = 1;
-    }
-    
-    if((float)cunt*0.02 < 10.0){
-        float tgtV = get_TgtVelcity((float)cunt*0.02, 11, time, velo);
-        printf("crnt_time: %f ", (float)cunt*0.02);
-        printf("TgtV: %f\n", tgtV);
-        mid_velocity_control(50.0f, 0.0f);    
-    }
-    else{
-        motor_stop(left_motor);
-        motor_stop(right_motor);
-    }
+    //if(0 == is_head){
+    //    calc_TgtVelocity(100.0, 10.0, 11, time, velo);
 
-    cunt += 1;
+    //    printf("time:\n");
+    //    for(int i=0;i<11;i++){
+    //        printf("%f, ", time[i]);
+    //    }
+    //    printf("\ntime:\n");
+    //    for(int i=0;i<11;i++){
+    //        printf("%f : ",velo[i]);
+    //    }
+    //    printf("\n");
+    //    is_head = 1;
+    //}
+    //
+    //if((float)cunt*0.02 < 10.0){
+    //    float tgtV = get_TgtVelcity((float)cunt*0.02, 11, time, velo);
+    //    printf("crnt_time: %f ", (float)cunt*0.02);
+    //    printf("TgtV: %f\n", tgtV);   
+    //}
+    //else{
+    //    motor_stop(left_motor);
+    //    motor_stop(right_motor);
+    //}
+
+    //cunt += 1;
 }
 
 
