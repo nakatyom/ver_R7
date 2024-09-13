@@ -45,10 +45,11 @@ float mid_PID_line_pos(float tag, float maj,int pwr){
 
 int divion = 0;
 int finish = 0;
-rgb_raw_t crnt_rgb_line;
+
 struct coordinate crnt_line = {0.0, 0.0, 0.0};//自己位置座標
 
 extern bool_t judge_blue(){
+    rgb_raw_t crnt_rgb_line;
     u_int8_t reflection = color_sensor_get_reflect(color_sensor);
     color_sensor_get_rgb_raw(color_sensor,&crnt_rgb_line);
     //printf("ref = %d | r = %d | g = %d | b = %d\n",reflection, crnt_rgb_line.r, crnt_rgb_line.g, crnt_rgb_line.b);
@@ -62,6 +63,7 @@ extern bool_t judge_blue(){
 }
 
 extern bool_t judge_black(){
+    rgb_raw_t crnt_rgb_line;
     u_int8_t reflection = color_sensor_get_reflect(color_sensor);
     color_sensor_get_rgb_raw(color_sensor,&crnt_rgb_line);
     //printf("ref = %d | r = %d | g = %d | b = %d\n",reflection, crnt_rgb_line.r, crnt_rgb_line.g, crnt_rgb_line.b);
