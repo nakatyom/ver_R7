@@ -73,7 +73,7 @@ void sens_task(intptr_t exinf){
         printf("r = %d, g = %d, b = %d, ",color.r,color.g,color.b);
 
         luminance = (int)(0.299 * color.r + 0.587 * color.g + 0.114 * color.b);
-        luminance = (luminance * 100) / 255;
+        //luminance = (luminance * 100) / 255;
 
         printf("ref = %d\n",luminance);
 
