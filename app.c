@@ -47,7 +47,7 @@ void boss_task(intptr_t exinf){
         is_head = 1;
     }
     else if((float)(cunt*0.02) < 10.0){
-        tgtV = get_TgtVelcity((float)(cunt*0.02), 11, time, velo);
+        float tgtV = get_TgtVelcity((float)(cunt*0.02), 11, time, velo);
         printf("crnt_time: %f ", (float)(cunt*0.1));
         printf("TgtV: %f\n", tgtV);
         mid_velocity_control(tgtV, 0.0);    
