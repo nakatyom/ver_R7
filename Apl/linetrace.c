@@ -53,7 +53,7 @@ bool_t judge_blue(){
     //u_int8_t reflection = color_sensor_get_reflect(color_sensor);
     //color_sensor_get_rgb_raw(color_sensor,&crnt_rgb_line);
     printf("ref = %d | r = %d | g = %d | b = %d\n",reflection, crnt_rgb_line.r, crnt_rgb_line.g, crnt_rgb_line.b);
-    if(( crnt_rgb_line.r >=80 && crnt_rgb_line.r <=90 ) && ( crnt_rgb_line.g >=110 && crnt_rgb_line.g <=225 ) && ( crnt_rgb_line.b >=140 && crnt_rgb_line.b <=150 )&& ( reflection >=85 && reflection <=150 )  ){
+    if(( crnt_rgb_line.r >=70 && crnt_rgb_line.r <=100 ) && ( crnt_rgb_line.g >=110 && crnt_rgb_line.g <=170 ) && ( crnt_rgb_line.b >=135 && crnt_rgb_line.b <=160 )&& ( reflection >=85 && reflection <=150 )  ){
         printf("_____________________BLUE JUDGE_____________________\n");
         return true;
     }
@@ -97,7 +97,8 @@ extern int linetrace(){
             velo_rot_target = mid_PID_line_pos(55.0f, (float)reflection,90);
             mid_velocity_control(90.0f, -velo_rot_target);
             if (kotesaki == true)
-            {
+            {   
+                printf("小手先のカラーセンサ");
                 color_sensor_get_rgb_raw(color_sensor,&crnt_rgb_line);
                 if(judge_blue() == true){
                     divion = 1;
@@ -106,19 +107,20 @@ extern int linetrace(){
         }
         return 0;
     }else if(divion == 1){//RGB==BLACK
-        cnt + cnt +1;
-        if (cnt <= 25){
+        cnt + cnt + 1;
+        if (cnt < 25){
             motor_stop(left_motor);
             motor_stop(right_motor);
+            printf("BLUE検知カウント：%d",cnt);
         }
         else{
             printf("判定3 \n");
             velo_rot_target = mid_PID_line_pos(55.0f, (float)reflection,50);
             mid_velocity_control(50.0f, -velo_rot_target);
-            return 0;
             if(judge_black()==true){
                 divion = 2;
             }
+            return 0;
         }
     }else{
         motor_stop(left_motor);
