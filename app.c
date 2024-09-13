@@ -52,7 +52,7 @@ void sens_task(intptr_t exinf){
     
     left=motor_get_counts(left_motor);
     right=motor_get_counts(right_motor);
-    printf("(left,right):(%d,%d)\n",left,right);
+    printf("(left,right):(%d,%d) | GYRO:%d\n",left,right,gyro_sensor_get_angle(gyro_sensor));
     rgb_raw_t rgb;
     uint8_t ref = ev3_color_sensor_get_reflect(color_sensor);
     ev3_color_sensor_get_rgb_raw(color_sensor,&rgb);
