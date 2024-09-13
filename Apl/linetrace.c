@@ -97,7 +97,7 @@ int linetrace(void){
             if(judge_blue() == true){
                 divion = 1;
             }
-        }
+//        }
 
 
         return 0;
