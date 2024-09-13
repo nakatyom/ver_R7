@@ -33,7 +33,7 @@ void boss_task(intptr_t exinf){
     static float velo[11] = {0.0};
 
     if(0 == is_head){
-        calc_TgtVelocity(500.0, 10.0, 11, time, velo);
+        calc_TgtVelocity(500.0, 100.0, 11, time, velo);
 
         printf("time:\n");
         for(int i=0;i<11;i++){
@@ -46,8 +46,8 @@ void boss_task(intptr_t exinf){
         printf("\n");
         is_head = 1;
     }
-    else if((float)(cunt*0.1) < 10.0){
-        float tgtV = get_TgtVelcity((float)(cunt*0.1), 11, time, velo);
+    else if((float)(cunt*0.02) < 10.0){
+        tgtV = get_TgtVelcity((float)(cunt*0.02), 11, time, velo);
         printf("crnt_time: %f ", (float)(cunt*0.1));
         printf("TgtV: %f\n", tgtV);
         mid_velocity_control(tgtV, 0.0);    
@@ -57,22 +57,12 @@ void boss_task(intptr_t exinf){
         motor_stop(right_motor);
     }
 
-
     cunt += 1;
 }
 
 
 void sens_task(intptr_t exinf){
-    /* モータ読み取り */
-    // motor_update(arm_motor);
-    // motor_update(left_motor);
-    // motor_update(right_motor);
 
-    /* ジャイロ読み取り */
-    // gyro_sensor_update(gyro_sensor);
-
-    /* カラーセンサ読み取り */
-    // color_sensor_update(color_sensor);
 
 }
 
