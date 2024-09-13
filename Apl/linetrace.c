@@ -78,13 +78,14 @@ extern bool_t judge_black(){
 }
 
 int linetrace(void){
-    reflection = color_sensor_get_reflect(color_sensor);
+    float velo_rot_target;
     color_sensor_get_rgb_raw(color_sensor,&crnt_rgb_line);
+    reflection = color_sensor_get_reflect(color_sensor);
     get_crntCoordinate(&crnt_line);
     printf("x=%f, y=%f, theta=%f | ",crnt_line.x, crnt_line.y, crnt_line.theta);
     // BLUE検知まで走行する処理。
-    u_int8_t reflection = color_sensor_get_reflect(color_sensor);
-    float velo_rot_target;
+
+
     
     if (divion == 0){
         if(judge_blue() == true){divion = 1;}// RGB==BLUE
