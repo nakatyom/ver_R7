@@ -63,7 +63,7 @@ void sens_task(intptr_t exinf){
     printf("ref = %d | r = %d | g = %d | b = %d\n",ref, rgb.r, rgb.g, rgb.b);
     */
 
-   mid_velocity_control(80.0f, 1.0f);
+   mid_velocity_control(500.0f, 0.0f);
 
    //gb_raw_t crnt_rgb_app = {0.0, 0.0, 0.0};
 
