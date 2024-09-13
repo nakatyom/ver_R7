@@ -47,8 +47,11 @@ void sens_task(intptr_t exinf){
     static float time[ARRAY] = {0.0};
     static float velo[ARRAY] = {0.0};
 
+    float tgt_distance = 500;
+    float tgt_time = 15.0;
+
     if(0 == is_head){
-        calc_TgtVelocity(500.0, 30.0, 11, time, velo);
+        calc_TgtVelocity(tgt_distance, tgt_time, ARRAY, time, velo);
 
         printf("time:\n");
         for(int i=0;i<ARRAY;i++){
@@ -62,7 +65,7 @@ void sens_task(intptr_t exinf){
         is_head = 1;
     }
     
-    if((float)cunt*0.02 < 10.0){
+    if((float)cunt*0.02 < tgt_time){
         float tgtV = get_TgtVelcity((float)cunt*0.02, ARRAY, time, velo);
         printf("crnt_time: %f ", (float)cunt*0.02);
         printf("TgtV: %f\n", tgtV); 
