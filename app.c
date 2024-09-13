@@ -62,13 +62,25 @@ void sens_task(intptr_t exinf){
     ev3_color_sensor_get_rgb_raw(color_sensor,&rgb);
     printf("ref = %d | r = %d | g = %d | b = %d\n",ref, rgb.r, rgb.g, rgb.b);
     */
-    printf("\n(mA,mV):(%d,%d)  |  ",ev3_battery_current_mA(),ev3_battery_voltage_mV());
-    if (robo_mode == 0 ){
-        robo_mode = linetrace();
-    }else if(robo_mode == 1){
-        printf("NEO  ");
-        robo_mode = hello_neo();
+
+   rgb_raw_t crnt_rgb_app = {0.0, 0.0, 0.0};
+
+   int calc_luminance(rgb_raw_t color) {
+    // 加重平均で明度を計算し、int型に変換
+
+        int luminance = 0;
+    
+        printf("r = %d, g = %d, b = %d, ",color.r,color.g,color.b);
+
+        luminance = (int)(0.299 * color.r + 0.587 * color.g + 0.114 * color.b);
+        luminance = (luminance * 100) / 255;
+
+        printf("ref = %d | ",luminance);
+
+        return luminance;
     }
+
+
     
     /*else if(robo_mode == 2){
         // robo_mode = demrm
