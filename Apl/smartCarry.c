@@ -6,6 +6,7 @@
 #include "odometry.h"
 #include "smartCarry.h"
 #include "port.h"
+#include "common.h"
 
 bool_t turn_flag = false;
 bool_t drive_flag = false;
@@ -56,7 +57,13 @@ extern int calc_angle(float tgt_pos_x, float tgt_pos_y){
     }
 
     // 処理2角度計算
+    tgt_angle = tgt_angle * (180 / PI);
+    printf("(x,y)=(%f,%f) | ",tgt_pos_x,tgt_pos_y);
+    return (int)tgt_angle;
+
+    // 処理2角度計算
     // ロボからみた目的地が第1象限の時。(x,y) (+,+)
+    /*
     printf("\n平行移動後の座標(%d,%d)",(int)tgt_pos_x,(int)tgt_pos_y);
     if (tgt_pos_x > 0 && tgt_pos_y >= 0){
         printf("| 第1象限\n");
@@ -99,16 +106,12 @@ extern int calc_angle(float tgt_pos_x, float tgt_pos_y){
             tgt_angle = tgt_angle;
         }
     }
-
-    
+    */
     //tgt_angle = atan((tgt_pos_y-crnt_neo.y)/(tgt_pos_x-crnt_neo.x));
-    printf("(x,y)=(%f,%f) | ",tgt_pos_x,tgt_pos_y);
-    
-
     //printf("(x,y)=(%f,%f) , theta=%f\n 目標位置(100,100)への角度：%f°\n",crnt_neo.x, crnt_neo.y,crnt_neo.theta,tgt_angle);
     //printf("(----------------------------------------------------\n");
 
-    return (int)tgt_angle;
+
 }
 
 // 旋回処理[暫定]
@@ -168,11 +171,10 @@ extern int hello_neo(){
     float y_pos_target[6]={-140.0,-580.0,-860.0,-760.0,-720.0,-1360.0,-1300.0,-720.0,0.0};
     get_crntCoordinate(&crnt_neo);
 
-    
     if(roop_cnt <= 8){
         // 変数宣言
-        now_angle = (int)crnt_neo.theta;
-        printf("x=%f, y=%f, theta=%f | ",crnt_neo.x, crnt_neo.y, crnt_neo.theta);
+        now_angle = (int)trans_gDeg(crnt_neo.theta);
+        printf("x=%f, y=%f, theta=%f | ",crnt_neo.x, crnt_neo.y, trans_gDeg(crnt_neo.theta));
         // 旋回処理
         if (init_flag == false){ 
             tgt_angl = calc_angle(x_pos_target[roop_cnt],y_pos_target[roop_cnt]);
@@ -180,7 +182,6 @@ extern int hello_neo(){
         }else if (init_flag == true && turn_flag==false && drive_flag==false){
             turn_flag=proc_turn(now_angle,tgt_angl);
             if(turn_flag==true){
-                
                 tgt_dist = dist(crnt_neo.x,crnt_neo.y,x_pos_target[roop_cnt],y_pos_target[roop_cnt]);
                 now_x = crnt_neo.x;
                 now_y = crnt_neo.y;
