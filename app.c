@@ -53,7 +53,7 @@ void sens_task(intptr_t exinf){
     float tgt_time = 15.0;
 
     get_crntCoordinate(&test_c);
-    printf("x: %f,y: %f,theta: %f\n",test_coor.x, test_c.y, test_c.theta);
+    printf("x: %f,y: %f,theta: %f\n",test_c.x, test_c.y, test_c.theta);
 
     if(0 == is_head){
         calc_TgtVelocity(tgt_distance, tgt_time, ARRAY, time, velo);
