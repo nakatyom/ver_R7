@@ -78,7 +78,7 @@ int linetrace(void){
     
     if (divion == 0){
         if(judge_blue() == true){divion = 1;}// RGB==BLUE
-        if((crnt_line.x >=2750 && crnt_line.y >= -220) || (crnt_line.x >=2750 && crnt_line.y <= -1800)){ //コーナーエリア
+        if((crnt_line.x >=2750 && crnt_line.y >= -300) || (crnt_line.x >=2750 && crnt_line.y <= -1800)){ //コーナーエリア
             velo_rot_target = mid_PID_line_pos(55.0f, (float)reflection,50);
             mid_velocity_control(50.0f, -velo_rot_target);
         }else{ //ストレートエリア
