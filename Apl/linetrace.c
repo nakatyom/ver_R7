@@ -87,9 +87,7 @@ bool_t judge_black(){
 bool_t kotesaki = false;
 int cnt =0;
 extern int linetrace(){
-    mid_velocity_control(50.0f, 0.0f);
-    return 0;
-    /*
+
     float velo_rot_target;
     get_crntCoordinate(&crnt_line);
     color_sensor_get_rgb_raw(color_sensor,&crnt_rgb_line);
@@ -143,5 +141,5 @@ extern int linetrace(){
         printf("FINISH LINETRACE\n");
         return 1;
     }
-    */
+    
 }
