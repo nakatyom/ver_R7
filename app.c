@@ -49,9 +49,9 @@ int32_t right=0;
 
 
 void sens_task(intptr_t exinf){
-    motor_get_counts(left_motor);
-    motor_get_counts(right_motor);
-    printf("(left,right):(%d,%d)",left,right);
+    left=motor_get_counts(left_motor);
+    right=motor_get_counts(right_motor);
+    printf("(left,right):(%d,%d)\n",left,right);
     /*
     if (robo_mode == 0 ){
         robo_mode = linetrace();
