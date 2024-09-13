@@ -27,6 +27,7 @@ void main_task(intptr_t unused) {
 int robo_mode=0;
 
 void boss_task(intptr_t exinf){
+    printf("僕は邪魔者。");
     /*
     static struct coordinate crnt;
     get_crntCoordinate(&crnt);
