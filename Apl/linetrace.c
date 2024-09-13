@@ -49,6 +49,8 @@ struct coordinate crnt_line = {0.0, 0.0, 0.0};//自己位置座標
 int calc_luminance(rgb_raw_t color) {
     // 加重平均で明度を計算し、int型に変換
     
+    printf("r = %d, g = %d, b = %d, "color.r,color.g,color.b);
+
     int luminance = (int)(0.299 * color.r + 0.587 * color.r + 0.114 * color.r);
     luminance = (luminance * 100) / 255;
 
