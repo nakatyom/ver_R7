@@ -12,16 +12,16 @@
 
 /* メインタスク */
 void main_task(intptr_t unused) {
-    /* ポート設定 */
+    /* ポ�?�ト設�? */
     // sensor   : touch_sensor, color_sensor, sonar_sensor, gyro_sensor
     // actuator : arm_motor, left_motor, right_motor
     set_portCfg();
     
-    /* タスク呼び出し */
+    /* タスク呼び出�? */
     sta_cyc(SENS_CYC);
     sta_cyc(BOSS_CYC);
 
-    /* タスク終了 */
+    /* タスク終�? */
     ext_tsk();
 }
 
@@ -29,7 +29,7 @@ void boss_task(intptr_t exinf){
     float time[11] = {0.0};
     float velo[11] = {0.0};
 
-    get_TgtVelocity(500.0, 10.0, time, velo);
+    get_TgtVelocity(500.0, 10.0, 11,time, velo);
 
     printf("time, velo:\n");
     for(int i=0;i<11;i++){
