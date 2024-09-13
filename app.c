@@ -9,6 +9,8 @@
 #include "odometry.h"
 #include "smartCarry.h"
 #include "linetrace.h"
+#include "velocity_control.h"
+#include "gyak_min.h"
 
 /* メインタスク */
 void main_task(intptr_t unused) {
@@ -53,6 +55,7 @@ int32_t right=0;
 int robo_mode=0;
 
 void sens_task(intptr_t exinf){
+    mid_velocity_control(50.0f, 0.0f);
     /*
     left=motor_get_counts(left_motor);
     right=motor_get_counts(right_motor);
@@ -63,12 +66,12 @@ void sens_task(intptr_t exinf){
     printf("ref = %d | r = %d | g = %d | b = %d\n",ref, rgb.r, rgb.g, rgb.b);
     */
     //printf("\n(mA,mV):(%d,%d)  |  ",ev3_battery_current_mA(),ev3_battery_voltage_mV());
-    if (robo_mode == 0 ){
-        robo_mode = linetrace();
-    }else if(robo_mode == 1){
-        printf("NEO  ");
-        robo_mode = hello_neo();
-    }
+    //if (robo_mode == 0 ){
+    //    robo_mode = linetrace();
+    //}else if(robo_mode == 1){
+    //    printf("NEO  ");
+    //    robo_mode = hello_neo();
+    //}
     
     /*else if(robo_mode == 2){
         // robo_mode = demrm
