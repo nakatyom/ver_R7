@@ -48,8 +48,8 @@ void sens_task(intptr_t exinf){
     static float time[ARRAY] = {0.0};
     static float velo[ARRAY] = {0.0};
 
-    float tgt_distance = 500.0;
-    float tgt_time = 15.0;
+    float tgt_distance = 1000.0;
+    float tgt_time = 20.0;
     float crnt_time = (float)cunt*0.02;
 
     get_crntCoordinate(&test_c);
