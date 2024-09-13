@@ -23,12 +23,12 @@ void calc_tgt(float tgt, float tgt_time, int div_num, float* div_dist, float* tg
 
         /*  */
         if(i == 1){
-            tgtV[i-1] = tgt_dist / div_time;
-            pre_tgt_dist = tgt_dist;
+            tgtV[i-1] = tgt_dist[i-1] / div_time;
+            pre_tgt_dist = tgt_dist[i-1];
         }
         else{
-            tgtV[i-1] = (tgt_dist - pre_tgt_dist) / div_time;
-            pre_tgt_dist = tgt_dist;
+            tgtV[i-1] = (tgt_dist[i-1] - pre_tgt_dist) / div_time;
+            pre_tgt_dist = tgt_dist[i-1];
         }
     }
 
