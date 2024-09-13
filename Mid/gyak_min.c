@@ -10,7 +10,7 @@
 /* external functions */
 /* 最初�?????��?��??��?��???��?��??��?��一回だけ呼び出される�?????��?��??��?��???��?��??��?��????��?��??��?��???��?��??��?��? */
 void calc_tgt(float tgt, float tgt_time, int div_num, float* div_dist, float* tgtV){
-    float pre_tgt_dist = 0.0;
+    float pre_div_dist = 0.0;
 
     /* ?��?割時間におけ?��? */
     for(int i=1; i<=div_num; i++){
@@ -19,16 +19,16 @@ void calc_tgt(float tgt, float tgt_time, int div_num, float* div_dist, float* tg
         double div_time = normTime * tgt_time;
             
         /*  */
-        tgt_dist[i-1] = tgt * (float)(6.0*pow(normTime,5.0) - 15.0*pow(normTime,4.0) + 10.0*pow(normTime,3.0));
+        div_dist[i-1] = tgt * (float)(6.0*pow(normTime,5.0) - 15.0*pow(normTime,4.0) + 10.0*pow(normTime,3.0));
 
         /*  */
         if(i == 1){
-            tgtV[i-1] = tgt_dist[i-1] / div_time;
-            pre_tgt_dist = tgt_dist[i-1];
+            tgtV[i-1] = div_dist[i-1] / div_time;
+            pre_div_dist = div_dist[i-1];
         }
         else{
-            tgtV[i-1] = (tgt_dist[i-1] - pre_tgt_dist) / div_time;
-            pre_tgt_dist = tgt_dist[i-1];
+            tgtV[i-1] = (div_dist[i-1] - pre_div_dist) / div_time;
+            pre_div_dist = div_dist[i-1];
         }
     }
 
