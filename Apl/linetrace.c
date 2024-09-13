@@ -79,8 +79,8 @@ extern bool_t judge_black(){
 
 int linetrace(void){
     float velo_rot_target;
-    //get_crntCoordinate(&crnt_line);
-    color_sensor_get_rgb_raw(color_sensor,&crnt_rgb_line);
+    get_crntCoordinate(&crnt_line);
+    //color_sensor_get_rgb_raw(color_sensor,&crnt_rgb_line);
     reflection = color_sensor_get_reflect(color_sensor);
 
     if (divion == 0){
