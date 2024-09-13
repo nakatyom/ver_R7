@@ -26,17 +26,31 @@ void main_task(intptr_t unused) {
 }
 
 void boss_task(intptr_t exinf){
+    static int cunt;
+    int is_head = 0;
     float time[11] = {0.0};
     float velo[11] = {0.0};
 
-    get_TgtVelocity(500.0, 10.0, 11,time, velo);
+    if(0 == is_head){
+        get_TgtVelocity(500.0, 10.0, 11, time, velo);
 
-    printf("time, velo:\n");
-    for(int i=0;i<11;i++){
-        printf("%f, ", time[i]);
-        printf("%f : ",velo[i]);
+        printf("time, velo:\n");
+        for(int i=0;i<11;i++){
+            printf("%f, ", time[i]);
+        }
+        printf("\ntime, velo:\n");
+        for(int i=0;i<11;i++){
+            printf("%f : ",velo[i]);
+        }
+        printf("\n");
+        is_head = 1;
     }
-    printf("\n");
+
+    float tgtV = get_TgtVelcity((float)(cunt*0.1), 11, time, velo);
+    printf("TgtV: \n",tgtV);
+
+    mid_velocity_control(tgtV, 0.0);    
+
 }
 
 
