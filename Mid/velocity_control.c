@@ -24,8 +24,8 @@ float mid_PID_str_velo(float tag, float maj){
     err = tag - maj;
     intg += err;
  
-    if (intg > 8000.0f)    intg = 8000.0f;
-    if (intg < -8000.0f)   intg = -8000.0f;
+    if (intg > 5000.0f)    intg = 5000.0f;
+    if (intg < -5000.0f)   intg = -5000.0f;
  
     return ((err * kp) + (intg * ki) + ((err - err_pre) * kd));
 }
