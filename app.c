@@ -16,6 +16,9 @@ void main_task(intptr_t unused) {
     // sensor   : touch_sensor, color_sensor, sonar_sensor, gyro_sensor
     // actuator : arm_motor, left_motor, right_motor
     set_portCfg();
+    printf("(mA,mV):(%d,%d)\n",ev3_battery_current_mA(),ev3_battery_voltage_mV());
+    
+
     
     /* タスク呼び出し */
     sta_cyc(SENS_CYC);
