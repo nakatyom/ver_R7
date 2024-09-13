@@ -62,7 +62,7 @@ void calc_TgtRate(float tgt_theta, float tgt_time, int div_num, float* div_theta
 float get_TgtVelcity(float crnt_dist, int div_num, float* div_dist, float* tgt_velocity){
     static int cunt_v = 0;
     /* 現在使�?べき速度配�?��?�要�?番号を更新する */
-    if(div_time[cunt_v] <= crnt_dist) cunt_v += 1;
+    if(div_dist[cunt_v] <= crnt_dist) cunt_v += 1;
 
 
     
@@ -78,7 +78,7 @@ float get_TgtVelcity(float crnt_dist, int div_num, float* div_dist, float* tgt_v
 float get_TgtRate(float crnt_dist, int div_num, float* div_theta, float* tgt_rate){
     static int cunt_r;
     /* 現在使�?べき速度配�?��?�要�?番号を更新する */
-    if(div_time[cunt_r] <= crnt_dist) cunt_r += 1;
+    if(div_theta[cunt_r] <= crnt_dist) cunt_r += 1;
     
     /* 配�?��?�最後に到�?(目標地点に到�?)したらリセ�?トす�?*/
     if(cunt_r >= div_num){
