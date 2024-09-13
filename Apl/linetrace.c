@@ -96,11 +96,11 @@ extern int linetrace(){
             printf("判定2 \n");
             velo_rot_target = mid_PID_line_pos(55.0f, (float)reflection,90);
             mid_velocity_control(90.0f, -velo_rot_target);
-            if (kotesaki == true)
-            {   
+            if (kotesaki == true){   
                 printf("小手先のカラーセンサ");
                 color_sensor_get_rgb_raw(color_sensor,&crnt_rgb_line);
-                if(judge_blue() == true){
+                if(judge_blue()== true){
+                    printf("黒検知平行：%d\n",cnt);
                     divion = 1;
                 }
             }
@@ -111,17 +111,18 @@ extern int linetrace(){
         if (cnt < 25){
             motor_stop(left_motor);
             motor_stop(right_motor);
-            printf("BLUE検知カウント：%d",cnt);
+            printf("STOPカウント：%d",cnt);
         }
         else{
             printf("判定3 \n");
             velo_rot_target = mid_PID_line_pos(55.0f, (float)reflection,50);
             mid_velocity_control(50.0f, -velo_rot_target);
+            color_sensor_get_rgb_raw(color_sensor,&crnt_rgb_line);
             if(judge_black()==true){
                 divion = 2;
             }
-            return 0;
         }
+        return 0;
     }else{
         motor_stop(left_motor);
         motor_stop(right_motor);
