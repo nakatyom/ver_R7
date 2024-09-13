@@ -1,5 +1,4 @@
 #include "velocity_control.h"
-#include "common.h"
  
 #define ENC_CORR_R      1.0f        // 右ENC個体差補正係数
 #define ENC_CORR_L      1.0f        // 左ENC個体差補正係数
