@@ -56,6 +56,11 @@ void sens_task(intptr_t exinf){
     get_crntCoordinate(&test_c);
     printf("x: %f,y: %f,theta: %f\n",test_c.x, test_c.y, test_c.theta);
 
+    if(true == ev3_button_is_pressed (4)){
+        test_c.x = 0.0;
+        test_c.y = 0.0;
+    }
+
 /*  
     mid_velocity_control(0.0f, -40.0f);
     if(test_c.theta > 0.95 * tgt_theta){
