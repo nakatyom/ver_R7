@@ -52,7 +52,7 @@ int calc_luminance(rgb_raw_t color) {
     int luminance = (int)(0.299 * color.r + 0.587 * color.r + 0.114 * color.r);
     luminance = (luminance * 100) / 255;
 
-    printf("ref = %d | ",reflection);
+    printf("ref = %d | ",luminance);
 
     return luminance;
 }
