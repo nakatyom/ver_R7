@@ -52,7 +52,7 @@ int calc_luminance(rgb_raw_t color) {
     printf("r = %d, g = %d, b = %d, ",color.r,color.g,color.b);
 
     int luminance = (int)(0.299 * color.r + 0.587 * color.g + 0.114 * color.b);
-    luminance = (luminance * 100) / 255;
+    // luminance = (luminance * 100) / 255; //百分率計算
 
     printf("ref = %d | ",luminance);
 
@@ -99,7 +99,7 @@ extern int linetrace(){
         printf("x=%f, y=%f, theta=%f | ",crnt_line.x, crnt_line.y, crnt_line.theta);
         if((crnt_line.x >=2750 && crnt_line.y >= -300) || (crnt_line.x >=3000 && crnt_line.y <= -1800)){
             printf("判定1 \n");
-            velo_rot_target = mid_PID_line_pos(55.0f, (float)reflection,50);
+            velo_rot_target = mid_PID_line_pos(80.0f, (float)reflection,50);
             mid_velocity_control(50.0f, -velo_rot_target);
             if (crnt_line.x >=3000 && crnt_line.y <= -1800 && kotesaki==false){
                 kotesaki=true;
@@ -107,7 +107,7 @@ extern int linetrace(){
         }
         else{ 
             printf("判定2");
-            velo_rot_target = mid_PID_line_pos(55.0f, (float)reflection,90);
+            velo_rot_target = mid_PID_line_pos(80.0f, (float)reflection,90);
             mid_velocity_control(90.0f, -velo_rot_target);
             if (kotesaki == true){   
                 printf(" | 小手先のカラーセンサ");
@@ -127,7 +127,7 @@ extern int linetrace(){
         }
         else{
             printf("判定3");
-            velo_rot_target = mid_PID_line_pos(55.0f, (float)reflection,50);
+            velo_rot_target = mid_PID_line_pos(80.0f, (float)reflection,50);
             mid_velocity_control(50.0f, -velo_rot_target);
             color_sensor_get_rgb_raw(color_sensor,&crnt_rgb_line);
             if(judge_black()==true){
