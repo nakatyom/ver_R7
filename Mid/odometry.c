@@ -10,6 +10,7 @@
 #include "gyro.h"
 #include "odometry.h"
 
+#define PI_FLOAT_    3.141592f   // 円周率
 
 static struct coordinate pre_coordinate  = {0.0, 0.0, 0.0}; //前回座標
 
@@ -18,8 +19,8 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
     float delta_L = 0.0; // 移動量
 
     /* 左右モータの回転量を計算する[rad] */
-    float delta_PhL = PI_FLOAT * (float)(motor_get_counts(left_motor)  - motor_get_pre_counts(left_motor))  / 180.0;
-    float delta_PhR = PI_FLOAT * (float)(motor_get_counts(right_motor) - motor_get_pre_counts(right_motor)) / 180.0;
+    float delta_PhL = PI_FLOAT_ * (float)(motor_get_counts(left_motor)  - motor_get_pre_counts(left_motor))  / 180.0;
+    float delta_PhR = PI_FLOAT_ * (float)(motor_get_counts(right_motor) - motor_get_pre_counts(right_motor)) / 180.0;
     // printf("delta_PhL:%f | delta_PhR:%f | ",delta_PhL,delta_PhR);
     
     /* 左右モータの移動量を計算する */
@@ -55,14 +56,14 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
         }
         
     }
-    delta_theta_e = (delta_rad_e * 180.0 / PI_FLOAT);
+    delta_theta_e = (delta_rad_e * 180.0 / PI_FLOAT__);
 
     /* 走行体の旋回角度を計算する (ジャイロ)*/
     float delta_theta_g = (float)(gyro_sensor_get_angle(gyro_sensor) - gyro_sensor_get_pre_angle(gyro_sensor));
-    float delta_rad_g   = PI_FLOAT * delta_theta_g /180.0;
+    float delta_rad_g   = PI_FLOAT_ * delta_theta_g /180.0;
 
     // 現在座標を計算する
-    float pre_rad = PI_FLOAT * pre_coordinate.theta / 180.0;
+    float pre_rad = PI_FLOAT__ * pre_coordinate.theta / 180.0;
     float delta_rad = delta_rad_e;      // 旋回量計算に使用するデバイスの選択
     float delta_theta = delta_theta_e;  // 旋回量計算に使用するデバイスの選択
 
