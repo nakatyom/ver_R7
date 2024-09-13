@@ -48,7 +48,7 @@ void calc_TgtRate(float tgt_theta, float tgt_time, int div_num, float* div_time,
 }
 
 float get_TgtVelcity(float crnt_time, int div_num, float* div_time, float* tgt_velocity){
-    static int cunt_v;
+    static int cunt_v = 0;
     /* 現在使�?べき速度配�?��?�要�?番号を更新する */
     if(div_time[cunt_v] <= crnt_time) cunt_v += 1;
     

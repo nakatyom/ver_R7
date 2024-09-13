@@ -28,8 +28,8 @@ void main_task(intptr_t unused) {
 void boss_task(intptr_t exinf){
     static int cunt;
     static int is_head = 0;
-    float time[11] = {0.0};
-    float velo[11] = {0.0};
+    static float time[11] = {0.0};
+    static float velo[11] = {0.0};
 
     if(0 == is_head){
         calc_TgtVelocity(500.0, 10.0, 11, time, velo);
@@ -50,7 +50,7 @@ void boss_task(intptr_t exinf){
     printf("crnt_time: %f ", (float)(cunt*0.1));
     printf("TgtV: %f\n", tgtV);
 
-    mid_velocity_control(tgtV, 0.0);    
+    // mid_velocity_control(tgtV, 0.0);    
 
     cunt += 1;
 }
