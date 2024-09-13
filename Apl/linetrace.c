@@ -73,10 +73,7 @@ int linetrace(void){
     // BLUE検知まで走行する処理。
     int reflection = ev3_color_sensor_get_reflect(color_sensor);
     float velo_rot_target;
-    velo_rot_target = mid_PID_line_pos(20.0f, (float)reflection,50);
-    mid_velocity_control(50.0f, -velo_rot_target);
-    return 0;
-    /*
+    
     if (divion == 0){
         if(judge_blue() == true){divion = 1;}// RGB==BLUE
         if((crnt_line.x >=2750 && crnt_line.y >= -220) || (crnt_line.x >=2750 && crnt_line.y <= -1800)){ //コーナーエリア
@@ -97,5 +94,5 @@ int linetrace(void){
         motor_stop(right_motor);
         printf("FINISH LINETRACE\n");
         return 1;
-    }*/
+    }
 }

@@ -1,11 +1,11 @@
-#ifndef _VELOCITY_CONTROL_H
-#define _VELOCITY_CONTROL_H
+#ifndef _ODOMETRY_H
+#define _ODOMETRY_H
  
-#include "ev3api.h"
-#include <stdio.h>
-#include "app.h"
-#include "port.h"
+#include "common.h"
  
-extern void mid_velocity_control(float, float);
  
-#endif	// _VELOCITY_CONTROL_H
+/* external functions*/
+extern void get_crntCoordinate(struct coordinate* crnt_coordinate);
+extern void get_preCoordinate(struct coordinate* pre_coordinate);
+ 
+#endif /* _ODOMETRY_H *
