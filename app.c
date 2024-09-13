@@ -9,26 +9,32 @@
 #include "odometry.h"
 #include "gyak_min.h"
 #include "linetrace.h"
-#include "doubleLoop.h"
 
 /* メインタスク */
 void main_task(intptr_t unused) {
-    /* ポ�??��ト設?��? */
+    /* ポート設定 */
     // sensor   : touch_sensor, color_sensor, sonar_sensor, gyro_sensor
     // actuator : arm_motor, left_motor, right_motor
     set_portCfg();
     
-    /* タスク呼び出?��? */
+    /* タスク呼び出し */
     sta_cyc(SENS_CYC);
     sta_cyc(BOSS_CYC);
 
-    /* タスク終�? */
+    /* タスク終了 */
     ext_tsk();
 }
 
 void boss_task(intptr_t exinf){
+    float time[11] = {0.0};
+    float velo[11] = {0.0};
 
-    doubleloop();
+    printf("time, velo:\n");
+    for(int i=0;i<11;i++){
+        printf("%f, ", time[i]);
+        printf("%f : ",velo[i]);
+    }
+    printf("\n");
 }
 
 
