@@ -63,7 +63,7 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
     float delta_rad_g   = PI_FLOAT_ * delta_theta_g /180.0;
 
     // 現在座標を計算する
-    float pre_rad = PI_FLOAT__ * pre_coordinate.theta / 180.0;
+    float pre_rad = PI_FLOAT_ * pre_coordinate.theta / 180.0;
     float delta_rad = delta_rad_e;      // 旋回量計算に使用するデバイスの選択
     float delta_theta = delta_theta_e;  // 旋回量計算に使用するデバイスの選択
 

@@ -10,7 +10,7 @@
  
 #define SAMPLE_RATE     50.0f      // 計測周波数[sec]
 
- 
+ #define PI_FLOAT    3.141592f   // 円周率
  
 float mid_PID_str_velo(float tag, float maj){
  
