@@ -56,7 +56,7 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
         }
         
     }
-    delta_theta_e = (delta_rad_e * 180.0 / PI_FLOAT__);
+    delta_theta_e = (delta_rad_e * 180.0 / PI_FLOAT_);
 
     /* 走行体の旋回角度を計算する (ジャイロ)*/
     float delta_theta_g = (float)(gyro_sensor_get_angle(gyro_sensor) - gyro_sensor_get_pre_angle(gyro_sensor));
