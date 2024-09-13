@@ -79,8 +79,9 @@ void sens_task(intptr_t exinf){
 
         return luminance;
     }
-
-
+    
+    color_sensor_get_rgb_raw(color_sensor,&crnt_rgb_app);
+    int ref_app = calc_luminance(crnt_rgb_app);
     
     /*else if(robo_mode == 2){
         // robo_mode = demrm
