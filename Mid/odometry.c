@@ -15,7 +15,7 @@ static struct coordinate pre_coordinate  = {0.0, 0.0, 0.0}; //前回座標
 /* external functions */
 void get_crntCoordinate(struct coordinate* crnt_coordinate){
     double delta_L = 0.0; // 移動量
- 
+
     /* 左右モータの回転量を計算する[rad] */
     double delta_PhL = PI_DOUBLE * (double)(motor_get_counts(left_motor)  - motor_get_pre_counts(left_motor))  / 180.0;
     double delta_PhR = PI_DOUBLE * (double)(motor_get_counts(right_motor) - motor_get_pre_counts(right_motor)) / 180.0;
