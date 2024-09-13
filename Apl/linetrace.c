@@ -87,9 +87,7 @@ bool_t judge_black(){
 bool_t kotesaki = false;
 int cnt =0;
 extern int linetrace(){
-    mid_velocity_control(50.0f, 0.0f);
-    return 0;
-    /*
+
     float velo_rot_target;
     get_crntCoordinate(&crnt_line);
     color_sensor_get_rgb_raw(color_sensor,&crnt_rgb_line);
@@ -101,14 +99,14 @@ extern int linetrace(){
         if((crnt_line.x >=2750 && crnt_line.y >= -300) || (crnt_line.x >=2750 && crnt_line.y <= -1800)){
             printf("判定1 \n");
             velo_rot_target = mid_PID_line_pos(80.0f, (float)reflection,50);
-            //mid_velocity_control(50.0f, -velo_rot_target);
+            mid_velocity_control(50.0f, -velo_rot_target);
 
             if (crnt_line.x >=2750 && crnt_line.y <= -1800 && kotesaki==false){
                 kotesaki=true;
             }
         }
         else{ 
-            printf("判定2");
+            printf("判定2 \n");
             velo_rot_target = mid_PID_line_pos(80.0f, (float)reflection,90);
             mid_velocity_control(90.0f, -velo_rot_target);
             if (kotesaki == true){   
@@ -128,7 +126,7 @@ extern int linetrace(){
             printf("STOPカウント：%d\n",cnt);
         }
         else{
-            printf("判定3");
+            printf("設定 \n");
             velo_rot_target = mid_PID_line_pos(80.0f, (float)reflection,50);
             mid_velocity_control(50.0f, -velo_rot_target);
             color_sensor_get_rgb_raw(color_sensor,&crnt_rgb_line);
@@ -143,5 +141,5 @@ extern int linetrace(){
         printf("FINISH LINETRACE\n");
         return 1;
     }
-    */
+    
 }
