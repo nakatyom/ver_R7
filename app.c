@@ -56,7 +56,7 @@ void sens_task(intptr_t exinf){
     get_crntCoordinate(&test_c);
     printf("x: %f,y: %f,theta: %f\n",test_c.x, test_c.y, test_c.theta);
 
-    if(1 ==  ev3_touch_sensor_is_pressed(touch_sensor)){
+    if(true ==  ev3_touch_sensor_is_pressed(touch_sensor)){
         test_c.x = 0.0;
         test_c.y = 0.0;
     }
