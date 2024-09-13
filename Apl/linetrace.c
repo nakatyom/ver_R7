@@ -81,13 +81,13 @@ int linetrace(void){
     float velo_rot_target;
     color_sensor_get_rgb_raw(color_sensor,&crnt_rgb_line);
     reflection = color_sensor_get_reflect(color_sensor);
-    
+
     get_crntCoordinate(&crnt_line);
     printf("x=%f, y=%f, theta=%f | ",crnt_line.x, crnt_line.y, crnt_line.theta);
-    // BLUE検知まで走行する処理。
-   
     if (divion == 0){
-        if(judge_blue() == true){divion = 1;}// RGB==BLUE
+        if(judge_blue() == true){
+            divion = 1;
+        }// RGB==BLUE
         if((crnt_line.x >=2750 && crnt_line.y >= -300) || (crnt_line.x >=2750 && crnt_line.y <= -1800)){ //コーナーエリア
             printf("判定1 \n");
             velo_rot_target = mid_PID_line_pos(55.0f, (float)reflection,50);
@@ -99,7 +99,9 @@ int linetrace(void){
         }
         return 0;
     }else if(divion == 1){//RGB==BLACK
-        if(judge_black==true){divion = 2;}
+        if(judge_black()==true){
+            divion = 2;
+        }
         printf("判定3 \n");
         velo_rot_target = mid_PID_line_pos(55.0f, (float)reflection,50);
         mid_velocity_control(50.0f, -velo_rot_target);
