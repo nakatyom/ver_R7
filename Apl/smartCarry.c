@@ -5,7 +5,7 @@
 #include "ev3api.h"
 #include "odometry.h"
 #include "smartCarry.h"
-#include "velococity_control.c"
+#include "velocity_control.h"
 #include "port.h"
 #include "common.h"
 
