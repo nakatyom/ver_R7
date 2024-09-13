@@ -32,14 +32,14 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
         //ロボットの移動距離
         delta_L = 0.0;
         // 旋回量の計算
-        delta_rad_e = 1.0 * (delta_LL -delta_LR) / (double)wheel_dist;
+        delta_rad_e = -1.0 * (delta_LL -delta_LR) / (double)wheel_dist;
  
     }
     else if((delta_LL < 0.0 && delta_LR > 0.0)){ // 反時計回りに旋回している
         //ロボットの移動距離
         delta_L = 0.0;
         // 旋回量の計算
-        delta_rad_e = -1.0 * (-delta_LL + delta_LR) / (double)wheel_dist;
+        delta_rad_e = 1.0 * (-delta_LL + delta_LR) / (double)wheel_dist;
  
     }
     else { //直進・曲進している
@@ -58,8 +58,8 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
     delta_theta_e = (delta_rad_e * 180.0 / PI_DOUBLE);
  
     /* 走行体の旋回角度を計算する (ジャイロ)*/
-    double delta_theta_g = (double)(gyro_sensor_get_angle(gyro_sensor) - gyro_sensor_get_pre_angle(gyro_sensor));
-    double delta_rad_g   = PI_DOUBLE * delta_theta_g /180.0;
+    double delta_theta_e = (double)(gyro_sensor_get_angle(gyro_sensor) - gyro_sensor_get_pre_angle(gyro_sensor));
+    double delta_rad_e   = PI_DOUBLE * delta_theta_g /180.0;
     
     //printf("theta_g = %f | rad_g = %f | ",delta_theta_g,delta_rad_g);
     
