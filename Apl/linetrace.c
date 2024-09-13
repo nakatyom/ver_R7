@@ -67,7 +67,7 @@ bool_t judge_black(){
     //u_int8_t reflection = color_sensor_get_reflect(color_sensor);
     //ev3_color_sensor_get_rgb_raw(color_sensor,&crnt_rgb_line);
     printf("ref = %d | r = %d | g = %d | b = %d\n",reflection, crnt_rgb_line.r, crnt_rgb_line.g, crnt_rgb_line.b);
-    if(( crnt_rgb_line.r >=70 && crnt_rgb_line.r <=80 ) && ( crnt_rgb_line.g >=80 && crnt_rgb_line.g <=90 ) && ( crnt_rgb_line.b >=95 && crnt_rgb_line.b <=100 )&& ( reflection >=68 && reflection <=77 )  ){
+    if(( crnt_rgb_line.r >=80 && crnt_rgb_line.r <=90 ) && ( crnt_rgb_line.g >=95 && crnt_rgb_line.g <=105 ) && ( crnt_rgb_line.b >=104 && crnt_rgb_line.b <=114 )&& ( reflection >=70 && reflection <=80 )  ){
         printf("_____________________BLACK JUDGE_____________________\n");
         return true;
     }
@@ -76,6 +76,7 @@ bool_t judge_black(){
     }
 }
 bool_t kotesaki = false;
+int cnt =0;
 extern int linetrace(){
     float velo_rot_target;
     get_crntCoordinate(&crnt_line);
@@ -100,21 +101,24 @@ extern int linetrace(){
                 color_sensor_get_rgb_raw(color_sensor,&crnt_rgb_line);
                 if(judge_blue() == true){
                     divion = 1;
-                    motor_stop(left_motor);
-                    motor_stop(right_motor);
                 }
             }
-
-
         }
         return 0;
     }else if(divion == 1){//RGB==BLACK
-        printf("判定3 \n");
-        velo_rot_target = mid_PID_line_pos(55.0f, (float)reflection,50);
-        mid_velocity_control(50.0f, -velo_rot_target);
-        return 0;
-        if(judge_black()==true){
-            divion = 2;
+        cnt + cnt +1;
+        if (cnt <= 25){
+            motor_stop(left_motor);
+            motor_stop(right_motor);
+        }
+        else{
+            printf("判定3 \n");
+            velo_rot_target = mid_PID_line_pos(55.0f, (float)reflection,50);
+            mid_velocity_control(50.0f, -velo_rot_target);
+            return 0;
+            if(judge_black()==true){
+                divion = 2;
+            }
         }
     }else{
         motor_stop(left_motor);
