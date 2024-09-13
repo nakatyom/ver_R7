@@ -47,7 +47,7 @@ void boss_task(intptr_t exinf){
 }
 int32_t left=0;
 int32_t right=0;
-int robo_mode=1;
+int robo_mode=0;
 struct coordinate postest = {0.0, 0.0, 0.0};//自己位置座標
 void sens_task(intptr_t exinf){
     //get_crntCoordinate(&postest);
