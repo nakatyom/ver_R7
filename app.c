@@ -49,7 +49,7 @@ int32_t right=0;
 
 
 void sens_task(intptr_t exinf){
-    
+    /*
     left=motor_get_counts(left_motor);
     right=motor_get_counts(right_motor);
     printf("(left,right):(%d,%d) | GYRO:%d\n",left,right,gyro_sensor_get_angle(gyro_sensor));
@@ -57,15 +57,15 @@ void sens_task(intptr_t exinf){
     uint8_t ref = ev3_color_sensor_get_reflect(color_sensor);
     ev3_color_sensor_get_rgb_raw(color_sensor,&rgb);
     printf("ref = %d | r = %d | g = %d | b = %d\n",ref, rgb.r, rgb.g, rgb.b);
+    */
     
-    /*
     if (robo_mode == 0 ){
         robo_mode = linetrace();
     }else if(robo_mode == 1){
         printf("NEO  ");
         robo_mode = hello_neo();
     }
-    */
+    
     /*else if(robo_mode == 2){
         // robo_mode = demrm
     }else if (robo_mode == 3){
