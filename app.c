@@ -27,18 +27,18 @@ void main_task(intptr_t unused) {
 
 void boss_task(intptr_t exinf){
     static int cunt;
-    int is_head = 0;
+    static int is_head = 0;
     float time[11] = {0.0};
     float velo[11] = {0.0};
 
     if(0 == is_head){
         calc_TgtVelocity(500.0, 10.0, 11, time, velo);
 
-        printf("time, velo:\n");
+        printf("time:\n");
         for(int i=0;i<11;i++){
             printf("%f, ", time[i]);
         }
-        printf("\ntime, velo:\n");
+        printf("\ntime:\n");
         for(int i=0;i<11;i++){
             printf("%f : ",velo[i]);
         }
@@ -51,6 +51,7 @@ void boss_task(intptr_t exinf){
 
     mid_velocity_control(tgtV, 0.0);    
 
+    cunt += 1;
 }
 
 
