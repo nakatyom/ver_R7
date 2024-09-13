@@ -50,7 +50,7 @@ void sens_task(intptr_t exinf){
 
     float tgt_distance = 500.0;
     float tgt_time = 15.0;
-    float crnt_time = (float)cunt*0.2;
+    float crnt_time = (float)cunt*0.02;
 
     get_crntCoordinate(&test_c);
     printf("x: %f,y: %f,theta: %f\n",test_c.x, test_c.y, test_c.theta);
