@@ -35,7 +35,7 @@ void boss_task(intptr_t exinf){
     static float velo[11] = {0.0};
 
     if(0 == is_head){
-        calc_TgtVelocity(500.0, 30.0, 11, time, velo);
+        calc_TgtVelocity(100.0, 10.0, 11, time, velo);
 
         printf("time:\n");
         for(int i=0;i<11;i++){
@@ -53,7 +53,7 @@ void boss_task(intptr_t exinf){
         float tgtV = get_TgtVelcity((float)cunt*0.02, 11, time, velo);
         printf("crnt_time: %f ", (float)cunt*0.02);
         printf("TgtV: %f\n", tgtV);
-        mid_velocity_control(tgtV, 0.0);    
+        mid_velocity_control(50.0f, 0.0f);    
     }
     else{
         motor_stop(left_motor);
