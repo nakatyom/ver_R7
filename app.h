@@ -5,11 +5,12 @@ extern "C" {
 
 /* タスク優先度 */
 #define MAIN_PRIORITY   (TMIN_APP_TPRI + 1) /* メインタスク */
-#define SENS_PRIORITY   (TMIN_APP_TPRI + 2) /* センサ駆動タスク */
-#define BOSS_PRIORITY   (TMIN_APP_TPRI + 3) /* 制御タスク */
+#define CUNT_PRIORITY   (TMIN_APP_TPRI + 2)
+#define SENS_PRIORITY   (TMIN_APP_TPRI + 3) /* センサ�?動タスク */
+#define BOSS_PRIORITY   (TMIN_APP_TPRI + 4) /* 制御タスク */
 
-/* タスク周期の定義 */
-// #define LINE_TRACER_PERIOD  (100 * 1000) /* ライントレースタスク:100msec周期 */
+/* タスク周期�?�定義 */
+// #define LINE_TRACER_PERIOD  (100 * 1000) /* ライントレースタスク:100msec周�? */
 
 #ifndef STACK_SIZE
 #define STACK_SIZE      (4096)
@@ -19,6 +20,7 @@ extern "C" {
 #ifndef TOPPERS_MACRO_ONLY
 
 extern void main_task(intptr_t exinf);
+extern void cunt_task(intptr_t exinf);
 extern void sens_task(intptr_t exinf);
 extern void boss_task(intptr_t exinf);
 
