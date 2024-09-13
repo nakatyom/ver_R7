@@ -42,6 +42,8 @@ int robo_mode=0;
 #define ARRAY 50
 
 void sens_task(intptr_t exinf){
+    static struct coordinate test_c = {0.0f, 0.0f, 0.0f};
+
     static int cunt;
     static int is_head = 0;
     static float time[ARRAY] = {0.0};
@@ -49,6 +51,9 @@ void sens_task(intptr_t exinf){
 
     float tgt_distance = 500;
     float tgt_time = 15.0;
+
+    get_crntCoordinate(&test_c);
+    printf("x: %f,y: %f,theta: %f\n",test_coor.x, test_c.y, test_c.theta);
 
     if(0 == is_head){
         calc_TgtVelocity(tgt_distance, tgt_time, ARRAY, time, velo);
