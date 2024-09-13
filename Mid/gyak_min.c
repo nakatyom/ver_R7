@@ -34,13 +34,27 @@ void calc_tgt(float tgt, float tgt_time, int div_num, float* div_time, float* tg
     return;
 }
 
+void normalize_tgt(int div_num, float* tgt){
+    float off_set = 30;
+    float maxVal = tgt[div_num/2];
+    float raito = off_set / maxVal;
+
+    for(int i=0; i<div_num; i++){
+        tgt[i] = (1.0 - raito)*tgt[i];
+        tgt[i] += off_set;
+    }
+
+}
+
 void calc_TgtVelocity(float tgt_dist, float tgt_time, int div_num, float* div_time, float* tgt_velocity){
     calc_tgt(tgt_dist, tgt_time, div_num, div_time, tgt_velocity);
+    normalize_tgt(div_num, tgt_velocity);
     return;
 }
 
 void calc_TgtRate(float tgt_theta, float tgt_time, int div_num, float* div_time, float* tgt_rate){
     calc_tgt(tgt_theta, tgt_time, div_num, div_time, tgt_rate);
+    normalize_tgt(div_num, tgt_rate);
     return;
 }
 
@@ -48,6 +62,8 @@ float get_TgtVelcity(float crnt_time, int div_num, float* div_time, float* tgt_v
     static int cunt_v = 0;
     /* 現在使�?べき速度配�?��?�要�?番号を更新する */
     if(div_time[cunt_v] <= crnt_time) cunt_v += 1;
+
+
     
     /* 配�?��?�最後に到�?(目標地点に到�?)したらリセ�?トす�?*/
     if(cunt_v >= div_num){

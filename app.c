@@ -55,7 +55,7 @@ void sens_task(intptr_t exinf){
     printf("x: %f,y: %f,theta: %f\n",test_c.x, test_c.y, test_c.theta);
     
     // mid_velocity_control(30.0f, 0.0f);
-    /*
+    
     if(0 == is_head){
         calc_TgtVelocity(tgt_distance, tgt_time, ARRAY, time, velo);
 
@@ -83,6 +83,6 @@ void sens_task(intptr_t exinf){
     }
 
     cunt += 1;
-    */
+    
 
 }
