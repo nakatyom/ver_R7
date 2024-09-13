@@ -7,7 +7,7 @@
 #include "gyro.h"
 #include "app.h"
 #include "odometry.h"
-#include "smartCarry.h"
+#include "dbleRoop.h"
 #include "linetrace.h"
 
 /* メインタスク */
@@ -16,9 +16,6 @@ void main_task(intptr_t unused) {
     // sensor   : touch_sensor, color_sensor, sonar_sensor, gyro_sensor
     // actuator : arm_motor, left_motor, right_motor
     set_portCfg();
-    
-    
-
     
     /* タスク呼び出し */
     sta_cyc(SENS_CYC);
@@ -50,7 +47,7 @@ void boss_task(intptr_t exinf){
 }
 int32_t left=0;
 int32_t right=0;
-int robo_mode=0;
+int robo_mode=1;
 
 void sens_task(intptr_t exinf){
     /*

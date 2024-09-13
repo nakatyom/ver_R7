@@ -120,15 +120,13 @@ bool_t proc_turn(int now_angle, int tgt_angle){
     bool_t flag = false;
     //get_crntCoordinate(&crnt_neo);
     if (now_angle < tgt_angle){
-        ev3_motor_set_power(left_motor,  5);
-        ev3_motor_set_power(right_motor, -5);
+        mid_velocity_control(0.0f, -40.0f);
         //printf("処理：分岐１");
         printf("比較角度(現在( %d° ):目標( %d° )\n",now_angle,tgt_angle);
         flag =false;
     }
     else if (now_angle > tgt_angle){
-        ev3_motor_set_power(left_motor,  -10);
-        ev3_motor_set_power(right_motor, 10);
+        mid_velocity_control(0.0f, 40.0f);
         //printf("処理：分岐２");
         printf("比較角度(現在( %d° ):目標( %d° )\n",now_angle,tgt_angle);
         flag =false;
@@ -147,13 +145,11 @@ bool_t proc_run(float now_dist,float tgt_dist){
     printf("距離情報(現在( %d mm):目標( %d mm )\n",(int)now_dist,(int)tgt_dist);
     bool_t flag = false;
     if (now_dist < tgt_dist){
-        ev3_motor_set_power(left_motor,  20);
-        ev3_motor_set_power(right_motor, 20);
+        mid_velocity_control(40.0f, 0.0f);
         flag = false;
     }
     else if (now_dist > tgt_dist){
-        ev3_motor_set_power(left_motor,  -2);
-        ev3_motor_set_power(right_motor, -2);
+        mid_velocity_control(-40.0f, 0.0f);
         flag = false;
     }else{
         printf("走行完了");
@@ -171,11 +167,10 @@ int hello_neo(){
     float x_pos_target[6]={420.0,520.0,240.0,-220.0,-780.0,-1040.0,-560.0,-260.0,-260.0};
     float y_pos_target[6]={-140.0,-580.0,-860.0,-760.0,-720.0,-1360.0,-1300.0,-720.0,0.0};
     get_crntCoordinate(&crnt_neo);
-
     if(roop_cnt <= 8){
         // 変数宣言
-        now_angle = (int)(crnt_neo.theta);
-        printf("x=%f, y=%f, theta=%f° , 変換後=%f° | ",crnt_neo.x, crnt_neo.y, crnt_neo.theta ,trans_gDeg(crnt_neo.theta));
+        now_angle = (int)trans_gDeg((crnt_neo.theta));
+        printf("x=%f, y=%f, theta(変換後)=%f° | ",crnt_neo.x, crnt_neo.y, trans_gDeg(crnt_neo.theta));
         // 旋回処理
         if (init_flag == false){ 
             tgt_angl = calc_angle(x_pos_target[roop_cnt],y_pos_target[roop_cnt]);
