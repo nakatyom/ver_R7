@@ -48,7 +48,7 @@ void sens_task(intptr_t exinf){
     static float velo[ARRAY] = {0.0};
 
     if(0 == is_head){
-        calc_TgtVelocity(100.0, 10.0, 11, time, velo);
+        calc_TgtVelocity(500.0, 30.0, 11, time, velo);
 
         printf("time:\n");
         for(int i=0;i<ARRAY;i++){
