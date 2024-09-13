@@ -20,8 +20,8 @@ float now_x=0.0f;
 float now_y=0.0f;
 int roop_cnt=0;
 struct coordinate crnt_neo = {0.0, 0.0, 0.0};//自己位置座標
-float x_pos_target[6]={ 420.0, 520.0, 240.0,-220.0,-780.0,-1040.0, -580.0,-260.0,-260.0};
-float y_pos_target[6]={-140.0,-580.0,-860.0,-760.0,-670.0,-1100.0,-1200.0,-720.0,   0.0};
+float x_pos_target[]={ 420.0, 520.0, 240.0,-220.0,-780.0,-1040.0, -580.0,-260.0,-260.0};
+float y_pos_target[]={-140.0,-580.0,-860.0,-760.0,-670.0,-1100.0,-1200.0,-720.0,   0.0};
 // 走行距離計算処理
 int dist(float x1, float y1, float x2, float y2) {
     float dx = x2 - x1;
@@ -145,7 +145,7 @@ bool_t proc_turn(int now_angle, int tgt_angle){
 
 // 走行処理[暫定]
 bool_t proc_run(float now_dist,float tgt_dist){
-    printf("距離情報(現在( %d mm):目標( %d mm )\n",(int)now_dist,(int)tgt_dist);
+    //printf("距離情報(現在( %d mm):目標( %d mm )\n",(int)now_dist,(int)tgt_dist);
     bool_t flag = false;
     if (now_dist < tgt_dist){
         mid_velocity_control(40.0f, 0.0f);
