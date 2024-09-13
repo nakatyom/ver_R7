@@ -18,6 +18,7 @@ void main_task(intptr_t unused) {
     set_portCfg();
     
     /* タスク呼び出�? */
+    sta_cyc(CUNT_CYC);
     sta_cyc(SENS_CYC);
     sta_cyc(BOSS_CYC);
 
@@ -74,5 +75,9 @@ void sens_task(intptr_t exinf){
 
     /* カラーセンサ読み取り */
     // color_sensor_update(color_sensor);
+
+}
+
+void cunt_task(intptr_t exinf){
 
 }
