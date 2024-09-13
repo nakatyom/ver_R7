@@ -94,6 +94,7 @@ int linetrace(void){
         return 0;
     }else if(divion = 1){//RGB==BLACK
         if(judge_black==true){divion = 2;}
+        velo_rot_target = mid_PID_line_pos(55.0f, (float)reflection,50)
         mid_velocity_control(50.0f, -velo_rot_target);
         return 0;
     }else{

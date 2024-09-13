@@ -46,8 +46,6 @@ void boss_task(intptr_t exinf){
 }
 
 void sens_task(intptr_t exinf){
-    static struct coordinate crnt;
-    get_crntCoordinate(&crnt);
     if (robo_mode == 0 ){
         robo_mode = linetrace();
     }else if(robo_mode == 1){
