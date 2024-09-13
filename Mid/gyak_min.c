@@ -19,7 +19,7 @@ void calc_tgt(float tgt, float tgt_time, int div_num, float* div_dist, float* tg
         double div_time = normTime * tgt_time;
             
         /*  */
-        float tgt_dist[i-1] = tgt * (float)(6.0*pow(normTime,5.0) - 15.0*pow(normTime,4.0) + 10.0*pow(normTime,3.0));
+        tgt_dist[i-1] = tgt * (float)(6.0*pow(normTime,5.0) - 15.0*pow(normTime,4.0) + 10.0*pow(normTime,3.0));
 
         /*  */
         if(i == 1){
