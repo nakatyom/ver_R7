@@ -6,8 +6,6 @@
 #include "linetrace.h"
 #include "odometry.h"
 
-
-
 float mid_PID_line_pos(float tag, float maj,int pwr){ 
     
     printf("ref = %f | ",maj);
@@ -45,11 +43,11 @@ float mid_PID_line_pos(float tag, float maj,int pwr){
 
 int divion = 0;
 int finish = 0;
-rgb_raw_t crnt_rgb_line;
+
 u_int8_t reflection =0;
 struct coordinate crnt_line = {0.0, 0.0, 0.0};//自己位置座標
 
-extern bool_t judge_blue(){
+bool_t judge_blue(rgb_raw_t crnt_rgb_line){
     //rgb_raw_t crnt_rgb_line;
     //u_int8_t reflection = color_sensor_get_reflect(color_sensor);
     //color_sensor_get_rgb_raw(color_sensor,&crnt_rgb_line);
@@ -63,7 +61,7 @@ extern bool_t judge_blue(){
     }
 }
 
-extern bool_t judge_black(){
+bool_t judge_black(){
     
     //u_int8_t reflection = color_sensor_get_reflect(color_sensor);
     //ev3_color_sensor_get_rgb_raw(color_sensor,&crnt_rgb_line);
@@ -77,26 +75,26 @@ extern bool_t judge_black(){
     }
 }
 
-int linetrace(void){
+extern int linetrace(rgb_raw_t rgb){
     float velo_rot_target;
     get_crntCoordinate(&crnt_line);
-    //color_sensor_get_rgb_raw(color_sensor,&crnt_rgb_line);
+    
     reflection = color_sensor_get_reflect(color_sensor);
 
     if (divion == 0){
         printf("x=%f, y=%f, theta=%f | ",crnt_line.x, crnt_line.y, crnt_line.theta);
-//        if((crnt_line.x >=2750 && crnt_line.y >= -300) || (crnt_line.x >=2750 && crnt_line.y <= -1800)){ //コーナーエリア
-//            printf("判定1 \n");
-//            velo_rot_target = mid_PID_line_pos(55.0f, (float)reflection,50);
-//            mid_velocity_control(50.0f, -velo_rot_target);
-//        }else{ //ストレートエリア
+        if((crnt_line.x >=2750 && crnt_line.y >= -300) || (crnt_line.x >=2750 && crnt_line.y <= -1800)){
+            printf("判定1 \n");
+            velo_rot_target = mid_PID_line_pos(55.0f, (float)reflection,50);
+            mid_velocity_control(50.0f, -velo_rot_target);
+        }else{ 
             printf("判定2 \n");
             velo_rot_target = mid_PID_line_pos(55.0f, (float)reflection,90);
             mid_velocity_control(90.0f, -velo_rot_target);
-            if(judge_blue() == true){
+            if(judge_blue(rgb) == true){
                 divion = 1;
             }
-//        }
+        }
 
 
         return 0;

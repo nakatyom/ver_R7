@@ -59,9 +59,10 @@ void sens_task(intptr_t exinf){
     ev3_color_sensor_get_rgb_raw(color_sensor,&rgb);
     printf("ref = %d | r = %d | g = %d | b = %d\n",ref, rgb.r, rgb.g, rgb.b);
     */
-    
+    rgb_raw_t app_rgb;
+    color_sensor_get_rgb_raw(color_sensor,&app_rgb);
     if (robo_mode == 0 ){
-        robo_mode = linetrace();
+        robo_mode = linetrace(app_rgb);
     }else if(robo_mode == 1){
         printf("NEO  ");
         robo_mode = hello_neo();
