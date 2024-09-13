@@ -42,9 +42,8 @@ int robo_mode=0;
 #define ARRAY 50
 
 void sens_task(intptr_t exinf){
-    int a = 0;
-    a = linetrace();
-    // static struct coordinate test_c = {0.0f, 0.0f, 0.0f};
+    
+    static struct coordinate test_c = {0.0f, 0.0f, 0.0f};
     //static int cunt;
     //static int is_head = 0;
     //static float time[ARRAY] = {0.0};
@@ -55,8 +54,8 @@ void sens_task(intptr_t exinf){
     //float tgt_time = 20.0;
     //float crnt_time = (float)cunt*0.02;
 
-    //get_crntCoordinate(&test_c);
-    //printf("x: %f,y: %f,theta: %f\n",test_c.x, test_c.y, test_c.theta);
+    get_crntCoordinate(&test_c);
+    printf("x: %f,y: %f,theta: %f\n",test_c.x, test_c.y, test_c.theta);
 
 /*  
     mid_velocity_control(0.0f, -40.0f);

@@ -44,10 +44,6 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
     }
     else { //直進・曲進している
         //ロボットの移動距離
-        if(delta_LL < 0.0){
-            delta_LL *= -1.0;
-            delta_LR *= -1.0;
-        }
         delta_L = (delta_LL + delta_LR)/(double)2.0;
         //ロボットの旋回量
         delta_rad_e = (delta_LL - delta_LR) / (double)wheel_dist;
@@ -65,8 +61,8 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
     
     // 現在座標を計算する
     double pre_rad = PI_DOUBLE * pre_coordinate.theta / 180.0;
-    double delta_rad = delta_rad_e;      // 旋回量計算に使用するデバイスの選択
-    double delta_theta = delta_theta_e;  // 旋回量計算に使用するデバイスの選択
+    double delta_rad = delta_rad_g;      // 旋回量計算に使用するデバイスの選択
+    double delta_theta = delta_theta_g;  // 旋回量計算に使用するデバイスの選択
  
     crnt_coordinate->x      = pre_coordinate.x + (float)(delta_L * cos( pre_rad + (delta_rad / 2.0) ));
     crnt_coordinate->y      = pre_coordinate.y + (float)(delta_L * sin( pre_rad + (delta_rad / 2.0) ));
