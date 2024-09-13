@@ -79,7 +79,7 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
     return;
 }
  
-extern void get_preCoordinate(struct coordinate* coordinate_p){
+void get_preCoordinate(struct coordinate* coordinate_p){
     coordinate_p->x     = pre_coordinate.x;
     coordinate_p->y     = pre_coordinate.y;
     coordinate_p->theta = pre_coordinate.theta;
