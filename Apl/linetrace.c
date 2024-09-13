@@ -51,7 +51,7 @@ int calc_luminance(rgb_raw_t color) {
     
     printf("r = %d, g = %d, b = %d, ",color.r,color.g,color.b);
 
-    int luminance = (int)(0.299 * color.r + 0.587 * color.r + 0.114 * color.r);
+    int luminance = (int)(0.299 * color.r + 0.587 * color.g + 0.114 * color.b);
     luminance = (luminance * 100) / 255;
 
     printf("ref = %d | ",luminance);
@@ -91,6 +91,7 @@ int cnt =0;
 extern int linetrace(){
     float velo_rot_target;
     get_crntCoordinate(&crnt_line);
+    color_sensor_get_rgb_raw(color_sensor,&crnt_rgb_line);
     reflection = calc_luminance(crnt_rgb_line);
     //printf("ref = %d | ",reflection);
 
@@ -110,7 +111,6 @@ extern int linetrace(){
             mid_velocity_control(90.0f, -velo_rot_target);
             if (kotesaki == true){   
                 printf(" | 小手先のカラーセンサ");
-                color_sensor_get_rgb_raw(color_sensor,&crnt_rgb_line);
                 if(judge_blue()== true){
                     printf("黒検知へ移行。");
                     divion = 1;
