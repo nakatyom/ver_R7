@@ -84,7 +84,6 @@ int linetrace(void){
     reflection = color_sensor_get_reflect(color_sensor);
 
     if (divion == 0){
-
         printf("x=%f, y=%f, theta=%f | ",crnt_line.x, crnt_line.y, crnt_line.theta);
 //        if((crnt_line.x >=2750 && crnt_line.y >= -300) || (crnt_line.x >=2750 && crnt_line.y <= -1800)){ //コーナーエリア
 //            printf("判定1 \n");
