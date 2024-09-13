@@ -73,8 +73,8 @@ void mid_velocity_control(float velo_str_tgt, float velo_rot_tgt){
     /* 並進速度計算 */
     cnt_r_pre = cnt_r;
     cnt_l_pre = cnt_l;
-    cnt_r = motor_get_counts(right_motor); 
-    cnt_l = motor_get_counts(left_motor);
+    cnt_r = ev3_motor_get_counts(right_motor); 
+    cnt_l = ev3_motor_get_counts(left_motor);
  
     int velo_r_tmp  = ((cnt_r - cnt_r_pre) * ENC_CORR_R) * SAMPLE_RATE; // cnt ⇒ deg/sec(motor)
     int velo_l_tmp  = ((cnt_l - cnt_l_pre) * ENC_CORR_L) * SAMPLE_RATE; // cnt ⇒ deg/sec(motor)             
