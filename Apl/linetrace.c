@@ -73,8 +73,8 @@ int linetrace(void){
     // BLUE検知まで走行する処理。
     int reflection = ev3_color_sensor_get_reflect(color_sensor);
     float velo_rot_target;
-    velo_rot_target = mid_PID_line_pos(70.0f, (float)reflection,90);
-    mid_velocity_control(90.0f, -velo_rot_target);
+    velo_rot_target = mid_PID_line_pos(55.0f, (float)reflection,50);
+    mid_velocity_control(50.0f, -velo_rot_target);
     return 0;
     /*
     if (divion == 0){
