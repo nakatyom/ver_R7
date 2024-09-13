@@ -72,13 +72,11 @@ bool_t judge_blue(){
         return false;
     }
 }
-
 bool_t judge_black(){
-    
     //u_int8_t reflection = color_sensor_get_reflect(color_sensor);
     //ev3_color_sensor_get_rgb_raw(color_sensor,&crnt_rgb_line);
     printf("ref = %d | r = %d | g = %d | b = %d\n",reflection, crnt_rgb_line.r, crnt_rgb_line.g, crnt_rgb_line.b);
-    if(( crnt_rgb_line.r >=80 && crnt_rgb_line.r <=90 ) && ( crnt_rgb_line.g >=95 && crnt_rgb_line.g <=105 ) && ( crnt_rgb_line.b >=104 && crnt_rgb_line.b <=114 )&& ( reflection >=70 && reflection <=80 )  ){
+    if(( crnt_rgb_line.r >=50 && crnt_rgb_line.r <=70 ) && ( crnt_rgb_line.g >=50 && crnt_rgb_line.g <=70 ) && ( crnt_rgb_line.b >=50 && crnt_rgb_line.b <=70sss )&& ( reflection >=20 && reflection <=70 )){
         printf("_____________________BLACK JUDGE_____________________\n");
         return true;
     }
