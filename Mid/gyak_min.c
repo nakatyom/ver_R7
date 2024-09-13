@@ -37,7 +37,7 @@ void calc_tgt(float tgt, float tgt_time, int div_num, float* div_time, float* tg
     return;
 }
 
-void clac_TgtVelocity(float tgt_dist, float tgt_time, int div_num, float* div_time, float* tgt_velocity){
+void calc_TgtVelocity(float tgt_dist, float tgt_time, int div_num, float* div_time, float* tgt_velocity){
     calc_tgt(tgt_dist, tgt_time, div_num, div_time, tgt_velocity);
     return;
 }
