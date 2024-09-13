@@ -58,15 +58,15 @@ void get_crntCoordinate(struct coordinate* crnt_coordinate){
     delta_theta_e = (delta_rad_e * 180.0 / PI_DOUBLE);
  
     /* 走行体の旋回角度を計算する (ジャイロ)*/
-    double delta_theta_e = (double)(gyro_sensor_get_angle(gyro_sensor) - gyro_sensor_get_pre_angle(gyro_sensor));
-    double delta_rad_e   = PI_DOUBLE * delta_theta_g /180.0;
+    double delta_theta_g = (double)(gyro_sensor_get_angle(gyro_sensor) - gyro_sensor_get_pre_angle(gyro_sensor));
+    double delta_rad_g   = PI_DOUBLE * delta_theta_g /180.0;
     
     //printf("theta_g = %f | rad_g = %f | ",delta_theta_g,delta_rad_g);
     
     // 現在座標を計算する
     double pre_rad = PI_DOUBLE * pre_coordinate.theta / 180.0;
-    double delta_rad = delta_rad_g;      // 旋回量計算に使用するデバイスの選択
-    double delta_theta = delta_theta_g;  // 旋回量計算に使用するデバイスの選択
+    double delta_rad = delta_rad_e;      // 旋回量計算に使用するデバイスの選択
+    double delta_theta = delta_theta_e;  // 旋回量計算に使用するデバイスの選択
  
     crnt_coordinate->x      = pre_coordinate.x + (float)(delta_L * cos( pre_rad + (delta_rad / 2.0) ));
     crnt_coordinate->y      = pre_coordinate.y + (float)(delta_L * sin( pre_rad + (delta_rad / 2.0) ));
