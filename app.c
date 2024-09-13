@@ -47,7 +47,7 @@ void boss_task(intptr_t exinf){
     }
 
     float tgtV = get_TgtVelcity((float)(cunt*0.1), 11, time, velo);
-    printf("TgtV: \n",tgtV);
+    printf("TgtV: %f\n",tgtV);
 
     mid_velocity_control(tgtV, 0.0);    
 
