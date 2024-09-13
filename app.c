@@ -62,7 +62,7 @@ void sens_task(intptr_t exinf){
     ev3_color_sensor_get_rgb_raw(color_sensor,&rgb);
     printf("ref = %d | r = %d | g = %d | b = %d\n",ref, rgb.r, rgb.g, rgb.b);
     */
-    printf("(mA,mV):(%d,%d)  |  ",ev3_battery_current_mA(),ev3_battery_voltage_mV());
+    printf("\n(mA,mV):(%d,%d)  |  ",ev3_battery_current_mA(),ev3_battery_voltage_mV());
     if (robo_mode == 0 ){
         robo_mode = linetrace();
     }else if(robo_mode == 1){
