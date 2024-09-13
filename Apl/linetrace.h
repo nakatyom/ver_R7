@@ -2,6 +2,6 @@
 #define _LINETRACE_H
 
 /* extern function */
-extern int linetrace(rgb_raw_t rgb);
+extern int linetrace();
 
 #endif	// _LINETRACE_H
