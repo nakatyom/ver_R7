@@ -27,7 +27,7 @@ void main_task(intptr_t unused) {
 
 
 void boss_task(intptr_t exinf){
-    mid_velocity_control(0.0f, 50.0f); 
+    mid_velocity_control(0.0f, 0.0f); 
 
     //static int cunt;
     //static int is_head = 0;
