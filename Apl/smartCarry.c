@@ -57,6 +57,7 @@ extern int calc_angle(float tgt_pos_x, float tgt_pos_y){
     }
 
     // 処理2角度計算
+    tgt_angle=atan2(tgt_pos_y,tgt_pos_x);
     tgt_angle = tgt_angle * (180 / PI);
     printf("(x,y)=(%f,%f) | ",tgt_pos_x,tgt_pos_y);
     return (int)tgt_angle;
@@ -119,15 +120,15 @@ extern bool_t proc_turn(int now_angle, int tgt_angle){
     bool_t flag = false;
     //get_crntCoordinate(&crnt_neo);
     if (now_angle < tgt_angle){
-        ev3_motor_set_power(left_motor,  -5);
-        ev3_motor_set_power(right_motor, 5);
+        ev3_motor_set_power(left_motor,  5);
+        ev3_motor_set_power(right_motor, -5);
         //printf("処理：分岐１");
         printf("比較角度(現在( %d° ):目標( %d° )\n",now_angle,tgt_angle);
         flag =false;
     }
     else if (now_angle > tgt_angle){
-        ev3_motor_set_power(left_motor,  10);
-        ev3_motor_set_power(right_motor, -10);
+        ev3_motor_set_power(left_motor,  -10);
+        ev3_motor_set_power(right_motor, 10);
         //printf("処理：分岐２");
         printf("比較角度(現在( %d° ):目標( %d° )\n",now_angle,tgt_angle);
         flag =false;
@@ -173,8 +174,8 @@ extern int hello_neo(){
 
     if(roop_cnt <= 8){
         // 変数宣言
-        now_angle = (int)trans_gDeg(crnt_neo.theta);
-        printf("x=%f, y=%f, theta=%f | ",crnt_neo.x, crnt_neo.y, trans_gDeg(crnt_neo.theta));
+        now_angle = (int)(crnt_neo.theta);
+        printf("x=%f, y=%f, theta=%f° , 変換後=%f° | ",crnt_neo.x, crnt_neo.y, crnt_neo.theta ,trans_gDeg(crnt_neo.theta));
         // 旋回処理
         if (init_flag == false){ 
             tgt_angl = calc_angle(x_pos_target[roop_cnt],y_pos_target[roop_cnt]);
