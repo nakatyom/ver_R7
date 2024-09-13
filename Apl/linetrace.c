@@ -100,7 +100,7 @@ extern int linetrace(){
         if((crnt_line.x >=2750 && crnt_line.y >= -300) || (crnt_line.x >=2750 && crnt_line.y <= -1800)){
             printf("判定1 \n");
             velo_rot_target = mid_PID_line_pos(80.0f, (float)reflection,50);
-            //mid_velocity_control(50.0f, -velo_rot_target);
+            mid_velocity_control(50.0f, -velo_rot_target);
 
             if (crnt_line.x >=2750 && crnt_line.y <= -1800 && kotesaki==false){
                 kotesaki=true;
