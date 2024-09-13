@@ -7,6 +7,7 @@
 #include "dbleRoop.h"
 #include "port.h"
 #include "common.h"
+#include "velocity_control.h"
 
 bool_t turn_flag = false;
 bool_t drive_flag = false;

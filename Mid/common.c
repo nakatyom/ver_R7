@@ -19,7 +19,7 @@ float trans_gDeg(float encdeg){
 
     //回転方向を戻す
     if(encdeg < 0.0) deg *= -1.0;
-    printf("(int)abs(deg):%f, (int)nPI:%f, deg:%f\n",encdeg,nPI,deg);
+    //printf("(int)abs(deg):%f, (int)nPI:%f, deg:%f\n",encdeg,nPI,deg);
     
     if(fabs(deg) > 180.0 && fabs(deg) < 360.0){
         deg = -1.0 * (360.0 - deg);
@@ -27,7 +27,7 @@ float trans_gDeg(float encdeg){
 
     if(deg == -180.0) deg = 0.0; //floatなのでホント�?��?要な�?けど,念のため
 
-    printf("deg:%f\n",(float)deg);
+    //printf("deg:%f\n",(float)deg);
     return deg;
 }
 
@@ -44,7 +44,7 @@ void transPolor(struct coordinate* crnt, struct coordinate* trgt, float* dist, f
     float rot = 180.0 / 3.141592 * atan2(y, x);
     rot = rot - crnt_gDeg;
 
-    printf("直進�?:%f, 旋回角度:%f\n",L, rot);
+    //printf("直進�?:%f, 旋回角度:%f\n",L, rot);
 
     return;
 }
