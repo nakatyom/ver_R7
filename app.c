@@ -43,7 +43,7 @@ int robo_mode=0;
 
 void sens_task(intptr_t exinf){
     int a = 0;
-    a = lintrace();
+    a = linetrace();
     // static struct coordinate test_c = {0.0f, 0.0f, 0.0f};
     //static int cunt;
     //static int is_head = 0;
