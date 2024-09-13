@@ -41,11 +41,11 @@ void calc_tgt(float tgt, float tgt_time, int div_num, float* div_time, float* tg
 }
 
 void get_TgtVelocity(float tgt_dist, float tgt_time, int div_num, float* div_time, float* tgt_velocity){
-    calc_tgt(tgt_dist, tgt_time, div_time, tgt_velocity);
+    calc_tgt(tgt_dist, tgt_time, div_num, div_time, tgt_velocity);
     return;
 }
 
 void get_TgtRate(float tgt_theta, float tgt_time, int div_num, float* div_time, float* tgt_rate){
-    calc_tgt(tgt_theta, tgt_time, div_time, tgt_rate);
+    calc_tgt(tgt_theta, tgt_time, div_num, div_time, tgt_rate);
     return;
 }
