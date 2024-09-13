@@ -86,6 +86,7 @@ extern int linetrace(){
     float velo_rot_target;
     get_crntCoordinate(&crnt_line);
     reflection = calc_luminance(crnt_rgb_line);
+    printf("ref = %d | ",reflection);
 
     if (divion == 0){
         printf("x=%f, y=%f, theta=%f | ",crnt_line.x, crnt_line.y, crnt_line.theta);
