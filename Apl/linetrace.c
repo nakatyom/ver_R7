@@ -42,13 +42,13 @@ float mid_PID_line_pos(float tag, float maj,int pwr){
 
 int divion = 0;
 int finish = 0;
-rgb_raw_t crnt_rgb;
+rgb_raw_t crnt_rgb_line;
 struct coordinate crnt_line = {0.0, 0.0, 0.0};//自己位置座標
 
 
 extern bool_t judge_blue(){
     int reflection = ev3_color_sensor_get_reflect(color_sensor);
-    if(( crnt_rgb.r >=10 && crnt_rgb.r <=20 ) && ( crnt_rgb.g >=42 && crnt_rgb.g <=52 ) && ( crnt_rgb.b >=80 && crnt_rgb.b <=90 )&& ( reflection >=30 && reflection <=40 )  ){
+    if(( crnt_rgb_line.r >=10 && crnt_rgb_line.r <=20 ) && ( crnt_rgb_line.g >=42 && crnt_rgb_line.g <=52 ) && ( crnt_rgb_line.b >=80 && crnt_rgb_line.b <=90 )&& ( reflection >=30 && reflection <=40 )  ){
         return true;
     }
     else{
@@ -58,7 +58,7 @@ extern bool_t judge_blue(){
 
 extern bool_t judge_black(){
     int reflection = ev3_color_sensor_get_reflect(color_sensor);
-    if(( crnt_rgb.r >=4 && crnt_rgb.r <=13 ) && ( crnt_rgb.g >=5 && crnt_rgb.g <=15 ) && ( crnt_rgb.b >=7 && crnt_rgb.b <=17 )&& ( reflection >=3 && reflection <=14 )  ){
+    if(( crnt_rgb_line.r >=4 && crnt_rgb_line.r <=13 ) && ( crnt_rgb_line.g >=5 && crnt_rgb_line.g <=15 ) && ( crnt_rgb_line.b >=7 && crnt_rgb_line.b <=17 )&& ( reflection >=3 && reflection <=14 )  ){
         return true;
     }
     else{
