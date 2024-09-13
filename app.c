@@ -51,6 +51,7 @@ void sens_task(intptr_t exinf){
     if (robo_mode == 0 ){
         robo_mode = linetrace();
     }else if(robo_mode == 1){
+        printf("NEO  ");
         robo_mode = hello_neo();
     }
     /*else if(robo_mode == 2){
