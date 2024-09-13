@@ -51,7 +51,7 @@ struct coordinate crnt_line = {0.0, 0.0, 0.0};//自己位置座標
 extern bool_t judge_blue(){
     u_int8_t reflection = color_sensor_get_reflect(color_sensor);
     //ev3_color_sensor_get_rgb_raw(color_sensor,&crnt_rgb_line);
-    printf("ref = %d | r = %d | g = %d | b = %d\n",reflection, crnt_rgb_line.r, crnt_rgb_line.g, crnt_rgb_line.b);
+    //printf("ref = %d | r = %d | g = %d | b = %d\n",reflection, crnt_rgb_line.r, crnt_rgb_line.g, crnt_rgb_line.b);
     if(( crnt_rgb_line.r >=80 && crnt_rgb_line.r <=90 ) && ( crnt_rgb_line.g >=110 && crnt_rgb_line.g <=225 ) && ( crnt_rgb_line.b >=140 && crnt_rgb_line.b <=150 )&& ( reflection >=85 && reflection <=150 )  ){
         printf("_____________________BLUE JUDGE_____________________\n");
         return true;
@@ -64,7 +64,7 @@ extern bool_t judge_blue(){
 extern bool_t judge_black(){
     u_int8_t reflection = color_sensor_get_reflect(color_sensor);
     //ev3_color_sensor_get_rgb_raw(color_sensor,&crnt_rgb_line);
-    printf("ref = %d | r = %d | g = %d | b = %d\n",reflection, crnt_rgb_line.r, crnt_rgb_line.g, crnt_rgb_line.b);
+    //printf("ref = %d | r = %d | g = %d | b = %d\n",reflection, crnt_rgb_line.r, crnt_rgb_line.g, crnt_rgb_line.b);
     if(( crnt_rgb_line.r >=70 && crnt_rgb_line.r <=80 ) && ( crnt_rgb_line.g >=80 && crnt_rgb_line.g <=90 ) && ( crnt_rgb_line.b >=95 && crnt_rgb_line.b <=100 )&& ( reflection >=68 && reflection <=77 )  ){
         printf("_____________________BLACK JUDGE_____________________\n");
         return true;
