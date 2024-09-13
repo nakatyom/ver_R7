@@ -1,4 +1,5 @@
 #include "velocity_control.h"
+#include "common.h"
  
 #define ENC_CORR_R      1.0f        // 右ENC個体差補正係数
 #define ENC_CORR_L      1.0f        // 左ENC個体差補正係数
@@ -8,7 +9,7 @@
 #define TRED_SIZE       125.0f      // トレッド直径[mm]
  
 #define SAMPLE_RATE     50.0f      // 計測周波数[sec]
-#define PI_FLOAT        3.141592f   // 円周率
+
  
  
 float mid_PID_str_velo(float tag, float maj){
