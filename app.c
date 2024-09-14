@@ -57,6 +57,8 @@ void sens_task(intptr_t exinf){
     get_crntCoordinate(&test_c);
     printf("x: %f,y: %f,theta: %f\n",test_c.x, test_c.y, test_c.theta);
 
+    hello_neo();
+
 /*  
     mid_velocity_control(0.0f, -40.0f);
     if(test_c.theta > 0.95 * tgt_theta){
