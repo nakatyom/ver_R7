@@ -217,7 +217,8 @@ extern int hello_neo(){
 
     }
     else{
-        last_angle_neo = crnt_neo.theta; //ロボットの最終向きを記憶
+        reset_Corrdinate();
+        last_angle_neo = (int)crnt_neo.theta; //ロボットの最終向きを記憶
         return 2;
     }
 }
@@ -299,7 +300,8 @@ int hello_dmrm(){
         return 1;
     }
     else{
-        last_angle_dm = tgt_dm.theta; //ロボットの最終向きを記憶
+        last_angle_dm = (int)tgt_dm.theta; //ロボットの最終向きを記憶
+        reset_Corrdinate();
         return 2;
     }
 }
@@ -340,6 +342,20 @@ float mid_PID_line_pos_carry(float tag, float maj,int pwr){
 
 
 int hello_carry(){
+    static int roop_cnt_carry = 0;
+    static bool_t turn_flag_carry = false;
+    static bool_t drive_flag_carry = false;
+    static bool_t init_flag_carry = false;
+
+    // 定数宣言（目標座標の配列
+    /* SIM上の座標を修正。*/
+    static float x_pos_target_carry[1]={0.0};
+    static float y_pos_target_carry[1]={0.0};
+    static struct coordinate crnt_carry = {0.0, 0.0, 0.0}; //自己位置座標
+    static struct coordinate tgt_carry  = {0.0, 0.0, 0.0}; //目標位置座標
+    static struct coordinate init_carry = {0.0, 0.0, 0.0};
+    static int tgt_angl_carry   = 0;
+    static float tgt_dist_carry = 0.0;
 
     static int carry_mode = 0;
     rgb_raw_t crnt_rgb_db;
@@ -360,22 +376,6 @@ int hello_carry(){
         }
 
     }else if (carry_mode == 1){
-
-        static int roop_cnt_carry = 0;
-        static bool_t turn_flag_carry = false;
-        static bool_t drive_flag_carry = false;
-        static bool_t init_flag_carry = false;
-
-        // 定数宣言（目標座標の配列
-        /* SIM上の座標を修正。*/
-        static float x_pos_target_carry[1]={0.0};
-        static float y_pos_target_carry[1]={0.0};
-        static struct coordinate crnt_carry = {0.0, 0.0, 0.0}; //自己位置座標
-        static struct coordinate tgt_carry  = {0.0, 0.0, 0.0}; //目標位置座標
-        static struct coordinate init_carry = {0.0, 0.0, 0.0};
-        static int tgt_angl_carry   = 0;
-        static float tgt_dist_carry = 0.0;
-
         /* 現在座標 */
         get_crntCoordinate(&crnt_carry);
 
@@ -383,7 +383,7 @@ int hello_carry(){
             /*座標設定*/
             printf("x=%8.4f[mm], y=%8.4f[mm], theta=%8.4f°\n",crnt_carry.x, crnt_carry.y, crnt_carry.theta);
             tgt_carry.x = x_pos_target_carry[roop_cnt_carry];
-            tgt_carry.y = y_pos_target_cary[roop_cnt_carry];
+            tgt_carry.y = y_pos_target_carry[roop_cnt_carry];
         }
         // 旋回処理
         // 旋回角度計算
@@ -413,7 +413,7 @@ int hello_carry(){
             turn_flag_carry = false;
             drive_flag_carry = false;
             init_flag_carry = false;
-            printf("移動完了(ループ%d回)\n",roop_cnt_c);
+            printf("移動完了(ループ%d回)\n",roop_cnt_carry);
             printf("現在位置：x=%8.4f[mm], y=%8.4f[mm], theta=%8.4f°\n",crnt_carry.x, crnt_carry.y, crnt_carry.theta);
             printf("目標位置：x=%8.4f[mm], y=%8.4f[mm], theta=%8.4f°\n",tgt_carry.x, tgt_carry.y, tgt_carry.theta);
         }
@@ -421,7 +421,7 @@ int hello_carry(){
         return 1;
     
     }else{
-        last_angle_carry = tgt_carry.theta;//ロボットの最終向きを記憶
+        last_angle_carry = (int)tgt_carry.theta;//ロボットの最終向きを記憶
         return 2;
     }
 }
