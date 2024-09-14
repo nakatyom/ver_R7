@@ -28,7 +28,7 @@ int calc_angle(struct coordinate* crnt, struct coordinate* tgt){
     // (y座標)
     if (crnt->y <= 0.0f){
         tgt->y = tgt-> + abs(crnt_carry.y);
-    }else if(crnt_carry.y > 0.0f){
+    }else if(crnt->y > 0.0f){
        tgt->y = tgt->y - abs(crnt_carry.y);
     }else{
         printf("旋回角度算出中に異常発生");
