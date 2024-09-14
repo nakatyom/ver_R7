@@ -63,8 +63,8 @@ bool_t proc_turn(int now_angle, int tgt_angle){
         flag =false;
     }else{
         /* 旋回完了 */
-        ev3_motor_stop(left_motor);
-        ev3_motor_stop(right_motor);
+        motor_stop(left_motor);
+        motor_stop(right_motor);
         flag =true;
     }
     return flag;
@@ -83,8 +83,8 @@ bool_t proc_run(float now_dist,float tgt_dist){
         flag = false;
     }else{
         printf("走行完了");
-        ev3_motor_stop(left_motor);
-        ev3_motor_stop(right_motor);
+        motor_stop(left_motor);
+        motor_stop(right_motor);
         flag = true;
     }
 
