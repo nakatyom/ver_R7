@@ -145,6 +145,8 @@ extern int hello_neo(){
             drive_flag = false;
             init_flag = false;
             printf("移動完了(ループ%d回)\n",roop_cnt);
+            printf("現在位置：x=%8.4f[mm], y=%8.4f[mm], theta=%8.4f°\n",crnt_neo.x, crnt_neo.y, crnt_neo.theta);
+            printf("目標位置：x=%8.4f[mm], y=%8.4f[mm], theta=%8.4f°\n",tgt_neo.x, tgt_neo.y, tgt_neo.theta);
         }
 
         return 1;
