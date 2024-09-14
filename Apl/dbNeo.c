@@ -110,7 +110,7 @@ extern int hello_neo(){
     /* 現在座標 */
     get_crntCoordinate(&crnt_neo);
 
-    if(roop_cnt <= 9){
+    if(roop_cnt < 9){
         /*座標設定*/
         printf("x=%8.4f[mm], y=%8.4f[mm], theta=%8.4f°\n",crnt_neo.x, crnt_neo.y, crnt_neo.theta);
         tgt_neo.x = x_pos_target[roop_cnt];
