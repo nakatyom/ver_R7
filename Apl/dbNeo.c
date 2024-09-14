@@ -72,11 +72,12 @@ bool_t proc_run(float now_dist,float tgt_dist){
     printf("距離情報(現在( %d mm):目標( %d mm )\n",(int)now_dist,(int)tgt_dist);
     bool_t flag = false;
     if (now_dist < tgt_dist){
-        gyak_velocity_control(60.0f, 0.0f);
+        gyak_velocity_control(50.0f, 0.0f);
         flag = false;
     }
     else if (now_dist > tgt_dist){
-        gyak_velocity_control(60.0f, 0.0f);
+        gyak_velocity_control(20.0f,0.0f);
+        gyak_velocity_control(-30.0f, 0.0f);
         flag = false;
     }else{
         printf("走行完了");
