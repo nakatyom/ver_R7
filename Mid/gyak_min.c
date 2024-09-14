@@ -124,7 +124,7 @@ float gyak_LPF_str_velo(float maj){
 }
  
 void gyak_velocity_control(float velo_str_tgt, float velo_rot_tgt){
-    float enc_corr_r = 1.0;
+    float enc_corr_r = 1.5;
     float enc_corr_l = 1.0;
     float sample_rate = 50.0;
     
