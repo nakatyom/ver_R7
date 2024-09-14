@@ -99,8 +99,8 @@ extern int hello_neo(){
 
     // 定数宣言（目標座標の配列
     /* SIM上の座標を修正。*/
-    static float x_pos_target[6]={420.0,520.0,240.0,-220.0,-780.0,-1040.0,-560.0,-260.0,-260.0};
-    static float y_pos_target[6]={-140.0,-580.0,-860.0,-760.0,-720.0,-1360.0,-1300.0,-720.0,0.0};
+    static float x_pos_target[9]={ 420.0, 520.0, 240.0,-220.0,-780.0,-1040.0,- 560.0,-260.0,-260.0};
+    static float y_pos_target[9]={-140.0,-580.0,-860.0,-760.0,-720.0,-1360.0,-1300.0,-720.0,   0.0};
     static struct coordinate crnt_neo = {0.0, 0.0, 0.0}; //自己位置座標
     static struct coordinate tgt_neo  = {0.0, 0.0, 0.0}; //目標位置座標
     static struct coordinate init_neo = {0.0, 0.0, 0.0};
@@ -110,7 +110,7 @@ extern int hello_neo(){
     /* 現在座標 */
     get_crntCoordinate(&crnt_neo);
 
-    if(roop_cnt < 5){
+    if(roop_cnt < 8){ // 0 - 8
         /*座標設定*/
         printf("x=%8.4f[mm], y=%8.4f[mm], theta=%8.4f°\n",crnt_neo.x, crnt_neo.y, crnt_neo.theta);
         tgt_neo.x = x_pos_target[roop_cnt];
