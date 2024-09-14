@@ -49,12 +49,12 @@ float calc_dist(struct coordinate* crnt, struct coordinate* tgt) {
 // 旋回処理[暫定]
 bool_t proc_turn(int now_angle, int tgt_angle){
     bool_t flag = false;
-    if (now_angle < tgt_angle + 5){
+    if (now_angle < tgt_angle){
         gyak_velocity_control(0.0f, -25.0f);
         printf("比較角度(現在( %d° ):目標( %d° )\n",now_angle, tgt_angle+5);
         flag =false;
     }
-    else if (now_angle > tgt_angle - 5){
+    else if (now_angle > tgt_angle){
         gyak_velocity_control(0.0f, 25.0f);
         printf("比較角度(現在( %d° ):目標( %d° )\n",now_angle, tgt_angle-5);
         flag =false;
