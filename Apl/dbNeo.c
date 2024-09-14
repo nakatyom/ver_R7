@@ -10,9 +10,6 @@
 #include "dbNeo.h"
 #include "linetrace.h"
 
-int reflection =0;
-rgb_raw_t crnt_rgb_carry;
-
 
 // 旋回角度算出処理
 int calc_angle(struct coordinate* crnt, struct coordinate* tgt){
