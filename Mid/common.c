@@ -29,7 +29,7 @@ float trans_gDeg(float encdeg){
     return deg;
 }
 
-float get_dist_p(struct coordinate* crnt, struct coordinate* trgt, float* dist, float* theta){
+float get_dist_p(struct coordinate* crnt, struct coordinate* trgt){
     /* 現在角度をジャイロ角度に変換 */
     float crnt_gDeg = trans_gDeg(crnt->theta);
     
@@ -43,6 +43,9 @@ float get_dist_p(struct coordinate* crnt, struct coordinate* trgt, float* dist, 
 }
 
 int get_rot_p(struct coordinate* crnt, struct coordinate* trgt){
+    float x = trgt->x - crnt->x;
+    float y = trgt->y - crnt->y;
+
     /* 現在角度をジャイロ角度に変換 */
     float crnt_gDeg = trans_gDeg(crnt->theta);
 
