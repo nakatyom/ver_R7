@@ -7,17 +7,13 @@
 #include "gyak_min.h"
 
 /* static functions */
-
-
-/* external functions */
-/* 最初�?????��?��??��?��???��?��??��?��一回だけ呼び出される�?????��?��??��?��???��?��??��?��????��?��??��?��???��?��??��?��? */
 void calc_tgt(float tgt, float tgt_time, int div_num, float* div_time, float* tgtV){
     float pre_div_dist = 0.0;
 
     /* ?��?割時間におけ?��? */
     for(int i=1; i<=div_num; i++){
-        double normTime = ((double)i / (double)div_num);             // 正規化時間
-        div_time[i-1]  = (float)normTime * tgt_time; // ?��?割時間
+        double normTime = ((double)i / (double)div_num);    // 正規化時間
+        div_time[i-1]  = (float)normTime * tgt_time;        // ?��?割時間
             
         /*  */
         float div_dist = (float)( tgt * (6.0*pow(normTime,5.0) - 15.0*pow(normTime,4.0) + 10.0*pow(normTime,3.0)) );
@@ -48,9 +44,13 @@ void normalize_tgt(int div_num, float* tgt){
 
 }
 
+/* external functions */
+
+
 void calc_TgtVelocity(float tgt_dist, float tgt_time, int div_num, float* div_time, float* tgt_velocity){
     calc_tgt(tgt_dist, tgt_time, div_num, div_time, tgt_velocity);
     normalize_tgt(div_num, tgt_velocity);
+
     return;
 }
 
@@ -60,13 +60,11 @@ void calc_TgtRate(float tgt_theta, float tgt_time, int div_num, float* div_time,
     return;
 }
 
-float get_TgtVelcity(float crnt_time, int div_num, float* div_time, float* tgt_velocity){
+float get_TgtVelocity(float crnt_time, int div_num, float* div_time, float* tgt_velocity){
     static int cunt_v = 0;
     /* 現在使�?べき速度配�?��?�要�?番号を更新する */
     if(div_time[cunt_v] <= crnt_time) cunt_v += 1;
 
-
-    
     /* 配�?��?�最後に到�?(目標地点に到�?)したらリセ�?トす�?*/
     if(cunt_v >= div_num){
         cunt_v = 0;
@@ -110,8 +108,8 @@ float gyak_PID_rot_velo(float tag, float maj){
  
     return ((err * kp) + (intg * ki) + ((err - err_pre) * kd));
 }
- 
- 
+
+
 float gyak_LPF_str_velo(float maj){
  
     const float k = 0.85f;

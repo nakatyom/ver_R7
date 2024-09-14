@@ -64,7 +64,7 @@ bool_t judge_blue(){
     //u_int8_t reflection = color_sensor_get_reflect(color_sensor);
     //color_sensor_get_rgb_raw(color_sensor,&crnt_rgb_line);
     printf("ref = %d | r = %d | g = %d | b = %d\n",reflection, crnt_rgb_line.r, crnt_rgb_line.g, crnt_rgb_line.b);
-    if(( crnt_rgb_line.r >=20 && crnt_rgb_line.r <=100 ) && ( crnt_rgb_line.g >=50 && crnt_rgb_line.g <=130 ) && ( crnt_rgb_line.b >=120 && crnt_rgb_line.b <=255 )&& ( reflection >=25 && reflection <=100 )  ){
+    if(( crnt_rgb_line.r >=15 && crnt_rgb_line.r <=100 ) && ( crnt_rgb_line.g >=50 && crnt_rgb_line.g <=130 ) && ( crnt_rgb_line.b >=120 && crnt_rgb_line.b <=255 )&& ( reflection >=25 && reflection <=100 )  ){
         printf("_____________________BLUE JUDGE_____________________\n");
         return true;
     }
@@ -88,7 +88,6 @@ bool_t kotesaki = false;
 int cnt =0;
 extern int linetrace(){
 
-    
     float velo_rot_target;
     get_crntCoordinate(&crnt_line);
     color_sensor_get_rgb_raw(color_sensor,&crnt_rgb_line);
@@ -107,7 +106,7 @@ extern int linetrace(){
             }
         }
         else{ 
-            printf("判定2");
+            printf("判定2 \n");
             velo_rot_target = mid_PID_line_pos(80.0f, (float)reflection,90);
             mid_velocity_control(90.0f, -velo_rot_target);
             if (kotesaki == true){   
@@ -127,7 +126,7 @@ extern int linetrace(){
             printf("STOPカウント：%d\n",cnt);
         }
         else{
-            printf("判定3");
+            printf("設定 \n");
             velo_rot_target = mid_PID_line_pos(80.0f, (float)reflection,50);
             mid_velocity_control(50.0f, -velo_rot_target);
             color_sensor_get_rgb_raw(color_sensor,&crnt_rgb_line);
@@ -140,6 +139,7 @@ extern int linetrace(){
         motor_stop(left_motor);
         motor_stop(right_motor);
         printf("FINISH LINETRACE\n");
+        reset_Coordinate();
         return 1;
     }
     

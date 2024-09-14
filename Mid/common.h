@@ -1,7 +1,7 @@
 #ifndef _COMMON_H
 #define _COMMON_H
 
-#define PI_FLOAT 3.141592f // å†?å‘¨çŽ?
+#define PI_FLOAT 3.141592f // ï¿½?å‘¨ï¿½?
 #define PI_DOUBLE 3.1415926535
 
 extern struct coordinate{
@@ -11,7 +11,8 @@ extern struct coordinate{
 };
 
 extern float trans_gDeg(float encdeg);
-extern void transPolor(struct coordinate* crnt, struct coordinate* trgt, float* dist, float* theta);
+extern float get_dist_p(struct coordinate* crnt, struct coordinate* trgt);
+extern int   get_rot_p(struct coordinate* crnt, struct coordinate* trgt);
 
 #endif /* _COMMON_H */
 

@@ -30,65 +30,42 @@ void main_task(intptr_t unused) {
     ext_tsk();
 }
 
+void boss_task(intptr_t exinf){}
+
+
 int32_t left  = 0;
 int32_t right = 0;
-int robo_mode = 0;
-
-#define ARRAY 50
 
 void sens_task(intptr_t exinf){
-    
-    static struct coordinate test_c = {0.0f, 0.0f, 0.0f};
-    //static int cunt;
-    //static int is_head = 0;
-    //static float time[ARRAY] = {0.0};
-    //static float velo[ARRAY] = {0.0};
+    static int robo_mode = 0;
 
-    //float tgt_distance = 1000.0;
-    //float tgt_theta = 90.0;
-    //float tgt_time = 20.0;
-    //float crnt_time = (float)cunt*0.02;
 
-    get_crntCoordinate(&test_c);
-    printf("x: %f,y: %f,theta: %f\n",test_c.x, test_c.y, test_c.theta);
-
-    // hello_neo();
-
-/*  
-    mid_velocity_control(0.0f, -40.0f);
-    if(test_c.theta > 0.95 * tgt_theta){
-        motor_stop(left_motor);
-        motor_stop(right_motor);      
+    if (robo_mode == 0 ){
+        robo_mode = linetrace();
     }
-    
-    if(0 == is_head){
-        calc_TgtVelocity(tgt_distance, tgt_time, ARRAY, time, velo);
-
-        printf("time:\n");
-        for(int i=0;i<ARRAY;i++){
-            printf("%f, ", time[i]);
-        }
-        printf("\nvelocity:\n");
-        for(int i=0;i<ARRAY;i++){
-            printf("%f : ",velo[i]);
-        }
-        printf("\n");
-        is_head = 1;
+    else if(robo_mode == 1){
+        robo_mode = hello_neo();
     }
-    
-    if(crnt_time < tgt_time){
-        float tgtV = get_TgtVelcity(crnt_time, ARRAY, time, velo);
-        printf("crnt_time: %f ", crnt_time);
-        printf("TgtV: %f\n", tgtV); 
-        mid_velocity_control(tgtV, 0.0f);
+    else if(robo_mode == 2){
+        robo_mode = hello_dmrm();
+    }
+    else if (robo_mode == 3){
+        robo_mode = hello_carry();
     }
     else{
-        motor_stop(left_motor);
-        motor_stop(right_motor);
+        pritnf("完\n");
     }
 
-    cunt += 1;
-*/
-}
+    /*get_crntCoordinate(&postest);
+    printf("x=%f, y=%f, theta(変換後)=%f° | ",postest.x, postest.y, trans_gDeg(postest.theta));
 
-void boss_task(intptr_t exinf){}
+    left=motor_get_counts(left_motor);
+    right=motor_get_counts(right_motor);
+    printf("(left,right):(%d,%d) | GYRO:%d\n",left,right,gyro_sensor_get_angle(gyro_sensor));
+    rgb_raw_t rgb;
+    uint8_t ref = ev3_color_sensor_get_reflect(color_sensor);
+    ev3_color_sensor_get_rgb_raw(color_sensor,&rgb);
+    printf("ref = %d | r = %d | g = %d | b = %d\n",ref, rgb.r, rgb.g, rgb.b);
+    */
+    //printf("\n(mA,mV):(%d,%d)  |  ",ev3_battery_current_mA(),ev3_battery_voltage_mV());
+}
