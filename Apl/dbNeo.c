@@ -27,7 +27,7 @@ int calc_angle(struct coordinate* crnt, struct coordinate* tgt){
 
     // (y座標)
     if (crnt->y <= 0.0f){
-        tgt->y = tgt-> + abs(crnt->y);
+        tgt->y = tgt->y + abs(crnt->y);
     }else if(crnt->y > 0.0f){
         tgt->y = tgt->y - abs(crnt->y);
     }else{
