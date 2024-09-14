@@ -96,7 +96,7 @@ float gyak_PID_rot_velo(float tag, float maj){
  
     const float kp = 0.4f;
     const float ki = 0.1f;
-    const float kd = 0.05f;
+    const float kd = 0.1f;
  
     static float intg;
     static float err_pre;
