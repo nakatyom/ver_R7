@@ -20,24 +20,24 @@ int calc_angle(struct coordinate* crnt, struct coordinate* tgt){
     float tgt_angle = 0.0;
     
     if (crnt->x <= 0.0f){
-        float tgt_x = tgt->x + (-crnt->x);
-    }else(){
-        float = tgt_pos_x - abs(crnt->x);
+        float tgt->x = tgt->x + abs(crnt->x);
+    }else {
+        float tgt->x = tgt->x - abs(crnt->x);
     }
 
     // (y座標)
-    if (crnt_carry.y <= 0.0f){
-        tgt_pos_y = tgt_pos_y + abs(crnt_carry.y);
+    if (crnt->y <= 0.0f){
+        tgt->y = tgt-> + abs(crnt_carry.y);
     }else if(crnt_carry.y > 0.0f){
-        tgt_pos_y = tgt_pos_y - abs(crnt_carry.y);
+       tgt->y = tgt->y - abs(crnt_carry.y);
     }else{
         printf("旋回角度算出中に異常発生");
     }
 
     // 処理2角度計算
-    tgt_angle=atan2(tgt_pos_y,tgt_pos_x);
+    tgt_angle=atan2(tgt->y,tgt->x);
     tgt_angle = tgt_angle * (180.0 / PI);
-    printf("(x,y)=(%f,%f) | ",tgt_pos_x,tgt_pos_y);
+    printf("(x,y)=(%f,%f) | ",tgt->x,tgt->y);
 
     return (int)tgt_angle;
 }
