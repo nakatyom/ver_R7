@@ -7,4 +7,7 @@ extern void calc_TgtRate(float tgt_theta, float tgt_time, int div_num, float* di
 extern float get_TgtVelcity(float crnt_dist, int div_num, float* div_time, float* tgt_velocity);
 extern float get_TgtRate(float crnt_theta, int div_num, float* div_time, float* tgt_rate);
 
+/* using odometry */
+extern void gyak_velocity_control(float, float);
+
 #endif /* _GYAK_MIN_H */

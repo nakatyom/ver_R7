@@ -92,27 +92,7 @@ float get_TgtRate(float crnt_time, int div_num, float* div_time, float* tgt_rate
 
 
 /* 関VFB移植 */ 
-float mid_PID_str_velo(float tag, float maj){
- 
-    const float kp = 0.15f;
-    const float ki = 0.02f;
-    const float kd = 0.0f;
- 
-    static float intg;
-    static float err_pre;
-    static float err;
-    err_pre = err;
-    err = tag - maj;
-    intg += err;
- 
-    if (intg > 2000.0f)    intg = 2000.0f;
-    if (intg < -2000.0f)   intg = -2000.0f;
- 
-    return ((err * kp) + (intg * ki) + ((err - err_pre) * kd));
-}
- 
- 
-float mid_PID_rot_velo(float tag, float maj){
+float gyak_PID_rot_velo(float tag, float maj){
  
     const float kp = 0.4f;
     const float ki = 0.1f;
@@ -132,7 +112,7 @@ float mid_PID_rot_velo(float tag, float maj){
 }
  
  
-float mid_LPF_str_velo(float maj){
+float gyak_LPF_str_velo(float maj){
  
     const float k = 0.85f;
  
@@ -143,7 +123,7 @@ float mid_LPF_str_velo(float maj){
     return out;
 }
  
-void mid_velocity_control(float velo_str_tgt, float velo_rot_tgt){
+void gyak_velocity_control(float velo_str_tgt, float velo_rot_tgt){
     float enc_corr_r = 1.0;
     float enc_corr_l = 1.0;
     float sample_rate = 50.0;
@@ -164,14 +144,14 @@ void mid_velocity_control(float velo_str_tgt, float velo_rot_tgt){
     float velo_l_tmp  = (((float)(cnt_l - cnt_l_pre) * enc_corr_l) * sample_rate); // cnt ⇒ deg/sec(motor)             
     float velo_r    = (velo_r_tmp / 360.0f) * (PI_FLOAT * wheel_size);   // deg/sec(motor) ⇒ mm/sec(motor) 
     float velo_l    = (velo_l_tmp / 360.0f) * (PI_FLOAT * wheel_dist);   // deg/sec(motor) ⇒ mm/sec(motor)
-    float velo_str  = mid_LPF_str_velo( ((velo_r + velo_l) * 0.5f)); // mm/sec(robot)
+    float velo_str  = gyak_LPF_str_velo( ((velo_r + velo_l) * 0.5f)); // mm/sec(robot)
  
     /* 旋回速度計算 */ 
     float velo_rot = (float)ev3_gyro_sensor_get_rate(gyro_sensor);   // deg/sec (yaw rate)
  
     /* 速度操作量計算（FB項算出）*/
     // float velo_str_u = mid_PID_str_velo(velo_str_tgt, velo_str);    // mm/sec(robot)
-    float velo_rot_u = mid_PID_rot_velo(velo_rot_tgt, velo_rot);    // deg/sec(yaw rate)
+    float velo_rot_u = gyak_PID_rot_velo(velo_rot_tgt, velo_rot);    // deg/sec(yaw rate)
  
     /* 速度操作量計算（FF項とFB項の合成）*/
     float mot_r_u_str = (velo_str_tgt / (PI_FLOAT * wheel_size)) * 360.0f;  // mm/sec(robot) ⇒ deg/sec(motor)
