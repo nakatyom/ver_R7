@@ -30,7 +30,6 @@ void main_task(intptr_t unused) {
     ext_tsk();
 }
 
-
 int32_t left  = 0;
 int32_t right = 0;
 int robo_mode = 0;
@@ -91,3 +90,5 @@ void sens_task(intptr_t exinf){
     cunt += 1;
 */
 }
+
+void boss_task(intptr_t exinf){}
