@@ -149,7 +149,7 @@ bool_t judge_pink_(){
 
 // 攻略
 /* ダブルループ */
-float last_angle_carry = 0;
+float last_angle_neo = 0;
 float last_angle_dm = 0;
 float last_angle_carry = 0;
 
@@ -260,7 +260,7 @@ int hello_dmrm(){
             init_flag_dm = true;
         }
         else if(init_flag_dm == true && turn_flag_dm == false && drive_flag_dm == false){
-            turn_flag_dm = proc_turn(crnt_dm.theta, tgt_angl_dm)        
+            turn_flag_dm = proc_turn(crnt_dm.theta, tgt_angl_dm);     
             if(turn_flag_dm == true){
                 tgt_dist_dm = calc_dist(&crnt_dm, &tgt_dm);
                 get_crntCoordinate(&init_dm); //旋回終了時の座標を取得
