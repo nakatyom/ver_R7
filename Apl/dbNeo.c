@@ -27,17 +27,17 @@ int calc_angle(struct coordinate* crnt, struct coordinate* tgt){
 
     // (y座標)
     if (crnt->y <= 0.0f){
-        tgt->y = tgt-> + abs(crnt_carry.y);
+        tgt->y = tgt-> + abs(crnt->y);
     }else if(crnt->y > 0.0f){
-       tgt->y = tgt->y - abs(crnt_carry.y);
+        tgt->y = tgt->y - abs(crnt->y);
     }else{
         printf("旋回角度算出中に異常発生");
     }
 
     // 処理2角度計算
-    tgt_angle=atan2(tgt->y,tgt->x);
+    tgt_angle=atan2(tgt->y, tgt->x);
     tgt_angle = tgt_angle * (180.0 / PI);
-    printf("(x,y)=(%f,%f) | ",tgt->x,tgt->y);
+    printf("(x,y)=(%f,%f) | ",tgt->x, tgt->y);
 
     return (int)tgt_angle;
 }
@@ -54,12 +54,12 @@ bool_t proc_turn(int now_angle, int tgt_angle){
     bool_t flag = false;
     if (now_angle < tgt_angle){
         gyak_velocity_control(0.0f, -45.0f);
-        printf("比較角度(現在( %d° ):目標( %d° )\n",now_angle,tgt_angle);
+        printf("比較角度(現在( %d° ):目標( %d° )\n",now_angle, tgt_angle);
         flag =false;
     }
     else if (now_angle > tgt_angle){
         gyak_velocity_control(0.0f, 45.0f);
-        printf("比較角度(現在( %d° ):目標( %d° )\n",now_angle,tgt_angle);
+        printf("比較角度(現在( %d° ):目標( %d° )\n",now_angle, tgt_angle);
         flag =false;
     }else{
         /* 旋回完了 */
