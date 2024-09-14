@@ -18,26 +18,18 @@ void main_task(intptr_t unused) {
     // sensor   : touch_sensor, color_sensor, sonar_sensor, gyro_sensor
     // actuator : arm_motor, left_motor, right_motor
     set_portCfg();
-    
-    
-
-    
+ 
     /* タスク呼び出し */
     sta_cyc(SENS_CYC);
-    //sta_cyc(BOSS_CYC);
 
     /* タスク終了 */
     ext_tsk();
 }
 
 
-void boss_task(intptr_t exinf){
-    // printf("僕は邪魔者。");
-  
-}
-int32_t left=0;
-int32_t right=0;
-int robo_mode=0;
+int32_t left  = 0;
+int32_t right = 0;
+int robo_mode = 0;
 
 #define ARRAY 50
 
