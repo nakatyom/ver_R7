@@ -1,16 +1,20 @@
 #include <stdio.h>
 
 #include "ev3api.h"
+
 #include "common.h"
 #include "port.h"
 #include "motor.h"
 #include "gyro.h"
-#include "app.h"
+
+
 #include "odometry.h"
-#include "smartCarry.h"
-#include "linetrace.h"
 #include "velocity_control.h"
 #include "gyak_min.h"
+
+#include "linetrace.h"
+#include "dbNeo.h"
+#include "app.h"
 
 /* メインタスク */
 void main_task(intptr_t unused) {
