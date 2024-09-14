@@ -159,7 +159,7 @@ void gyak_velocity_control(float velo_str_tgt, float velo_rot_tgt){
     float mot_r_u_rot = (wheel_dist / wheel_size) * (velo_rot_tgt + velo_rot_u);            // deg/sec(yaw rate) ⇒ deg/sec(motor)
     float mot_l_u_rot = (wheel_dist / wheel_size) * (velo_rot_tgt + velo_rot_u);            // deg/sec(yaw rate) ⇒ deg/sec(motor)
     /* 速度操作量計算（並進速度と旋回速度の合成）*/
-    float mot_r_u_tmp = mot_r_u_str + (mot_r_u_rot+10.0 );  // deg/sec(motor)
+    float mot_r_u_tmp = mot_r_u_str + (mot_r_u_rot * 1.2);  // deg/sec(motor)
     float mot_l_u_tmp = mot_l_u_str - mot_l_u_rot;  // deg/sec(motor)
     /* 操作量計算 */
     int mot_r_u = (int)(mot_r_u_tmp * 1.0f);
