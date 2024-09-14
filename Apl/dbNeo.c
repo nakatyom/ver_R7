@@ -53,12 +53,12 @@ float calc_dist(struct coordinate* crnt, struct coordinate* tgt) {
 bool_t proc_turn(int now_angle, int tgt_angle){
     bool_t flag = false;
     if (now_angle < tgt_angle){
-        gyak_velocity_control(0.0f, 45.0f);
+        gyak_velocity_control(0.0f, -45.0f);
         printf("比較角度(現在( %d° ):目標( %d° )\n",now_angle,tgt_angle);
         flag =false;
     }
     else if (now_angle > tgt_angle){
-        gyak_velocity_control(0.0f, -45.0f);
+        gyak_velocity_control(0.0f, 45.0f);
         printf("比較角度(現在( %d° ):目標( %d° )\n",now_angle,tgt_angle);
         flag =false;
     }else{
@@ -126,7 +126,7 @@ extern int hello_neo(){
         }
         // 旋回処理
         else if(init_flag == true && turn_flag==false && drive_flag==false){
-            turn_flag = proc_turn(crnt.theta,tgt_angl);
+            turn_flag = proc_turn(crnt_neo.theta,tgt_angl);
 
             if(turn_flag==true){
                 tgt_dist = calc_dist(&crnt_neo, &tgt_neo);
