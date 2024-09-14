@@ -238,7 +238,7 @@ int hello_dmrm(){
     #define DM_LOOP 6
     static float x_pos_target_dm[DM_LOOP]={950.0, 970.0, 1015.0, 1015.0, 1015.0, 1100.0};
     static float y_pos_target_dm[DM_LOOP]={  0.0,   0.0,  -35.0, -850.0, -880.0, -950.0};
-    static struct coordinate crnt_dm = {0.0, 0.0, last_angle_neo}; //自己位置座標
+    static struct coordinate crnt_dm = {0.0, 0.0, 0.0}; //自己位置座標
     static struct coordinate tgt_dm  = {0.0, 0.0, 0.0}; //目標位置座標
     static struct coordinate init_dm = {0.0, 0.0, 0.0};
     static int tgt_angl_dm   = 0;
@@ -255,7 +255,8 @@ int hello_dmrm(){
 
         // 旋回処理
         // 旋回角度計算
-        if(init_flag_dm == false){ 
+        if(init_flag_dm == false){
+            crnt_dm.theta = last_angle_neo; 
             tgt_angl_dm = calc_angle(&crnt_dm, &tgt_dm);
             init_flag_dm = true;
         }
@@ -388,7 +389,8 @@ int hello_carry(){
         }
         // 旋回処理
         // 旋回角度計算
-        if(init_flag_carry == false){ 
+        if(init_flag_carry == false){
+            crnt_carry.theta = last_angle_dm; 
             tgt_angl_carry  = calc_angle(&crnt_carry, &tgt_carry);
             init_flag_carry = true;
         }
