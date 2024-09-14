@@ -20,9 +20,9 @@ int calc_angle(struct coordinate* crnt, struct coordinate* tgt){
     float tgt_angle = 0.0;
     
     if (crnt->x <= 0.0f){
-        float tgt->x = tgt->x + abs(crnt->x);
+        tgt->x = tgt->x + abs(crnt->x);
     }else {
-        float tgt->x = tgt->x - abs(crnt->x);
+        tgt->x = tgt->x - abs(crnt->x);
     }
 
     // (y座標)
