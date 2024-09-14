@@ -89,9 +89,70 @@ bool_t proc_run(float now_dist,float tgt_dist){
     return flag;
 }
 
-// 攻略
-extern int hello_neo(){
+int reflection_ = 0;
+rgb_raw_t color_;
 
+int calc_luminance_(rgb_raw_t color) {
+    // 加重平均で明度を計算し、int型に変換
+    int luminance = (int)(0.299 * color.r + 0.587 * color.g + 0.114 * color.b);
+    // luminance = (luminance * 100) / 255; //百分率計算
+
+    return luminance;
+}
+bool_t judge_blue_(){
+    if(( crnt_rgb_db.r >=15 && crnt_rgb_db.r <=100 ) && ( crnt_rgb_db.g >=50 && crnt_rgb_db.g <=130 ) && ( crnt_rgb_db.b >=120 && crnt_rgb_db.b <=255 )&& ( reflection_ >=25 && reflection_ <=100 )  ){
+        printf("_____________________BLUE JUDGE_____________________\n");
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+bool_t judge_black_(){
+    if(( crnt_rgb_db.r >=10 && crnt_rgb_db.r <=90 ) && ( crnt_rgb_db.g >=10 && crnt_rgb_db.g <=110 ) && ( crnt_rgb_db.b >=10 && crnt_rgb_db.b <=110 )&& ( reflection_ >=10 && reflection_ <=80 )){
+        printf("_____________________BLACK JUDGE_____________________\n");
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+bool_t judge_red_(){
+    if(( crnt_rgb_db.r >=10 && crnt_rgb_db.r <=90 ) && ( crnt_rgb_db.g >=10 && crnt_rgb_db.g <=110 ) && ( crnt_rgb_db.b >=10 && crnt_rgb_db.b <=110 )&& ( reflection_ >=10 && reflection_ <=80 )){
+        printf("_____________________RED JUDGE_____________________\n");
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+bool_t judge_yellow_(){
+    if(( crnt_rgb_db.r >=10 && crnt_rgb_db.r <=90 ) && ( crnt_rgb_db.g >=10 && crnt_rgb_db.g <=110 ) && ( crnt_rgb_db.b >=10 && crnt_rgb_db.b <=110 )&& ( reflection_ >=10 && reflection_ <=80 )){
+        printf("_____________________YELLOW JUDGE_____________________\n");
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+bool_t judge_pink_(){
+    if(( crnt_rgb_db.r >=10 && crnt_rgb_db.r <=90 ) && ( crnt_rgb_db.g >=10 && crnt_rgb_db.g <=110 ) && ( crnt_rgb_db.b >=10 && crnt_rgb_db.b <=110 )&& ( reflection_ >=10 && reflection_ <=80 )){
+        printf("_____________________PINK JUDGE_____________________\n");
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+
+// 攻略
+/* ダブルループ */
+float last_angle_carry = 0;
+float last_angle_dm = 0;
+float last_angle_carry = 0;
+
+extern int hello_neo(){
     static int roop_cnt = 0;
     static bool_t turn_flag = false;
     static bool_t drive_flag = false;
@@ -99,8 +160,9 @@ extern int hello_neo(){
 
     // 定数宣言（目標座標の配列
     /* SIM上の座標を修正。*/
-    static float x_pos_target[9]={ 420.0, 520.0, 240.0,-220.0,-780.0,- 560.0,-260.0,-300.0,100.0};
-    static float y_pos_target[9]={-140.0,-580.0,-860.0,-760.0,-720.0,-1300.0,-900.0,-400.0,  0.0};
+    #define NEO_LOOP 9
+    static float x_pos_target[NEO_LOOP]={ 420.0, 520.0, 240.0,-220.0,-780.0,- 560.0,-260.0,-300.0,100.0};
+    static float y_pos_target[NEO_LOOP]={-140.0,-580.0,-860.0,-760.0,-720.0,-1300.0,-900.0,-400.0,  0.0};
     static struct coordinate crnt_neo = {0.0, 0.0, 0.0}; //自己位置座標
     static struct coordinate tgt_neo  = {0.0, 0.0, 0.0}; //目標位置座標
     static struct coordinate init_neo = {0.0, 0.0, 0.0};
@@ -110,7 +172,7 @@ extern int hello_neo(){
     /* 現在座標 */
     get_crntCoordinate(&crnt_neo);
 
-    if(roop_cnt < 9){
+    if(roop_cnt < NEO_LOOP){
         /*座標設定*/
         printf("x=%8.4f[mm], y=%8.4f[mm], theta=%8.4f°\n",crnt_neo.x, crnt_neo.y, crnt_neo.theta);
         tgt_neo.x = x_pos_target[roop_cnt];
@@ -151,15 +213,99 @@ extern int hello_neo(){
 
         return 1;
     }
-    else if(){
+    else if(roop_cnt < NEO_LOOP + 1){
 
     }
     else{
-
+        last_angle_neo = crnt_neo.theta; //ロボットの最終向きを記憶
         return 2;
     }
 }
 
+
+/* デブリリムーバル */
+
+int hello_dmrm(){
+    static int roop_cnt_dm = 0;
+    static bool_t turn_flag_dm = false;
+    static bool_t drive_flag_dm = false;
+    static bool_t init_flag_dm = false;
+
+    // 定数宣言（目標座標の配列
+    /* SIM上の座標を修正。*/
+    #define DM_LOOP 6
+    static float x_pos_target_dm[DM_LOOP]={950.0, 970.0, 1015.0, 1015.0, 1015.0, 1100.0};
+    static float y_pos_target_dm[DM_LOOP]={  0.0,   0.0,  -35.0, -850.0, -880.0, -950.0};
+    static struct coordinate crnt_dm = {0.0, 0.0, last_angle_neo}; //自己位置座標
+    static struct coordinate tgt_dm  = {0.0, 0.0, 0.0}; //目標位置座標
+    static struct coordinate init_dm = {0.0, 0.0, 0.0};
+    static int tgt_angl_dm   = 0;
+    static float tgt_dist_dm = 0.0;
+
+    /* 現在座標 */
+    get_crntCoordinate(&crnt_dm);
+
+    if(roop_cnt_dm < DM_LOOP){
+        /*座標設定*/
+        printf("x=%8.4f[mm], y=%8.4f[mm], theta=%8.4f°\n",crnt_dm.x, crnt_dm.y, crnt_dm.theta);
+        tgt_dm.x = x_pos_target_dm[roop_cnt_dm];
+        tgt_dm.y = y_pos_target_dm[roop_cnt_dm];
+
+        // 旋回処理
+        // 旋回角度計算
+        if(init_flag_dm == false){ 
+            tgt_angl_dm = calc_angle(&crnt_dm, &tgt_dm);
+            init_flag_dm = true;
+        }
+        else if(init_flag_dm == true && turn_flag_dm == false && drive_flag_dm == false){
+            turn_flag_dm = proc_turn(crnt_dm.theta, tgt_angl_dm)        
+            if(turn_flag_dm == true){
+                tgt_dist_dm = calc_dist(&crnt_dm, &tgt_dm);
+                get_crntCoordinate(&init_dm); //旋回終了時の座標を取得
+            }
+        }
+        
+        // 走行処理     
+        if(turn_flag_dm == true && drive_flag_dm == false){
+            float crnt_dist_dm = calc_dist(&init_dm, &crnt_dm);
+            
+            if(roop_cnt_dm == 1 || roop_cnt_dm == 3){ //赤円or黄円手前
+                color_sensor_get_rgb_raw(color_sensor,&color_);
+                reflection_ = calc_luminance(color_);
+
+                if(true == judge_red_()){ //赤円判定
+                    crnt_dist_dm = tgt_dist_dm;
+                }
+                if(true == judge_yellow_()){//黄円判定
+                    crnt_dist_dm = tgt_dist_dm;
+                }
+            }
+
+            drive_flag_dm = proc_run(crnt_dist_dm, tgt_dist_dm);
+        }
+        
+        /* カウント++, リセット処理 */
+        if(turn_flag_dm == true && drive_flag_dm == true){
+            roop_cnt_dm = roop_cnt_dm + 1;
+            turn_flag_dm = false;
+            drive_flag_dm = false;
+            init_flag_dm = false;
+            printf("移動完了(ループ%d回)\n",roop_cnt_dm);
+            printf("現在位置：x=%8.4f[mm], y=%8.4f[mm], theta=%8.4f°\n",crnt_dm.x, crnt_dm.y, crnt_dm.theta);
+            printf("目標位置：x=%8.4f[mm], y=%8.4f[mm], theta=%8.4f°\n",tgt_dm.x, tgt_dm.y, tgt_dm.theta);
+        }
+
+
+        return 1;
+    }
+    else{
+        last_angle_dm = tgt_dm.theta; //ロボットの最終向きを記憶
+        return 2;
+    }
+}
+
+
+/* スマートキャリー */
 float mid_PID_line_pos_carry(float tag, float maj,int pwr){ 
     float kp = 0.2f;
     float ki = 0.02f;
@@ -196,13 +342,13 @@ float mid_PID_line_pos_carry(float tag, float maj,int pwr){
 int hello_carry(){
 
     static int carry_mode = 0;
-    rgb_raw_t crnt_rgb_line;
+    rgb_raw_t crnt_rgb_db;
 
     if (carry_mode == 0){
 
-        color_sensor_get_rgb_raw(color_sensor,&crnt_rgb_line);
-        int reflection = calc_luminance(crnt_rgb_line);
-        float velo_rot_target = mid_PID_line_pos_carry(60.0f, (float)reflection,50);
+        color_sensor_get_rgb_raw(color_sensor,&crnt_rgb_db);
+        reflection_ = calc_luminance(crnt_rgb_db);
+        float velo_rot_target = mid_PID_line_pos_carry(60.0f, (float)reflection_,50);
         mid_velocity_control(50.0f, -velo_rot_target);
 
         if(0){ //ピンク判定
@@ -215,58 +361,58 @@ int hello_carry(){
 
     }else if (carry_mode == 1){
 
-        static int roop_cnt_c = 0;
-        static bool_t turn_flag = false;
-        static bool_t drive_flag = false;
-        static bool_t init_flag = false;
+        static int roop_cnt_carry = 0;
+        static bool_t turn_flag_carry = false;
+        static bool_t drive_flag_carry = false;
+        static bool_t init_flag_carry = false;
 
         // 定数宣言（目標座標の配列
         /* SIM上の座標を修正。*/
-        static float x_pos_target[9]={ 420.0, 520.0, 240.0,-220.0,-780.0,-1040.0,- 560.0,-260.0,-260.0};
-        static float y_pos_target[9]={-140.0,-580.0,-860.0,-760.0,-720.0,-1360.0,-1300.0,-720.0,   0.0};
+        static float x_pos_target_carry[1]={0.0};
+        static float y_pos_target_carry[1]={0.0};
         static struct coordinate crnt_carry = {0.0, 0.0, 0.0}; //自己位置座標
         static struct coordinate tgt_carry  = {0.0, 0.0, 0.0}; //目標位置座標
         static struct coordinate init_carry = {0.0, 0.0, 0.0};
-        static int tgt_angl   = 0;
-        static float tgt_dist = 0.0;
+        static int tgt_angl_carry   = 0;
+        static float tgt_dist_carry = 0.0;
 
         /* 現在座標 */
         get_crntCoordinate(&crnt_carry);
 
-        if(roop_cnt_c < 8){ // 0 - 8
+        if(roop_cnt_carry < 8){ // 0 - 8
             /*座標設定*/
             printf("x=%8.4f[mm], y=%8.4f[mm], theta=%8.4f°\n",crnt_carry.x, crnt_carry.y, crnt_carry.theta);
-            tgt_carry.x = x_pos_target[roop_cnt_c];
-            tgt_carry.y = y_pos_target[roop_cnt_c];
+            tgt_carry.x = x_pos_target_carry[roop_cnt_carry];
+            tgt_carry.y = y_pos_target_cary[roop_cnt_carry];
         }
         // 旋回処理
         // 旋回角度計算
-        if(init_flag == false){ 
-            tgt_angl = calc_angle(&crnt_carry, &tgt_carry);
-            init_flag = true;
+        if(init_flag_carry == false){ 
+            tgt_angl_carry  = calc_angle(&crnt_carry, &tgt_carry);
+            init_flag_carry = true;
         }
         // 旋回処理
-        else if(init_flag == true && turn_flag==false && drive_flag==false){
-            turn_flag = proc_turn(crnt_carry.theta,tgt_angl);
+        else if(init_flag_carry == true && turn_flag_carry == false && drive_flag_carry == false){
+            turn_flag_carry = proc_turn(crnt_carry.theta, tgt_angl_carry);
 
-            if(turn_flag==true){
-                tgt_dist = calc_dist(&crnt_carry, &tgt_carry);
+            if(turn_flag_carry == true){
+                tgt_dist_carry = calc_dist(&crnt_carry, &tgt_carry);
                 get_crntCoordinate(&init_carry); //旋回終了時の座標を取得
             }
         }
 
         // 走行処理
-        if(turn_flag==true && drive_flag==false){
-            float crnt_dist = calc_dist(&init_carry, &crnt_carry);
-            drive_flag = proc_run(crnt_dist, tgt_dist);
+        if(turn_flag_carry == true && drive_flag_carry == false){
+            float crnt_dist_carry = calc_dist(&init_carry, &crnt_carry);
+            drive_flag_carry = proc_run(crnt_dist_carry, tgt_dist_carry);
         }
 
         /* カウント++, リセット処理 */
-        if(turn_flag == true && drive_flag == true){
-            roop_cnt_c = roop_cnt_c + 1;
-            turn_flag = false;
-            drive_flag = false;
-            init_flag = false;
+        if(turn_flag_carry == true && drive_flag_carry == true){
+            roop_cnt_carry = roop_cnt_carry + 1;
+            turn_flag_carry = false;
+            drive_flag_carry = false;
+            init_flag_carry = false;
             printf("移動完了(ループ%d回)\n",roop_cnt_c);
             printf("現在位置：x=%8.4f[mm], y=%8.4f[mm], theta=%8.4f°\n",crnt_carry.x, crnt_carry.y, crnt_carry.theta);
             printf("目標位置：x=%8.4f[mm], y=%8.4f[mm], theta=%8.4f°\n",tgt_carry.x, tgt_carry.y, tgt_carry.theta);
@@ -275,7 +421,7 @@ int hello_carry(){
         return 1;
     
     }else{
-        
+        last_angle_carry = tgt_carry.theta;//ロボットの最終向きを記憶
         return 2;
     }
 }
