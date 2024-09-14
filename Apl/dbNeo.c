@@ -92,6 +92,7 @@ bool_t proc_run(float now_dist,float tgt_dist){
 int reflection_ = 0;
 rgb_raw_t color_;
 
+
 int calc_luminance_(rgb_raw_t color) {
     // 加重平均で明度を計算し、int型に変換
     int luminance = (int)(0.299 * color.r + 0.587 * color.g + 0.114 * color.b);
@@ -100,7 +101,7 @@ int calc_luminance_(rgb_raw_t color) {
     return luminance;
 }
 bool_t judge_blue_(){
-    if(( crnt_rgb_db.r >=15 && crnt_rgb_db.r <=100 ) && ( crnt_rgb_db.g >=50 && crnt_rgb_db.g <=130 ) && ( crnt_rgb_db.b >=120 && crnt_rgb_db.b <=255 )&& ( reflection_ >=25 && reflection_ <=100 )  ){
+    if(( color_.r >=15 && color_.r <=100 ) && ( color_.g >=50 && color_.g <=130 ) && ( color_.b >=120 && color_.b <=255 )&& ( reflection_ >=25 && reflection_ <=100 )  ){
         printf("_____________________BLUE JUDGE_____________________\n");
         return true;
     }
@@ -109,7 +110,7 @@ bool_t judge_blue_(){
     }
 }
 bool_t judge_black_(){
-    if(( crnt_rgb_db.r >=10 && crnt_rgb_db.r <=90 ) && ( crnt_rgb_db.g >=10 && crnt_rgb_db.g <=110 ) && ( crnt_rgb_db.b >=10 && crnt_rgb_db.b <=110 )&& ( reflection_ >=10 && reflection_ <=80 )){
+    if(( color_.r >=10 && color_.r <=90 ) && ( color_.g >=10 && color_.g <=110 ) && ( color_.b >=10 && color_.b <=110 )&& ( reflection_ >=10 && reflection_ <=80 )){
         printf("_____________________BLACK JUDGE_____________________\n");
         return true;
     }
@@ -118,7 +119,7 @@ bool_t judge_black_(){
     }
 }
 bool_t judge_red_(){
-    if(( crnt_rgb_db.r >=10 && crnt_rgb_db.r <=90 ) && ( crnt_rgb_db.g >=10 && crnt_rgb_db.g <=110 ) && ( crnt_rgb_db.b >=10 && crnt_rgb_db.b <=110 )&& ( reflection_ >=10 && reflection_ <=80 )){
+    if(( color_.r >=10 && color_.r <=90 ) && ( color_.g >=10 && color_.g <=110 ) && ( color_.b >=10 && color_.b <=110 )&& ( reflection_ >=10 && reflection_ <=80 )){
         printf("_____________________RED JUDGE_____________________\n");
         return true;
     }
@@ -127,7 +128,7 @@ bool_t judge_red_(){
     }
 }
 bool_t judge_yellow_(){
-    if(( crnt_rgb_db.r >=10 && crnt_rgb_db.r <=90 ) && ( crnt_rgb_db.g >=10 && crnt_rgb_db.g <=110 ) && ( crnt_rgb_db.b >=10 && crnt_rgb_db.b <=110 )&& ( reflection_ >=10 && reflection_ <=80 )){
+    if(( color_.r >=10 && color_.r <=90 ) && ( color_.g >=10 && color_.g <=110 ) && ( color_.b >=10 && color_.b <=110 )&& ( reflection_ >=10 && reflection_ <=80 )){
         printf("_____________________YELLOW JUDGE_____________________\n");
         return true;
     }
@@ -136,7 +137,7 @@ bool_t judge_yellow_(){
     }
 }
 bool_t judge_pink_(){
-    if(( crnt_rgb_db.r >=10 && crnt_rgb_db.r <=90 ) && ( crnt_rgb_db.g >=10 && crnt_rgb_db.g <=110 ) && ( crnt_rgb_db.b >=10 && crnt_rgb_db.b <=110 )&& ( reflection_ >=10 && reflection_ <=80 )){
+    if(( color_.r >=10 && color_.r <=90 ) && ( color_.g >=10 && color_.g <=110 ) && ( color_.b >=10 && color_.b <=110 )&& ( reflection_ >=10 && reflection_ <=80 )){
         printf("_____________________PINK JUDGE_____________________\n");
         return true;
     }
@@ -358,12 +359,12 @@ int hello_carry(){
     static float tgt_dist_carry = 0.0;
 
     static int carry_mode = 0;
-    rgb_raw_t crnt_rgb_db;
+    rgb_raw_t color_;
 
     if (carry_mode == 0){
 
-        color_sensor_get_rgb_raw(color_sensor,&crnt_rgb_db);
-        reflection_ = calc_luminance(crnt_rgb_db);
+        color_sensor_get_rgb_raw(color_sensor,&color_);
+        reflection_ = calc_luminance(color_);
         float velo_rot_target = mid_PID_line_pos_carry(60.0f, (float)reflection_,50);
         mid_velocity_control(50.0f, -velo_rot_target);
 
