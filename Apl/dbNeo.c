@@ -146,6 +146,38 @@ bool_t judge_pink_(){
     }
 }
 
+float mid_PID_line_pos_carry(float tag, float maj,int pwr){ 
+    float kp = 0.2f;
+    float ki = 0.02f;
+    float kd = 0.10f;
+    
+    /* power 90 の時。Straight */
+    if (pwr==90){
+        kp = 0.2f;
+        ki = 0.02f;
+        kd = 0.10f;
+    }else{
+    /* power 50 の時。Cave */
+        kp = 0.30f;
+        ki = 0.04f;
+        kd = 0.13f;
+    }
+
+
+    static float intg;
+    static float err_pre;
+    static float err;
+     
+    err_pre = err;
+    err = tag - maj;
+    intg += err;
+
+    if (intg > 1000.0f)    intg = 1000.0f;
+    if (intg < -1000.0f)   intg = -1000.0f;
+
+    return ((err * kp) + (intg * ki) + ((err - err_pre) * kd));
+}
+
 
 // 攻略
 /* ダブルループ */
@@ -161,9 +193,9 @@ extern int hello_neo(){
 
     // 定数宣言（目標座標の配列
     /* SIM上の座標を修正。*/
-    #define NEO_LOOP 9
-    static float x_pos_target[NEO_LOOP]={ 420.0, 520.0, 240.0,-220.0,-780.0,- 560.0,-260.0,-300.0,100.0};
-    static float y_pos_target[NEO_LOOP]={-140.0,-580.0,-860.0,-760.0,-720.0,-1300.0,-900.0,-400.0,  0.0};
+    #define NEO_LOOP 10
+    static float x_pos_target[NEO_LOOP]={ 420.0, 520.0, 240.0,-220.0,-780.0,- 560.0,-260.0,-300.0,100.0, 100.0};
+    static float y_pos_target[NEO_LOOP]={-140.0,-580.0,-860.0,-760.0,-720.0,-1300.0,-900.0,-400.0,  0.0,   0.0};
     static struct coordinate crnt_neo = {0.0, 0.0, 0.0}; //自己位置座標
     static struct coordinate tgt_neo  = {0.0, 0.0, 0.0}; //目標位置座標
     static struct coordinate init_neo = {0.0, 0.0, 0.0};
@@ -198,6 +230,16 @@ extern int hello_neo(){
         // 走行処理
         if(turn_flag==true && drive_flag==false){
             float crnt_dist = calc_dist(&init_neo, &crnt_neo);
+
+            if(roop_cnt == NEO_LOOP-2 || roop_cnt == NEO_LOOP-1){ //ダブルループ脱出orライントレース調整
+                color_sensor_get_rgb_raw(color_sensor,&color_);
+                reflection_ = calc_luminance(color_);
+
+                if(true == judge_black_()){ //黒判定
+                    crnt_dist = tgt_dist;
+                }
+            }
+
             drive_flag = proc_run(crnt_dist, tgt_dist);
         }
 
@@ -215,10 +257,20 @@ extern int hello_neo(){
         return 1;
     }
     else if(roop_cnt < NEO_LOOP + 1){
+        color_sensor_get_rgb_raw(color_sensor,&color_);
+        reflection_ = calc_luminance(color_);
+
+        if(true == judge_blue_()){ //黒判定
+            roop_cnt += 1;
+        }
+        else {
+            float velo_rot_target = mid_PID_line_pos(80.0f, (float)reflection_,50);
+            mid_velocity_control(50.0f, -velo_rot_target);
+        }
 
     }
     else{
-        reset_Corrdinate();
+        reset_Coordinate();
         last_angle_neo = (int)crnt_neo.theta; //ロボットの最終向きを記憶
         return 2;
     }
@@ -279,7 +331,7 @@ int hello_dmrm(){
                 if(true == judge_red_()){ //赤円判定
                     crnt_dist_dm = tgt_dist_dm;
                 }
-                if(true == judge_yellow_()){//黄円判定
+                else if(true == judge_yellow_()){//黄円判定
                     crnt_dist_dm = tgt_dist_dm;
                 }
             }
@@ -303,46 +355,13 @@ int hello_dmrm(){
     }
     else{
         last_angle_dm = (int)tgt_dm.theta; //ロボットの最終向きを記憶
-        reset_Corrdinate();
+        reset_Coordinate();
         return 2;
     }
 }
 
 
 /* スマートキャリー */
-float mid_PID_line_pos_carry(float tag, float maj,int pwr){ 
-    float kp = 0.2f;
-    float ki = 0.02f;
-    float kd = 0.10f;
-    
-    /* power 90 の時。Straight */
-    if (pwr==90){
-        kp = 0.2f;
-        ki = 0.02f;
-        kd = 0.10f;
-    }else{
-    /* power 50 の時。Cave */
-        kp = 0.30f;
-        ki = 0.04f;
-        kd = 0.13f;
-    }
-
-
-    static float intg;
-    static float err_pre;
-    static float err;
-     
-    err_pre = err;
-    err = tag - maj;
-    intg += err;
-
-    if (intg > 1000.0f)    intg = 1000.0f;
-    if (intg < -1000.0f)   intg = -1000.0f;
-
-    return ((err * kp) + (intg * ki) + ((err - err_pre) * kd));
-}
-
-
 int hello_carry(){
     static int roop_cnt_carry = 0;
     static bool_t turn_flag_carry = false;
