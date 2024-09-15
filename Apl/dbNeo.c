@@ -260,7 +260,7 @@ extern int hello_neo(){
         color_sensor_get_rgb_raw(color_sensor,&color_);
         reflection_ = calc_luminance(color_);
 
-        if(true == judge_blue_()){ //黒判定
+        if(true == judge_blue_()){ //青判定
             roop_cnt += 1;
         }
         else {
@@ -278,7 +278,6 @@ extern int hello_neo(){
 
 
 /* デブリリムーバル */
-
 int hello_dmrm(){
     static int roop_cnt_dm = 0;
     static bool_t turn_flag_dm = false;
