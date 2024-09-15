@@ -13,14 +13,14 @@ float mid_PID_line_pos(float tag, float maj,int pwr){
     
     /* power 90 の時。Straight */
     if (pwr==90){
-        kp = 0.15f;
+        kp = 0.2f;
         ki = 0.02f;
-        kd = 0.08f;
+        kd = 0.10f;
     }else{
     /* power 50 の時。Cave */
-        kp = 0.30f;
+        kp = 0.24f;
         ki = 0.04f;
-        kd = 0.13f;
+        kd = 0.10f;
     }
 
 
