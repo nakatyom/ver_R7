@@ -13,9 +13,9 @@ float mid_PID_line_pos(float tag, float maj,int pwr){
     
     /* power 90 の時。Straight */
     if (pwr==90){
-        kp = 0.2f;
+        kp = 0.15f;
         ki = 0.02f;
-        kd = 0.10f;
+        kd = 0.08f;
     }else{
     /* power 50 の時。Cave */
         kp = 0.30f;
@@ -111,7 +111,7 @@ extern int linetrace(){
             mid_velocity_control(90.0f, -velo_rot_target);
             if (kotesaki == true){   
                 printf(" | 小手先のカラーセンサ");
-                if(judge_blue()== true){
+                if(judge_blue()== true || crnt_line.x <=2400){
                     printf("黒検知へ移行。");
                     divion = 1;
                 }
@@ -130,9 +130,10 @@ extern int linetrace(){
             velo_rot_target = mid_PID_line_pos(80.0f, (float)reflection,50);
             mid_velocity_control(50.0f, -velo_rot_target);
             color_sensor_get_rgb_raw(color_sensor,&crnt_rgb_line);
-            if(judge_black()==true){
+            if(judge_black()==true ||crnt_line.x <=2300 ){
                 divion = 2;
             }
+
         }
         return 0;
     }else{
