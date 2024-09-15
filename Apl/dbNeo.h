@@ -3,7 +3,7 @@
 
 
 extern int hello_neo();
-extern int hello_dmrm();
-extern int hello_carry();
+// extern int hello_dmrm();
+// extern int hello_carry();
 
 #endif /* _DBNEO_H */

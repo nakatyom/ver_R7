@@ -51,7 +51,7 @@ void sens_task(intptr_t exinf){
             robo_mode = hello_neo();
         }
         else if(robo_mode == 2){
-            robo_mode = hello_dmrm();
+            // robo_mode = hello_dmrm();
         }
         else if (robo_mode == 3){
             // robo_mode = hello_carry();
