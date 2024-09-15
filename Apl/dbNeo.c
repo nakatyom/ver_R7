@@ -276,7 +276,6 @@ extern int hello_neo(){
     }
 }
 
-
 /* デブリリムーバル */
 int hello_dmrm(){
     static int roop_cnt_dm = 0;

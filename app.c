@@ -32,40 +32,36 @@ void main_task(intptr_t unused) {
 
 void boss_task(intptr_t exinf){}
 
-
-int32_t left  = 0;
-int32_t right = 0;
-
 void sens_task(intptr_t exinf){
-    static int robo_mode = 0;
-
-
-    if (robo_mode == 0 ){
-        robo_mode = linetrace();
-    }
-    else if(robo_mode == 1){
-        robo_mode = hello_neo();
-    }
-    else if(robo_mode == 2){
-        robo_mode = hello_dmrm();
-    }
-    else if (robo_mode == 3){
-        // robo_mode = hello_carry();
-    }
-    else{
-        printf("完\n");
+    static int is_start = 0;
+    if(ev3_touch_sensor_is_pressed(touch_sensor)){
+        is_start = 1;
     }
 
-    /*get_crntCoordinate(&postest);
-    printf("x=%f, y=%f, theta(変換後)=%f° | ",postest.x, postest.y, trans_gDeg(postest.theta));
+    
+    if(1 == is_start){
+        printf("start!!!\n");
+        is_start = 2;
+    }
+    else if(2 == is_start){
+        static int robo_mode = 0;
 
-    left=motor_get_counts(left_motor);
-    right=motor_get_counts(right_motor);
-    printf("(left,right):(%d,%d) | GYRO:%d\n",left,right,gyro_sensor_get_angle(gyro_sensor));
-    rgb_raw_t rgb;
-    uint8_t ref = ev3_color_sensor_get_reflect(color_sensor);
-    ev3_color_sensor_get_rgb_raw(color_sensor,&rgb);
-    printf("ref = %d | r = %d | g = %d | b = %d\n",ref, rgb.r, rgb.g, rgb.b);
-    */
-    //printf("\n(mA,mV):(%d,%d)  |  ",ev3_battery_current_mA(),ev3_battery_voltage_mV());
+        if (robo_mode == 0 ){
+            robo_mode = linetrace();
+        }
+        else if(robo_mode == 1){
+            robo_mode = hello_neo();
+        }
+        else if(robo_mode == 2){
+            robo_mode = hello_dmrm();
+        }
+        else if (robo_mode == 3){
+            // robo_mode = hello_carry();
+        }
+        else{
+            printf("完\n");
+        }
+    }
+    else {}
+
 }
