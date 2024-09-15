@@ -140,12 +140,6 @@ extern int hello_neo(){
         // 走行処理
         if(turn_flag==true && drive_flag==false){
             float crnt_dist = calc_dist(&init_neo, &crnt_neo);
-
-            if(roop_cnt == NEO_LOOP-2 || roop_cnt == NEO_LOOP-1){ //ダブルループ脱出orライントレース調整
-                color_sensor_get_rgb_raw(color_sensor,&color_);
-                reflection_ = calc_luminance(color_);
-            }
-
             drive_flag = proc_run(crnt_dist, tgt_dist);
         }
 
