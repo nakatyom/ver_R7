@@ -43,10 +43,7 @@ int16_t gyro_sensor_get_angle(sensor_port_t port){
     pre_angle = crnt_angle;  
 
     // 現在値の取得(通信遅れ判定の場合、1ms待って再取得)
-    for(int i=0; i<1; i++){
-        crnt_angle = ev3_gyro_sensor_get_angle(port);
-        i += checkMissingData_g(port);
-    }
+    crnt_angle = ev3_gyro_sensor_get_angle(port);
     
     return crnt_angle;
 }
@@ -82,11 +79,8 @@ int16_t gyro_sensor_get_rate(sensor_port_t port){
     /* 前回値の更新 */
     pre_rate = crnt_rate;
     
-    // 現在値の取得(通信遅れ判定の場合、1ms待って再取得)
-    for(int i=0; i<1; i++){
-        crnt_rate = ev3_gyro_sensor_get_rate(port);
-        i += checkMissingData_g(port);
-    }
+    // 現在値の取得
+    crnt_rate = ev3_gyro_sensor_get_rate(port);
     
     return crnt_rate;
 }
@@ -98,26 +92,4 @@ int16_t gyro_sensor_get_pre_rate(sensor_port_t port){
     }
 
     return pre_rate;
-}
-
-
-/* using_sensor_task */
-void gyro_sensor_update(sensor_port_t port){
-    if(port != gyro_sensor){
-        printf("An invalid value entered in gyro_sensor_update().\n");
-        return;
-    }
-
-    /* 前回値の更新 */
-    pre_angle = crnt_angle;
-    pre_rate = crnt_rate; 
-
-    // 現在値の取得(通信遅れ判定の場合、1ms待って再取得)
-    for(int i=0; i<1; i++){
-        crnt_angle = ev3_gyro_sensor_get_angle(port);
-        crnt_rate = ev3_gyro_sensor_get_rate(port);
-        i += checkMissingData_g(port);
-    }
-
-    return;
 }
