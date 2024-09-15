@@ -404,7 +404,7 @@ int hello_carry(){
             tgt_carry.x = x_pos_target_carry[roop_cnt_carry];
             tgt_carry.y = y_pos_target_carry[roop_cnt_carry];
         }
-        if(roop_cnt_carry == 0 || ){
+        if(roop_cnt_carry == 0){
             // 旋回処理
             // 旋回角度計算
             if(init_flag_carry == false){
