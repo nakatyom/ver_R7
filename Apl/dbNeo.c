@@ -137,7 +137,7 @@ bool_t judge_yellow_(){
     }
 }
 bool_t judge_pink_(){
-    if(( color_.r >=10 && color_.r <=90 ) && ( color_.g >=10 && color_.g <=110 ) && ( color_.b >=10 && color_.b <=110 )&& ( reflection_ >=10 && reflection_ <=80 )){
+    if(( color_.r >=136 && color_.r <=156 ) && ( color_.g >=78 && color_.g <=98 ) && ( color_.b >=107 && color_.b <=127 )&& ( reflection_ >=10 && reflection_ <=80 )){
         printf("_____________________PINK JUDGE_____________________\n");
         return true;
     }
@@ -368,8 +368,8 @@ int hello_carry(){
 
     // 定数宣言（目標座標の配列
     /* SIM上の座標を修正。*/
-    static float x_pos_target_carry[1]={0.0};
-    static float y_pos_target_carry[1]={0.0};
+    static float x_pos_target_carry[1]={-382.0,  -116.0,-138.0, 386.0, 386.0};
+    static float y_pos_target_carry[1]={   0.0, -1013.0,-897.0,-400.0,-127.0};
     static struct coordinate crnt_carry = {0.0, 0.0, 0.0}; //自己位置座標
     static struct coordinate tgt_carry  = {0.0, 0.0, 0.0}; //目標位置座標
     static struct coordinate init_carry = {0.0, 0.0, 0.0};
@@ -386,11 +386,11 @@ int hello_carry(){
         float velo_rot_target = mid_PID_line_pos_carry(60.0f, (float)reflection_,50);
         mid_velocity_control(50.0f, -velo_rot_target);
 
-        if(0){ //ピンク判定
+        if(true == judge_pink_()){ //ピンク判定
 
             motor_stop(left_motor);
             motor_stop(right_motor);
-            reset_Corrdinate();
+            reset_Coordinate();
             carry_mode = 1;
         }
 
@@ -404,12 +404,14 @@ int hello_carry(){
             tgt_carry.x = x_pos_target_carry[roop_cnt_carry];
             tgt_carry.y = y_pos_target_carry[roop_cnt_carry];
         }
-        // 旋回処理
-        // 旋回角度計算
-        if(init_flag_carry == false){
-            crnt_carry.theta = last_angle_dm; 
-            tgt_angl_carry  = calc_angle(&crnt_carry, &tgt_carry);
-            init_flag_carry = true;
+        if(roop_cnt_carry == 0 || ){
+            // 旋回処理
+            // 旋回角度計算
+            if(init_flag_carry == false){
+                crnt_carry.theta = last_angle_dm; 
+                tgt_angl_carry  = calc_angle(&crnt_carry, &tgt_carry);
+                init_flag_carry = true;
+            }
         }
         // 旋回処理
         else if(init_flag_carry == true && turn_flag_carry == false && drive_flag_carry == false){
