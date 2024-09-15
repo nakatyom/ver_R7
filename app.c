@@ -53,7 +53,7 @@ void sens_task(intptr_t exinf){
         robo_mode = hello_carry();
     }
     else{
-        pritnf("完\n");
+        printf("完\n");
     }
 
     /*get_crntCoordinate(&postest);
