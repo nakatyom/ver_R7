@@ -37,9 +37,7 @@ void sens_task(intptr_t exinf){
     if(ev3_touch_sensor_is_pressed(touch_sensor)){
         is_start = 1;
     }
-
-    
-    if(1 == is_start){
+    else if(1 == is_start){
         printf("start!!!\n");
         is_start = 2;
     }
