@@ -4,7 +4,6 @@
 #include "ev3api.h"
 #include "port.h"
 #include "motor.h"
-#include "_timer_.h"
 
 
 int16_t crnt_angle = 0;
